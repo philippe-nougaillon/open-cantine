@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
 gem 'rails', '3.2.7'
+gem 'heroku'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
 gem 'in_place_editing'
 #gem 'calendar_date_select', :git => 'http://github.com/paneq/calendar_date_select.git', :branch => 'rails3test'
 gem 'will_paginate', '~> 3.0.0'
@@ -15,6 +16,10 @@ gem 'thin'
 gem 'simple_form'
 gem 'wicked_pdf'
 gem 'jquery_datepicker'
+
+group :development, :test do
+	gem 'mysql2'
+end
 
 group :production do
   gem 'pg'
