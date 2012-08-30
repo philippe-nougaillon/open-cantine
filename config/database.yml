@@ -25,7 +25,7 @@ test:
   socket: /var/run/mysqld/mysqld.sock
 
 production:
-  adapter: mysql2
+  adapter: pg
   encoding: utf8
   database: OPENCANTINERAILS
   pool: 5
