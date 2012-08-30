@@ -1,0 +1,36 @@
+<h1><%=h Ville.find(@paiement.mairie_id).nom %></h1>
+
+<h2>Reçu pour paiement N°<%= @paiement.id %> </h2>
+
+<p>
+  <b>Date:</b>
+  <%=h @paiement.date.to_s(:fr) %>
+</p>
+<p>
+  <b>Famille:</b>
+  <%= link_to Famille.find(@paiement.famille_id).nom, :controller => 'familles', :action => 'show', :id => @paiement.famille_id %>
+</p>
+<p>
+  <b>Type:</b>
+  <%=h @paiement.typepaiement %>
+</p>
+
+<p>
+  <b>Ref:</b>
+  <%=h @paiement.ref %>
+</p>
+
+<p>
+  <b>Facture :</b>
+  <%= Facture.find(@paiement.facture_id).ref if @paiement.facture_id %>
+</p>
+
+<p>
+  <b>Banque:</b>
+  <%=h @paiement.banque %>
+</p>
+
+<p>
+  <b>Montant:</b>
+  <%=h @paiement.montant %> €
+</p>

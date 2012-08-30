@@ -1,0 +1,50 @@
+<div id="form_actions">
+  <%= form_tag request.path, :method => 'get' do %>
+    Nom :
+    <%= text_field_tag :search, params[:search] %>
+    Classe :
+    <%= select_tag 'classe', options_for_select(@classes,params[:classe]) %>
+    <%= submit_tag 'Rechercher' %>
+  <% end %>
+  <hr>	
+  <div id="adroite"> 	
+    <%= link_to "Imprimer", :action => 'liste', :id => 1 %>
+  </div>
+</div>
+<br>
+
+<table class="sample">
+  <tr>
+    <th><%= link_to "Nom", :sort => "nom" %></th>
+    <th><%= link_to "Prénom", :sort => "prenom" %></th>
+    <th><%= link_to "Classe", :sort => "classe" %></th>
+    <th>Enseignant</th>
+    <th><%= link_to "Date Naissance", :sort => "dateNaissance" %></th>
+    <th><%= link_to "Age", :sort => "age" %></th>
+    <th><%= link_to "Menu", :sort => "sansPorc, allergies" %></th>
+    <% if session[:user_readwrite]%> <th>Inscription</th> <th>Inscription</th> <% end %>
+  </tr>
+
+  <% for enfant in @enfants %>
+    <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
+      <% famille = Famille.find(enfant.famille_id) %>
+      <% classroom = Classroom.find_by_id(enfant.classe) %>
+      <td><b><%=link_to famille.nom, :controller => 'familles', :action => 'show', :id => enfant.famille_id %></b></td>
+      <td><b><%=link_to enfant.prenom, enfant %></b></td>
+      <td><%=h classroom.nom %></td>
+      <td><%=h classroom.referant %></td>
+      <td><%=h enfant.dateNaissance %></td>
+      <td style="text-align:right"><%=h enfant.age %></td>
+      <td><% if enfant.sansPorc %>Sans Porc. <% end %> <% if enfant.allergies %>Allergies.<% end %></td>
+      <% if session[:user_readwrite] %>
+
+        <td><%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :year => Date.today.year, :id  => enfant.id %></td>
+        <td><%= link_to "Automatique", :controller => 'prestations', :action => 'new', :enfant_id  => enfant.id %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<br>
+<%= will_paginate @enfants %>
+<br>
+

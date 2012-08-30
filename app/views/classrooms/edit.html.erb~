@@ -1,0 +1,7 @@
+<h3>Modification d'une classe</h3>
+
+<% form_for(@classroom) do |f| %>
+
+  <%= render :partial => 'classroom', :locals => { :f => f } %>
+
+<% end %>

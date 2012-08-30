@@ -1,0 +1,86 @@
+<br>
+<br>
+
+<h3>Inscription automatique</h3>
+<hr/>
+<br>
+<% if @enfants %>
+    <% for enfant in @enfants %>
+        Enfant : <%= link_to enfant.prenom + " "+ Famille.find(enfant.famille_id).nom, :controller => 'enfants', :action => 'show', :id => enfant %>
+        <br>
+    <% end %>
+    <br>
+<% else %>
+    Enfant : <%= link_to Enfant.find(@prestation.enfant_id).prenom + " "+ Famille.find(Enfant.find(@prestation.enfant_id).famille_id).nom, :controller => 'enfants', :action => 'show', :id => @prestation.enfant_id %>
+    <br><br>
+<% end %>
+
+<% form_for(@prestation) do |f| %>
+  <%= f.error_messages %>
+
+  <table class="sample">
+    <tr>
+      <th>Journée(s)</th>
+      <th>Repas</th>
+      <th>Garderie Matin</th>
+      <th>Garderie Soir</th>
+      <th>Centre Matin</th>
+      <th>Centre Soir</th>
+      <th>Etude</th>
+    </tr>
+
+    <p style="display:none">
+      <%= f.label :enfant_id %><br />
+      <%= f.text_field :enfant_id %>
+      <%= text_field_tag(:famille_id, params[:famille_id]) %> Famille id
+    </p>
+
+    <tr>
+      <td>
+        A partir du : 
+        <%= calendar_date_select_includes nil,:locale=>'fr' %>
+        <% CalendarDateSelect.format=(:finnish )%>
+        <%= f.calendar_date_select :date, :time => false, :size => 10 %>
+     <td>
+        <%= f.check_box :repas%>
+      </td>
+      <td>
+        <%= f.check_box :garderieAM %>
+      </td>
+      <td>
+        <%= f.check_box :garderiePM %>
+      </td>
+      <td>
+        <%= f.check_box :centreAM %>
+      </td>
+       <td>
+        <%= f.check_box :centrePM %>
+      </td>
+      <td>
+        <%= f.check_box :etude %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= check_box_tag(:lundi, params[:lundi]) %>Lundi ?
+        <%= check_box_tag(:mardi, params[:mardi]) %>Mardi ?
+        <%= check_box_tag(:mercredi, params[:mercredi]) %>Mercredi ?
+        <%= check_box_tag(:jeudi, params[:jeudi]) %>Jeudi ?
+        <%= check_box_tag(:vendredi, params[:vendredi]) %>Vendredi ?
+      </td>
+    </tr>
+  </table>
+  <%= check_box_tag(:toutlemois, params[:toutlemois]) %> Répéter jusqu'à la fin du mois ?
+  <br>
+  <br>
+  <br>
+     <%= image_submit_tag "valider.gif" %>
+   <br>
+  <p><small>
+    Pour une seule journée, entrez la date et cochez les prestations voulues.
+    <br>
+    Pour un mois, entrez la date du début du mois, cochez les jours souhaités, les prestations voulues et cochez 'Répéter jusqu'à la fin du mois ?'
+  </small></p>
+  
+<% end %>
+

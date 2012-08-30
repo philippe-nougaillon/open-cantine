@@ -1,0 +1,216 @@
+<br>
+<h3>Vos paramètres</h3>
+
+<div id="form_actions">
+	<%= link_to "Coordonnées", "#coordonnees" %> |
+	<%= link_to "Classes", "#classes" %> |
+	<%= link_to "Tarifs", "#tarifs" %> |
+	<%= link_to "Formules", "#formules" %> |
+	<%= link_to "Vacances", "#vacances" %> |
+	<%= link_to "Utilisateurs", "#utilisateurs" %> |
+	<%= link_to "Données associées à ce compte", "#donnees" %> |
+	<%= link_to "Importer / Exporter des données", "#export" %> |
+	<%= link_to "Options Opencantine", "#options" %> |
+	<br>	<br>
+</div>
+<br>
+<div>
+   <div class="span-12">	
+	    <a name="coordonnees" />
+	    <h3>Coordonnées</h3>
+
+	    <table class="sample">
+	      <tr>
+		<td>Nom</td>
+		<td><b><%=h @mairie.nom %></b></td>
+	      </tr>
+	      <tr>
+		<td>Adresse</td>
+		<td><b><%=h @mairie.adr %></b></td>
+	      </tr>
+	      <tr>
+		<td>Cp</td>
+		<td><b><%=h @mairie.cp %></b></td>
+	      </tr>
+	      <tr>
+		<td>Ville</td>
+		<td><b><%=h @mairie.ville %></b></td>
+	      </tr>
+	      <tr>
+		<td>Tél</td>
+		<td><b><%=h @mairie.tel %></b></td>
+	      </tr>
+	      <tr>
+		<td>Email</td>
+		<td><%= @mairie.email %></td>
+	      </tr>
+	    </table>
+	    <%= link_to "Modifier", :controller => 'villes', :action => 'edit', :id => @mairie.id if session[:user_readwrite] %>
+            <br><br>
+    </div>
+<hr>
+    <div class="span-12 last">	
+	    <a name="classes" />
+            <h3>Classes</h3>
+	    <table class="sample">
+		<th></th>
+		<th>Enseignant</th>
+		<th>Elèves</th>
+		 <% for c in @classrooms %>
+		      <tr  class="<%= cycle('list-line-even','list-line-odd')%>">
+		      <td><b><%= c.nom %></b></td>
+		      <td><%= c.referant %></td>
+		      <td><%= Enfant.count(:conditions => ["classe = ?", c.id]) %> </td>
+		      </tr>
+		 <% end %>
+	    </table>
+	    <%= link_to "Modifier", :controller => 'classrooms' if session[:user_readwrite] %>
+	    <p></p>
+    </div>
+<hr>
+    <div class="span-24 last">	
+	    <a name="tarifs" />
+	    <h3>Tarifs</h3>
+	    <table class="sample">
+	     <tr>
+		<th></th>
+		<th></th>
+		<th>Repas</th>
+		<th>Garderie Matin</th>
+		<th>Garderie Après-midi</th>
+		<th>Centre Matin</th>
+		<th>Centre Après-midi</th>
+		<th>Centre Journée</th>
+		<th>Etude</th>
+	      </tr>
+	      <% for tarif in @tarifs %>
+		<tr class="<%= cycle('list-line-even','list-line-odd')%>">
+		  <td><%=h tarif.memo %></td>
+		  <td id="sum"><%=h number_to_currency(tarif.RepasP, :unit => '') %> €</td>
+		  <td id="sum"><%=h number_to_currency(tarif.GarderieAMP, :unit => '') %> €</td>
+		  <td id="sum"><%=h number_to_currency(tarif.GarderiePMP, :unit => '') %> €</td>
+		  <td id="sum"><%=h number_to_currency(tarif.CentreAMP, :unit => '') %> €</td>
+		  <td id="sum"><%=h number_to_currency(tarif.CentrePMP, :unit => '') %> €</td>
+		  <td id="sum"><%=h number_to_currency(tarif.CentreAMPMP, :unit => '') %> €</td>
+		  <td id="sum"><%=h number_to_currency(tarif.Etude, :unit => '') %> €</td>
+		</tr>
+	      <% end -%>
+	    </table>
+	    <%= link_to "Modifier", :controller => 'tarifs' if session[:user_readwrite] %> 
+	    <br>
+    	    <br>
+    </div>
+<hr>
+    <div class="span-24">
+      <a name="formules" />
+      <h3>Formules</h3>
+      <table class="sample">
+         <tr>
+	    <th>Formules</th>
+            <th>Description de la formule de calcul utilisée lors de la facturation</th>
+            <th>Active?</th>
+         </tr>
+         <% for f in Formule.all %>
+  	   <tr  class="<%= cycle('list-line-even','list-line-odd')%>">
+             <td><%= f.nom  %></td>
+             <td><%= f.memo %></td>
+	     <td><%= 'Oui' if (@mairie.FacturationModuleName == f.module_name) %></td>
+           </tr>	 
+         <% end %>
+      </table>
+      <%= link_to "Modifier", :controller => 'villes', :action => 'edit', :id => @mairie.id if session[:user_readwrite] %>
+      <br><br>	
+    </div>
+<hr>
+    <div class="span-24 last">	
+	<a name="vacances" />
+	<h3>Vacances</h3>
+	    <table class="sample">
+	      <tr>
+		<th style="color:black">Vacances</th>
+		<th>Débutent le</th>
+		<th>Se terminent le</th>
+	      </tr>
+	      <% for vacance in @vacances %>
+		<tr class="<%= cycle('list-line-even','list-line-odd')%>">
+		  <td><%=h vacance.nom %></td>
+		  <td><%=h vacance.debut.to_s(:fr) %></td>
+		  <td><%=h vacance.fin.to_s(:fr) %></td>
+		</tr>
+	      <% end -%>
+	    </table>
+	    <%= link_to 'Modifier', vacances_url %>
+	    <br><br>
+    </div>
+    <hr>
+    <div class="span-24 last">	
+	<a name="utilisateurs" />
+	<h3>Utilisateurs</h3>
+	    <table class="sample">
+	      <tr>
+		<th style="color:black">Utilisateurs</th>
+		<th>Nom</th>
+		<th>Droits</th>
+		<th>Connecté le</th>
+	      </tr>
+	       <% for u in @users %>
+		  <tr class="<%= cycle('list-line-even','list-line-odd')%>">
+		    <td><%= image_tag avatar_url(u) %></td>
+		    <td><b><%= u.username[0..30] %></b></td>
+		    <td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
+		    <td><%= u.lastconnection.to_s(:fr) %> </td>
+		  </tr>
+	       <% end -%>
+	    </table>
+    </div>
+    <hr>
+	<div class="span-24 last">	
+	   <a name="export" />
+	   <h3>Exporter les données</h3>
+      		<table class="sample">
+		<tr>
+		<th style="color:black">Données associées à ce compte</th>
+		<th>Familles</th>
+		<th>Enfants</th>
+		<th>Prestations</th>
+		<th>Factures</th>
+		<th>Paiements</th>
+	</tr>
+	<tr>
+	    <td></td>
+	    <td><b><%= Famille.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
+	    <td><b><%= @enfants.count %></b></td>
+	    <td><b><%= @prestations.count %></b></td>
+	    <td><b><%= Facture.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
+	    <td><b><%= Paiement.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td> 
+	</td></tr>	 
+      </table>
+      <%= link_to "Importer données Familles et Enfants", :action => "import" %><br>
+      <%= link_to "Exporter les Familles et données liées (enfants, prestations) en XML", "/familles.xml" %><br>
+      <%= link_to "Exporter les Factures et données liées (lignes de factures) en XML", "/factures.xml" %><br>
+      <%= link_to "Exporter les Paiement en XML", "/paiements.xml" %>
+      <br><br>
+	
+    </div>
+    <hr>
+    <div class="span-24 last">
+       <a name="options" />
+       <h3>Options</h3>
+       <table class="sample">
+	 <tr>
+            <th style="color:black">Options disponibles</th>
+       	    <th>Description</th>
+	    <th>Version PRO?</th>
+         </tr>
+	 <tr><td><%= link_to "Portail Parents", "http://demonstration.opencantine.fr/moncompte/famillelogin" %></td>
+	     <td>Pour la consultation en ligne par les parents des inscriptions et factures</td><td></td></tr>
+         <tr><td><%= link_to "Smartphones", "http://iphone.opencantine.fr/familles/login" %></td>
+	     <td>Pour une consultation de compte depuis un iPhone et autres smartphones</td><td></td></tr>
+         <tr><td>Hébergement</td><td>Prestation d'hébergement sous-domaine personnalisé (votreville.opencantine.fr)</td><td></td></tr>
+         <tr><td>Formule calcul personnalisée</td><td>Pour personnaliser vos règles de calcul de facturation</td><td>OUI</td></tr>
+	 <tr><td>Multi-Utilisateurs</td><td>Permet l'ajout illimité d'utilisateurs pour la consultation (Lecture/Ecriture)</td><td>OUI</td></tr>
+       </table>
+       * Option disponible dans la version 'Pro'. <a href="mailto:philippe.nougaillon@gmail.com">Consultez-nous</a> 
+       <br><br>
+    </div>
+</div>

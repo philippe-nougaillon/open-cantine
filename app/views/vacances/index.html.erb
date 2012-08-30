@@ -1,0 +1,25 @@
+<div class="span-12 last">
+
+	<br><br>
+
+	<h3>Liste des vacances</h3>
+
+	<table class="sample">
+	  <tr>
+	    <th>Nom de la période</th>
+	    <th>Débute le</th>
+	    <th>Se termine le</th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+	  <% for vacance in @vacances %>
+	    <%= render :partial => vacance %>
+	  <% end %>
+	</table>
+
+	<br />
+
+	<%= link_to 'Ajouter', new_vacance_path %>
+</div>
+

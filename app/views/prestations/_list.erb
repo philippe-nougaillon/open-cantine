@@ -1,0 +1,196 @@
+  <% if @prestations.size > 0 %>
+
+    <% total_repas = 0 %>
+    <% total_repasA = 0 %>
+
+    <% total_repasEnfant = 0 %>
+    <% total_repasEnfantSP = 0 %>
+    <% total_repasEnfantALG = 0 %>
+    
+    <% total_repasAdulte = 0 %>
+    <% total_repasAdulteSP = 0 %>
+    <% total_repasAdulteALG = 0 %>
+
+    <% total_garderieAMP = 0 %>
+    <% total_garderieAMA = 0 %>
+    <% total_garderieAMM = 0 %>
+
+    <% total_garderiePMP = 0 %>
+    <% total_garderiePMA = 0 %>
+    <% total_garderiePMM = 0 %>
+
+    <% total_centreAMP = 0 %>
+    <% total_centreAMA = 0 %>
+    <% total_centreAMM = 0 %>
+
+    <% total_centrePMP = 0 %>
+    <% total_centrePMA = 0 %>
+    <% total_centrePMM = 0 %>
+
+    <% total_etude = 0 %>
+
+    <table class="sample">
+      <tr>
+        <th><%= link_to "Date", :sort => "date", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Classe", :sort => "classe", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Nom", :sort => "nom", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Prénom", :sort => "prenom", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Repas", :sort => "repas", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Garderie Matin", :sort => "garderieAM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Garderie Soir", :sort => "garderiePM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Centre Matin", :sort => "centreAM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Centre Après-midi", :sort => "centrePM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Etude", :sort => "etude", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+	<th>Mémo</th>
+        <th></th>
+      </tr>
+      <% if params[:action] == 'print' %>
+        <tr>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+        </tr>
+      <% end %>
+
+      <% for prestation in @prestations %>
+
+        <% enfant = Enfant.find(prestation.enfant_id) %>
+
+        <%= render :partial => 'prestation_full', :locals => { :prestation => prestation, :enfant => enfant } %>
+
+        <% if prestation.repas == '1' or prestation.repas == '3' %>
+            <% if enfant.age %> 
+		<% if enfant.age <= 15 %>
+                	<% total_repasEnfant += 1 %>
+                	<% total_repasEnfantSP  +=  1 if enfant.sansPorc %>
+                	<% total_repasEnfantALG +=  1 if enfant.allergies %>
+            	<% else %>
+                	<% total_repasAdulte += 1 %>
+                	<% total_repasAdulteSP  +=  1 if enfant.sansPorc %>
+                	<% total_repasAdulteALG +=  1 if enfant.allergies %>
+            	<% end %>
+	    <% else %>
+        	<% total_repasEnfant += 1 %>
+        	<% total_repasEnfantSP +=  1  if enfant.sansPorc %>
+        	<% total_repasEnfantALG +=  1 if enfant.allergies %>
+	    <% end %>
+        <% else %>
+            <% if prestation.repas == '2'  %>
+                <% total_repasA += 1 %>
+            <% end %>
+        <% end %>
+
+        <% total_garderieAMP +=  1 if (prestation.garderieAM == '1' or prestation.garderieAM == '5' or prestation.garderieAM == '6' or prestation.garderieAM == '7') %>
+        <% total_garderieAMA +=  1 if prestation.garderieAM == '2' %>
+        <% total_garderieAMM +=  1 if prestation.garderieAM == '3' %>
+
+        <% total_garderiePMP +=  1 if (prestation.garderiePM == '1' or prestation.garderiePM == '5' or prestation.garderiePM == '6' or prestation.garderiePM == '7') %>
+        <% total_garderiePMA +=  1 if prestation.garderiePM == '2' %>
+        <% total_garderiePMM +=  1 if prestation.garderiePM == '3' %>
+
+        <% total_centreAMP   +=  1 if prestation.centreAM == '1' %>
+        <% total_centreAMA   +=  1 if prestation.centreAM == '2' %>
+        <% total_centreAMM   +=  1 if prestation.centreAM == '3' %>
+
+        <% total_centrePMP   +=  1 if prestation.centrePM == '1' %>
+        <% total_centrePMA   +=  1 if prestation.centrePM == '2' %>
+        <% total_centrePMM   +=  1 if prestation.centrePM == '3' %>
+
+        <% total_etude       +=  1 if prestation.etude == '1' %>
+      <% end %>
+
+      <% if params[:action] == 'print' %>
+        <tr>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><b>Total Repas Enfants</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="center">
+            <b><%= sprintf("%3d", (total_repasEnfant)) %></b>
+            <% if total_repasEnfantSP > 0 %>
+               (dont <%= sprintf("%2d", (total_repasEnfantSP)) %> ss porc)
+            <% end%>
+            <% if total_repasEnfantALG > 0 %>
+               (dont <%= sprintf("%2d", (total_repasEnfantALG)) %> ALLERGIES)
+            <% end%>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Repas Adulte</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="center">
+            <b><%= sprintf("%3d", (total_repasAdulte)) %></b>
+            <% if total_repasAdulteSP > 0 %>
+               (dont <%= sprintf("%2d", (total_repasAdulteSP)) %> ss porc)
+            <% end%>
+            <% if total_repasAdulteALG > 0 %>
+               (dont <%= sprintf("%2d", (total_repasAdulteALG)) %> ALLERGIES)
+            <% end%>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr id="sum">
+        <td>Annulations</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="center"><%= sprintf("%03d", total_repasA) %></td>
+        <td class="center"><%= sprintf("%03d", total_garderieAMA) %></td>
+        <td class="center"><%= sprintf("%03d", total_garderiePMA) %></td>
+        <td class="center"><%= sprintf("%03d", total_centreAMA) %></td>
+        <td class="center"><%= sprintf("%03d", total_centrePMA) %></td>
+        <td class="center"><%= sprintf("%03d", total_etude) %></td>
+        <td></td>
+      </tr>
+      <tr id="sum">
+        <td><b>Total</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="center"><b><%= sprintf("%03d", total_repasEnfant  + total_repasAdulte) %></b></td>
+        <td class="center"><b><%= sprintf("%03d", total_garderieAMP + total_garderieAMM) %></b></td>
+        <td class="center"><b><%= sprintf("%03d", total_garderiePMP + total_garderiePMM) %></b></td>
+        <td class="center"><b><%= sprintf("%03d", total_centreAMP +total_centreAMM) %></b></td>
+        <td class="center"><b><%= sprintf("%03d", total_centrePMP + total_centrePMM ) %></b></td>
+        <td class="center"><b><%= sprintf("%03d", total_etude) %></b></td>
+        <td></td>
+      </tr>
+    </table>
+  <% else %>
+     Aucune prestation pour ce jour. Veuillez choisir une autre date ou réduire le filtre.
+  <% end  %>

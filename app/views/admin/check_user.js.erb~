@@ -1,0 +1,3 @@
+$("#login_msg").html("<%= flash[:notice] %>");
+$("#login_msg").effect("highlight", {}, 2500);
+$("#login_msg").fadeOut(10000);

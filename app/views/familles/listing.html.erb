@@ -1,0 +1,50 @@
+<h3>Liste des familles</h3>
+<table class="sample">
+  <tr>
+    <th>Nom</th>
+    <th>Adresse</th>
+    <th>Cp</th>
+    <th>Ville</th>
+    <th>Allocataire</th>
+    <th>QF</th>
+    <th>Tél. fixe</th>
+    <th>Mob. maman</th>
+    <th>Mob. papa</th>
+    <th>Enfant(s)</h>
+   </tr>
+  <% total_enfant = 0 %>
+  <% for famille in @familles %>
+    <tr>
+      <td><b><%=h famille.nom %></b></td>
+      <td><%=h famille.adresse[0..25] %></td>
+      <td><%=h famille.cp %></td>
+      <td><%=h famille.ville %></td>
+      <td><%=h famille.allocataire %></td>
+      <td>
+      <% if famille.tarif_id %>
+         <%=h Tarif.find(famille.tarif_id).memo unless famille.tarif_id.blank?  %>
+      <% end %>
+      </td>
+      <td><%=h famille.phone %></td>
+      <td><%=h famille.mobile1 %></td>
+      <td><%=h famille.mobile2 %></td>
+      <td style="text-align:right"><%=h famille.enfants.count %></td>
+    </tr>
+    <% total_enfant += famille.enfants.count %>
+  <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td  style="text-align:right"><b><%= total_enfant %></b></td>
+    </tr>
+    <% total_enfant += famille.enfants.count %>
+
+</table>
+

@@ -1,0 +1,38 @@
+<p>
+  <b>Enfant:</b>
+  <%=h @prestation.enfant_id %>
+</p>
+
+<p>
+  <b>Facture:</b>
+  <%=h @prestation.facture_id %>
+</p>
+
+<p>
+  <b>Repasamp:</b>
+  <%=h @prestation.repasAMP %>
+</p>
+
+<p>
+  <b>Repasamr:</b>
+  <%=h @prestation.repasAMR %>
+</p>
+
+<p>
+  <b>Repaspmp:</b>
+  <%=h @prestation.repasPMP %>
+</p>
+
+<p>
+  <b>Repaspmr:</b>
+  <%=h @prestation.repasPMR %>
+</p>
+
+<p>
+  <b>Etude:</b>
+  <%=h @prestation.etude %>
+</p>
+
+
+<%= link_to 'Edit', edit_prestation_path(@prestation) %> |
+<%= link_to 'Back', prestations_path %>

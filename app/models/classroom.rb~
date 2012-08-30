@@ -1,0 +1,9 @@
+class Classroom < ActiveRecord::Base
+
+	attr_protected :id
+
+	belongs_to :ville
+
+	validates_presence_of :nom, :referant
+
+end

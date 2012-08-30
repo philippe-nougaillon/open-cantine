@@ -1,0 +1,28 @@
+<br><br>
+
+<h3>Liste des Classes</h3>
+
+<table class="sample">
+  <tr>
+    <th>Nom</th>
+    <th>Référant</th>
+    <th>Elèves</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% for classroom in @classrooms %>
+    <tr class="<%= cycle('list-line-even','list-line-odd') %>" >
+      <td><b><%=h classroom.nom %></b></td>
+      <td><%=h classroom.referant %></td>
+      <td><%= Enfant.count(:conditions => ["classe = ?", classroom.id]) %> </td>
+      <td><%= link_to 'Modifier', edit_classroom_path(classroom) %></td>
+      <td><%= link_to '[X]', classroom, :confirm => 'Certain(e)?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'Ajouter', new_classroom_path %>  | <%= link_to 'Retour', :controller => 'admin', :action => 'setup' %>
+

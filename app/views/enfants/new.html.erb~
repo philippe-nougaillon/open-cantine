@@ -1,0 +1,9 @@
+<br>
+<h3>Nouvel enfant</h3>
+
+<% form_for(@enfant) do |f| %>
+
+  <%= render :partial => 'enfant', :locals => { :f => f } %>
+
+<% end %>
+

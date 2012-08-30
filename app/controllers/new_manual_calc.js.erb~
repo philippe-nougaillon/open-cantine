@@ -1,0 +1,2 @@
+$("#ajax_update").html("<b>hello</b>);
+

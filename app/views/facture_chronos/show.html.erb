@@ -1,0 +1,13 @@
+<p>
+  <b>Mairie:</b>
+  <%=h @facture_chrono.mairie_id %>
+</p>
+
+<p>
+  <b>Prochain:</b>
+  <%=h @facture_chrono.prochain %>
+</p>
+
+
+<%= link_to 'Edit', edit_facture_chrono_path(@facture_chrono) %> |
+<%= link_to 'Back', facture_chronos_path %>

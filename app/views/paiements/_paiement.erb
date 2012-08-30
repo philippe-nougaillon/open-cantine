@@ -1,0 +1,107 @@
+<br>
+<p style="display:none">
+    <%= select("paiement", "famille_id", Famille.find(:all, :order => 'nom').collect {|p| [ "#{p.nom} (#{p.adresse} #{p.ville})", p.id ] }, { :include_blank => false }) %>
+</p>
+
+<table class="form">
+  <tr>
+    <td id="label">
+      <%= calendar_date_select_includes nil,:locale=>'fr' %>
+      <% CalendarDateSelect.format=(:finnish )%>
+      <%= f.label "Date" %>
+    </td>
+    <td>
+      <%= f.calendar_date_select :date, :time => false, :size => 10 %>
+    </td>
+  </tr>
+  <tr>
+    <td id="label">
+        <%= f.label "Famille" %>
+    </td>
+    <td>
+        <%= link_to Famille.find(@paiement.famille_id).nom, :controller => 'familles', :action => 'show', :id => @paiement.famille_id %>
+    </td>
+  </tr>
+ 
+  <tr>
+    <td id="label">
+      <%= f.label "Référence" %>
+    </td>
+    <td>
+      <%= f.text_field :ref, :size => 10 %>
+    </td>
+  </tr>
+  <tr>
+    <td id="label">
+      <%= f.label 'Type paiement' %>
+    </td>
+    <td>
+      <%= f.select(:typepaiement, %w{ CHEQUE ESPECES AVOIR AUTRE }) %>
+    </td>
+  </tr>
+  <tr>
+    <td id="label">
+      <%= f.label "Banque" %>
+    </td>
+    <td>
+      <%= f.text_field :banque, :size => 10 %>
+    </td>
+  </tr>
+  <tr>
+    <td id="label">
+      <%= f.label "Chèque N°" %>
+    </td>
+    <td>
+      <%= f.text_field :chequenum, :size => 10 %>
+    </td>
+  </tr>
+  <tr>
+    <td id="label">
+      <%= f.label "Montant Cantine" %>
+    </td>
+    <td>
+      <%= f.text_field :montantCantine, :size => 10 %> € (ex: 12.50)
+    </td>
+  </tr>
+  <tr>
+    <td id="label">
+      <%= f.label "Montant Garderie" %>
+    </td>
+    <td>
+      <%= f.text_field :montantGarderie, :size => 10 %> € 
+    </td>
+  </tr>
+  <tr>
+    <td id="label">
+      <%= f.label "Montant Total" %>
+    </td>
+    <td>
+      <%= f.text_field :montant, :size => 10 %> €
+    </td>
+  </tr>
+  <tr>
+    <td id="label">
+      Date remise TP
+    </td>
+    <td>
+      <%= f.calendar_date_select :remise, :time => false, :size => 10 %>
+    </td>
+  </tr>
+  <tr>
+    <td id="label">
+      Mémo
+    </td>
+    <td>
+      <%= f.text_field :memo, :size => 30 %>
+    </td>
+  </tr>
+
+  <tr>
+     <td></td>
+     <td>
+       <div style="margin-top:10px;">
+          <%= image_submit_tag "valider.gif" %>
+       </div>
+     </td>
+   </tr>
+</table>

@@ -1,0 +1,69 @@
+body {
+    font-family: Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+#content {
+    margin-left: 20px;
+}
+
+
+h3 {
+    border-bottom-color: #000000;
+    border-bottom-width: 1px;
+    border-bottom-style: groove;
+    width: 100%;
+    color: #8b0000;
+}
+
+h4 {
+    width: 100%;
+    color: green;
+}
+
+a { color: #000;text-decoration:none }
+a:visited { color: #000;text-decoration:none  }
+
+table.sample {
+	border-width: 1px 1px 1px 1px;
+	border-spacing: 2px;
+	border-style: none none none none;
+	border-color: gray gray gray gray;
+	border-collapse: separate;
+    color:  black;
+}
+table.sample th {
+	border-width: 1px 1px 1px 1px;
+	padding: 5px 5px 5px 5px;
+	border-style: groove groove groove groove;
+	border-color: gray gray gray gray;
+	background-color: rgb(255, 250, 250);
+	-moz-border-radius: 3px 3px 3px 3px;
+    color: 	green;
+}
+table.sample .center {
+    text-align:center;
+}
+
+table.sample .list-line-even {
+	background-color: rgb(255, 255, 255);
+}
+table.sample .list-line-odd {
+	background-color: rgb(240, 240, 240);
+}
+
+table.sample td {
+	border-width: 1px 1px 1px 1px;
+	padding: 3px 3px 3px 3px;
+	border-style: groove groove groove groove;
+	border-color: gray gray gray gray;
+}
+table.sample .center {
+    text-align:center;
+}
+table.sample #sum {
+	color: 	#b80000;
+}
+table.sample a {
+     color: black;
+}

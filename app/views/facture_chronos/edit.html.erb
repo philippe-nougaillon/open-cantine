@@ -1,0 +1,27 @@
+<h3>Modifier le prochain N° de facture</h3>
+
+<div style="color: orange">* indique un champ obligatoire</div>
+
+<br>
+  
+<% form_for(@facture_chrono) do |f| %>
+
+  <table class="form">
+    <tr>
+      <td>
+        <%= f.label 'Prochain N°* :' %>
+      </td>
+      <td>
+        <%= f.text_field :prochain, :size => 5 %>
+      </td>
+    </tr>
+    <tr>
+       <td></td>
+       <td>
+         <div style="background-color:lightblue;text-align:right">
+            <%= f.submit "Sauvegarder" %>
+         </div>
+       </td>
+     </tr>
+  </table>
+<% end %>

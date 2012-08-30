@@ -1,0 +1,11 @@
+<h1>Règles de facturation</h1>
+<h2><%=  @mairie.nom %></h2>
+<p>
+  Note : Chaque établissement dispose de ses propres règles de facturation sous la forme d'un fichier Ruby autonome. Il peut être modifié à volonté.
+</p>
+
+<h3><%= @mairie.FacturationModuleName %> </h3>
+
+<% for l in @facturation_module %>
+    <%= l.gsub(" ", "&nbsp;") %><br>
+<% end %>

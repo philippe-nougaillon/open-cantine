@@ -1,0 +1,18 @@
+<p>
+  <b>Nom de la période:</b>
+  <%=h @vacance.nom %>
+</p>
+
+<p>
+  <b>Debut:</b>
+  <%=h @vacance.debut %>
+</p>
+
+<p>
+  <b>Fin:</b>
+  <%=h @vacance.fin %>
+</p>
+
+
+<%= link_to 'Edit', edit_vacance_path(@vacance) %> |
+<%= link_to 'Back', vacances_path %>

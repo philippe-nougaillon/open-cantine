@@ -1,0 +1,11 @@
+<p>
+  <b>Nom:</b>
+  <%=h @classroom.nom %>
+  <br>
+  <b>Référant:</b>
+  <%=h @classroom.referant   %>
+</p>
+
+
+<%= link_to 'Modifier', edit_classroom_path(@classroom) %> |
+<%= link_to 'Retour', classrooms_path %>

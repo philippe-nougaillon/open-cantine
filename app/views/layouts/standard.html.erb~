@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>openCantine</title>
+  <%= javascript_include_tag "application", :debug => true %>
+
+  <%= stylesheet_link_tag '/stylesheets/standard', :media => "all"  %>
+  <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="/stylesheets/blueprint/print.css" type="text/css" media="print">	
+  <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+  <%= csrf_meta_tags %>  
+
+</head>
+<body>
+   <div class="container">
+	<div id="login" class="span-24 last">
+	    <% unless session[:user].nil? %>
+	         <%= link_to User.find(session[:user]).username, :controller => 'admin', :action => 'user_edit' %>
+			| <%= link_to "Paramètres", :controller => 'admin', :action => 'setup' %>
+	        | <%= link_to "Aide", :controller => 'admin', :action => 'bienvenue' %>
+	        | <%= link_to "Souhaits", :controller => 'todos' %>
+	        | <%= link_to "Déconnexion", {:controller => 'admin', :action => 'signout', :id => 0 } %>
+	    <% end %>
+	</div>
+
+	<div id="title" class="span-10">
+           <%= image_tag '/images/playground.png' %>
+           <%= image_tag '/images/diner.png' %>
+           <%= image_tag '/images/picnic.png' %>
+           <h3 style="color:#df2599"> openCantine </h3>
+	</div>
+
+	<div id="title" class="span-14 last">
+	    <% unless session[:user].nil? %>
+	        <%= Ville.find(session[:mairie]).nom %>
+	    <% end %>
+	</div>
+
+	<div class="span-24 last">
+	    <hr>
+	    <div id="error_message">  <%= flash[:notice]  %></div>
+	    <div id="warning_message"><%= flash[:warning] %></div>
+	</div>
+
+	<div id="menubar" class="span-24 last">
+	   <% unless session[:user].nil? %>
+		<div class="span-4" id="menu<%= 'Current' if params[:controller] == 'familles' %>">
+       			<%= image_tag "/images/school.png"  %>
+       			<%= link_to "Familles", :controller => 'familles' %>
+		</div>
+	    	<div class="span-4" id="menu<%= 'Current' if params[:controller] == 'enfants' %>">
+		       <%= image_tag "/images/kid.png"  %>
+		       <%= link_to "Enfants", :controller => 'enfants' %>
+		</div>
+		<div class="span-4" id="menu<%= 'Current' if params[:controller] == 'prestations' %>">
+	      		<%= image_tag "/images/diner.png"  %>
+	      		<%= link_to "Prestations", :controller => 'prestations' %>
+		</div>
+		<div class="span-4" id="menu<%= 'Current' if params[:controller] == 'factures' %>">
+		       <%= image_tag "/images/factures.png"   %>
+		       <%= link_to "Factures", :controller => 'factures' %>  
+		</div>
+		<div class="span-4 last" id="menu<%= 'Current' if params[:controller] == 'paiements' %>">
+		       <%= image_tag "/images/euro.png"   %>
+		       <%= link_to "Paiements", :controller => 'paiements' %>
+		</div>
+	    <% end %>
+	</div>
+	<div class="span-24 last">
+	   <div>
+		<%= yield -%>
+	   </div> 
+    </div>
+   </div>
+  </body>
+</html>

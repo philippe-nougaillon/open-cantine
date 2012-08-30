@@ -1,0 +1,19 @@
+<h1>New facture_chrono</h1>
+
+<% form_for(@facture_chrono) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :mairie_id %><br />
+    <%= f.text_field :mairie_id %>
+  </p>
+  <p>
+    <%= f.label :prochain %><br />
+    <%= f.text_field :prochain %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', facture_chronos_path %>

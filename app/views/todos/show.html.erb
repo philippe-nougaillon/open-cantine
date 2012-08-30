@@ -1,0 +1,13 @@
+<p>
+  <b>Description:</b>
+  <%=h @todo.description %>
+</p>
+
+<p>
+  <b>Counter:</b>
+  <%=h @todo.counter %>
+</p>
+
+
+<%= link_to 'Edit', edit_todo_path(@todo) %> |
+<%= link_to 'Back', todos_path %>

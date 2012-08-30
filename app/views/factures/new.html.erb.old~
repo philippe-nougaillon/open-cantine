@@ -1,0 +1,65 @@
+<div id="main" class="span-6 last">
+  <br><br>
+     <% if session[:user].nil? %>
+	  <fieldset>
+	  <legend>Facturation</legend> 
+		<% form_tag :action => "signin"  do %>
+		    <label for="famille_id">Famille</label><br>
+		    <%=  text_field_tag( "username",params[:famille_id] ,:size => 20) %><br>
+
+		    <label for="famille_id">Mois</label><br>
+		    <%=  select_tag("mois", "<option>Janvier</option>", params[:famille_id] ,:size => 20) %><br>
+
+		    <label for="password">Mot de passe</label><br>
+		    <%=  password_field_tag "password",params[:password], :size => 20 %><br>
+
+		    <div style="margin-top:10px;">
+		       <%= image_submit_tag "valider.gif" %>
+		    </div>
+		  <% end %>
+	   </fieldset>
+     <% end %>
+</div>
+
+<% form_for(@facture) do |f| %>
+
+  <p style="display:none">
+    <%= f.text_field :famille_id %>
+    <%= f.text_field :reglement_id %>
+    <%= f.text_field :SoldeFamille, :size => 8 %>
+  </p>
+
+  <table class="form">
+    <tr>
+      <td><%= f.label "Facture N°:" %></td>
+      <td><%= f.text_field :ref, :size => 10 %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Date:" %></td>
+      <td><%= f.calendar_date_select :date, :time => false, :value => Date.today.to_s(:fr), :size => 10 %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Echéance:" %></td>
+      <td><%= f.calendar_date_select :echeance, :time => false, :value => Date.today.at_end_of_month.to_s(:fr), :size => 10 %></td>
+    </tr>
+    <tr>
+      <td>Prestations :</td>
+      <td><%= @txt.gsub(";", "<br>") %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Total:"%></td>
+      <td><b><%= f.text_field :montant, :size => 10 %> €</b></td>
+    </tr>
+
+    <tr>
+       <td></td>
+       <td>
+          <div style="margin-top:10px;">
+              <%= image_submit_tag "valider.gif" %>
+          </div>
+       </td>
+     </tr>
+     
+  </table>
+
+<% end %>

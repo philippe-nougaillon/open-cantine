@@ -1,0 +1,22 @@
+<h1>Listing facture_chronos</h1>
+
+<table>
+  <tr>
+    <th>Mairie</th>
+    <th>Prochain</th>
+  </tr>
+
+<% for facture_chrono in @facture_chronos %>
+  <tr>
+    <td><%=h facture_chrono.mairie_id %></td>
+    <td><%=h facture_chrono.prochain %></td>
+    <td><%= link_to 'Show', facture_chrono %></td>
+    <td><%= link_to 'Edit', edit_facture_chrono_path(facture_chrono) %></td>
+    <td><%= link_to 'Destroy', facture_chrono, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New facture_chrono', new_facture_chrono_path %>

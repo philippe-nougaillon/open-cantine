@@ -1,0 +1,58 @@
+<br>
+<br>
+
+<%= form_for(@ville, :url=>{:action=> :update}) do |f|%>
+
+	<% @ville.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+
+	<fieldset id="report_form">
+	  <legend>Modifier coordonnées</legend>
+	  <div class="span-10 column last">
+
+	    <dl>
+	      <dt><%=f.label :nom, "Nom" %></dt>
+	      <dt><%=f.text_field :nom, :class=>"text required", :minlength=>"3" %></dt>
+
+	      <dt><%=f.label :nom, "Adresse" %></dt>
+	      <dt><%=f.text_field :adr, :class=>"text required", :minlength=>"3" %></dt>
+
+	      <dt><%=f.label :nom, "Code postal" %></dt>
+	      <dt><%=f.text_field :cp, :class=>"text required", :minlength=>"5" %></dt>
+
+	      <dt><%=f.label :nom, "Ville" %></dt>
+	      <dt><%=f.text_field :ville, :class=>"text required", :minlength=>"3" %></dt>
+
+	      <dt><%=f.label :nom, "Téléphone" %></dt>
+	      <dt><%=f.text_field :tel, :class=>"text required", :minlength=>"3" %></dt>
+
+	      <dt><%=f.label :nom, "Courriel" %></dt>
+	      <dt><%=f.text_field :email, :class=>"text required", :minlength=>"3" %></dt>
+
+	      <dt><%=f.check_box :newsletter %> <%=f.label "Recevoir la newsletter openCantine ?" %></dt>
+		
+		<br><br>
+		<legend>Méthode de facturation</legend>
+
+	 	<div class="span-22">
+		      <table class="sample">
+			 <tr>
+			    <th>Méthode</th>
+			    <th>Description</th>
+			    <th>Active?</th>
+			 </tr>
+			 <% for formule in Formule.all %>
+		  	   <tr>
+			     <td><%= formule.nom  %></td>
+			     <td><%= formule.memo %></td>
+			     <td><%= f.radio_button 'FacturationModuleName', formule.module_name %></td>
+			   </tr>	 
+			 <% end %>
+		      </table>
+	    	</div>
+	    </dl>
+  	    <br>
+            <%= f.submit "Valider" %>
+	</fieldset>
+<% end %>

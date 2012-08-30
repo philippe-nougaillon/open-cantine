@@ -1,0 +1,90 @@
+<div id="form_actions">
+   <div id="login">
+       <%= link_to "| APERCU AVANT IMPRESSION |", :action => 'print', :id => @facture.id %>        
+       <%= link_to "| SUPPRIMER |", @facture, :confirm => 'Etes-vous certain(e) de vouloir supprimer cette facture ?', :method => :delete %>
+   </div> 
+</div>
+
+<div>
+  <br><br>
+  <h3>Facture <%= @facture.ref %> </h3>
+  <hr/>
+  	<div class="span-24 last">
+	  <table>
+	    <tr>
+	      <td>Famille</td>
+	      <td><b><%= link_to Famille.find(@facture.famille_id).nom, :controller => 'familles', :action => 'show', :id => @facture.famille_id %></b></td>
+	    </tr>
+	    <tr>
+	      <td>Référence </td>
+	      <td><b><%=h @facture.ref %></b></td>
+	    </tr>
+	    <tr>
+	      <td>Date</td>
+	      <td><b><%=h @facture.date.to_date.to_s(:fr) %></b></td>
+	    </tr>
+	    <tr>
+	      <td>Echéance</td>
+	      <td><b><%=h @facture.echeance.to_s(:fr) %></b></td>
+	    </tr>
+	    <tr><td>Prestations</td></tr>
+	    <% for l in @facture.facture_lignes %>
+	      <tr>
+		<td></td>
+		<td><b>
+		    <%=h l.texte %>
+		    <% if l.montant %>
+		       = <%= number_to_currency(l.montant, :unit => "") %> €
+		    <% end %>
+		    </b>
+		</td>
+	      </tr>
+	    <% end %>
+	    <tr>
+	      <td><b>Montant<b></td>
+	      <td><b><%=h number_to_currency(@facture.montant, :unit => "") %> €</b></td>
+	    </tr>
+	    <% if @facture.SoldeFamille %>
+		    <tr>
+		      <td>Solde Famille avant cette facture</td>
+		      <td><b><%=h number_to_currency(@facture.SoldeFamille, :unit => "") %> €</b></td>
+		    </tr>
+		    <tr />
+		    <tr>
+		      <td><b>Solde Famille</b></td>
+		      <td><b><%=h number_to_currency((@facture.SoldeFamille + @facture.montant), :unit => "") %> €</b></td>
+		    </tr>
+		    <tr />
+	    <% end %>
+	    <tr>
+		<td>Vérifiée ?</td><td><%= image_tag "ok.jpeg", :size => '15x15' if @facture.checked %></td>
+	    </tr>
+	    <tr>
+		<td>Mémo de bas de page</td><td><%= @facture.footer %></td>
+	    </tr>
+	  </table>
+        </div>
+	
+	<div class="span-24 last">
+		<% if @prestations.size > 0 %>
+		  <br>
+		  <b>Détails des prestations facturées</b>
+		  <hr/>
+		    <table class="sample">
+			<tr>
+			  <th>Date</th>
+			  <th>Prénom</th>
+			  <th>Repas</th>
+			  <th>Garderie Matin</th>
+			  <th>Garderie Soir</th>
+			  <th>Centre Matin</th>
+			  <th>Centre Soir</th>
+			  <th>Etude</th>
+			</tr>
+			<% for prestation in @prestations %>
+			   <%= render :partial => 'prestations/prestation_facture', :locals => { :prestation => prestation } %>
+			<% end %>
+		    </table>
+		<% end %>
+	</div>
+</div>

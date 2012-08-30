@@ -1,0 +1,11 @@
+<br><br>
+<% for blog in @blogs %>
+   <strong><%= blog.titre %></strong>
+   <%= link_to 'Show', blog %>
+   <%= link_to 'Edit', edit_blog_path(blog) %>
+   <%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete %>
+   <br>
+<% end %>
+
+
+<%= link_to 'New blog', new_blog_path %>

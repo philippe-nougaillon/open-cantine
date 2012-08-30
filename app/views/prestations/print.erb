@@ -1,0 +1,10 @@
+<h2><%= Ville.find(session[:mairie]).nom %></h2>
+Le : <%= Date.today.to_s(:fr) %>
+<br><br><br>
+
+<h3>Liste des prestations</h3>
+
+<div id="mainform">
+  <%= render :partial => "list", :locals => { :prestations => @prestations } %>
+</div>
+

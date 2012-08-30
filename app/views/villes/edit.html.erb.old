@@ -1,0 +1,10 @@
+	<h3>Modifier</h3>
+
+	<% form_for(@ville) do |f| %>
+	 	  <%= f.error_messages %>
+
+		  <%= render :partial => 'ville', :locals => { :f => f } %>
+	 
+	<% end %>
+
+ 

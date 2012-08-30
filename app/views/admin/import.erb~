@@ -1,0 +1,39 @@
+<div id="form_actions">
+	Importer données Familles et Enfants
+</div>
+<br>
+Pour importer vos données, vous devez fournir un fichier au format CSV avec ";" comme séparateur de champs.<br><br>
+Les champs doivent être dans l'ordre ci-dessous :<br>
+<br>
+<div class="span-8">
+	<h3>Familles</h3>
+	<ul>
+		<li>Civilité</li>
+		<li>Nom</li>
+		<li>Adresse</li>
+		<li>Adresse2</li>
+		<li>Code postal</li>
+		<li>Ville</li>
+		<li>Email</li>
+		<li>Phone</li>
+		<li>Mobile Maman</li>
+		<li>Mobile Papa</li>
+		<li>Mémo</li>
+		<li>Tarif(id)</li>
+
+	</ul>
+</div>
+<div class="span-8 last">
+	<h3>Enfants</h3>
+	<ul>
+		<li>Nom</li>
+		<li>Prénom</li>
+		<li>Classe(id)</li>
+		<li>Date de naissance</li>
+		<li>Sans porc?(o/n)</li>
+		<li>Allergie?(o/n)</li>
+		<li>Tarif(id)</li>
+	</ul>
+</div>
+
+

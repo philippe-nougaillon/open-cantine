@@ -1,0 +1,44 @@
+
+<div id="form_actions">
+  <%= form_tag request.path, :method => 'get' do %>
+      Nom :
+      <%= autocomplete_field_tag 'nom', '', autocomplete_famille_nom_familles_path, :size => 25, :id_element => '#famille_id' %>
+      <%= hidden_field_tag 'famille_id','' %>
+      <%= submit_tag 'Rechercher'   %>
+  <% end %>
+  <hr>	
+  <div id="adroite"> 	
+  	<% if session[:user_readwrite] %>
+         <%= link_to 'Ajouter une famille', new_famille_path %> | 
+  	<% end %>
+  	<%= link_to 'Listing Familles', :action => "listing", :id => 0 %>
+  </div> 	
+</div>
+<br>
+
+<table class="sample">
+  <tr>
+    <th><%= link_to "Nom", :sort => "nom" %></th>
+    <th>Adresse</th>
+    <th><%= link_to "Cp", :sort => "cp" %></th>
+    <th><%= link_to "Ville", :sort => "ville" %></th>
+    <th>Tél. fixe</th>
+    <th>Mob. maman</th>
+    <th>Mob. papa</th>
+   </tr>
+
+  <% for famille in @familles %>
+    <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
+      <td><b><%= link_to famille.nom, famille %></b></td>
+      <td><%=h famille.adresse[0..25] %></td>
+      <td><%=h famille.cp %></td>
+      <td><%=h famille.ville %></td>
+      <td><%=h famille.phone %></td>
+      <td><%=h famille.mobile1 %></td>
+      <td><%=h famille.mobile2 %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<%= will_paginate @familles %>

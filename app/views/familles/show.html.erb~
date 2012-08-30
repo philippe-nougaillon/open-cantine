@@ -1,0 +1,172 @@
+<div id="form_actions">
+</div>
+<br>
+
+<div id="main" class="span-24 last">
+    <div class="span-10">
+        <table class="sample">
+          <tr>
+            <td>Nom</td>
+            <td><b><%=h @famille.nom %></b></td>
+          </tr>
+          <tr>
+            <td>Civilité</td>
+            <td><b><%=h @famille.civilité %></b></td>
+          </tr>
+          <tr>
+            <td>Adresse</td>
+            <td><b><%=h @famille.adresse %></b></td>
+          </tr>
+          <tr>
+            <td>Adresse</td>
+            <td><b><%=h @famille.adresse2 %></b></td>
+          </tr>
+          <tr>
+            <td>Ville</td>
+            <td><b><%=h @famille.cp %> <%=h @famille.ville %></b></td>
+          </tr>
+	  <tr>
+            <td>N°Allocataire</td>
+            <td><b><%=h @famille.allocataire %> </b></td>
+          </tr>          
+	  <tr>
+            <td>Téléphone fixe</td>
+            <td><b><%=h @famille.phone %></b></td>
+          </tr>
+          <tr>
+            <td>Mob Maman/Papa</td>
+            <td><b><%= @famille.mobile1 %> / <%= @famille.mobile2 %></b></td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td><b><%= mail_to @famille.email %></b></td>
+          </tr>
+	  <tr><td></td>
+		<td>
+	
+	</td></tr>
+        </table>
+	<% if session[:user_readwrite] %>
+	       <%= link_to "Modifier", edit_famille_path(@famille) %> |
+       	       <%= link_to("[X]", @famille, 
+				:confirm => 'Certain(e) de vouloir supprimer cette fiche famille ?', :method => :delete) %> 	  
+	<% end %>
+	<br /><br />
+    </div>
+
+    <div class="span-2"> <br>	</div>
+
+    <div class="span-12 last">
+
+        <table class="sample">
+
+	  <tr>
+            <td>N°Allocataire</td>
+            <td><b><%=h @famille.allocataire %> </b></td>
+          </tr>          
+	  <tr>
+    	    <td>Tarif ou QF</td>
+    	    <td>
+	      <% if @famille.tarif_id %>
+   	         <%= Tarif.find(@famille.tarif_id).memo %> 
+	     <% else %>
+	         Automatique
+	     <% end %>
+            </td>
+  	  </tr>
+	</table>
+        <table class="sample">
+            <tr>
+              <th>Total Factures</th>
+              <th>Total Paiements</th>
+              <th>Solde de la famille</th>
+            </tr>
+            <tr>
+              <td id="sum">
+                  <%= link_to number_to_currency(@sumP, :unit => ""), :controller => 'factures', :action => 'index', :famille_id => @famille  %> € 
+              </td>
+              <td id="sum">
+                  <%= link_to number_to_currency(@sumIn, :unit => ""), :controller => 'paiements', :action => 'index', :famille_id => @famille %> €
+              </td>
+              <td id="sum">
+                  <%= link_to number_to_currency(@solde, :unit => ""), :action => 'balance', :id => @famille.id  %> €
+              </td>
+            </tr>
+          </table>
+          <br>
+	  <% if @facture %>
+          	Dernière facture : 
+		<%= link_to @facture.ref, :controller => 'factures', :action => 'show', :id => @facture  %>
+          |
+          <%= link_to 'Facturer', :controller => 'factures', :action => 'new', :famille_id => @famille if session[:user_readwrite] %>
+          <% end %>
+          |
+          <%= link_to 'Encaisser', :controller => 'paiements', :action => 'new', :famille_id => @famille if session[:user_readwrite] %>
+	  |
+          <br>
+      </td>
+    </tr>
+  </table>
+     <br>
+     <fieldset style="width: 92%">
+	<legend>Mémo</legend>
+     	<%= in_place_editor_field :famille, 'memo', {}, :rows => '4', :click_to_edit_text => "Cliquer pour modifier", 
+				   :saving_text => "Sauvegarde en cours...", :cancel_text => "Annuler" %>
+     </fieldset>	
+</div>
+
+<div class="span-24 last">
+
+	  <b>Enfants & Prestations non facturées</b>
+	  <table class="sample">
+	    <tr>
+	      <th>Prénom</th>
+	      <th>Age</th>
+	      <th>Classe</th>
+	      <th>Référant</th>
+	      <th>Repas</th>
+	      <th>Garderie M.</th>
+	      <th>Garderie S.</th>
+	      <th>Centre M.</th>
+	      <th>Centre S.</th>
+	      <th>Etude</th>
+	      <% if session[:user_readwrite] %><th>Inscription</th><th>Inscription</th> <% end %>
+	    </tr>
+
+	    <% for enfant in @famille.enfants %>
+	      <tr class="<%= cycle('list-line-even','list-line-odd') %>">
+		<td><b><%=link_to enfant.prenom, enfant  %></b></td>
+		<td style="text-align:right"><%=h enfant.age %></td>
+		<td><%=h Classroom.find_by_id(enfant.classe).nom %></td>
+		<td><%=h Classroom.find_by_id(enfant.classe).referant %></td>
+		<% @prestas = enfant.prestations %>
+
+		<td style="text-align:right"><%=h @prestas._repas.afacturer.count('id') %>       </td>
+		<td style="text-align:right"><%=h @prestas._garderieAM.afacturer.count('id') %>  </td>
+		<td style="text-align:right"><%=h @prestas._garderiePM.afacturer.count('id') %>  </td>
+		<td style="text-align:right"><%=h @prestas._centrePM.afacturer.count('id')   %>  </td>
+		<td style="text-align:right"><%=h @prestas._garderiePM.afacturer.count('id') %>  </td>
+		<td style="text-align:right"><%=h @prestas._etude.afacturer.count('id') %>       </td>
+		<% if session[:user_readwrite] %>
+		  <td><%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :id  => enfant.id, :year => Date.today.year %></td>
+		  <td><%= link_to "Automatique", :controller => 'prestations', :action => 'new', :enfant_id  => enfant.id %></td>
+		<% end %>
+	      </tr>
+	    <% end %>
+	  </table>
+
+ 	<% if session[:user_readwrite] %>
+		<%=link_to "Ajouter un enfant", :controller => 'enfants', :action => 'new', :famille_id => @famille %>
+
+		| Inscription groupées des enfants  :
+        	<%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :famille_id => @famille, 
+				:mois => Date.today.month , :year => Date.today.year, :id => 0 %>
+       		ou <%= link_to "Automatique", :controller => 'prestations', :action => 'new', :famille_id => @famille %>
+  	<% end %>
+	 
+     </div>
+
+
+</div>
+
+

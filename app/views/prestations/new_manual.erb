@@ -1,0 +1,100 @@
+
+	<div id="form_actions"></div>
+	<br>
+	<br>
+
+	<h3>Inscription manuelle</h3>
+	<hr/>
+
+	<% if @famille_id %>
+	   <h3><%= link_to Famille.find(@famille_id).nom, :controller => 'familles', :action => 'show', :id => @famille_id %></h3>
+	   <h3><%= format_mois(@mois.to_i).upcase %> <%= @year.upcase %></h3>
+	   <%= link_to "- Mois", :controller => 'prestations', :action => 'new_manual', 
+		:mois => @mois_down , :year => @year_down, :famille_id => @famille_id, :id => 0 %>
+	   <%= link_to "Mois +", :controller => 'prestations', :action => 'new_manual', 
+		:mois => @mois_up   , :year => @year_up, :famille_id => @famille_id, :id => 0 %>
+	<%  else %>
+	    <h3><%=  link_to @enfant.prenom + " "+ Famille.find(@enfant.famille_id).nom, 
+		:controller => "enfants", :action => "show", :id => @enfant.id %></h3>
+	    <%= format_mois(@mois.to_i).upcase %> <%= @year.upcase %>
+	    <%= link_to "[ - ]", :controller => 'prestations', :action => 'new_manual', :mois => @mois_down , :year => @year_down, :id => @enfant.id %>
+	    <%= link_to "[ + ]", :controller => 'prestations', :action => 'new_manual', :mois => @mois_up   , :year => @year_up, :id => @enfant.id %>
+
+	<% end %>
+	<br>
+  
+    <div id="ajaxzone"></div>
+
+	<%= form_for(Prestation.new, :remote => true, :url => { :controller => "prestations", :action => "new_manual_calc"}) do |f| %>
+	  <p style="display:none">
+	     <%= text_field_tag "enfant_id", @enfant.id if @enfant %>
+	     <%= text_field_tag "famille_id", @famille_id if @famille_id %>
+	     <%= text_field_tag "mois", @mois %>
+	     <%= text_field_tag "year", @year %>
+	  </p>
+	  <table class="sample">
+	    <tr>
+	      <th>Semaine</th>
+	      <th>Date</th>
+	      <th>Repas</th>
+	      <th>Garderie Matin</th>
+	      <th>Garderie Soir</th>
+	      <th>Centre Matin</th>
+	      <th>Centre Soir</th>
+	    </tr>
+	    <% @week = 1 %>
+	    <% for d in @days %>
+		<%  @vacances = Vacance.find(:all, :conditions => ["debut <= ? AND fin >= ? AND mairie_id = ?", d.to_s(:en), d.to_s(:en), session[:mairie]]) %>
+			
+		<% if @famille_id %>
+			<% @presta = Prestation.new %>
+		<% else %>
+		     <% @presta = Prestation.find(:first, :conditions => ["enfant_id = ? and date = ?", @enfant.id, d]) %>
+		<% end %>
+
+	        <% @locked = (@presta && @presta.facture_id) %>
+		<tr>
+		  <td><% if @current_week != @week %><%= @week %><% @current_week = @week %><% end %></td>
+		  <td><b><%= format_date(d) %></b></td>
+		  <td><%= check_box_tag(:"#{d.day}RepasAM", params[:"#{d.day}RepasAM"], 
+			@presta ? (@presta.repas !="0")  : false , { :onclick => "this.form.commit.click();",
+			 :disabled => @locked }) %></td>
+		  <td><%= check_box_tag(:"#{d.day}GarderieAM", params[:"#{d.day}GarderieAM"],
+			 @presta ? (@presta.garderieAM != "0") : false, { :onclick => "this.form.commit.click();", 
+			:disabled => @locked  }) %></td>
+		  <td><%= check_box_tag(:"#{d.day}GarderiePM", params[:"#{d.day}GarderiePM"], 
+			@presta ? (@presta.garderiePM != "0") : false, { :onclick => "this.form.commit.click();", 
+			:disabled => @locked  }) %></td>
+		  <td><%= check_box_tag(:"#{d.day}CentreAM", params[:"#{d.day}CentreAM"], 
+			@presta ? (@presta.centreAM != "0") : false, { :onclick => "this.form.commit.click();", 
+			:disabled => @locked  }) %></td>
+		  <td><%= check_box_tag(:"#{d.day}CentrePM", params[:"#{d.day}CentrePM"], 
+			@presta ? (@presta.centrePM != "0") : false, { :onclick => "this.form.commit.click();", 
+			:disabled => @locked  }) %></td>
+		</tr>
+
+		<% if d.wday == 5 %><% @week = @week + 1 %>
+		   </table>
+		   <table class="sample">
+			<tr>
+			      <th>Semaine</th>
+			      <th>Date</th>
+			      <th>Repas</th>
+			      <th>Garderie Matin</th>
+			      <th>Garderie Soir</th>
+			      <th>Centre Matin</th>
+			      <th>Centre Soir</th>
+			</tr>
+                <% end %>
+	     <% end %>
+	   </table>
+	   <%= check_box_tag("etude", params[:etude]) %> Etude pour tout le mois ?
+	   
+	   <%= f.submit "Enregistrer" %>
+	   <a href="#top">Haut de la page</a>
+
+
+	<% end %>
+	<br>
+	<br>
+

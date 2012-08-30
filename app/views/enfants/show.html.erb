@@ -1,0 +1,207 @@
+<div id="form_actions">
+  
+</div>
+
+<br>
+<br>
+
+<div class="span-10">
+  <table class=sample>
+    <tr>
+      <td>
+        <td>Prénom</td>
+        <td><b><%= h @enfant.prenom %></b></td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <td>Famille</td>
+        <td><b><%= link_to Famille.find(@enfant.famille_id).nom, :controller => 'familles', :action => 'show', :id => @enfant.famille_id %></b></td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <td>Date de naissance</td>
+        <td><b><%=h @enfant.dateNaissance %></b></td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <td>Age</td>
+        <td><b><%=h @enfant.age %></b></td>
+      </td>
+     </tr>
+     <tr>	
+       <td>
+        <td>Classe</td>
+        <td><b><%=h Classroom.find_by_id(@enfant.classe).nom  %></b></td>
+       </td>
+     </tr>
+     <tr>
+      <td>
+        <td>Enseignant</td>
+        <td><b><%=h Classroom.find_by_id(@enfant.classe).referant %></b></td>
+      </td>
+     </tr>
+  </table>
+	<% if session[:user_readwrite] %>
+		<%= link_to "Modifier", edit_enfant_path(@enfant) %> |
+		<%= link_to("[X]", @enfant, :data => { :confirm => 'Certain(e) de vouloir supprimer cette fiche enfant ?'}, :method => :delete) %> 
+	<% end %>
+</div>
+<div class="span-1">
+	<br>
+</div>
+
+<div class="span-10 last ">
+  <table class=sample>
+     <tr>
+      <% if @enfant.sansPorc or @enfant.allergies %>
+          <td>Menu spécial </td>
+          <td>
+            <b>
+              <%= "Sans Porc" if @enfant.sansPorc %>
+              <%= "Allergies" if @enfant.allergies %>
+            </b>
+	</td>
+	<% end %>
+     </tr>
+     <tr>
+      <% if @enfant.tarif_id %>
+  	 <td>Tarif</td>
+	 <td><b><%= Tarif.find(@enfant.tarif_id).memo %></b></td>
+      <% end %>
+      </tr>
+	<% if @enfant.habitudeGarderieAM %>		
+	 <tr>	
+	  	<td id="label">Habitude garderie Matin</td>
+		<td>
+			<%= select("enfant","habitudeGarderieAM", {"1h" => 5, "1h30" => 6, "2h" => 7, "Aucune" => nil }, :disabled => true) %>
+	 	</td>
+	</tr>
+	<% end %>
+	
+       <% if @enfant.habitudeGarderiePM %>		
+	<tr>
+	  	<td id="label">Habitude garderie Soir</td>
+	 	<td>
+			<%= select("enfant","habitudeGarderiePM", {"1h" => 5, "1h30" => 6, "2h" => 7, "Aucune" => nil }) %>
+		</td>
+	</tr>
+	<% end %>
+  </table>
+</div>
+
+<div class="span-24 last">
+   <br>
+   <br>
+
+    Liste des Prestations :
+    <% if params[:facturees] %>
+      <b>Facturées</b> ou <%= link_to "Non facturées", :action => 'show', :id => @enfant.id %>
+    <% else %>
+      <%= link_to "Facturées", :action => 'show', :id => @enfant.id, :facturees => 'on' %> ou <b>Non facturées</b>
+    <% end %>
+ 
+  <% if @prestations %>
+      <% if @prestations.size > 0 %>
+
+        <% @total_repas = 0 %>
+        <% @total_repasA = 0 %>
+        <% @total_repasM = 0 %>
+        <% @total_garderieAMP = 0 %>
+        <% @total_garderieAMA = 0 %>
+        <% @total_garderieAMM = 0 %>
+
+        <% @total_garderiePMP = 0 %>
+        <% @total_garderiePMA = 0 %>
+        <% @total_garderiePMM = 0 %>
+
+        <% @total_centreAMP = 0 %>
+        <% @total_centreAMA = 0 %>
+        <% @total_centreAMM = 0 %>
+
+        <% @total_centrePMP = 0 %>
+        <% @total_centrePMA = 0 %>
+        <% @total_centrePMM = 0 %>
+
+        <% @total_etude = 0 %>
+        <% @total_etudeA = 0 %>
+
+        <% @totalP = 0 %>
+        <% @totalA = 0 %>
+
+        <br>
+        <table class="sample">
+          <tr>
+            <th>Date</th>
+            <th>Repas</th>
+            <th>Garderie Matin</th>
+            <th>Garderie Après-midi</th>
+            <th>Centre Matin</th>
+            <th>Centre Après-midi</th>
+            <th>Etude</th>
+          </tr>
+          <% for prestation in @prestations %>
+
+            <%= render :partial => 'prestations/prestation', :locals => { :prestation => prestation } %>
+
+            <% @total_repas +=  1 if prestation.repas == '1' %>
+            <% @total_repasA += 1 if prestation.repas == '2' %>
+            <% @total_repasM += 1 if prestation.repas == '3' %>
+
+            <% @total_garderieAMP +=  1 if (prestation.garderieAM == '1' or prestation.garderieAM == '5' or prestation.garderieAM == '6' or prestation.garderieAM == '7') %>
+            <% @total_garderieAMA +=  1 if prestation.garderieAM == '2' %>
+            <% @total_garderieAMM +=  1 if prestation.garderieAM == '3' %>
+
+            <% @total_garderiePMP +=  1 if (prestation.garderiePM == '1' or prestation.garderiePM == '5' or prestation.garderiePM == '6' or prestation.garderiePM == '7') %>
+            <% @total_garderiePMA +=  1 if prestation.garderiePM == '2' %>
+            <% @total_garderiePMM +=  1 if prestation.garderiePM == '3' %>
+
+            <% @total_centreAMP   +=  1 if prestation.centreAM == '1' %>
+            <% @total_centreAMA   +=  1 if prestation.centreAM == '2' %>
+            <% @total_centreAMM   +=  1 if prestation.centreAM == '3' %>
+
+            <% @total_centrePMP   +=  1 if prestation.centrePM == '1' %>
+            <% @total_centrePMA   +=  1 if prestation.centrePM == '2' %>
+            <% @total_centrePMM   +=  1 if prestation.centrePM == '3' %>
+
+            <% @total_etude       +=  1 if prestation.etude == '1' %>
+
+            <% @totalP += prestation.totalP if prestation.totalP %>
+            <% @totalA += prestation.totalA if prestation.totalA %>
+
+          <% end %>
+          <tr></tr>
+          <tr id="sum">
+            <td>Prestations</td>
+            <td class="center"><%= sprintf("%03d", @total_repas + @total_repasM) %></td>
+            <td class="center"><%= sprintf("%03d", @total_garderieAMP + @total_garderieAMM) %></td>
+            <td class="center"><%= sprintf("%03d", @total_garderiePMP + @total_garderiePMM) %></td>
+            <td class="center"><%= sprintf("%03d", @total_centreAMP +@total_centreAMM) %></td>
+            <td class="center"><%= sprintf("%03d", @total_centrePMP + @total_centrePMM ) %></td>
+            <td class="center"><%= sprintf("%03d", @total_etude) %></td>
+          </tr>
+          <tr id="sum">
+            <td>Annulations</td>
+            <td class="center"><%= sprintf("%03d", @total_repasA) %></td>
+            <td class="center"><%= sprintf("%03d", @total_garderieAMA) %></td>
+            <td class="center"><%= sprintf("%03d", @total_garderiePMA) %></td>
+            <td class="center"><%= sprintf("%03d", @total_centreAMA) %></td>
+            <td class="center"><%= sprintf("%03d", @total_centrePMA) %></td>
+            <td class="center"><%= sprintf("%03d", @total_etudeA) %></td>
+          </tr>
+          <tr id="sum">
+            <td><b>Total : <%= @prestations.size %> jour(s)</b></td>
+            <td class="center"><%= sprintf("%03d", @total_repas + @total_repasM) %></td>
+            <td class="center"><%= sprintf("%03d", @total_garderieAMP + @total_garderieAMM) %></td>
+            <td class="center"><%= sprintf("%03d", @total_garderiePMP + @total_garderiePMM) %></td>
+            <td class="center"><%= sprintf("%03d", @total_centreAMP +@total_centreAMM) %></td>
+            <td class="center"><%= sprintf("%03d", @total_centrePMP + @total_centrePMM ) %></td>
+            <td class="center"><%= sprintf("%03d", @total_etude) %></td>
+          </tr>
+        </table>
+    <% end  %>
+  <% end  %>
+</div>
+

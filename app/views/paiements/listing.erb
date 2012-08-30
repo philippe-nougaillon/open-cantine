@@ -1,0 +1,52 @@
+<h2><%= Ville.find(session[:mairie]).nom %></h2>
+Le : <%= link_to "#{Date.today.to_s(:fr)}", :action => 'majdateremise', :id => 0 %>
+<br><br><br>
+
+<h3>Remise de chèques</h3>
+
+<% @total = 0.00 %>
+<% @totalCantine = 0.00 %>
+<% @totalGarderie = 0.00 %>
+
+<table class="sample">
+  <tr>
+    <th>Date</th>
+    <th>Famille</th>
+    <th>Réf</th>
+    <th>Banque</th>
+    <th>Chèque N°</th>
+    <th>Cantine</th>
+    <th>Garderie</th>
+    <th>Total</th>
+  </tr>
+
+  <% for paiement in @paiements %>
+    <tr class="<%= cycle('list-line-even','list-line-odd') %>">
+        <td><%=h paiement.date.to_s(:fr) %></td>
+        <td><%=h Famille.find(paiement.famille_id).nom.upcase %></td>
+        <td><%=h paiement.ref %></td>
+        <td><%=h paiement.banque.upcase %></td>
+        <td><%=h paiement.chequenum %></td>
+        <td style="text-align:right"><%=h number_to_currency(paiement.montantCantine, :unit => '') %> €</td>
+        <td style="text-align:right"><%=h number_to_currency(paiement.montantGarderie, :unit => '') %> €</td>
+        <td style="text-align:right"><%=h number_to_currency(paiement.montant, :unit => '') %> €</td>
+    </tr>
+    <% @total+= paiement.montant %>
+    <% @totalCantine += paiement.montantCantine if paiement.montantCantine %>
+    <% @totalGarderie += paiement.montantGarderie if paiement.montantGarderie %>
+
+  <% end %>
+  <tr />
+  <tr />
+  <tr />
+  <tr>
+    <td><b><%= @paiements.count %> chèques</b> </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td style="text-align:right"><b><%= h number_to_currency(@totalCantine, :unit => '') %> €</b> </td>
+    <td style="text-align:right"><b><%= h number_to_currency(@totalGarderie, :unit => '') %> €</b> </td>
+    <td style="text-align:right"><b><%= h number_to_currency(@total, :unit => '') %> €</b> </td>
+  </tr>
+</table>

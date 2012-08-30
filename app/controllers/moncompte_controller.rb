@@ -1,0 +1,123 @@
+# encoding: utf-8
+
+class MoncompteController < ApplicationController
+ 
+  layout :determine_layout
+
+  def determine_layout
+    if iphone_format?
+      return "iphone"
+    else
+      return "standard"
+    end
+  end
+
+
+  def famillelogin
+
+    if request.post?
+         @famille = Famille.find_by_email(params[:email])
+         if @famille
+           if params[:password].empty? and not @famille.password
+              password = random_password
+              @famille.password = password
+              @famille.save
+              UserMailer.deliver_send_password(@famille)
+              flash[:notice] = "Votre mot de passe vient d'être envoyé. Vérifiez vos mails..."
+              flash[:warning] = nil
+           else
+              if @famille.password == params[:password]
+                if @famille.lastconnection
+                   flash[:notice] = "Bienvenue! Dernière connection le #{@famille.lastconnection.to_s(:fr)}"
+                end
+                @famille.lastconnection = Time.now
+                @famille.save
+                session[:famille] = @famille.id
+		session[:mairie]  = @famille.mairie_id
+                redirect_to :action => "familleshow"
+              else
+                flash[:warning] = 'Mot de passe incorrect !'
+                flash[:notice] = nil
+              end
+           end
+         else
+           flash[:warning] = 'Email ou mot de passe inconnu !'
+         end
+      end
+  end
+
+  def famillelogin_iphone
+      if request.post?
+         pass = params[:email]
+         @famille = Famille.find_by_email(params[:email])
+         if @famille
+           if params[:password].empty? and not @famille.password
+              password = random_password
+              @famille.password = password
+              @famille.save
+              UserMailer.deliver_send_password(@famille)
+              flash[:notice] = "Votre mot de passe vient d'être envoyé. Vérifiez vos mails..."
+              flash[:warning] = nil
+           else
+              if @famille.password == params[:password]
+                if @famille.lastconnection
+                   flash[:notice] = "Bienvenue! Dernière connection: #{@famille.lastconnection.to_s(:fr)}"
+                end
+                @famille.lastconnection = Time.now
+                @famille.save
+                session[:famille] = @famille.id
+                redirect_to :action => "familleindex_iphone", :target => '_self'
+              else
+                flash[:warning] = 'Mot de passe incorrect !'
+                flash[:notice] = nil
+              end
+           end
+         else
+           flash[:warning] = 'Email ou mot de passe inconnu !'
+         end
+      end
+  end
+
+
+  def familleindex_iphone
+    @famille = Famille.find(session[:famille])
+  end
+
+  def familleshow
+    @famille = Famille.find(session[:famille])
+    @factures = Facture.find_all_by_famille_id(@famille.id)
+    @paiements = Paiement.find_all_by_famille_id(@famille.id)
+
+    @releve = []
+    @solde = 0.00
+    @debit = 0.00
+    @credit = 0.00
+
+    for f in @factures
+      balance = { :date => f.date.to_date, :type => "Facture", :ref => f.ref, :mnt => f.montant }
+      @releve << balance
+    end
+
+    for p in @paiements
+      balance = { :date => p.date.to_date, :type => "Paiement", :ref => p.ref, :mnt => p.montant }
+      @releve << balance
+    end
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @releve }
+    end
+  end
+
+  def famillelogout
+    session[:famille] = nil
+    redirect_to :action => "famillelogin"
+  end
+
+  def random_password(size = 8)
+      chars = (('a'..'z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
+      (1..size).collect{|a| chars[rand(chars.size)] }.join
+  end
+
+ 
+end

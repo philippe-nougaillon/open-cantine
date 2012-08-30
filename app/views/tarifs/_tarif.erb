@@ -1,0 +1,44 @@
+<br>
+
+<table class="form">
+  <tr>
+    <td id="label"><%= f.label 'Intitulé' %></td>
+    <td><%= f.text_field :memo %> </td>
+  </tr>
+  <tr>
+    <td id="label"><%= f.label 'Repas' %></td>
+    <td><%= f.text_field :RepasP, :size => 5 %> €</td>
+  </tr>
+  <tr>
+    <td id="label"><%= f.label 'Garderie Matin' %></td>
+    <td><%= f.text_field :GarderieAMP, :size => 5 %> €</td>
+  </tr>
+  <tr>
+    <td id="label"><%= f.label 'Garderie Après-midi' %></td>
+    <td><%= f.text_field :GarderiePMP, :size => 5 %> €</td>
+  </tr>
+  <tr>
+    <td id="label"><%= f.label 'Centre Matin' %></td>
+    <td><%= f.text_field :CentreAMP, :size => 5 %> €</td>
+  </tr>
+  <tr>
+    <td id="label"><%= f.label 'Centre Après-midi' %></td>
+    <td><%= f.text_field :CentrePMP, :size => 5 %> €</td>
+  </tr>
+  <tr>
+    <td id="label"><%= f.label 'Centre Journée' %></td>
+    <td><%= f.text_field :CentreAMPMP, :size => 5 %> €</td>
+  </tr>
+  <tr>
+    <td id="label"><%= f.label 'Etude' %></td>
+    <td><%= f.text_field :Etude, :size => 5 %> €</td>
+  </tr>
+  <tr>
+     <td></td>
+     <td>
+       <div style="margin-top:10px;">
+          <%= image_submit_tag "valider.gif" %>
+       </div>
+     </td>
+   </tr>
+</table>

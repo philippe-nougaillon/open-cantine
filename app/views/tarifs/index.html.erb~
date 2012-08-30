@@ -1,0 +1,35 @@
+<br>
+
+<h3>Liste des tarifs journaliers</h3>
+
+<table class="sample">
+  <tr>
+    <th>Tarif</th>
+    <th>Repas</th>
+    <th>Garderie Matin</th>
+    <th>Garderie Après-midi</th>
+    <th>Centre Matin</th>
+    <th>Centre Après-midi</th>
+    <th>Centre Journée</th>
+    <th>Etude</th>
+    <th></th>	
+  </tr>
+
+<% for tarif in @tarifs %>
+  <tr>
+      <td><%=h tarif.memo %></td>
+      <td style="text-align:right"><%=h number_to_currency(tarif.RepasP, :unit => '') %> €</td>
+      <td style="text-align:right"><%=h number_to_currency(tarif.GarderieAMP, :unit => '') %> €</td>
+      <td style="text-align:right"><%=h number_to_currency(tarif.GarderiePMP, :unit => '') %> €</td>
+      <td style="text-align:right"><%=h number_to_currency(tarif.CentreAMP, :unit => '') %> €</td>
+      <td style="text-align:right"><%=h number_to_currency(tarif.CentrePMP, :unit => '') %> €</td>
+      <td style="text-align:right"><%=h number_to_currency(tarif.CentreAMPMP, :unit => '') %> €</td>
+      <td style="text-align:right"><%=h number_to_currency(tarif.Etude, :unit => '') %> €</td>
+      <td><%= link_to 'Modifier', edit_tarif_path(tarif) %></td>
+  </tr>
+<% end %>
+</table>
+<br>
+<%= link_to "Ajouter", :action => 'new' %>
+|
+<%= link_to "Retour", :action => 'setup', :controller => 'admin' %>

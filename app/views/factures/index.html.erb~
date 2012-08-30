@@ -1,0 +1,53 @@
+<div  id="form_actions">
+  <%= form_tag request.path, :method => 'get' do %>
+      Référence :
+      <%= text_field_tag "search", params[:search] %>
+      <%= submit_tag 'Rechercher' %>
+  <% end %>
+  <%= link_to "Facturer", :action => "new" %>
+</div>
+
+<br>
+
+<% if @factures.size > 0 %>
+  <table class="sample">
+    <tr>
+      <th><%= link_to "Référence", :sort => "ref" %></th>
+      <th><%= link_to "Date", :sort => "date" %></th>
+      <th><%= link_to "Echéance", :sort => "echeance" %></th>
+      <th><%= link_to "Famille", :sort => "familles.nom" %></th>
+      <th><%= link_to "Montant", :sort => "montant" %></th>
+      <th><%= link_to "Vérifiée?", :sort => "checked" %></th>
+      <th><%= link_to "Mémo bas de page", :sort => "footer" %></th>
+      <th/>
+      <th>Mail</th>
+      <th/>
+    </tr>
+
+    <% for facture in @factures %>
+      <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
+        <td><%= link_to facture.ref, :action => 'print', :id => facture.id %></td>
+        <td><%=h facture.date.to_date.to_s(:fr) %></td>
+        <td><%=h facture.echeance.to_s(:fr) %></td>
+        <td><%= link_to facture.famille.nom, facture.famille  %> </td>
+        <td style="text-align:right"><%=h number_to_currency(facture.montant, :unit => '') %> €</td>
+	<td style="text-align:center"><%= image_tag "ok.jpeg", :size => '15x15' if facture.checked %></td>
+	<td><%= facture.footer[0..15] if facture.footer %></td>
+	<td><%= link_to image_tag("pdf-logo.png", :size => "25x25"), facture_path(facture, :format => :pdf)  %></td>
+	<td>
+	   <% if Famille.find(facture.famille_id).email %>
+  	      <% if !Famille.find(facture.famille_id).email.empty? %>
+                  <%= link_to "Envoyer", :action => 'send_invoice', :id => facture.id %> 
+              <% end %> 
+           <% end %>
+        </td>
+	<td><%= link_to 'Modifier', edit_facture_path(facture) %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <br>
+  <%= will_paginate @factures %>
+<% else %>
+  Aucune facture à afficher. Veuillez réduire le filtre et recommencer.
+<% end %>

@@ -1,0 +1,64 @@
+<div id="main" class="span-14">
+  <table>
+    <tr>
+      <td>
+        <b>Application libre de gestion de votre service péri-scolaire.</b><br>
+	    <br><br>
+        <h3 style="color:black;font-size:150%">Quoi de neuf ?</h3>
+        <hr>
+        <% for b in @blogs %>
+           <div style="color:darkblue;font-size:120%"><%= b.titre %></div>
+		   <small><%= b.updated_at.to_s(:fr) %></small><br>
+           <%= b.texte.html_safe %>
+	       
+ 	       <hr>
+        <% end %>
+	    <br><br>
+      </td>
+</tr></table>
+</div>
+
+<div class="span-2">
+	<br>
+</div>
+
+<div id="main" class="span-6">
+  <br><br>
+     <% if session[:user].nil? %>
+	  <fieldset>
+	  <legend>Connexion</legend> 
+	  <%= form_for(User.new, :remote => true, :url => { :controller => "admin", :action => "check_user"}) do |f| %>
+		    <label for="username">Utilisateur</label><br>
+		    <%=  f.text_field "username", :size => 20 %><br>
+		    <label for="password">Mot de passe</label><br>
+		    <%=  f.password_field "password", :size => 20 %><br>
+ 
+   		   <div id="login_msg"></div>
+
+		    <div style="margin-top:15px;">
+		       <%= image_submit_tag "valider.gif" %>
+		    </div>
+		  <% end %>
+		  <br>		  
+		  <%= link_to "Problème de connexion ?", "mailto:philippe.nougaillon@gmail.com" %>
+	   </fieldset>
+     <% end %>
+     <% if session[:user].nil? %>
+	  <fieldset>
+	  <legend>Nouveau ?</legend> 
+		  <%= link_to "Créer un compte gratuit", :controller => "villes", :action => "nouveau_compte" %>
+		  <br><br>
+		  <%= link_to "Guide d'utilisation", :action => "guide" %>
+	   </fieldset>
+
+	   <fieldset>
+	   <legend>Parents</legend> 
+		  <%= link_to "Accès à votre compte", :controller => "moncompte", :action => "famillelogin" %>
+	   </fieldset>
+     <% end %>
+
+</div>
+<div class="span-2 last">
+	<br>
+</div>
+

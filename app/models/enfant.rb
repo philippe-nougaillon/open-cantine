@@ -1,0 +1,37 @@
+class Enfant < ActiveRecord::Base
+
+  attr_protected :id
+
+  belongs_to :famille
+  has_one 	 :classroom
+  has_many   :prestations, :dependent => :destroy
+
+  validates_presence_of :prenom,        :message => " manquant !"
+  validates_presence_of :famille_id,    :message => "Famille manquante !"
+  validates_presence_of :classe,        :message => " manquante !"
+  validates_length_of   :dateNaissance, :is => 10 , :message => " > Entrez une date comme 01/01/1999"
+ 
+  before_save :uppercase_fields
+
+  def uppercase_fields
+    self.prenom.upcase!
+  end
+
+  def self.search(search, page, classe, mairie,  sort)
+	@order_by = (sort.blank?) ? "nom, prenom" : sort	
+	paginate :per_page => 10,
+	          :page => page,
+	          :conditions => ['nom like ? AND classe like ? AND mairie_id = ?', "%#{search}%", "%#{classe}%", mairie],
+	          :joins => :famille,
+	          :order => @order_by
+  end
+
+  def r
+     @prestations = Prestation.find_all_by_enfant_id(self.id)
+     for p in @prestations
+       p.calc_debit
+       p.save
+     end
+  end
+
+end

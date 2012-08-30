@@ -1,0 +1,36 @@
+<br>
+<h2>Statistiques d'utilisation</h2>
+<p>
+   Comptes:  <b><%= Ville.count %></b>
+   Factures: <b><%= Facture.count %></b>
+</p>
+<table>
+	<th>Dernière connexion</th>
+	<th>Nom du Compte</th>
+	<th>Mairie</th>
+	<th>Dep.</th>
+	<th>Familles</th>
+	<th>Enfants</th>
+	<th>Factures</th>
+	<th>Compte créé le</th>
+	<th>Ville ID</th>
+
+	<% for user in @users %>
+
+	   <% if Famille.find_all_by_mairie_id(user.mairie_id).count > 0 %>
+		   <tr>
+		      <td><b><%= user.lastconnection.to_s(:fr) %></b></td>
+		      <td><%= user.username %> </td>
+		      <td><%= Ville.find(user.mairie_id).nom %> </td>
+		      <td><%= Ville.find(user.mairie_id).cp[0..1] if Ville.find(user.mairie_id).cp %> </td>
+		      <td><b><%= Famille.find_all_by_mairie_id(user.mairie_id).count %></b> </td>
+	   	      <td><b><%= Enfant.find_by_sql("SELECT COUNT(*) AS count_all FROM enfants WHERE famille_id IN (SELECT id FROM familles WHERE mairie_id= #{user.mairie_id} )")[0].count_all %></b> </td>
+		      <td><b><%= Facture.find_all_by_mairie_id(user.mairie_id).count %></b></td>
+		      <td><%= Ville.find(user.mairie_id).created_at.to_s(:fr) %></td>
+		      <td><%= user.mairie_id %></td>
+		   </tr>
+	   <% end %>
+
+	<% end %>
+</table>
+

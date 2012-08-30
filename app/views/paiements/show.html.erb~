@@ -1,0 +1,8 @@
+<h3>Paiement</h3>
+
+<% form_for(@paiement) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'paiement', :locals => { :f => f } %>
+
+<% end %>

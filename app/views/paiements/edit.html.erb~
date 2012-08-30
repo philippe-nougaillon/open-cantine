@@ -1,0 +1,11 @@
+<br>
+<br>
+
+<h3>Modifier un paiement</h3>
+<hr/>
+
+<% form_for(@paiement) do |f| %>
+
+  <%= render :partial => 'paiement', :locals => { :f => f } %>
+
+<% end %>

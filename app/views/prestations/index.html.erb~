@@ -1,0 +1,24 @@
+<div id="form_actions">
+ <%= form_tag request.path, :method => 'get' do %>
+      Pour le :
+      <%= text_field_tag('prestation_date', params[:prestation_date], :size => 10) %>
+      Classe :
+      <%= select_tag "classe", options_from_collection_for_select(@classrooms, "id", "nom", params[:classe]), :include_blank => true %>
+      <%= check_box_tag "toutlemois", params[:toutlemois], params[:toutlemois] %> Voir tout le mois ?
+      <%= submit_tag 'Rechercher'   %>
+      <hr>	
+      <% if params[:action] != 'print' %>
+	  <div id="adroite">
+ 	       <%= link_to "Imprimer", :action => 'print', :search => params[:search], 
+			:classe => params[:classe], :toutlemois => params[:toutlemois], :id => 0 %>
+	       <%= link_to "Importer pointages", :controller => 'upload' %>
+	  </div>
+      <% end %>
+ <% end %>
+</div>
+
+<div class="span-24 last">
+  <%= render :partial => "list", :locals => { :prestations => @prestations } %>
+</div>
+  
+

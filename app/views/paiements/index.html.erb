@@ -1,0 +1,53 @@
+<div id="form_actions">
+  <%= form_tag request.path, :method => 'get' do %>
+    Référence :
+    <%= text_field_tag "search", params[:search] %>
+    <%= submit_tag 'Rechercher' %>
+  <% end %>
+  <hr>
+  <div id="adroite">
+  <%= link_to("Imprimer", :action => 'listing',:id => 0) %>
+  </div>
+</div>
+
+<br>
+
+<% if @paiements.size > 0 %>
+  <table class="sample">
+    <tr>
+      <th><%= link_to "Date", :sort => "date" %></th>
+      <th><%= link_to "Famille", :sort => "familles.nom" %></th>
+      <th><%= link_to "Référence", :sort => "ref" %></th>
+      <th><%= link_to "Type", :sort => "typepaiement" %></th>
+      <th><%= link_to "Banque", :sort => "banque" %></th>
+      <th><%= link_to "N°", :sort => "chequenum" %></th>
+      <th><%= link_to "Mnt.Cantine", :sort => "montantCantine" %></th>
+      <th><%= link_to "Mnt.Garderie", :sort => "montantGarderie" %></th>
+      <th><%= link_to "Mnt.Total", :sort => "montant" %></th>
+      <th><%= link_to "Date Remise TP", :sort => "remise" %></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% for paiement in @paiements %>
+      <tr class="<%= cycle('list-line-even','list-line-odd') %>">
+          <td><%=h paiement.date.to_s(:fr) %></td>
+          <td><%= link_to Famille.find(paiement.famille_id).nom, paiement.famille  %></td>
+          <td><%=h paiement.ref %></td>
+          <td><%=h paiement.typepaiement %></td>
+          <td><%=h paiement.banque %></td>
+          <td><%=h paiement.chequenum %></td>
+          <td style="text-align:right"><%=h number_to_currency(paiement.montantCantine, :unit => '') %> €</td>
+          <td style="text-align:right"><%=h number_to_currency(paiement.montantGarderie, :unit => '') %> €</td>
+          <td style="text-align:right"><%=h number_to_currency(paiement.montant, :unit => '') %> €</td>
+          <td><%=h paiement.remise.to_s(:fr) if paiement.remise %></td>
+          <% if session[:user_readwrite] %> <td><%= link_to 'Modifier', edit_paiement_path(paiement) %></td> <% end %>
+          <td><%= link_to 'Imprimer', :action => 'print', :id => paiement.id %></td>
+      </tr>
+  <% end %>
+  </table>
+  <br />
+  <%= will_paginate @paiements %>
+<% else %>
+  Pas de paiements à afficher. Réduisez le filtre et recommencez.
+<% end %>

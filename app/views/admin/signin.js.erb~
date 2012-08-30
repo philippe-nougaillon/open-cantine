@@ -1,0 +1,7 @@
+$("#error_message").effect("highlight", {}, 1500);
+
+$("#error_message2").html("<b>ERROR JS </b>");
+ 
+$("#error_message").fadeOut();
+
+

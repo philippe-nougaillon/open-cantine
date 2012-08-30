@@ -1,0 +1,93 @@
+<table class="sample">
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Repas</th>
+      <th>Garderie Matin</th>
+      <th>Garderie Après-midi</th>
+      <th>Centre Matin</th>
+      <th>Centre Après-midi</th>
+      <th>Etude</th>
+    </tr>
+    <tr class="list-line-even">
+      <td><b>Oui</b></td>
+      <td class="center"><%= image_tag @images[1], :size => '15x15' %></td>
+      <td class="center"><%= f.radio_button 'repas', '1' %></td>
+      <td class="center"><%= f.radio_button 'garderieAM', '1' %></td>
+      <td class="center"><%= f.radio_button 'garderiePM', '1' %></td>
+      <td class="center"><%= f.radio_button 'centreAM', '1' %></td>
+      <td class="center"><%= f.radio_button 'centrePM', '1' %></td>
+      <td class="center"><%= f.radio_button 'etude', '1' %></td>
+    </tr>
+    <tr class="list-line-odd">
+      <td><b>Oui-Durée 1h</b></td>
+      <td class="center"><%= image_tag @images[1], :size => '15x15' %></td>
+      <td class="center"></td>
+      <td class="center"><%= f.radio_button 'garderieAM', '5' %></td>
+      <td class="center"><%= f.radio_button 'garderiePM', '5' %></td>
+      <td class="center"></td>
+      <td class="center"></td>
+      <td class="center"></td>
+    </tr>
+    <tr class="list-line-even">
+      <td><b>Oui-Durée 1h30</b></td>
+      <td class="center"><%= image_tag @images[1], :size => '15x15' %></td>
+      <td class="center"></td>
+      <td class="center"><%= f.radio_button 'garderieAM', '6' %></td>
+      <td class="center"><%= f.radio_button 'garderiePM', '6' %></td>
+      <td class="center"></td>
+      <td class="center"></td>
+      <td class="center"></td>
+    </tr>
+    <tr class="list-line-odd">
+      <td><b>Oui-Durée 2h</b></td>
+      <td class="center"><%= image_tag @images[1], :size => '15x15' %></td>
+      <td class="center"></td>
+      <td class="center"><%= f.radio_button 'garderieAM', '7' %></td>
+      <td class="center"><%= f.radio_button 'garderiePM', '7' %></td>
+      <td class="center"></td>
+      <td class="center"></td>
+      <td class="center"></td>
+    </tr>
+    <tr class="list-line-even">
+      <td><b>Ajouté</b> par la famille</td>
+      <td class="center"><%= image_tag @images[3], :size => '15x15' %></td>
+      <td class="center"><%= f.radio_button 'repas', '3' %></td>
+      <td class="center"><%= f.radio_button 'garderieAM', '3' %></td>
+      <td class="center"><%= f.radio_button 'garderiePM', '3' %></td>
+      <td class="center"><%= f.radio_button 'centreAM', '3' %></td>
+      <td class="center"><%= f.radio_button 'centrePM', '3' %></td>
+      <td></td>
+    </tr>
+    <tr class="list-line-odd">
+      <td><b>Annulé</b> par la famille</td>
+      <td class="center"><%= image_tag @images[2], :size => '15x15' %></td>
+      <td class="center"><%= f.radio_button 'repas', '2' %></td>
+      <td class="center"><%= f.radio_button 'garderieAM', '2' %></td>
+      <td class="center"><%= f.radio_button 'garderiePM', '2' %></td>
+      <td class="center"><%= f.radio_button 'centreAM', '2' %></td>
+      <td class="center"><%= f.radio_button 'centrePM', '2' %></td>
+      <td></td>
+    </tr>
+     <tr class="list-line-even">
+      <td><b>Annulé</b> pour maladie</td>
+      <td class="center"><%= image_tag @images[4], :size => '15x15' %></td>
+      <td class="center"><%= f.radio_button 'repas', '4' %></td>
+      <td class="center"><%= f.radio_button 'garderieAM', '4' %></td>
+      <td class="center"><%= f.radio_button 'garderiePM', '4' %></td>
+      <td class="center"><%= f.radio_button 'centreAM', '4' %></td>
+      <td class="center"><%= f.radio_button 'centrePM', '4' %></td>
+      <td></td>
+    </tr>
+      <tr class="list-line-odd">
+      <td><b>Non</b></td>
+      <td></td>
+      <td class="center"><%= f.radio_button 'repas', '0' %></td>
+      <td class="center"><%= f.radio_button 'garderieAM', '0' %></td>
+      <td class="center"><%= f.radio_button 'garderiePM', '0' %></td>
+      <td class="center"><%= f.radio_button 'centreAM', '0' %></td>
+      <td class="center"><%= f.radio_button 'centrePM', '0' %></td>
+      <td class="center"><%= f.radio_button 'etude', '0' %></td>
+    </tr>
+
+</table>

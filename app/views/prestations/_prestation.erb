@@ -1,0 +1,35 @@
+<% @images = ["","ok.jpeg","no.jpeg","orange.jpeg","cancel.jpeg","ok.jpeg","ok.jpeg","ok.jpeg"] %>
+
+<tr class="<%= cycle('list-line-even','list-line-odd')%>">
+    <td><%=h format_date(prestation.date) %></td>
+
+    <td class="center"><%= image_tag @images[prestation.repas.to_i], :size => '15x15'  if prestation.repas != "0" %> </td>
+    <td class="center">
+        <% if prestation.garderieAM != "0" %>
+           <%= image_tag @images[prestation.garderieAM.to_i], :size => '15x15' %>
+           <%= '1h'   if prestation.garderieAM == '5' %>
+           <%= '1h30' if prestation.garderieAM == '6' %>
+           <%= '2h'   if prestation.garderieAM == '7' %>
+        <% end %> 
+    </td>
+    <td class="center">
+        <% if prestation.garderiePM != "0" %>
+           <%= image_tag @images[prestation.garderiePM.to_i], :size => '15x15'  %>
+           <%= '1h'   if prestation.garderiePM == '5' %>
+           <%= '1h30' if prestation.garderiePM == '6' %>
+           <%= '2h'   if prestation.garderiePM == '7' %>
+        <% end %>
+    </td>
+    <td class="center"><%= image_tag @images[prestation.centreAM.to_i], :size => '15x15'   if prestation.centreAM != "0" %> </td>
+    <td class="center"><%= image_tag @images[prestation.centrePM.to_i], :size => '15x15'   if prestation.centrePM != "0" %> </td>
+    <td class="center"><%= image_tag @images[prestation.etude.to_i], :size => '15x15'      if prestation.etude != "0" %> </td>
+  
+    <% if not prestation.facture_id and session[:user_readwrite] %>
+       <td><%= link_to 'Modifier', :controller => 'prestations', :action => 'edit_from_enfants', :id => prestation %></td>
+       <td><%= link_to '(X)', prestation, :data => {:confirm => 'Etes-vous certain(e) ?'}, :method => :delete %></td>
+    <% end %>
+</tr>
+
+<% if prestation.date.wday == 5 %> <tr /><tr /> <% end %>
+
+  

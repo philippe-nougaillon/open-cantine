@@ -1,0 +1,150 @@
+# encoding: utf-8
+
+class AdminController < ApplicationController
+
+  layout "standard"
+
+  def stats
+     @users = User.find(:all, :order => 'lastconnection DESC')
+  end
+
+  def signin
+    @blogs = Blog.find(:all, :order => 'updated_at DESC')
+    respond_to do |format|
+    	format.html 
+    	format.js
+	end
+  end
+
+  def check_user
+    @u = User.authenticate(params[:user][:username], params[:user][:password])
+    if @u 
+      @u.lastconnection = Time.now
+      @u.save
+      session[:user] = @u.id
+      session[:user_readwrite] = @u.readwrite
+      session[:mairie] = @u.mairie_id
+    else
+      flash[:notice] = "Compte et/ou mot de passe inconnu(s). Pour une démonstration, utilisez le compte 'demo', mot de passe 'demo' "
+    end
+	respond_to do |format|
+  	  format.js { render :js => "window.location = '/familles/index'" if @u }
+	end
+  end
+
+  def signout
+    @user = User.find(session[:user])
+    session[:user] = nil
+    redirect_to :controller => 'admin', :action => 'signin'
+    flash[:notice] = "Au revoir et à bientôt... " 
+  end
+
+  def user_edit
+    @user = User.find(session[:user])
+  end
+  
+  def user_update
+    @user = User.find(session[:user])
+    respond_to do |format|
+     if @user.update_attributes(params[:user]) and @user.mairie_id != 2
+        @user.password_hash=params[:password]
+        @user.lastchange = Time.now
+        @user.save
+        flash[:notice] = "Utilisateur modifié..."
+        format.html { redirect_to :action => "setup", :controller => "admin" }
+        format.xml  { head :ok }
+      else
+        flash[:warning] = 'Modification utilisateur annulée...'
+        format.html { render :action => "user_edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def backup
+    @filename = "#{Date.today.to_s(:fr)}-#{session[:mairie]}-backupmacantine.txt"
+
+    cmd = "'select * from villes where id=#{session[:mairie]}'"
+    system("echo '******* VILLES *************' > public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+
+    cmd = "'select * from familles where mairie_id=#{session[:mairie]}'"
+    system("echo '******* FAMILLES *************' >> public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+
+    cmd = "'select * from enfants where famille_id in (select id from familles where mairie_id=#{session[:mairie]})'"
+    system("echo '******* ENFANTS *************' >> public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+
+    cmd = "'SELECT * FROM prestations where enfant_id in (select id from enfants where famille_id in (select id from familles where mairie_id =#{session[:mairie]}))'"
+    system("echo '******* PRESTATIONS *************' >> public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+
+    cmd = "'select * from factures where mairie_id=#{session[:mairie]}'"
+    system("echo '******* FACTURES *************' >> public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+
+    cmd = "'select * from facture_lignes where facture_id in (select id from factures where mairie_id=#{session[:mairie]})'"
+    system("echo '******* FACTURE_LIGNES *************' >> public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+
+    cmd = "'select * from paiements where mairie_id=#{session[:mairie]}'"
+    system("echo '******* PAIEMENTS *************' >> public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+
+    cmd = "'select * from classrooms where mairie_id=#{session[:mairie]}'"
+    system("echo '******* CLASSES *************' >> public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+
+    cmd = "'select * from users where mairie_id=#{session[:mairie]}'"
+    system("echo '******* USERS *************' >> public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+     
+    cmd = "'select * from tarifs where mairie_id=#{session[:mairie]}'"
+    system("echo '******* TARIFS *************' >> public/#{@filename}")
+    system("mysql -u root -pAltecLansing2009  -e #{cmd} CANTINE >> public/#{@filename}")
+  end
+
+  def backupall
+    @user = User.find(session[:user])
+    if @user.username == "capcod"
+      @filename = "#{Date.today.to_s(:fr)}-all-backupmacantine.sql"
+      system("mysqldump -u root -pAltecLansing2009 CANTINE > public/#{@filename}")
+    else
+      flash[:warning] = "Vous n'êtes pas autorisé..."
+      redirect_to :action => "setup"
+    end
+  end
+
+  def setup
+    mairie = session[:mairie]
+    @mairie = Ville.find(mairie)
+    @classrooms = Classroom.find(:all, :conditions => ["mairie_id = ?",mairie], :order => 'nom')
+    @tarifs = Tarif.find(:all,:conditions => ["mairie_id = ?",mairie])
+    @users = User.find(:all,:conditions => ["mairie_id = ?",mairie])
+    @facture_chrono = FactureChrono.find(:first, :conditions => ["mairie_id = ?",mairie])
+    @tarifsNom = ["","Normal","Famille","Majoré"]
+    @vacances = Vacance.find(:all, :conditions => ["mairie_id = ?",session[:mairie]], :order => 'debut')
+    @enfants= Enfant.find_by_sql("SELECT id FROM enfants WHERE famille_id IN (SELECT id FROM familles WHERE mairie_id= #{session[:mairie]} )")
+
+    #@prestations = Prestation.find_by_sql("SELECT id FROM prestations WHERE enfant_id IN (0 #{ @enfants.map{|e| ',' + e.id.to_s } })")
+	#@prestations = Ville.find(mairie).enfants.prestations.all
+
+    @prestations =[]
+  end
+
+  def show_facturation_module
+    @mairie = Ville.find(session[:mairie])
+    mairie_facturation_module = @mairie.FacturationModuleName
+    @facturation_module = IO.readlines("/home/phil/NetBeansProjects/Cantine/app/models/facturation_modules/#{mairie_facturation_module}")
+  end
+
+  def guide
+
+  end
+
+  def import
+
+  end
+
+end

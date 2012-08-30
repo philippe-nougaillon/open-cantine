@@ -1,0 +1,2 @@
+$("#ajaxzone").html("<b>hello</b>);
+

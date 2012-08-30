@@ -1,0 +1,9 @@
+$("#ajaxzone").effect("highlight", {}, 1500);
+
+$("#ajaxzone").html("<b>Total des prestations cochées: <%=  number_to_currency(@total, :unit => "") %> € </b>");
+$("#ajaxzone").append("<br>Solde famille AVANT cette inscription: <%=number_to_currency(@solde, :unit => "") %> € | Solde APRES cette inscription : <%=number_to_currency(@solde - @total, :unit => "") %> € ");
+
+
+
+
+

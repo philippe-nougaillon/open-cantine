@@ -1,0 +1,27 @@
+<fieldset id="report_form">
+  <legend>Modifier vos paramètres</legend>
+  <div class="span-10 column last">
+
+    <dl>
+      <dt><%=f.label :nom, "Nom" %></dt>
+      <dt><%=f.text_field :nom, :class=>"text required", :minlength=>"3" %>
+
+      <dt><%=f.label :nom, "Adresse" %></dt>
+      <dt><%=f.text_field :adr, :class=>"text required", :minlength=>"3" %>
+
+      <dt><%=f.label :nom, "Code postal" %></dt>
+      <dt><%=f.text_field :cp, :class=>"text required", :minlength=>"5" %>
+
+      <dt><%=f.label :nom, "Ville" %></dt>
+      <dt><%=f.text_field :ville, :class=>"text required", :minlength=>"3" %>
+
+      <dt><%=f.label :nom, "Téléphone" %></dt>
+      <dt><%=f.text_field :tel, :class=>"text required", :minlength=>"3" %>
+
+      <dt><%=f.label :nom, "Courriel" %></dt>
+      <dt><%=f.text_field :email, :class=>"text required", :minlength=>"3" %>
+      <%= image_submit_tag "valider.gif" %>
+
+    </dl>
+</fieldset>
+
