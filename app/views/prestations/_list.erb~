@@ -27,6 +27,13 @@
     <% total_centrePMA = 0 %>
     <% total_centrePMM = 0 %>
 
+	<% total_repas_jour = 0 %>
+	<% total_garderieAM_jour = 0 %>
+	<% total_garderiePM_jour = 0 %>
+	<% total_centreAM_jour = 0 %>
+	<% total_centrePM_jour = 0 %>
+	<% total_etude_jour = 0 %>
+
     <% total_etude = 0 %>
 
     <table class="sample">
@@ -46,29 +53,23 @@
       </tr>
       <% if params[:action] == 'print' %>
         <tr>
-          <td><hr></td>
-          <td><hr></td>
-          <td><hr></td>
-          <td><hr></td>
-          <td><hr></td>
-          <td><hr></td>
-          <td><hr></td>
-          <td><hr></td>
-          <td><hr></td>
-          <td><hr></td>
-          <td><hr></td>
+          <%= "<td><hr></td>" *11 %>
         </tr>
       <% end %>
+	
+      <% @date = @prestations.first.date %>
 
       <% for prestation in @prestations %>
 
         <% enfant = Enfant.find(prestation.enfant_id) %>
 
-        <%= render :partial => 'prestation_full', :locals => { :prestation => prestation, :enfant => enfant } %>
-
+		<% unless params[:totaux] %>
+	        <%= render :partial => 'prestation_full', :locals => { :prestation => prestation, :enfant => enfant } %>
+		<% end %>
+	
         <% if prestation.repas == '1' or prestation.repas == '3' %>
             <% if enfant.age %> 
-		<% if enfant.age <= 15 %>
+				<% if enfant.age <= 15 %>
                 	<% total_repasEnfant += 1 %>
                 	<% total_repasEnfantSP  +=  1 if enfant.sansPorc %>
                 	<% total_repasEnfantALG +=  1 if enfant.allergies %>
@@ -77,11 +78,11 @@
                 	<% total_repasAdulteSP  +=  1 if enfant.sansPorc %>
                 	<% total_repasAdulteALG +=  1 if enfant.allergies %>
             	<% end %>
-	    <% else %>
-        	<% total_repasEnfant += 1 %>
-        	<% total_repasEnfantSP +=  1  if enfant.sansPorc %>
-        	<% total_repasEnfantALG +=  1 if enfant.allergies %>
-	    <% end %>
+			<% else %>
+		    	<% total_repasEnfant += 1 %>
+		    	<% total_repasEnfantSP +=  1 if enfant.sansPorc %>
+		    	<% total_repasEnfantALG += 1 if enfant.allergies %>
+			<% end %>
         <% else %>
             <% if prestation.repas == '2'  %>
                 <% total_repasA += 1 %>
@@ -105,7 +106,50 @@
         <% total_centrePMM   +=  1 if prestation.centrePM == '3' %>
 
         <% total_etude       +=  1 if prestation.etude == '1' %>
+
+		<%  if prestation.date != @date %>
+    		<% @date = prestation.date %>
+			<% if params[:totaux] %>
+				<tr><td><%= prestation.date.to_s(:fr) %></td></tr> 
+			<% end %>
+
+			<tr id="sum">
+				<td><b>Sous-total</b></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td class="center"><b><%= sprintf("%03d", (total_repasEnfant  + total_repasAdulte) - total_repas_jour) %></b></td>
+				<td class="center"><b><%= sprintf("%03d", (total_garderieAMP + total_garderieAMM) - total_garderieAM_jour) %></b></td>
+				<td class="center"><b><%= sprintf("%03d", (total_garderiePMP + total_garderiePMM) - total_garderiePM_jour) %></b></td>
+				<td class="center"><b><%= sprintf("%03d", (total_centreAMP + total_centreAMM) - total_centreAM_jour) %></b></td>
+				<td class="center"><b><%= sprintf("%03d", (total_centrePMP + total_centrePMM) - total_centrePM_jour) %></b></td>
+				<td class="center"><b><%= sprintf("%03d", total_etude - total_etude_jour) %></b></td>
+				<td></td>
+		    </tr>
+
+			<% total_repas_jour = total_repasEnfant  + total_repasAdulte %>
+			<% total_garderieAM_jour = total_garderieAMP + total_garderieAMM %>
+			<% total_garderiePM_jour = total_garderiePMP + total_garderiePMM %>
+			<% total_centreAM_jour = total_centreAMP +total_centreAMM %>
+			<% total_centrePM_jour = total_centrePMP + total_centrePMM %>
+			<% total_etude_jour = total_etude %>
+		<% end %>
+
       <% end %>
+
+		<tr id="sum">
+			<td><b>Sous-total</b></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td class="center"><b><%= sprintf("%03d", (total_repasEnfant  + total_repasAdulte) - total_repas_jour) %></b></td>
+			<td class="center"><b><%= sprintf("%03d", (total_garderieAMP + total_garderieAMM) - total_garderieAM_jour) %></b></td>
+			<td class="center"><b><%= sprintf("%03d", (total_garderiePMP + total_garderiePMM) - total_garderiePM_jour) %></b></td>
+			<td class="center"><b><%= sprintf("%03d", (total_centreAMP + total_centreAMM) - total_centreAM_jour) %></b></td>
+			<td class="center"><b><%= sprintf("%03d", (total_centrePMP + total_centrePMM) - total_centrePM_jour) %></b></td>
+			<td class="center"><b><%= sprintf("%03d", total_etude - total_etude_jour) %></b></td>
+			<td></td>
+	    </tr>
 
       <% if params[:action] == 'print' %>
         <tr>
@@ -123,7 +167,7 @@
         </tr>
       <% end %>
       <tr>
-        <td>Repas Enfant</td>
+        <td><b>Total Repas Enfants</b></td>
         <td></td>
         <td></td>
         <td></td>

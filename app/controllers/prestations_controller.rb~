@@ -382,10 +382,7 @@ class PrestationsController < ApplicationController
 	@enfants.each do |e|
 		if params[:"#{e.id}RepasAM"] or params[:"#{e.id}GarderieAM"] or params[:"#{e.id}GarderiePM"] or params[:"#{e.id}CentreAM"] or params[:"#{e.id}CentrePM"] then
 			@prestation = Prestation.find_or_create_by_date_and_enfant_id(@date.to_date.to_s(:en), e.id)
-			
-			@repasAM = params[:"#{e.id}RepasAM"] ? '1' : '0'
-		    @prestation.repas = @repasAM if @prestation.repas != @repasAM 
-
+		    @prestation.repas = params[:"#{e.id}RepasAM"] ? '1' : '0'
 		    @prestation.garderieAM = params[:"#{e.id}GarderieAM"] ? '1' : '0'
 		    @prestation.garderiePM = params[:"#{e.id}GarderiePM"] ? '1' : '0'
 		    @prestation.centreAM = params[:"#{e.id}CentreAM"] ? '1' : '0'

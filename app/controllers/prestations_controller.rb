@@ -45,6 +45,7 @@ class PrestationsController < ApplicationController
   end
 
   def print
+	 @images = get_etat_images
      refresh
   end
 

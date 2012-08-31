@@ -6,10 +6,10 @@
       <%= hidden_field_tag 'famille_id','' %>
       <%= submit_tag 'Rechercher'   %>
   <% end %>
-	<hr>
+  <hr>	
   <div id="adroite"> 	
   	<% if session[:user_readwrite] %>
-         <%= link_to 'Ajouter une famille', new_famille_path %> | 
+         <%= link_to 'Ajouter une famille', new_famille_path %> 
   	<% end %>
   	<%= link_to 'Listing Familles', :action => "listing", :id => 0 %>
   </div> 	

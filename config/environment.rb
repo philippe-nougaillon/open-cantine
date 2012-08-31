@@ -20,5 +20,3 @@ Time::DATE_FORMATS.merge!(
 )
 
 
-#CalendarDateSelect.default_options.update(:popup => 'force')
-#CalendarDateSelect.format = :finnish

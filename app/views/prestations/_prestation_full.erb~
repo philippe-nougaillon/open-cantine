@@ -1,6 +1,7 @@
 <%  if prestation.date != @date %>
     <% @date = prestation.date %>
-    <tr />
+	<tr />
+	<tr />
 <% end %>
 
 <%  if prestation.enfant.classe != @classe %>
@@ -9,15 +10,15 @@
     <tr /> 
 <% end %>
 
-<% @images = ["","ok.jpeg","no.jpeg","orange.jpeg","cancel.jpeg","ok.jpeg","ok.jpeg","ok.jpeg"] %>
-
 <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
     <td><%=h format_date(prestation.date) %></td>
     <td><%=h Classroom.find(@classe).nom %> </td>
     <td><b><%=h Famille.find(enfant.famille_id).nom[0..20]  %></b></td>
     <td><%= link_to enfant.prenom[0..16], :controller => 'enfants', :action => 'show', :id => prestation.enfant_id %></td>
     <td class="center">
-        <%= image_tag @images[prestation.repas.to_i], :size => '15x15'      if prestation.repas != "0" %>
+		<% if prestation.repas != "0" %>
+           <%= image_tag @images[prestation.repas.to_i], :size => '15x15' %>
+		<% end %>
     </td>
     <td class="center">
         <% if prestation.garderieAM != "0" %>
