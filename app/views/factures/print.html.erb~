@@ -27,16 +27,16 @@
 	<table class="sample">
 	  <th style="text-align:left;width:80%">Désignation des prestations</th>
 	  <th>Qté</th>
-	  <th>Prix.U</th>
+	  <th>Prix Unitaire</th>
 	  <th>Montant total</th>
 	  <tr></tr>
 	  <% for l in @facture.facture_lignes %>
 
 	    <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
 	      <td>
-		<%= "<b>" unless l.montant %>
+		<%= "<b>".html_safe unless l.montant %>
 		<%= l.texte.gsub(";", "")  %>
-		<%= "</b>" unless l.montant %>
+		<%= "</b>".html_safe unless l.montant %>
 	      </td>
 	      <td style="text-align:right">
 		<% if l.qte %>

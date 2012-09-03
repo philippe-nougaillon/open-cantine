@@ -27,18 +27,13 @@
 	    <% end %>
 	</div>
 
-	<div id="title" class="span-10">
+	<div id="title" class="span-9">
            <%= image_tag '/images/playground.png' %>
            <%= image_tag '/images/diner.png' %>
            <%= image_tag '/images/picnic.png' %>
            <h3 style="color:#df2599"> openCantine </h3>
 	</div>
-
-	<div id="title" class="span-14 last">
-	    <% unless session[:user].nil? %>
-	        <%= Ville.find(session[:mairie]).nom %>
-	    <% end %>
-	</div>
+	<%= Ville.find(session[:mairie]).nom if !session[:user].nil? %>
 
 	<div class="span-24 last">
 	    <hr>

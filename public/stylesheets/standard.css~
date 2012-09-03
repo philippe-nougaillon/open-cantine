@@ -162,7 +162,7 @@ table.sample .center {
 table.sample #sum {
 	text-align:right;
 	font-weight:bold; 
-	background-color: yellow;
+	font-size:120%;
 }
 table.sample #number {
 	text-align:right;
@@ -197,20 +197,18 @@ table.sample a:hover {
 
 #error_message {
     position:absolute;
-    left:45%;
-    top:5px;
+    left:44%;
+    top:80px;
     background-color: green;
     color:white;
-    font-size:110%;
 }
 
 #warning_message {
     position: absolute;
-    left: 45%;
-    top: 5px;
+    left: 42%;
+    top: 80px;
     background-color: red;
     color: white;
-    font-size: 110%;
 }
 .fieldWithErrors {
   background-color: red;

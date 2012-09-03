@@ -197,20 +197,18 @@ table.sample a:hover {
 
 #error_message {
     position:absolute;
-    left:45%;
-    top:5px;
+    left:44%;
+    top:80px;
     background-color: green;
     color:white;
-    font-size:110%;
 }
 
 #warning_message {
     position: absolute;
-    left: 45%;
-    top: 5px;
+    left: 44%;
+    top: 80px;
     background-color: red;
     color: white;
-    font-size: 110%;
 }
 .fieldWithErrors {
   background-color: red;

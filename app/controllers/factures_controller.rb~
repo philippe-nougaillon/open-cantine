@@ -45,7 +45,7 @@ class FacturesController < ApplicationController
           render :pdf => filename ,
                  :template => 'factures/show.pdf.erb',
                  :layout => 'pdf',
-		 :save_to_file => Rails.root + "/pdfs/#{filename}.pdf"
+		 :save_to_file => Rails.root + "pdfs/#{filename}.pdf"
           end   
     end
   end

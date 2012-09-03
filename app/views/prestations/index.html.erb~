@@ -10,8 +10,11 @@
 	  <hr>	
 	  <% if params[:action] != 'print' %>
 	  <div id="adroite">
-		   <%= link_to "Imprimer", :action => 'print', :search => params[:search], 
-			:classe => params[:classe], :toutlemois => params[:toutlemois], :id => 0 %> 
+		   <%= link_to "Imprimer cette liste", :action => 'print', :search => params[:prestation_date], 
+			:classe => params[:classe], :toutlemois => params[:toutlemois], :totaux => params[:totaux], :id => 0 %> 
+
+		   <%= link_to "Imprimer état mensuel", :action => 'stats_mensuelle_params' %> 
+
 		   <%= link_to "Importer pointages", :controller => 'upload' %>
 	  </div>
 	  <% end %>

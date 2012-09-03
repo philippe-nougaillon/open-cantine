@@ -33,6 +33,7 @@ class FacturesController < ApplicationController
   # GET /factures/1
   # GET /factures/1.xml
   def show
+	@images = get_etat_images
     @facture = Facture.find(params[:id])
     @famille = Famille.find(@facture.famille_id)
     @mairie  = Ville.find(session[:mairie])

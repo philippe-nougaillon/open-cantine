@@ -34,7 +34,6 @@ class PrestationsController < ApplicationController
      else
 		refresh 	 
 	end
-   
   end
 
   def refresh
@@ -396,5 +395,26 @@ class PrestationsController < ApplicationController
         format.js
     end
   end 
+
+  def stats_mensuelle_params
+	@classrooms = Ville.find(session[:mairie]).classrooms
+  end
+
+  def stats_mensuelle
+	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
+	@prestation_date = @stats_date.to_date
+	@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'classe,nom,prenom', '', true)
+	
+	if @prestations.first
+		@classrooms = Ville.find(session[:mairie]).classrooms
+		@datedebut  = @prestation_date.to_date.at_beginning_of_month
+		@datefin = @prestation_date.to_date.at_end_of_month	
+		@classe = @prestations.first.enfant.classe
+		@enfant_id = @prestations.first.enfant.id
+	else
+		flash[:notice] = "Pas de prestations ce mois là."
+		redirect_to "/prestations/stats_mensuelle_params/0"
+	end
+  end	
 
 end
