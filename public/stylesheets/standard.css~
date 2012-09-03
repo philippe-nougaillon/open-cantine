@@ -205,7 +205,7 @@ table.sample a:hover {
 
 #warning_message {
     position: absolute;
-    left: 42%;
+    left: 44%;
     top: 80px;
     background-color: red;
     color: white;
@@ -334,9 +334,24 @@ table.bienvenue #help {
   margin: 2px 10px;
 }
 
-div.boolean, .simple_form input[type='submit'] {
+.simple_form .image_button {
+  float: left;
+  width: 100px;
+  text-align: right;
+  margin: 2px 10px;
+}
+
+div.boolean {
   margin-left: 120px;
 }
+
+.simple_form input[type="submit"] {
+  margin-left: 120px;
+  width: 132px;
+  height: 31px;	
+  background:url("valider.gif");
+}
+
 
 div.boolean label, label.collection_radio_buttons {
   float: none;

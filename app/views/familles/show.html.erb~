@@ -41,10 +41,7 @@
             <td>Email</td>
             <td><b><%= mail_to @famille.email %></b></td>
           </tr>
-	  <tr><td></td>
-		<td>
-	
-	</td></tr>
+	  <tr><td></td><td></td></tr>
         </table>
 	<% if session[:user_readwrite] %>
 	       <%= link_to "Modifier", edit_famille_path(@famille) %> |
@@ -94,12 +91,12 @@
             </tr>
           </table>
           <br>
-	  <% if @facture %>
+	      <% if @facture %>
           	Dernière facture : 
-		<%= link_to @facture.ref, :controller => 'factures', :action => 'show', :id => @facture  %>
+		    <%= link_to @facture.ref, :controller => 'factures', :action => 'show', :id => @facture  %>
           |
-          <%= link_to 'Facturer', :controller => 'factures', :action => 'new', :famille_id => @famille if session[:user_readwrite] %>
           <% end %>
+         <%= link_to 'Facturer', :controller => 'factures', :action => 'new', :famille_id => @famille if session[:user_readwrite] %>
           |
           <%= link_to 'Encaisser', :controller => 'paiements', :action => 'new', :famille_id => @famille if session[:user_readwrite] %>
 	  |

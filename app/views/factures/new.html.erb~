@@ -2,30 +2,18 @@
 <h3>Facturation mensuelle </h3>
 <div id="main" class="span-12 last">
   <fieldset>
-  <legend>Facturer</legend> 
-	<%= form_tag :action => "create" do %>
-  	    <p style="display:none">
- 	       <%= text_field_tag "famille_id", params[:famille_id] %>
-	    </p>
+  <legend>Choisir un mois à facturer</legend> 
+		<%= simple_form_for :facturer, :url => "create" do |f| %>
+			<%= f.input :an, :collection => 2010..2020, :label => 'Année',  :selected => Date.today.year %>
+			<%= f.input :mois, :collection => 1..12,  :selected => Date.today.month %>
 
-	    <label for="an">Année</label><br>
-	    <%= select_tag "an", "<option>2011</option><option selected='selected'>2012</option><option>2013</option><option>2014</option>".html_safe, { :include_blank => false } %>
-	    <br>
-	    <label for="mois">Mois</label><br>
-	    <%= select_tag "mois", options_for_select([ ["Janvier", "1"],["Février", "2"],["Mars", "3"], ["Avril", "4"],["Mai", "5"], ["Juin", "6"],["Juillet", "7"], ["Août", "8"], ["Septembre", "9"], ["Octobre", "10"],["Novembre", "11"], ["Décembre", "12"] ]), { :include_blank => false } %>
-	    <br><br>
+	  	    <p style="display:none"><%= text_field_tag "famille_id", params[:famille_id] %></p>
 
- 	    <% if params[:famille_id] %>
-  	    	<label for="famille_id">Famille</label><br>
-	    	<%= text_field_tag("Famille_name", Famille.find(params[:famille_id]).nom ,:size => 20) %><br>
-	    <% else %>
-    	        <%= check_box_tag("auto", false) %> Toutes les familles ? 
-	    <% end %>
-	    <br><br>
-	    <div style="margin-top:10px;">
-	       <%= image_submit_tag "valider.gif" %>
-	    </div>
-	 <% end %>
+  	    	<label for="famille_id">Famille</label>
+			<%= text_field_tag("Famille_name", Famille.find(params[:famille_id]).nom ,:size => 20) %><br>
+			<%= f.input :commentaire, :as => :text, :required => false %>
+			<%= f.submit ""  %>
+		<% end %>
    </fieldset>
 </div>
 

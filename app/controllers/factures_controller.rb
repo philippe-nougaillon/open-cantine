@@ -4,7 +4,7 @@ class FacturesController < ApplicationController
 
   layout :determine_layout
 
-  before_filter :check, :except => ['index', 'new', 'create']
+  before_filter :check, :except => ['index', 'new','new_all','create']
 
   def check
     unless Facture.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", params[:id], session[:mairie]])
@@ -42,12 +42,12 @@ class FacturesController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @facture }
       format.pdf do
-	  filename = @facture.id.to_s
+	  	  filename = @facture.id.to_s
           render :pdf => filename ,
                  :template => 'factures/show.pdf.erb',
                  :layout => 'pdf',
-		 :save_to_file => Rails.root + "pdfs/#{filename}.pdf"
-          end   
+		 		 :save_to_file => Rails.root + "pdfs/#{filename}.pdf"
+      end   
     end
   end
 
@@ -86,32 +86,31 @@ class FacturesController < ApplicationController
 
   end
 
+  def new_all
+
+  end
+
   # POST /factures
   # POST /factures.xml
   def create
-    if params[:auto]
+    if !params[:famille_id]
         nbr_facture = 0
         Famille.find(:all, :conditions => ["mairie_id = ?", session[:mairie]]).each { 
 			|famille|
-			facture_id = create_facture(famille.id , 0, famille.mairie_id, false, params[:mois], params[:an])
+			facture_id = create_facture(famille.id , 0, famille.mairie_id, false, params[:facturer][:mois], params[:facturer][:an], params[:facturer][:commentaire])
 			nbr_facture += 1 if facture_id 
-	}
-	flash[:notice] = "#{nbr_facture} Factures créées."
-	redirect_to(:controller => 'factures', :sort => 'id', :order => 'DESC') 
+		}
+		flash[:notice] = "#{nbr_facture} factures créées..."
+		redirect_to(:controller => 'factures', :sort => 'id DESC') 
     else 
-        if !params[:famille_id].blank?	
-   	   facture_id = create_facture(params[:famille_id], 0, session[:mairie], false, params[:mois], params[:an])
-	   if facture_id 
-   		flash[:notice] = 'Facture créée.'
-   		redirect_to(:controller => 'factures', :action => 'show', :id => facture_id)
-	   else
-   		flash[:warning] = 'Rien à facturer.'
-   		redirect_to(:controller => 'familles', :action => 'show', :id => params[:famille_id])
-     	   end
-	else
-	   flash[:warning] = 'Rien à facturer.'
-	   redirect_to(:controller => 'factures', :sort => 'id', :order => 'DESC') 
-	end
+   		facture_id = create_facture(params[:famille_id], 0, session[:mairie], false, params[:facturer][:mois], params[:facturer][:an], params[:facturer][:commentaire])
+ 	    if facture_id 
+	   		flash[:notice] = 'Facture créée.'
+	   		redirect_to(:controller => 'factures', :action => 'print', :id => facture_id)
+		else
+	   		flash[:warning] = 'Rien à facturer.'
+	   		redirect_to(:controller => 'familles', :action => 'show', :id => params[:famille_id])
+ 	   	end
     end
   end
 
@@ -150,7 +149,7 @@ class FacturesController < ApplicationController
 
 end
 
-def create_facture(famille_id, facture_id, mairie_id, draft, mois, an)
+def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentaire)
     
     hash_prestations = {'Repas' => 0,'GarderieAM' => 0.0,'GarderiePM' => 0.0, 'CentreAM' => 0, 'CentrePM' => 0, 'CentreAMPM' => 0, 
 		'Etude' => 0, 'MntRepas' => 0,'MntGarderieAM' => 0.0,'MntGarderiePM' => 0.0, 'MntCentreAM' => 0, 'MntCentrePM' => 0, 
@@ -182,6 +181,7 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an)
     @facture.ref = "#{date_debut.month.to_s}-#{Date.today.year}/#{@prochain.prochain}"
     @facture.SoldeFamille = @solde
     @facture.checked = false
+	@facture.footer = commentaire
     @facture.save
     facture_id = @facture.id
 

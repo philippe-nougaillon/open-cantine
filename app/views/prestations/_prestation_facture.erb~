@@ -10,7 +10,4 @@
     <td class="center"><%= image_tag @images[prestation.centrePM.to_i], :size => '15x15'   if prestation.centrePM != "0" %> </td>
     <td class="center"><%= image_tag @images[prestation.etude.to_i], :size => '15x15'      if prestation.etude != "0" %> </td>
 
-    <td style="text-align:right"><%= number_to_currency(prestation.totalP, :unit => "") %> €</td>
-    <td style="text-align:right"><%= number_to_currency(prestation.totalA, :unit => "") %> €</td>
-    <td style="text-align:right"><b><%= number_to_currency(prestation.totalP - prestation.totalA, :unit => "") %> €</b></td>
 </tr>

@@ -1,0 +1,19 @@
+<br>
+<h3>Facturation mensuelle </h3>
+Attention: Toutes les prestations du mois <b>de toutes les familles</b> vont être facturées !
+<br>
+<br>
+
+<div id="main" class="span-15 last">
+  <fieldset>
+  <legend>Choisir un mois à facturer</legend> 
+
+		<%= simple_form_for :facturer, :url => "/factures/create" do |f| %>
+			<%= f.input :an, :collection => 2010..2020, :label => 'Année',  :selected => Date.today.year %>
+			<%= f.input :mois, :collection => 1..12,  :selected => Date.today.month %>
+			<%= f.input :commentaire, :as => :text, :hint => "Saisir un commentaire commun à toutes les factures", :required => false %>
+			<%= f.submit ""  %>
+		<% end %>
+
+   </fieldset>
+</div>

@@ -1,5 +1,4 @@
 <tr>
-    <% @images = ["","ok.jpeg","no.jpeg","orange.jpeg","cancel.jpeg","ok.jpeg","ok.jpeg","ok.jpeg"] %>
     <td><%=h format_date(prestation.date) %></td>
     <td><%= link_to Enfant.find(prestation.enfant_id).prenom, :controller => 'enfants', :action => 'show', :id => prestation.enfant_id %></td>
 

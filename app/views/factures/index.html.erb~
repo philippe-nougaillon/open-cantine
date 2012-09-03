@@ -4,7 +4,10 @@
       <%= text_field_tag "search", params[:search] %>
       <%= submit_tag 'Rechercher' %>
   <% end %>
-  <%= link_to "Facturer", :action => "new" %>
+  <hr>
+  <div id="adroite">
+     <%= link_to "Facturer", :action => "new_all", :id => 0 %>
+  </div>
 </div>
 
 <br>

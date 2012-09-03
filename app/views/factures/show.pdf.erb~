@@ -1,15 +1,12 @@
-<strong><%= @mairie.nom %><br></strong>
-<br>
-<%= @mairie.adr %><br>
-<%= @mairie.cp %> <%= @mairie.ville %><br>
-<br>
-<small>
-<%= @mairie.tel %><br>
-<%= @mairie.email %><br>
-</small>
-
-
+	<strong><%= @mairie.nom %><br></strong>
 	<br>
+	<%= @mairie.adr %><br>
+	<%= @mairie.cp %> <%= @mairie.ville %><br>
+	<br>
+	<small>
+    	   <%= @mairie.tel %><br>
+	   <%= @mairie.email %><br>
+	</small>
 
 	<table>
 	  <tr>
