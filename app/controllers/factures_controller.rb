@@ -4,7 +4,7 @@ class FacturesController < ApplicationController
 
   layout :determine_layout
 
-  before_filter :check, :except => ['index', 'new','new_all','create']
+  before_filter :check, :except => ['index', 'new','new_all','create', 'stats_mensuelle_params', 'stats_mensuelle']
 
   def check
     unless Facture.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", params[:id], session[:mairie]])
@@ -89,6 +89,11 @@ class FacturesController < ApplicationController
 
   end
 
+  def stats_mensuelle_params
+
+  end
+
+
   def stats_mensuelle
 	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
 	@facture_date = @stats_date.to_date
@@ -96,15 +101,23 @@ class FacturesController < ApplicationController
 	@datedebut  = @facture_date.to_date.at_beginning_of_month
 	@datefin = @facture_date.to_date.at_end_of_month	
 
-	#@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'classe,nom,prenom', '', true)
-	
+	@factures = Facture.where("date between ? and ? and mairie_id= ?", @datedebut, @datefin, session[:mairie])
 
-	#if @prestations.first
-	#	@classrooms = Ville.find(session[:mairie]).classrooms
-	#else
-	#	flash[:notice] = "Pas de prestations ce mois là."
-	#	redirect_to "/prestations/stats_mensuelle_params/0"
-	#end
+	if @factures.first
+		@total_cantine = 0.00
+		@total_garderie = 0.00
+		@total_centre = 0.00
+		@total_etude = 0.00
+		for f in @factures
+			@total_cantine += f.total_cantine if f.total_cantine
+			@total_garderie += f.total_garderie if f.total_garderie
+			@total_centre += f.total_centre if f.total_centre
+			@total_etude += f.total_etude if f.total_etude
+		end
+	else
+		flash[:notice] = "Pas de factures ce mois là."
+		redirect_to "/factures/stats_mensuelle_params/0"
+	end
   end	
 
   # POST /factures
