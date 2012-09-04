@@ -72,7 +72,6 @@ class FacturesController < ApplicationController
     
   end
 
-
   # GET /factures/1/edit
   def edit
     @facture = Facture.find(params[:id])
@@ -89,6 +88,24 @@ class FacturesController < ApplicationController
   def new_all
 
   end
+
+  def stats_mensuelle
+	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
+	@facture_date = @stats_date.to_date
+	
+	@datedebut  = @prestation_date.to_date.at_beginning_of_month
+	@datefin = @prestation_date.to_date.at_end_of_month	
+
+	#@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'classe,nom,prenom', '', true)
+	
+
+	#if @prestations.first
+	#	@classrooms = Ville.find(session[:mairie]).classrooms
+	#else
+	#	flash[:notice] = "Pas de prestations ce mois là."
+	#	redirect_to "/prestations/stats_mensuelle_params/0"
+	#end
+  end	
 
   # POST /factures
   # POST /factures.xml
@@ -158,6 +175,10 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
 		'PrixEtude' => 0.0,'JoursRepas' => "",'JoursGarderieAM' => "",'JoursGarderiePM' => "", 
 		'JoursCentreAM' =>"", 'JoursCentrePM' => "", 'JoursCentreAMPM' => "", 'JoursEtude' => ""} 
 
+    total_cantine = 0.00
+	total_garderie = 0.00
+	total_centre = 0.00
+	total_etude = 0.00
     grand_total = 0.00
 
     d = Date.new(an.to_i,  mois.to_i , 1)
@@ -181,6 +202,7 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
     @facture.ref = "#{date_debut.month.to_s}-#{Date.today.year}/#{@prochain.prochain}"
     @facture.SoldeFamille = @solde
     @facture.checked = false
+	@facture.footer = commentaire
     @facture.save
     facture_id = @facture.id
 
@@ -200,19 +222,19 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
               prestation1.save
           end
 
-          # calcul prestations type 3 ' Majoré
+          # calcul prestations type 3 ' Majorée
           prestations_majorees= hash_prestations.clone
           for prestation3 in @prestations
               prestations_majorees = prestation3.calc_majoration(prestations_majorees)
           end
 
-          # calcul prestations type 2 ' Annulé par la famille
+          # calcul prestations type 2 ' Annulée par la famille
           prestations_annulees= hash_prestations.clone
           for prestation2 in @prestations
               prestations_annulees = prestation2.calc_annulation(prestations_annulees)
           end
 
-          # calcul prestations type 4 ' Annulé maladie
+          # calcul prestations type 4 ' Annulée maladie
           prestations_annulees_maladie = hash_prestations.clone
           for prestation4 in @prestations
               prestations_annulees_maladie = prestation4.calc_annulation_maladie(prestations_annulees_maladie)
@@ -356,12 +378,31 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
           total += total_annulations
           total += total_annulations_maladie
           grand_total = grand_total + total
+
+		  total_cantine += prestations_normales['MntRepas'] + prestations_majorees['MntRepas'] + prestations_annulees['MntRepas'] + prestations_annulees_maladie['MntRepas']
+
+		  total_garderie += prestations_normales['MntGarderieAM'] + prestations_majorees['MntGarderieAM'] + prestations_annulees['MntGarderieAM'] + prestations_annulees_maladie['MntGarderieAM']
+
+		  total_garderie += prestations_normales['MntGarderiePM'] + prestations_majorees['MntGarderiePM'] + prestations_annulees['MntGarderiePM'] + prestations_annulees_maladie['MntGarderiePM']
+
+		  total_centre += prestations_normales['MntCentreAMPM'] + prestations_majorees['MntCentreAMPM'] + prestations_annulees['MntCentreAMPM'] + prestations_annulees_maladie['MntCentreAMPM']
+
+		  total_centre += prestations_normales['MntCentreAM'] + prestations_majorees['MntCentreAM'] + prestations_annulees['MntCentreAM'] + prestations_annulees_maladie['MntCentreAM']
+
+		  total_centre += prestations_normales['MntCentrePM'] + prestations_majorees['MntCentrePM'] + prestations_annulees['MntCentrePM'] + prestations_annulees_maladie['MntCentrePM']
+
+		  total_etude += prestations_normales['MntEtude'] + prestations_majorees['MntEtude'] + prestations_annulees['MntEtude'] + prestations_annulees_maladie['MntEtude']
+
         end
     end
 
     if grand_total > 0	
-       @facture.montant    = grand_total
-       @facture.save
+      @facture.montant  = grand_total
+	  @facture.total_cantine = total_cantine
+	  @facture.total_garderie = total_garderie
+	  @facture.total_centre = total_centre
+	  @facture.total_etude = total_etude 
+      @facture.save
 
        # incrémente le N° de facture
        @prochain = FactureChrono.find(:first, :conditions => ["mairie_id = ?", mairie_id])

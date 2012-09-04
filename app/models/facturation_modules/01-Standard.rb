@@ -10,7 +10,7 @@ module Facturation
     else
         if Famille.find(kid.famille_id).tarif_id
            @tarif = Tarif.find(kid.famille.tarif_id) 
-	else
+		else
            @tarif = Tarif.find(:first, :conditions => ["mairie_id = ?", kid.famille.mairie_id]) 
         end
     end
@@ -19,13 +19,15 @@ module Facturation
   end
 
   def Facturation.tarif_majore(kid)
+
     if kid.tarif_id
-        # tarif forcé
-        tarif_id = Tarif.find(kid.tarif_id).id
+       # tarif forcé
+       tarif_id = Tarif.find(kid.tarif_id).id
     else
-      tarif_id = Tarif.find(:first, :conditions => ["mairie_id = ?",  kid.famille.mairie_id]).id 
+       tarif_id = Tarif.find(:first, :conditions => ["mairie_id = ?",  kid.famille.mairie_id]).id 
     end
     return tarif_id
+
   end
 
   def Facturation.calc_prestation(prestations_normales, prestation, tarif, jour)
@@ -33,7 +35,7 @@ module Facturation
       # Repas
       if prestation.repas == '1' or prestation.repas == '2' or prestation.repas == '4'
          prestations_normales['MntRepas'] += tarif.RepasP
-	 prestations_normales['PrixRepas'] = tarif.RepasP
+	 	 prestations_normales['PrixRepas'] = tarif.RepasP
          prestations_normales['Repas'] += 1
          prestations_normales['JoursRepas'] += "#{jour}, "
       end
@@ -41,7 +43,7 @@ module Facturation
       #Garderie
       if prestation.garderieAM == '1' or prestation.garderieAM == '2' or prestation.garderieAM == '4'
          prestations_normales['MntGarderieAM'] += tarif.GarderieAMP
-	 prestations_normales['PrixGarderieAM'] = tarif.GarderieAMP
+	 	 prestations_normales['PrixGarderieAM'] = tarif.GarderieAMP
          prestations_normales['GarderieAM'] += 1
          prestations_normales['JoursGarderieAM'] += "#{jour}, "
       end

@@ -19,7 +19,7 @@
 		    <td>Lecture<% if session[:user_readwrite] %>+Ecriture <% end %></td>
 		  </tr>
 		  <tr>
-		    <td id="label">Dernière connexion</td>
+		    <td id="label">Dernière connexion le</td>
 		    <td><%= @user.lastconnection.to_s(:fr) %></td>
 		  </tr>
 		    <tr>

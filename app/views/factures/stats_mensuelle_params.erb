@@ -1,0 +1,17 @@
+<br>
+<h3>Etat mensuel de la factutation</h3>
+Compte le nombre de factures et totalise les prestations de cantine, garderie, centre et étude.
+<br><br>
+
+<div id="main" class="span-12 last">
+	<fieldset>
+	  <legend>Choisir un mois </legend>
+		<%= simple_form_for :stats, :url => '/factures/stats_mensuelle/0' do |f| %>
+			<%= f.input :an, :collection => 2010..2020, :label => 'Année',  :selected => Date.today.year %>
+			<%= f.input :mois, :collection => 1..12,  :selected => Date.today.month %>
+			<%= f.submit "" %>
+		<% end %>
+	</fieldset>
+</div>
+
+ 

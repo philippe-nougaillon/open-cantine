@@ -6,7 +6,7 @@
   <% end %>
   <hr>
   <div id="adroite">
-     <%= link_to "Facturer", :action => "new_all", :id => 0 %>
+     <%= link_to "Facturer le mois", :action => "new_all", :id => 0 %>
   </div>
 </div>
 

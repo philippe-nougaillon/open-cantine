@@ -13,24 +13,17 @@ module Facturation
 	else
            @tarif = Tarif.find(:first, :conditions => ["mairie_id = ?", kid.famille.mairie_id]) 
         end
-        # si l'enfant n'est pas le premier de la famille, tarif famille
-        #agemax = Enfant.maximum(:age, :conditions => ['famille_id = ?' , kid.famille_id])
-        #if kid.age != agemax
-        #  tarif_id = 2 # tarif famille
-        #end
     end
-
     return @tarif
 
   end
 
-
   def Facturation.tarif_majore(kid)
     if kid.tarif_id
-        # tarif forcé
-        tarif_id = Tarif.find(kid.tarif_id).id
+       # tarif forcé
+       tarif_id = Tarif.find(kid.tarif_id).id
     else
-      tarif_id = Tarif.find(:first, :conditions => ["mairie_id = ?",  kid.famille.mairie_id]).id 
+       tarif_id = Tarif.find(:first, :conditions => ["mairie_id = ?",  kid.famille.mairie_id]).id 
     end
     return tarif_id
   end
