@@ -12,15 +12,7 @@ gem 'thin'
 gem 'simple_form'
 gem 'wicked_pdf'
 gem 'jquery_datepicker'
-
-group :development, :test do
-  gem 'mysql2'
-end
-
-group :production do
-  gem 'pg'
-end
-
+gem 'mysql2'
 
 # Gems used only for assets and not required
 # in production environments by default.
