@@ -1,7 +1,7 @@
 <br>
 <h3>Facturation du <%= @datedebut.to_s(:fr) %> au <%= @datefin.to_s(:fr) %></h3>
 
-Nombre de facture: <%= @factures.count %><br>
+Nombre de factures: <%= @factures.count %><br>
 <br>
 
 Total Cantine:  <%= @total_cantine %><br>
