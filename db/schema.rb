@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904131711) do
+ActiveRecord::Schema.define(:version => 20120911103715) do
 
   create_table "blogs", :force => true do |t|
     t.string   "titre"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20120904131711) do
     t.decimal  "total_garderie", :precision => 8, :scale => 2
     t.decimal  "total_centre",   :precision => 8, :scale => 2
     t.decimal  "total_etude",    :precision => 8, :scale => 2
+    t.datetime "envoyee"
   end
 
   create_table "familles", :force => true do |t|

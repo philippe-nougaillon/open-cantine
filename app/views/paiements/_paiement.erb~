@@ -9,7 +9,7 @@
       <%= f.label "Date" %>
     </td>
     <td>
-	  <%= f.text_field :date, :size => 10 %>
+	  <%= f.text_field :date, f.date.to_s(:fr), :size => 10 %>
     </td>
   </tr>
   <tr>

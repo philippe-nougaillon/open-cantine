@@ -360,7 +360,7 @@ class PrestationsController < ApplicationController
 	@enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')
 	@enfants.each do |e|
 		@kids_to_show.push(e)
-		@presta = e.prestations.where("date = ?", @date.to_date.to_s(:en)).last
+		@presta = e.prestations.where("date = ? and facture_id is null", @date.to_date.to_s(:en)).last
 		if @presta
 		   @kids_to_show_presta.push(@presta)
 		else

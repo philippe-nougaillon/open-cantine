@@ -408,7 +408,8 @@ class PrestationsController < ApplicationController
 	if @prestations.first
 		@classrooms = Ville.find(session[:mairie]).classrooms
 		@datedebut  = @prestation_date.to_date.at_beginning_of_month
-		@datefin = @prestation_date.to_date.at_end_of_month	@classe = @prestations.first.enfant.classe
+		@datefin = @prestation_date.to_date.at_end_of_month	
+		@classe = @prestations.first.enfant.classe
 		@enfant_id = @prestations.first.enfant.id
 	else
 		flash[:notice] = "Pas de prestations ce mois là."

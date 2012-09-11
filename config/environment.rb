@@ -8,9 +8,9 @@ Date::DATE_FORMATS.merge!(
   :my_format_1 => '%l %p, %b %d, %Y',
   :my_format_2  => '%l:%M %p, %B %d, %Y',
 
-  :default => '%m/%d/%Y',
+  :default => '%d.%m.%Y',
   :date_time12  => "%m/%d/%Y %I:%M%p",
-  :date_time24  => "%m/%d/%Y %H:%M",
+  :date_time24  => "%d.%m.%Y %H:%M",
   :fr => '%d.%m.%Y',
   :en => '%Y-%m-%d'
 )

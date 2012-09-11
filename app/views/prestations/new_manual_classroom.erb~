@@ -20,7 +20,6 @@
     	</tr>
 
 	    <% @kids_to_show.each_with_index do |enfant, index| %>
-
 			<% if @kids_to_show_presta[index] %>
 				 <% @presta = @kids_to_show_presta[index] %>
 			<% else %>

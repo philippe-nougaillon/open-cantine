@@ -28,7 +28,6 @@
 			<tr>
 			  <td><%= enfant.famille.nom %>
 			  <td><%= link_to enfant.prenom, enfant_path(enfant.id) %>
-			  <td><%= @presta.repas %></td>
 
 			  <td><%= check_box_tag(:"#{enfant.id}RepasAM", params[:"#{enfant.id}RepasAM"], @presta ? (@presta.repas !="0") : false, 
 				  { :onclick => "this.form.commit.click();" }) %></td>

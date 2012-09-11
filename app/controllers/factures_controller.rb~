@@ -61,15 +61,22 @@ class FacturesController < ApplicationController
     @facture = Facture.find(params[:id])
     @famille = Famille.find(@facture.famille_id)
     @mairie  = Ville.find(session[:mairie])
-    filename = Rails.root + "/pdfs/#{@facture.id.to_s}.pdf"
-    if File.exist?(filename) 
-       UserMailer.deliver_send_invoice(@mairie, @famille, @facture)
-       flash[:notice] = "Facture envoyée."
-    else
-       redirect_to(:controller => 'factures')
-       flash[:notice] = "PDF non créé. Veuillez cliquer sur l'icone PDF pour créer le fichier à envoyer."
-    end
-    
+	
+	# render pdf
+    filename = @facture.id.to_s
+    pdf = render_to_string :pdf => filename, :template => 'factures/show.pdf.erb', :layout => 'pdf'
+
+	# then save to a file
+	save_path = Rails.root.join('pdfs',"#{filename}.pdf")
+	File.open(save_path, 'wb') do |file|
+	  file << pdf
+	end
+	UserMailer.send_invoice(@mairie, @famille, @facture).deliver
+	# update sent at	
+	@facture.envoyee = Time.now.getlocal.to_s
+	@facture.save
+	flash[:notice] = "Facture #{@facture.ref} #{@famille.nom} envoyée."
+	redirect_to factures_path
   end
 
   # GET /factures/1/edit
@@ -109,10 +116,10 @@ class FacturesController < ApplicationController
 		@total_centre = 0.00
 		@total_etude = 0.00
 		for f in @factures
-			@total_cantine += f.total_cantine
-			@total_garderie += f.total_garderie
-			@total_centre += f.total_centre
-			@total_etude += f.total_etude
+			@total_cantine += f.total_cantine if f.total_cantine
+			@total_garderie += f.total_garderie if f.total_garderie
+			@total_centre += f.total_centre if f.total_centre
+			@total_etude += f.total_etude if f.total_etude
 		end
 	else
 		flash[:notice] = "Pas de factures ce mois là."
