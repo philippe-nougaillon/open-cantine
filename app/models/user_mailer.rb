@@ -22,23 +22,11 @@ class UserMailer < ActionMailer::Base
 
 
   def send_login(username,ip)
-    subject    "#{username} s'est connecté à openCantine.fr"
-    recipients "philippe@capcod.com"
-    sent_on    Time.now
-    body       "#{username} s'est connecté depuis : #{ip}"
-  end
-
-  def send_logout(username,ip)
-    subject    "#{username} s'est déconnecté de openCantine.fr"
-    recipients "philippe@capcod.com"
-    sent_on    Time.now
-    body       "#{username} s'est déconnecté depuis : #{ip}"
+	mail(:to => "philippe.nougaillon@gmail.com", :subject => "#{username} s'est connecté depuis : #{ip}")
   end
 
   def send_info(email)
-    subject    "openCantine.fr - Vos identifiants de connexion"
-    recipients  email
-    sent_on    Time.now
-    body       "Un compte #{email} a bien été créé. Utilisez votre email comme identifiant et mot de passe pour vous connecter. Vous pouvez modifier votre mot de passe à tout moment."
+	@email = email
+	mail( :subject => "openCantine.net - Vos identifiants de connexion", :to => @email) 
   end
 end
