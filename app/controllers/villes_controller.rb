@@ -6,6 +6,7 @@ class VillesController < ApplicationController
 
   def nouveau_compte
     @ville = Ville.new
+	flash[:notice] =""
   end	
 
   # POST /villes
