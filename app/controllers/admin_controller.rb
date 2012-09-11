@@ -24,8 +24,6 @@ class AdminController < ApplicationController
       session[:user] = @u.id
       session[:user_readwrite] = @u.readwrite
       session[:mairie] = @u.mairie_id
-    else
-      flash[:notice] = "Compte et/ou mot de passe inconnu(s). Pour une démonstration, utilisez le compte 'demo', mot de passe 'demo' "
     end
 	respond_to do |format|
   	  format.js { render :js => "window.location = '/familles/index'" if @u }
