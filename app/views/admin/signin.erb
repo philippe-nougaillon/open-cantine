@@ -3,6 +3,7 @@
     <tr>
       <td>
         <b>Application libre de gestion de votre service péri-scolaire.</b><br>
+		<small>Version 3 beta</small>
 	    <br><br>
         <h3 style="color:black;font-size:150%">Quoi de neuf ?</h3>
         <hr>
@@ -13,9 +14,12 @@
  	       <hr>
         <% end %>
       </td>
-</tr></table>
+	</tr>
+	</table>
+	<b>
+	Les sources d'openCatine sont disponibles sur la <a href="https://adullact.net/projects/opencantine/">forge Adullact</a><br>
+	</b>
 </div>
-
 <div class="span-2">
 	<br>
 </div>
@@ -36,9 +40,7 @@
 		    <div style="margin-top:15px;">
 		       <%= image_submit_tag "valider.gif" %>
 		    </div>
-		  <% end %>
-		  <br>		  
-		  <%= link_to "Problème de connexion ?", "mailto:philippe.nougaillon@gmail.com" %>
+		  <% end %>	  
 	   </fieldset>
      <% end %>
      <% if session[:user].nil? %>
@@ -47,6 +49,8 @@
 		  <%= link_to "Créer un compte gratuit", :controller => "villes", :action => "nouveau_compte" %>
 		  <br><br>
 		  <%= link_to "Guide d'utilisation", :action => "guide" %>
+		  <br><br>
+  	      <%= link_to "Problème de connexion ?", "mailto:philippe.nougaillon@gmail.com" %>
 	   </fieldset>
 
 	   <fieldset>
