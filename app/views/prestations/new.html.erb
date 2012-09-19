@@ -41,9 +41,7 @@
     <tr>
       <td>
         A partir du : 
-        <%= calendar_date_select_includes nil,:locale=>'fr' %>
-        <% CalendarDateSelect.format=(:finnish )%>
-        <%= f.calendar_date_select :date, :time => false, :size => 10 %>
+		<%= text_field_tag('prestation_date', params[:prestation_date], :size => 10) %>
      <td>
         <%= f.check_box :repas%>
       </td>
@@ -75,15 +73,18 @@
   </table>
   <%= check_box_tag(:toutlemois, params[:toutlemois]) %> Répéter jusqu'à la fin du mois ?
   <br>
+  <%= check_box_tag(:toutelannee, params[:toutelannee]) %> Répéter jusqu'à la fin de l'année scolaire (5 juillet 2013) ?
   <br>
-  <br>
-     <%= image_submit_tag "valider.gif" %>
-   <br>
   <p><small>
     Pour une seule journée, entrez la date et cochez les prestations voulues.
     <br>
-    Pour un mois, entrez la date du début du mois, cochez les jours souhaités, les prestations voulues et cochez 'Répéter jusqu'à la fin du mois ?'
-  </small></p>
+    Pour un mois, entrez la date du début du mois puis cochez les jours souhaités, les prestations voulues et cochez 'Répéter jusqu'à la fin du mois ?'
+     </small>
+  </p>
+  <br>
+  <%= image_submit_tag "valider.gif" %>
+  <br>
+  
   
 <% end %>
 

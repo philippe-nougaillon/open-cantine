@@ -105,7 +105,9 @@ class PrestationsController < ApplicationController
   # POST /prestations.xml
   def create
     @prestation_foo = Prestation.new(params[:prestation])
-    if not @prestation_foo.date.nil?
+	@prestation_date = params[:prestation_date]
+
+    if not @prestation_date.nil?
 
       unless params[:famille_id].blank?
           @famille_id = params[:famille_id]
@@ -116,14 +118,15 @@ class PrestationsController < ApplicationController
 
        @enfants.count.times { |i|
           @enfant = @enfants[i]
-          start_date = @prestation_foo.date.to_s(:en).to_date
 
-          if params[:toutlemois] and (params[:lundi] or params[:mardi] or params[:mercredi] or params[:jeudi] or params[:vendredi])
-               if params[:toutlemois]
-                  ndays = days_in_month(start_date) - (start_date.day - 1)
-               else
-                  ndays = 5
-               end
+          start_date = @prestation_date.to_date
+
+          if (params[:toutlemois] or params[:toutelannee]) and (params[:lundi] or params[:mardi] or params[:mercredi] or params[:jeudi] or params[:vendredi])
+			   ndays = 5
+               
+              ndays = days_in_month(start_date) - (start_date.day - 1) if params[:toutlemois]
+              ndays =  Date.parse("2013-07-05") - start_date if params[:toutelannee]
+		
                date = start_date
                ndays.times {
                  if is_weekday?(date)
@@ -138,13 +141,17 @@ class PrestationsController < ApplicationController
                           @prestation = Prestation.new(params[:prestation])
                           @prestation.etude = 0 if date.wday == 3 or not @vacances.empty?
                           @prestation.enfant_id = @enfant.id
-			  # test si habitude enfant garderie
-	       	 	  @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM
-	       		  @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM 
+			  			  # test si habitude enfant garderie
+	       	 	  		  @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM
+	       		  		  @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM 
                           @prestation.date = date
                           @prestation.totalP = 0.00
                           @prestation.totalA = 0.00
-                          @prestation.save
+						  if @prestation.save
+					          flash[:notice] = "Prestations ajoutées sur #{ndays} jours"
+						  else
+					          flash[:warning] = "Prestations ajoutées mais en doublons sur certaines dates.. Veuillez faire une vérification."
+						  end
                     end
                  end
                  date = date + 1.day
@@ -152,13 +159,17 @@ class PrestationsController < ApplicationController
             else
                @prestation = Prestation.new(params[:prestation])
                @prestation.enfant_id = @enfant.id
-	       # test si habitude enfant garderie
-	       @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM
-	       @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM 
-               @prestation.date = @prestation_foo.date
+	       	   # test si habitude enfant garderie
+	       	   @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM
+	       	   @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM 
+               @prestation.date = @prestation_date
                @prestation.totalP = 0.00
                @prestation.totalA = 0.00
-               @prestation.save
+ 			   if @prestation.save
+		          flash[:notice] = 'Prestation ajoutée.'
+			   else
+		          flash[:warning] = "Erreur lors de l'ajout des prestation, peut-être en doublon..."
+			   end
             end
          }
         flash[:notice] = 'Prestation(s) ajoutée(s).'
@@ -172,7 +183,6 @@ class PrestationsController < ApplicationController
        flash[:warning] = 'Manque date de début...'
        redirect_to :action => "new", :enfant_id => @prestation_foo.enfant_id
     end
-
   end
 
   # PUT /prestations/1
@@ -360,7 +370,7 @@ class PrestationsController < ApplicationController
 	@enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')
 	@enfants.each do |e|
 		@kids_to_show.push(e)
-		@presta = e.prestations.where("date = ?", @date.to_date.to_s(:en)).last
+		@presta = e.prestations.where("date = ? and facture_id is null", @date.to_date.to_s(:en)).last
 		if @presta
 		   @kids_to_show_presta.push(@presta)
 		else
