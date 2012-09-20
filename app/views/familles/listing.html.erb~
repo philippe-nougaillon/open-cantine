@@ -9,7 +9,8 @@
     <th>QF</th>
     <th>Tél. fixe</th>
     <th>Mob. maman</th>
-    <th>Mob. papa</th>
+    <th>Mob. papa</th>	
+	<th>Email</th>
     <th>Enfant(s)</h>
    </tr>
   <% total_enfant = 0 %>
@@ -28,6 +29,8 @@
       <td><%=h famille.phone %></td>
       <td><%=h famille.mobile1 %></td>
       <td><%=h famille.mobile2 %></td>
+      <td><%=h famille.email %></td>
+
       <td style="text-align:right"><%=h famille.enfants.count %></td>
     </tr>
     <% total_enfant += famille.enfants.count %>
@@ -42,7 +45,7 @@
       <td></td>
       <td></td>
       <td></td>
-      <td><%= total_enfant %></td>
+      <td  style="text-align:right"><b><%= total_enfant %></b></td>
     </tr>
     <% total_enfant += famille.enfants.count %>
 

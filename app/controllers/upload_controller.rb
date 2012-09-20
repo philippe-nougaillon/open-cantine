@@ -2,8 +2,6 @@
 
 class UploadController < ApplicationController
 
-  require 'parsedate'
-
   layout 'standard'
 
   def index
@@ -12,10 +10,9 @@ class UploadController < ApplicationController
   def uploadFile
 
     if params[:upload]['datafile'].empty?
-	flash[:warning] = 'Aucun fichier à importer...'
-	redirect_to :action => 'index'
+		flash[:warning] = 'Aucun fichier à importer...'
+		redirect_to :action => 'index'
     else
-
 	    #save file 
 	    post = DataFile.save(params[:upload], session[:mairie])
 	    # load saved file
@@ -27,7 +24,6 @@ class UploadController < ApplicationController
 	    #open file
 	    f = File.new(path)
 
-
 	    f.each { |line|
 	       #split line
 	       message = line.split(";")
@@ -37,7 +33,7 @@ class UploadController < ApplicationController
 	       logger.info(line)
 	      
 	       #transforme chaine date en datetime  --- Attention jour  = mois
-	       d = ParseDate.parsedate(log_date)
+	       d = Date.parse(log_date)
 	       time = Time.local(*d)
 	       log_date = time.strftime("%Y-%d-%m")
 
@@ -65,7 +61,6 @@ class UploadController < ApplicationController
 		  when 12..14 
 		    prestaRepas = 1	
 		    logger.info("Repas")
-
 
 		  when 16..23 #mettre heure de garderie Soir en variable mairie
 		    minutes = (time.hour * 60) + time.min

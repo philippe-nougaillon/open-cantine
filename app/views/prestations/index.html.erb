@@ -5,7 +5,7 @@
 	  Classe :
 	  <%= select_tag "classe", options_from_collection_for_select(@classrooms, "id", "nom", params[:classe]), :include_blank => true %>
 	  <%= check_box_tag "toutlemois", params[:toutlemois], params[:toutlemois] %> Voir tout le mois ?
-	  <%= submit_tag 'Rechercher'   %>
+	  <%= submit_tag 'Rechercher' %>
 	  <%= check_box_tag "totaux", params[:totaux], params[:totaux] %> Voir uniquement les totaux ?
 	  <hr>	
 	  <% if params[:action] != 'print' %>

@@ -1,20 +1,16 @@
 <br>
 <br>
 <h3>Importation du fichier de pointage</h3>
-Pour être importées correctement, les données issues de votre scanner code barres doivent correspondre à ce format :
+<b>Pour être importées correctement, les données issues de votre scanner code barres doivent correspondre à ce format :</b>
 <br><br>
-<small>
 N°Sequence; id_enfant; date(MM/JJ/AAAA H:M:S)<br>
-</small>
 <br>
-Exemple :<br>
-<small>
+<b>Exemple :</b><br>
 41;23;11/10/2010 8:00:09<br>
 42;43;11/10/2010 8:20:09<br>
 43;44;11/10/2010 12:14:42<br>
 44;16;11/10/2010 12:15:16<br>
 45;16;11/10/2010 17:20:16<br>
-</small>
 <br>
 Pour chaque enfant présent, une prestation sera ajouté selon l'heure de pointage:<br>
 - Si le pointage a eu lieu entre 0 et 9h, une garderie matin sera ajoutée.<br>
@@ -24,8 +20,7 @@ Pour chaque enfant présent, une prestation sera ajouté selon l'heure de pointa
 Ce paramétrage peut être modifié à votre convenance. Veuillez me contacter si besoin.<br>
 <br>
 
-<% form_tag ({:action => 'uploadFile'}, 
-              :multipart => true) do %>
+<%= form_tag :action => 'uploadFile', :multipart => true do %>
 
    <p><label for="upload_file">Fichier de pointage</label> : 
       <%= file_field 'upload', 'datafile' %>

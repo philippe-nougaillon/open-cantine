@@ -27,7 +27,7 @@ class PrestationsController < ApplicationController
   # GET /prestations.xml
   def index
      @images = get_etat_images
-     if !params[:classe].blank?
+     if !params[:classe].blank? and !params[:toutlemois]
 		session[:date] = params[:prestation_date]
 		session[:classe] = params[:classe]
 		redirect_to '/presence'
@@ -45,7 +45,8 @@ class PrestationsController < ApplicationController
 
   def print
 	 @images = get_etat_images
-     refresh
+     @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], params[:sort], session[:order], params[:toutlemois])
+     @classrooms = Ville.find(session[:mairie]).classrooms
   end
 
   # GET /prestations/1
@@ -125,7 +126,7 @@ class PrestationsController < ApplicationController
 			   ndays = 5
                
               ndays = days_in_month(start_date) - (start_date.day - 1) if params[:toutlemois]
-              ndays =  Date.parse("2013-07-05") - start_date if params[:toutelannee]
+              ndays = (Date.parse("2013-07-05") - start_date).to_i if params[:toutelannee]
 		
                date = start_date
                ndays.times {

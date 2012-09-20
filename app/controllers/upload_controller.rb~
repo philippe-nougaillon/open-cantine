@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class UploadController < ApplicationController
 
   require 'parsedate'
@@ -10,10 +12,9 @@ class UploadController < ApplicationController
   def uploadFile
 
     if params[:upload]['datafile'].empty?
-	flash[:warning] = 'Aucun fichier à importer...'
-	redirect_to :action => 'index'
+		flash[:warning] = 'Aucun fichier à importer...'
+		redirect_to :action => 'index'
     else
-
 	    #save file 
 	    post = DataFile.save(params[:upload], session[:mairie])
 	    # load saved file
@@ -24,7 +25,6 @@ class UploadController < ApplicationController
 
 	    #open file
 	    f = File.new(path)
-
 
 	    f.each { |line|
 	       #split line
@@ -63,7 +63,6 @@ class UploadController < ApplicationController
 		  when 12..14 
 		    prestaRepas = 1	
 		    logger.info("Repas")
-
 
 		  when 16..23 #mettre heure de garderie Soir en variable mairie
 		    minutes = (time.hour * 60) + time.min

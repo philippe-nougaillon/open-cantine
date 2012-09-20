@@ -29,9 +29,14 @@
 				<td><%= @sum[:centreAM] %></td> 
 				<td><%= @sum[:centrePM] %></td>
 				<td><%= @sum[:etude] %></td>
+				<% @sum[:repas] =0 %>
+				<% @sum[:garderieAM] =0 %>
+				<% @sum[:garderiePM] =0 %>
+				<% @sum[:centreAM] =0 %>
+				<% @sum[:centrePM] =0 %>
+				<% @sum[:etude] =0 %>
 			</tr> 
- 
-		<% end %>
+ 		<% end %>
 
 		<% @sum[:repas] += 1 if prestation.repas == '1' or prestation.repas == '3' %>
 		<% @sum[:garderieAM] +=  1 if (prestation.garderieAM == '1' or prestation.garderieAM == '5' or prestation.garderieAM == '6' or prestation.garderieAM == '7') %>

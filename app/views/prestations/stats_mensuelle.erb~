@@ -10,7 +10,7 @@
 <br>
 <h3>Prestations du <%= @datedebut.to_s(:fr) %> au <%= @datefin.to_s(:fr) %></h3>
 <table class="sample">
-	<tr><th>Nom prénom</th><th>Total repas</th><th>Total Garderie Matin</th><th>Total Garderie Soir</th><th>Total Centre Matin</th><th>Total Centre Soir</th></tr>
+	<tr><th>Nom prénom</th><th>Total repas</th><th>Total Garderie Matin</th><th>Total Garderie Soir</th><th>Total Centre Matin</th><th>Total Centre Soir</th><th>Total Etude</th></tr>
 	<tr><td><i>Classe <%= Classroom.find(@classe).nom %></i></td><td/></tr>
 
 	<% for prestation in @prestations %>
@@ -29,6 +29,12 @@
 				<td><%= @sum[:centreAM] %></td> 
 				<td><%= @sum[:centrePM] %></td>
 				<td><%= @sum[:etude] %></td>
+				<% @sum[:repas] =0 %>
+				<% @sum[:garderieAM] =0 %>
+				<% @sum[:garderiePM] =0 %>
+				<% @sum[:centreAM] =0 %>
+				<% @sum[:centrePM] =0 %>
+				<% @sum[:etude] =0 %>
 			</tr> 
  
 		<% end %>

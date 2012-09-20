@@ -27,7 +27,7 @@ class PrestationsController < ApplicationController
   # GET /prestations.xml
   def index
      @images = get_etat_images
-     if !params[:classe].blank?
+     if !params[:classe].blank? and !params[:toutlemois]
 		session[:date] = params[:prestation_date]
 		session[:classe] = params[:classe]
 		redirect_to '/presence'
@@ -45,7 +45,8 @@ class PrestationsController < ApplicationController
 
   def print
 	 @images = get_etat_images
-     refresh
+     @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], 'date,classe,nom,prenom', '', params[:toutlemois])
+     @classrooms = Ville.find(session[:mairie]).classrooms
   end
 
   # GET /prestations/1
