@@ -16,7 +16,7 @@
       </td>
 	</tr>
 	</table>
-	<%= will_paginate @blogs, :previous_label => "Prédédent", :next_label => "Suivant" %>
+	<%= will_paginate @blogs, :previous_label => "<", :next_label => ">" %>
 </div>
 <div class="span-2">
 	<br>
