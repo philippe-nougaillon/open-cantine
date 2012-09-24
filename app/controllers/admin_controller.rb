@@ -9,7 +9,7 @@ class AdminController < ApplicationController
   end
 
   def signin
-    @blogs = Blog.find(:all, :order => 'updated_at DESC')
+    @blogs   = Blog.search(params[:page])
     respond_to do |format|
     	format.html 
     	format.js

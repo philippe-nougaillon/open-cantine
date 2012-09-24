@@ -53,7 +53,7 @@
   </table>
 
   <br>
-  <%= will_paginate @factures %>
+  <%= will_paginate @factures, :previous_label => "Prédédent", :next_label => "Suivant" %>
 <% else %>
   Aucune facture à afficher. Veuillez réduire le filtre et recommencer.
 <% end %>

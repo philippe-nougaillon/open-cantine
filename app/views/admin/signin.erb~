@@ -3,7 +3,7 @@
     <tr>
       <td>
         <b>Application libre de gestion de votre service péri-scolaire.</b><br>
-		<small>Version 3 beta</small>
+		<span style="color:red;font-size:85%">Version 3 beta. Pour tests uniquement !</span>
 	    <br><br>
         <h3 style="color:black;font-size:150%">Quoi de neuf ?</h3>
         <hr>
@@ -16,9 +16,7 @@
       </td>
 	</tr>
 	</table>
-	<b>
-	Les sources d'openCatine sont disponibles sur la <a href="https://adullact.net/projects/opencantine/">forge Adullact</a><br>
-	</b>
+	<%= will_paginate @blogs, :previous_label => "Prédédent", :next_label => "Suivant" %>
 </div>
 <div class="span-2">
 	<br>
@@ -54,7 +52,7 @@
 		  	<br><br>
 		  	<%= link_to "Accès parents", :controller => "moncompte", :action => "famillelogin" %>
 	   </fieldset>
-	   <small>Optimlizé pour</small>
+	   <small>Optimlizé pour</small><br>
 	   <%= link_to image_tag("firefox.png"), "http://www.mozilla.org/fr/firefox/fx/" %>
 	 <% end %>
 

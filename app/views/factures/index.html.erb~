@@ -23,9 +23,9 @@
       <th><%= link_to "Montant", :sort => "montant" %></th>
       <th><%= link_to "Vérifiée?", :sort => "checked" %></th>
       <th><%= link_to "Mémo bas de page", :sort => "footer" %></th>
-      <th/>
+      <th>PDF</th>
       <th>Envoyée par mail le</th>
-	  <th></th>	
+	  <th/>	
       <th/>
     </tr>
 
