@@ -25,11 +25,11 @@ class TodosController < ApplicationController
      	
     unless session[:votants].include?(ip)
      	session[:votants].push(ip)
-	@todo.counter += 1
-	@todo.save	
-	flash[:notice] = 'Merci pour votre vote'
+		@todo.counter += 1
+		@todo.save	
+		flash[:notice] = 'Merci pour votre vote'
     else
-	flash[:warning] = 'Vous avez déjà voté.'
+		flash[:warning] = 'Vous avez déjà voté.'
     end	
 
     respond_to do |format|
@@ -48,6 +48,16 @@ class TodosController < ApplicationController
       format.html # new.html.erb
       format.xml  { render :xml => @todo }
     end
+  end
+
+  def editthewish
+    @todo = Todo.find(params[:id])
+  end
+ 	
+  def destroy
+    @todo = Todo.find(params[:id])
+	@todo.destroy
+	redirect_to(todos_url) 
   end
 
   # POST /todos

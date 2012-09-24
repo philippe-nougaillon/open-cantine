@@ -61,7 +61,7 @@ fieldset {
 
 #title {
     color:  black;
-    font-size: 14px;
+    font-size: 20px;
     font-family: Helvetica,sans-serif;
     text-align: left;
     padding-top: 10px;
@@ -69,6 +69,11 @@ fieldset {
 }
 #title img {
 	width: 30px;
+}
+
+#title a {
+	text-decoration: none;
+	color:#df2599;
 }
 
 

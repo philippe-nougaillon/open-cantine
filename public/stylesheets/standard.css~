@@ -71,6 +71,11 @@ fieldset {
 	width: 30px;
 }
 
+#title a {
+	text-decoration: none;
+	color:#df2599;
+}
+
 
 #menu {
     font-weight: bold;
@@ -347,7 +352,7 @@ div.boolean {
 
 .simple_form input[type="submit"] {
   margin-left: 120px;
-  width: 132px;
+  width: 133px;
   height: 31px;	
   background:url("valider.gif");
 }

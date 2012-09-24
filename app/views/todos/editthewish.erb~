@@ -1,7 +1,8 @@
-<h1>Editing todo</h1>
+<%= form_for(@todo) do |f| %>
 
-<% form_for(@todo) do |f| %>
-  <%= f.error_messages %>
+  <% @todo.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+  <% end %>
 
   <p>
     <%= f.label :description %><br />
@@ -13,4 +14,5 @@
 <% end %>
 
 <%= link_to 'Show', @todo %> |
+<%= link_to "Delete", @todo, :confirm => "Really??",  :method => :deletethewish %> |
 <%= link_to 'Back', todos_path %>

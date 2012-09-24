@@ -1,9 +1,8 @@
 <br><br>
 
-<h3>Nouveau souhait</h3>
+<h3>Décrivez la fonctionnalité souhaitée</h3>
 
 <%= form_for(@todo) do |f| %>
- 
   <% @todo.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>
   <% end %>
@@ -12,7 +11,7 @@
     <%= f.text_area :description %>
   </p>
   <p>
-    <%= f.submit "Valider" %>
+    <%= f.submit "Enregistrer" %>
   </p>
 <% end %>
 
