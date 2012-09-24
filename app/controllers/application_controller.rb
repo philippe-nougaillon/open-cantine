@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_authentification, 
   				:except => 	[:signin, :check_user, :compte_login, :famillelogin, :familleshow, :famillelogout, 
-							:site_presentation, :nouveau_compte, :nouveau_compte_create, :stats, :guide]
+							:site_presentation, :nouveau_compte, :nouveau_compte_create, :stats, :guide, :points_forts]
  
   helper :all # include all helpers, all the time
 

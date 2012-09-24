@@ -28,37 +28,35 @@
   <br><br>
      <% if session[:user].nil? %>
 	  <fieldset>
-	  <legend>Connexion</legend> 
-	  <%= form_for(User.new, :remote => true, :url => { :controller => "admin", :action => "check_user"}) do |f| %>
+	  		<legend>Connexion</legend> 
+	 	 	<%= form_for(User.new, :remote => true, :url => { :controller => "admin", :action => "check_user"}) do |f| %>
 		    <label for="username">Utilisateur</label><br>
 		    <%=  f.text_field "username", :size => 20 %><br>
 		    <label for="password">Mot de passe</label><br>
 		    <%=  f.password_field "password", :size => 20 %><br>
  
-   		   <div id="login_msg"></div>
+   		    <div id="login_msg"></div>
 
 		    <div style="margin-top:15px;">
 		       <%= image_submit_tag "valider.gif" %>
 		    </div>
-		  <% end %>
-		  <br>		  
-	   </fieldset>
-     <% end %>
-     <% if session[:user].nil? %>
+		  <% end %>	  
+	  </fieldset>
 	  <fieldset>
-	  <legend>Nouveau ?</legend> 
-		  <%= link_to "Créer un compte gratuit", :controller => "villes", :action => "nouveau_compte" %>
-		  <br><br>
-		  <%= link_to "Guide d'utilisation", :action => "guide" %>
-		  <br>
-  	      <%= link_to "Problème de connexion ?", "mailto:philippe.nougaillon@gmail.com" %>
+	  <legend></legend> 
+		  	<%= link_to "Créer un compte gratuit", :controller => "villes", :action => "nouveau_compte" %>
+		  	<br><br>
+		  	<%= link_to "Points forts", :action => "points_forts" %>
+		  	<br><br>
+		  	<%= link_to "Guide d'utilisation", :action => "guide" %>
+		  	<br><br>
+  	      	<%= link_to "Contact", "mailto:philippe.nougaillon@gmail.com" %>
+		  	<br><br>
+		  	<%= link_to "Accès parents", :controller => "moncompte", :action => "famillelogin" %>
 	   </fieldset>
-
-	   <fieldset>
-	   <legend>Parents</legend> 
-		  <%= link_to "Accès à votre compte", :controller => "moncompte", :action => "famillelogin" %>
-	   </fieldset>
-     <% end %>
+	   <small>Optimlizé pour</small>
+	   <%= link_to image_tag("firefox.png"), "http://www.mozilla.org/fr/firefox/fx/" %>
+	 <% end %>
 
 </div>
 <div class="span-2 last">

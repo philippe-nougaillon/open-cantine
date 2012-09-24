@@ -147,4 +147,8 @@ class AdminController < ApplicationController
 
   end
 
+  def points_forts
+
+  end
+
 end
