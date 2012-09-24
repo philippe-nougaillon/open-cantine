@@ -1,32 +1,35 @@
 <p><strong>Un usage simplifi&eacute;</strong></p>
 <ul>
 	<li>
-		<p>Prise en main imm&eacute;diate</p>
+		<p>Prise en main imm&eacute;diate.</p>
 	</li>
 	<li>
-		<p>Une comptabilit&eacute; par famille</p>
+		<p>Une comptabilit&eacute; simple par famille. Une facture par mois avec solde. Balance famille.</p>
 	</li>
 	<li>
-		<p>Modes de calcul de la facturation personnalisables</p>
+		<p>Pré-inscriptions ou pointage des présences par classe. Pointage automatique pr&eacute;sences par douchette code-barres</p>
 	</li>
 	<li>
-		<p>Les familles peuvent consulter comptes et r&eacute;servations par Internet et sur iPhone</p>
+		<p>Mode de calcul facturation personnalisables. Annulation avec ou sans jours de carence.</p>
 	</li>
 	<li>
-		<p>Pointage automatique des pr&eacute;sences par douchette code-barre</p>
+		<p>Les familles peuvent consulter comptes et r&eacute;servations par Internet et sur iPhone.</p>
 	</li>
 	<li>
-		<p>Logiciel &eacute;volutif selon les besoins des utilisateurs</p>
+		<p>Envoi des factures PDF par email.</p>
 	</li>
 	<li>
-		<p>Ne d&eacute;pend pas d&#39;une soci&eacute;t&eacute;. Code source disponible sur la forge <a href="http://www.adullact.org/">Adullact</a><br />
+		<p>Etat mensuel des factures et paiements.</p>
+	</li>
+	<li>
+		<p>Ne d&eacute;pend pas d&#39;une soci&eacute;t&eacute;. Code source librement disponible sur <a href="https://adullact.net/projects/opencantine/">la forge Adullact</a><br />
 			&nbsp;</p>
 	</li>
 </ul>
 <p><strong>Une informatique &#39;dans le nuage&#39;</strong></p>
 <ul>
 	<li>
-		<p>Pas de logiciel &agrave; installer, un simple navigateur Internet suffit (Firefox, Google Chrome conseill&eacute;s)</p>
+		<p>Pas de logiciel &agrave; installer, un simple navigateur Internet suffit (Firefox conseill&eacute;)</p>
 	</li>
 	<li>
 		<p>Pas de mise &agrave; jour &agrave; g&eacute;rer, l&#39;application est mise &agrave; jour automatiquement</p>
@@ -38,5 +41,11 @@
 		<p>Pas de serveur &agrave; installer et &agrave; administer. Pas de sauvegardes &agrave; g&eacute;rer</p>
 	</li>
 </ul>
+<br>
+<fieldset><i>Et les logiciels métiers libres n'existent pas, et pour cause, personne n'a intérêt à les développer (ni même pour le fun, car la gestion des parcmètres, <b>les inscriptions à la cantine</b>, ou la répartition des concessions dans les cimetières ne passionnent pas les foules des programmeurs amateurs."</i> 
+<br><br>
+François ELIE, président de l'Adullact, <%= link_to "Economie du logiciel libre", "http://www.amazon.fr/Economie-logiciel-libre-Fran%C3%A7ois-Elie/dp/2212124635" %> p.62, Eyrolles (5 février 2009).
+</fieldset>
+<br>
 
 
