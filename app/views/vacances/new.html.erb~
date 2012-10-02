@@ -1,41 +1,21 @@
 <div class="span-12 last">
 	<br><br>
 
-	<%= calendar_date_select_includes nil,:locale=>'fr' %>
-	<% CalendarDateSelect.format=(:finnish )%>
-
 	<h4>Ajout d'une période de vacance</h4>
 
+	<%= simple_form_for(@vacance) do |f| %>
+	 
+	 <% @vacance.errors.full_messages.each do |msg| %>
+       <p><%= msg %></p>
+     <% end %>
 
-	<% form_for(@vacance) do |f| %>
-	  <%= f.error_messages %>
+	 <%= f.input :nom %>
+	 <%= f.input :debut, :as => :string, :input_html => { :class => 'date_picker' } %>
+	 <%= f.input :fin,   :as => :string, :input_html => { :id => 'date_picker' } %>
 
-	 <table class="form">
-	    <tr>
-	      <td id="label">Période</td>
-	      <td><%= f.text_field :nom %></td>
-	    </tr>
-	    <tr>
-	      <td id="label">Début</td>
-	      <td>
-		<%= calendar_date_select_includes nil,:locale=>'fr' %>
-		<% CalendarDateSelect.format=(:finnish )%>
-		<%= f.calendar_date_select :debut, :time => false, :size => 10 %>
-	      </td>
-	    </tr>
-	    <tr>
-	      <td id="label">Fin</td>
-	      <td><%= f.calendar_date_select :fin, :time => false, :size => 10 %></td>
-	    </tr>
-	    <tr>
-	      <td></td>
-	      <td>
-		 <div style="margin-top:10px;">
-		    <%= image_submit_tag "valider.gif" %>
-		 </div>
-	      </td>
-	    </tr>
-	  </table>
+     <div style="margin-top:10px;">
+		 <%= image_submit_tag "valider.gif" %>
+	 </div>
 	<% end %>
 </div>
 

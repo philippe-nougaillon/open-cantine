@@ -32,7 +32,7 @@ $.datepicker.regional['fr'] = {clearText: 'Effacer', clearStatus: '',
     dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
     dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
     dayStatus: 'Utiliser DD comme premier jour de la semaine', dateStatus: 'Choisir le DD, MM d',
-    dateFormat: 'dd/mm/yy', firstDay: 1, 
+    dateFormat: 'dd.mm.yy', firstDay: 1, 
     initStatus: 'Choisir la date', isRTL: false};
  $.datepicker.setDefaults($.datepicker.regional['fr']);
 
@@ -40,6 +40,7 @@ $.datepicker.regional['fr'] = {clearText: 'Effacer', clearStatus: '',
 jQuery(function(){
 
     jQuery('#prestation_date').datepicker();
+	jQuery('#date_picker').datepicker();
 
 });
 

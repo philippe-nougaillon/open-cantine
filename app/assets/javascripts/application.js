@@ -40,6 +40,7 @@ $.datepicker.regional['fr'] = {clearText: 'Effacer', clearStatus: '',
 jQuery(function(){
 
     jQuery('#prestation_date').datepicker();
+	jQuery('input.date_picker').datepicker();
 
 });
 
