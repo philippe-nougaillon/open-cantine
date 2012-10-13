@@ -2,7 +2,7 @@
   <table>
     <tr>
       <td>
-        <b>Application libre de gestion de votre service péri-scolaire.</b><br>
+        <b>Application libre de facturation péri-scolaire.</b><br>
 		<span style="color:red;font-size:85%">Version 3 beta. Pour tests uniquement !</span>
 	    <br><br>
         <h3 style="color:black;font-size:150%">Quoi de neuf ?</h3>
@@ -52,7 +52,7 @@
 		  	<br><br>
 		  	<%= link_to "Accès parents", :controller => "moncompte", :action => "famillelogin" %>
 	   </fieldset>
-	   <small>Optimlizé pour</small><br>
+	   <small>Optimisé pour</small><br>
 	   <%= link_to image_tag("firefox.png"), "http://www.mozilla.org/fr/firefox/fx/" %>
 	 <% end %>
 

@@ -17,10 +17,10 @@
   <table class="sample">
     <tr>
       <th><%= link_to "Référence", :sort => "ref" %></th>
-      <th><%= link_to "Date", :sort => "date" %></th>
-      <th><%= link_to "Echéance", :sort => "echeance" %></th>
-      <th><%= link_to "Famille", :sort => "familles.nom" %></th>
-      <th><%= link_to "Montant", :sort => "montant" %></th>
+      <th><%= link_to "Date", 	   :sort => "date" %></th>
+      <th><%= link_to "Echéance",  :sort => "echeance" %></th>
+      <th><%= link_to "Famille",   :sort => "familles.nom" %></th>
+      <th><%= link_to "Montant",   :sort => "montant" %></th>
       <th><%= link_to "Vérifiée?", :sort => "checked" %></th>
       <th><%= link_to "Mémo bas de page", :sort => "footer" %></th>
       <th>PDF</th>
@@ -47,7 +47,7 @@
               <% end %> 
            <% end %>
         </td>
-	<td><%= link_to 'Modifier', edit_facture_path(facture) %></td>
+		<td><%= link_to 'Modifier', edit_facture_path(facture) %></td>
       </tr>
     <% end %>
   </table>

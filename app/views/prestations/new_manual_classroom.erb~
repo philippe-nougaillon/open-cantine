@@ -1,8 +1,8 @@
 <div id="form_actions">
 	<h3>Pointage présences <%= Classroom.find(@classe).nom %> le <%= @date %></h3>
 
-	Cocher la prestation voulue, elle sera automatique enregistrée comme étant effectuée. 
-	Attention : Décocher une prestation ne la supprimera pas. 
+	Cochez la prestation effectuée, elle sera automatique enregistrée. 
+	Attention ! Décocher une prestation ne la supprimera pas automatiquement.  
 </div>
 
 <div style="color:green" id="msgzone"></div>
@@ -28,7 +28,6 @@
 			<tr>
 			  <td><%= enfant.famille.nom %>
 			  <td><%= link_to enfant.prenom, enfant_path(enfant.id) %>
-			  <td><%= @presta.repas %></td>
 
 			  <td><%= check_box_tag(:"#{enfant.id}RepasAM", params[:"#{enfant.id}RepasAM"], @presta ? (@presta.repas !="0") : false, 
 				  { :onclick => "this.form.commit.click();" }) %></td>
