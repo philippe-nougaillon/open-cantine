@@ -33,3 +33,5 @@
 <%= link_to "Ajouter", :action => 'new' %>
 |
 <%= link_to "Retour", :action => 'setup', :controller => 'admin' %>
+
+

@@ -1,6 +1,6 @@
 <h3>Ajout d'un tarif</h3>
 
-<%= form_for(@tarif) do |f| %>
+<% form_for(@tarif) do |f| %>
 
   <%= render :partial => 'tarif', :locals => { :f => f } %>
   

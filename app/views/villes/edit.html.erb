@@ -33,14 +33,14 @@
 	      <dt><%=f.check_box :newsletter %> <%=f.label "Recevoir la newsletter openCantine ?" %></dt>
 		
 		<br><br>
-		<legend>Méthode de facturation</legend>
+		<legend>Facturation</legend>
 
 	 	<div class="span-22">
 		      <table class="sample">
 			 <tr>
-			    <th>Méthode</th>
-			    <th>Description</th>
-			    <th>Active?</th>
+			    <th>Nom</th>
+			    <th>Description du mode de facturation</th>
+			    <th>Actif?</th>
 			 </tr>
 			 <% for formule in Formule.all %>
 		  	   <tr>

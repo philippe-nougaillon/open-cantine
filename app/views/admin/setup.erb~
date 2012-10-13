@@ -10,13 +10,13 @@
 	<%= link_to "Utilisateurs", "#utilisateurs" %> |
 	<%= link_to "Données associées à ce compte", "#donnees" %> |
 	<%= link_to "Importer / Exporter des données", "#export" %> |
-	<%= link_to "Options Opencantine", "#options" %> |
+	<%= link_to "Options Opencantine", "#options" %> 
 	<br>	<br>
 </div>
 <br>
 <div>
    <div class="span-12">	
-	    <a name="coordonnees" />
+	    <a name="coordonnees"></a>
 	    <h3>Coordonnées</h3>
 
 	    <table class="sample">
@@ -50,10 +50,10 @@
     </div>
 <hr>
     <div class="span-12 last">	
-	    <a name="classes" />
-            <h3>Classes</h3>
+	    <a name="classes"></a>
+        <h3>Classes</h3>
 	    <table class="sample">
-		<th></th>
+		<th>Nom</th>
 		<th>Enseignant</th>
 		<th>Elèves</th>
 		 <% for c in @classrooms %>
@@ -69,52 +69,51 @@
     </div>
 <hr>
     <div class="span-24 last">	
-	    <a name="tarifs" />
+	    <a name="tarifs"></a>
 	    <h3>Tarifs</h3>
 	    <table class="sample">
 	     <tr>
-		<th></th>
-		<th></th>
-		<th>Repas</th>
-		<th>Garderie Matin</th>
-		<th>Garderie Après-midi</th>
-		<th>Centre Matin</th>
-		<th>Centre Après-midi</th>
-		<th>Centre Journée</th>
-		<th>Etude</th>
+			<th>Nom</th>
+			<th>Repas</th>
+			<th>Garderie Matin</th>
+			<th>Garderie Après-midi</th>
+			<th>Centre Matin</th>
+			<th>Centre Après-midi</th>
+			<th>Centre Journée</th>
+			<th>Etude</th>
 	      </tr>
 	      <% for tarif in @tarifs %>
-		<tr class="<%= cycle('list-line-even','list-line-odd')%>">
-		  <td><%=h tarif.memo %></td>
-		  <td id="sum"><%=h number_to_currency(tarif.RepasP, :unit => '') %> €</td>
-		  <td id="sum"><%=h number_to_currency(tarif.GarderieAMP, :unit => '') %> €</td>
-		  <td id="sum"><%=h number_to_currency(tarif.GarderiePMP, :unit => '') %> €</td>
-		  <td id="sum"><%=h number_to_currency(tarif.CentreAMP, :unit => '') %> €</td>
-		  <td id="sum"><%=h number_to_currency(tarif.CentrePMP, :unit => '') %> €</td>
-		  <td id="sum"><%=h number_to_currency(tarif.CentreAMPMP, :unit => '') %> €</td>
-		  <td id="sum"><%=h number_to_currency(tarif.Etude, :unit => '') %> €</td>
-		</tr>
-	      <% end -%>
+			<tr class="<%= cycle('list-line-even','list-line-odd')%>">
+			  <td><%=h tarif.memo %></td>
+			  <td id="sum"><%=h number_to_currency(tarif.RepasP, :unit => '') %> €</td>
+			  <td id="sum"><%=h number_to_currency(tarif.GarderieAMP, :unit => '') %> €</td>
+			  <td id="sum"><%=h number_to_currency(tarif.GarderiePMP, :unit => '') %> €</td>
+			  <td id="sum"><%=h number_to_currency(tarif.CentreAMP, :unit => '') %> €</td>
+			  <td id="sum"><%=h number_to_currency(tarif.CentrePMP, :unit => '') %> €</td>
+			  <td id="sum"><%=h number_to_currency(tarif.CentreAMPMP, :unit => '') %> €</td>
+			  <td id="sum"><%=h number_to_currency(tarif.Etude, :unit => '') %> €</td>
+			</tr>
+	      <% end %>
 	    </table>
 	    <%= link_to "Modifier", :controller => 'tarifs' if session[:user_readwrite] %> 
 	    <br>
-    	    <br>
+    	<br>
     </div>
 <hr>
     <div class="span-24">
-      <a name="formules" />
-      <h3>Formules</h3>
+      <a name="formules"></a>
+      <h3>Facturation</h3>
       <table class="sample">
          <tr>
-	    <th>Formules</th>
-            <th>Description de la formule de calcul utilisée lors de la facturation</th>
-            <th>Active?</th>
+	    <th>Nom</th>
+            <th>Description du mode de facturation</th>
+            <th>Actif?</th>
          </tr>
          <% for f in Formule.all %>
-  	   <tr  class="<%= cycle('list-line-even','list-line-odd')%>">
-             <td><%= f.nom  %></td>
-             <td><%= f.memo %></td>
-	     <td><%= 'Oui' if (@mairie.FacturationModuleName == f.module_name) %></td>
+	  	   <tr  class="<%= cycle('list-line-even','list-line-odd')%>">
+		         <td><%= f.nom  %></td>
+		         <td><%= f.memo %></td>
+			 <td><%= 'Oui' if (@mairie.FacturationModuleName == f.module_name) %></td>
            </tr>	 
          <% end %>
       </table>
@@ -123,11 +122,11 @@
     </div>
 <hr>
     <div class="span-24 last">	
-	<a name="vacances" />
+	<a name="vacances"></a>
 	<h3>Vacances</h3>
 	    <table class="sample">
 	      <tr>
-		<th style="color:black">Vacances</th>
+		<th>Nom</th>
 		<th>Débutent le</th>
 		<th>Se terminent le</th>
 	      </tr>
@@ -143,8 +142,9 @@
 	    <br><br>
     </div>
     <hr>
+
     <div class="span-24 last">	
-	<a name="utilisateurs" />
+	<a name="utilisateurs"></a>
 	<h3>Utilisateurs</h3>
 	    <table class="sample">
 	      <tr>
@@ -165,7 +165,7 @@
     </div>
     <hr>
 	<div class="span-24 last">	
-	   <a name="export" />
+	   <a name="export"></a>
 	   <h3>Exporter les données</h3>
       		<table class="sample">
 		<tr>
@@ -186,31 +186,30 @@
 	</td></tr>	 
       </table>
       <%= link_to "Importer données Familles et Enfants", :action => "import" %><br>
-      <%= link_to "Exporter les Familles et données liées (enfants, prestations) en XML", "/familles.xml" %><br>
-      <%= link_to "Exporter les Factures et données liées (lignes de factures) en XML", "/factures.xml" %><br>
-      <%= link_to "Exporter les Paiement en XML", "/paiements.xml" %>
+      <%= link_to "Export XML des Familles et données liées (enfants, prestations)", "/familles.xml" %><br>
+      <%= link_to "Export XML des Factures et données liées (lignes de factures)", "/factures.xml" %><br>
+      <%= link_to "Export XML des Paiement", "/paiements.xml" %>
       <br><br>
 	
     </div>
     <hr>
     <div class="span-24 last">
-       <a name="options" />
-       <h3>Options</h3>
+       <a name="options"></a>
+       <h3>Options disponibles</h3>
        <table class="sample">
-	 <tr>
-            <th style="color:black">Options disponibles</th>
+	   <tr>
+            <th>Nom</th>
        	    <th>Description</th>
-	    <th>Version PRO?</th>
-         </tr>
-	 <tr><td><%= link_to "Portail Parents", "http://demonstration.opencantine.fr/moncompte/famillelogin" %></td>
-	     <td>Pour la consultation en ligne par les parents des inscriptions et factures</td><td></td></tr>
-         <tr><td><%= link_to "Smartphones", "http://iphone.opencantine.fr/familles/login" %></td>
-	     <td>Pour une consultation de compte depuis un iPhone et autres smartphones</td><td></td></tr>
-         <tr><td>Hébergement</td><td>Prestation d'hébergement sous-domaine personnalisé (votreville.opencantine.fr)</td><td></td></tr>
-         <tr><td>Formule calcul personnalisée</td><td>Pour personnaliser vos règles de calcul de facturation</td><td>OUI</td></tr>
-	 <tr><td>Multi-Utilisateurs</td><td>Permet l'ajout illimité d'utilisateurs pour la consultation (Lecture/Ecriture)</td><td>OUI</td></tr>
+        </tr>
+	     <tr><td>Portail Parents</td>
+	     <td>Consultation en ligne par les parents des inscriptions et factures. Paiement factures par PayPal.</td></tr>
+         <tr><td>Smartphones</td>
+	     <td>Accès au portail parents depuis un iPhone et autres smartphones</td></tr>
+         <tr><td>Hébergement</td><td>Prestation d'hébergement avec infogérance</td></tr>
+         <tr><td>Formule calcul personnalisée</td><td>Pour personnaliser les règles de calcul de votre facturation</td></tr>
+	 	 <tr><td>Multi-Utilisateurs</td>
+		 <td>Permet l'ajout illimité d'utilisateurs pour la consultation et/ou la modification des données</td></tr>
        </table>
-       * Option disponible dans la version 'Pro'. <a href="mailto:philippe.nougaillon@capcod.com">Consultez-nous</a> 
-       <br>
+       <br><br>
     </div>
 </div>
