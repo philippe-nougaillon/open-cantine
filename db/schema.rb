@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120911103715) do
+ActiveRecord::Schema.define(:version => 20121022083846) do
 
   create_table "blogs", :force => true do |t|
     t.string   "titre"
@@ -205,6 +205,9 @@ ActiveRecord::Schema.define(:version => 20120911103715) do
     t.integer  "counter"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "done",        :default => false
+    t.integer  "mairie_id"
+    t.string   "note"
   end
 
   create_table "users", :force => true do |t|

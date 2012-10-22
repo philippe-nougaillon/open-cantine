@@ -1,18 +1,20 @@
-<%= form_for(@todo) do |f| %>
+<table>
+	<% for todo in @todos %>
+	  <tr>
+ 	    <td><%=h todo.description %></td>
+		<td><%= image_tag "ok.jpeg" if todo.done %></td>
+		<td><%=h todo.note %></td>
+	    <td><%= link_to "edit", :action => "editthewish", :id => todo.id %></td>
+	  </tr>
+	<% end %>
+</table>
 
-  <% @todo.errors.full_messages.each do |msg| %>
-      <p><%= msg %></p>
-  <% end %>
+<%= simple_form_for(@todo) do |f| %>
 
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
+    <%= f.input :done %>
+    <%= f.input :description, :as => :text %>
+    <%= f.input :note, :as => :text %>
+    <%= f.submit '' %>
+
 <% end %>
 
-<%= link_to 'Show', @todo %> |
-<%= link_to "Delete", @todo, :confirm => "Really??",  :method => :delete %> |
-<%= link_to 'Back', todos_path %>

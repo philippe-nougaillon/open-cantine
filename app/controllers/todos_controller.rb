@@ -7,7 +7,7 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.xml
   def index
-    @todos = Todo.find(:all, :order => "counter DESC")
+    @todos = Todo.find(:all, :order => "done DESC, id")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -51,7 +51,23 @@ class TodosController < ApplicationController
   end
 
   def editthewish
+    @todos = Todo.find(:all, :order => "done DESC, id")
     @todo = Todo.find(params[:id])
+  end
+
+  def update
+    @todo = Todo.find(params[:id])
+
+    respond_to do |format|
+      if @todo.update_attributes(params[:todo])
+        flash[:notice] = 'edit the wish ok'
+        format.html { redirect_to :action => 'editthewish', :id => 1  }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "editthewish" }
+        format.xml  { render :xml => @todo.errors, :status => :unprocessable_entity }
+      end
+    end
   end
  	
   def destroy
@@ -65,6 +81,7 @@ class TodosController < ApplicationController
   def create
     @todo = Todo.new(params[:todo])
     @todo.counter = 1	
+	@todo.mairie_id = session[:mairie]
 
     respond_to do |format|
       if @todo.save

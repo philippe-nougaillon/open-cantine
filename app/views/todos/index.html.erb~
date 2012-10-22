@@ -1,29 +1,28 @@
 <br><br><br>
 
-<strong>Vous souhaitez une nouvelle fonctionnalité ?</strong> 
-<br>
-Décrivez-la le plus simplement possible, en quelques mots.<br>
-Si votre idée est bonne, nous la développerons rapidement pour en faire profiter toute la communauté openCantine.
-<br>
-Merci
-<br><br>
-
-
 <table>
   <tr>
-    <th>Description</th>
-    <th>Votes</th>
+	<th>Description</th>
+	<th>Fait?</th>
+	<th>Note</th>
   </tr>
 
-<% for todo in @todos %>
-  <tr>
-    <td><%=h todo.description %></td>
-    <td><%=h todo.counter %></td>
-    <td><%= link_to "J'aime (+1)", todo %></td>
-  </tr>
-<% end %>
+	<% for todo in @todos %>
+	  <tr>
+		<% if todo.done %>
+		   <td><%=h todo.description %></td>
+		<% else %>
+		   <td><b><%=h todo.description %></b></td>
+		<% end %>
+		<td><%= image_tag "ok.jpeg" if todo.done %></td>
+		<td><%=h todo.note %></td>
+	  </tr>
+	<% end %>
 </table>
 
 <br />
-
+<strong>Vous souhaitez une nouvelle fonctionnalité ?</strong> 
+<br>
+Décrivez-la simplement en quelques mots et nous la développerons pour en faire profiter toute la communauté openCantine.
+<br>
 <%= link_to 'Ajouter', new_todo_path %>
