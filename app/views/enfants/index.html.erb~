@@ -31,8 +31,8 @@
       <% classroom = Classroom.find_by_id(enfant.classe) %>
       <td><b><%=link_to famille.nom, :controller => 'familles', :action => 'show', :id => enfant.famille_id %></b></td>
       <td><b><%=link_to enfant.prenom, enfant %></b></td>
-      <td><%=h classroom.nom %></td>
-      <td><%=h classroom.referant %></td>
+      <td><%=h classroom.nom if classroom.nom %></td>
+      <td><%=h classroom.referant classroom.referant %></td>
       <td><%=h enfant.dateNaissance %></td>
       <td style="text-align:right"><%=h enfant.age %></td>
       <td><% if enfant.sansPorc %>Sans Porc. <% end %> <% if enfant.allergies %>Allergies.<% end %></td>
@@ -45,6 +45,6 @@
   <% end %>
 </table>
 <br>
-<%= will_paginate @enfants %>
+<%= will_paginate @enfants, :previous_label => "Prédédent", :next_label => "Suivant" %>
 <br>
 

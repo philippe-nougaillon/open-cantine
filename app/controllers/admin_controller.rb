@@ -126,11 +126,6 @@ class AdminController < ApplicationController
     @tarifsNom = ["","Normal","Famille","Majoré"]
     @vacances = Vacance.find(:all, :conditions => ["mairie_id = ?",session[:mairie]], :order => 'debut')
     @enfants= Enfant.find_by_sql("SELECT id FROM enfants WHERE famille_id IN (SELECT id FROM familles WHERE mairie_id= #{session[:mairie]} )")
-
-    #@prestations = Prestation.find_by_sql("SELECT id FROM prestations WHERE enfant_id IN (0 #{ @enfants.map{|e| ',' + e.id.to_s } })")
-	#@prestations = Ville.find(mairie).enfants.prestations.all
-
-    @prestations =[]
   end
 
   def show_facturation_module

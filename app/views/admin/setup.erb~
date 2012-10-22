@@ -8,8 +8,7 @@
 	<%= link_to "Formules", "#formules" %> |
 	<%= link_to "Vacances", "#vacances" %> |
 	<%= link_to "Utilisateurs", "#utilisateurs" %> |
-	<%= link_to "Données associées à ce compte", "#donnees" %> |
-	<%= link_to "Importer / Exporter des données", "#export" %> |
+	<%= link_to "Importer/Exporter les données", "#export" %> |
 	<%= link_to "Options Opencantine", "#options" %> 
 	<br>	<br>
 </div>

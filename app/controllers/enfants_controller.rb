@@ -36,6 +36,7 @@ class EnfantsController < ApplicationController
   # GET /enfants/1.xml
   def show
     @enfant = Enfant.find(params[:id])
+	@classroom = Classroom.find_by_id(@enfant.classe)
     if params[:facturees] == 'on'
        @prestations = @enfant.prestations.facturees	
     else

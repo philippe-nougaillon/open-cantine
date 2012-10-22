@@ -1,9 +1,5 @@
 <div id="form_actions">
-  <hr>	
-  <div id="adroite"> 	
-       <%= link_to "Inscription Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :year => Date.today.year, :id  => @enfant.id %>  |
-       <%= link_to "Inscription Automatique", :controller => 'prestations', :action => 'new', :enfant_id  => @enfant.id %>  |
-	</div>
+  
 </div>
 
 <br>
