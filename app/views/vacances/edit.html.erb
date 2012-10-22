@@ -1,35 +1,22 @@
-<h4>Modifier dates de vacances scolaires</h4>
+<div class="span-12 last">
+	<br><br>
 
-<%= form_for(@vacance) do |f| %>
-  <% @vacance.errors.full_messages.each do |msg| %>
-      <p><%= msg %></p>
-  <% end %>
-  <table class="form">
-    <tr>
-      <td id="label">Période</td>
-      <td><%= f.text_field :nom %></td>
-    </tr>
-    <tr>
-      <td id="label">Début</td>
-      <td>
-        <%= calendar_date_select_includes nil,:locale=>'fr' %>
-        <% CalendarDateSelect.format=(:finnish )%>
-        <%= f.calendar_date_select :debut, :time => false, :size => 10 %>
-      </td>
-    </tr>
-    <tr>
-      <td id="label">Fin</td>
-      <td><%= f.calendar_date_select :fin, :time => false, :size => 10 %></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td>
-         <div style="margin-top:10px;">
-            <%= image_submit_tag "valider.gif" %>
-         </div>
-      </td>
-    </tr>
-  </table>
+	<h4>Modification d'une période de vacances</h4>
 
-<% end %>
+	<%= simple_form_for(@vacance) do |f| %>
+	 
+	 <% @vacance.errors.full_messages.each do |msg| %>
+       <p><%= msg %></p>
+     <% end %>
+
+	 <%= f.input :nom %>
+	 <%= f.input :debut, :as => :string, :input_html => { :class => 'date_picker' } %>
+	 <%= f.input :fin,   :as => :string, :input_html => { :class => 'date_picker' } %>
+
+     <div style="margin-top:10px;">
+		 <%= image_submit_tag "valider.gif" %>
+	 </div>
+	<% end %>
+</div>
+
 

@@ -1,6 +1,6 @@
 <h4>Modifier dates de vacances scolaires</h4>
 
-<% form_for(@vacance) do |f| %>
+<%= form_for(@vacance) do |f| %>
   <% @vacance.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>
   <% end %>
