@@ -1,5 +1,5 @@
 <h2>Guide d'utilisation</h2>
-<h3>Sommaire<h3>
+<h3>Sommaire</h3>
 <ul>
 	<li><a href="#prez">Présentation de l'application</a></li>
 	<li><a href="#compte">Créer un compte OpenCantine</a></li>
@@ -123,7 +123,7 @@ OpenCantine se présente sous la forme de 5 onglets, Familles, Enfants, Prestati
 <a name="compte"></a>
 <hr><h2>Créer un compte OpenCantine</h2>
 <p>
-	Pour cr&eacute;er un compte, rendez-vous sur <a href="http://demonstration.opencantine.fr/nouveau">demonstration.opencantine.fr/nouveau</a></p>
+	Pour cr&eacute;er un compte, rendez-vous sur <a href="http://demonstration.opencantine.net/nouveau">demonstration.opencantine.fr/nouveau</a></p>
 <p>
 	&nbsp;</p>
 <p>
@@ -495,26 +495,51 @@ OpenCantine se présente sous la forme de 5 onglets, Familles, Enfants, Prestati
 	Ceci peut &ecirc;tre fait automatiquement, simplement en cliquant que la date situ&eacute;e en haut &agrave; gauche du bordereau. La date du jour sera alors enregistr&eacute;e pour chaque ch&egrave;que de la liste.</p>
 
 <a name="portail"></a>
-<hr><h2>Portail Parents (en construction)</h2>
+<hr><h2>Portail Parents</h2>
 <p>
-	Les familles peuvent consulter leur rel&eacute;v&eacute; de compte ansi que les r&eacute;servations en cours.</p>
+	Les familles peuvent consulter leur rel&eacute;v&eacute; de compte ansi que les r&eacute;servations en cours. Avec Paypal, les parents peuvent payer facilement leurs factures, il suffit de configurer une compte vendeur pour que votre association puisse recevoir l'argent.</p>
 <p>
-	L&#39;acc&egrave;s au site sp&eacute;cial &#39;Familles&#39; se fait en allant sur <a href="http://demonstration.opencantine.fr/moncompte/famillelogin">demonstration.opencantine.fr/moncompte/famillelogin</a></p>
+	L&#39;acc&egrave;s au site sp&eacute;cial &#39;Familles&#39; se fait en allant sur <a href="http://demonstration.opencantine.net/moncompte/famillelogin">demonstration.opencantine.net/moncompte/famillelogin</a></p>
 <p>
 	Suivre ensuite les instructions pr&eacute;sentes &agrave; l&#39;&eacute;cran.</p>
 <p>
 	&nbsp;</p>
-
-<hr><h2>iPhone & smartphones</h2>
-<p>
-	Pour consulter le relev&eacute; de compte ainsi que les r&eacute;servations directement depuis votre iPhone, rendez-vous sur <a href="http://iphone.opencantine.fr">iphone.opencantine.fr</a></p>
-<p>
-	Un identifiant (g&eacute;n&eacute;ralement votre adresse email) et un mot de passe vous seront demand&eacute;s. Le mot de passe est celui qui vous a &eacute;t&eacute; attribu&eacute; pour la consultation en ligne de votre compte.</p>
-
 <hr>
+<h2>
+	Installation d&#39;openCantine sur un serveur linux debian</h2>
+<p><strong>1/ Installation des d&eacute;pendances au framework Ruby on Rails</strong></p>
+<p>sudo apt-get install ruby1.9.1-full<br />
+	sudo apt-get install ruby1.9.1.dev<br />
+	sudo apt-get install build-essential libopenssl-ruby1.9.1 libssl-dev zlib1g-dev<br />
+	sudo apt-get install mysql-server<br />
+	sudo apt-get install mysql-devel<br />
+	sudo apt-get install mysql-dev<br />
+	sudo apt-get install mysql-client libmysqlclient-dev<br />
+	sudo apt-get install git<br />
+	sudo apt-get install curl</p>
+<p><strong>2/ Installation du framework Ruby on Rails</strong></p>
+<p>sudo gem install rails<br />
+	sudo gem install therubyracer</p>
+<p><strong>3/ R&eacute;cup&eacute;ration du convertiseur html to PDF</strong></p>
+<p>curl -C - -O http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2<br />
+	tar xvjf wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2<br />
+	sudo cp wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf</p>
+<p><strong>4/ R&eacute;cup&eacute;ration des sources depuis la forge Adullact</strong></p>
+<p>git clone https://adullact.net/anonscm/git/opencantine/opencantine.git<br />
+	cd opencantine<br />
+	bundle<br />
+	rake db:migrate</p>
+<p><strong>5/ Lance le serveur web </strong></p>
+<p>rails s</p>
+<p><strong>6/ Et voil&agrave; !</strong></p>
+<p>rendez-vous sur localhost:3000</p>
+<p>&nbsp;</p>
+<p><strong>Veuillez ensuite &agrave; maintenir votre version d&#39;openCantine &agrave; jour. </strong></p>
+<p><strong>Pour r&eacute;cup&eacute;rer les mises &agrave; jour depuis la forge adullact</strong> :</p>
+<p>git pull<br />
+
 <br>
 <h3 style="color:#df2599">Vos commentaires sont les bienvenus et m'aident à améliorer l'application...</h3>
-<br>
 <%= link_to "philippe.nougaillon@gmail.com", "mailto:philippe.nougaillon@gmail.com" %>
 <br><br><br>
 
