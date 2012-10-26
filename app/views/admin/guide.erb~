@@ -533,7 +533,6 @@ OpenCantine se présente sous la forme de 5 onglets, Familles, Enfants, Prestati
 <p>rails s</p>
 <p><strong>6/ Et voil&agrave; !</strong></p>
 <p>rendez-vous sur localhost:3000</p>
-<p>&nbsp;</p>
 <p><strong>Veuillez ensuite &agrave; maintenir votre version d&#39;openCantine &agrave; jour. </strong></p>
 <p><strong>Pour r&eacute;cup&eacute;rer les mises &agrave; jour depuis la forge adullact</strong> :</p>
 <p>git pull<br />
