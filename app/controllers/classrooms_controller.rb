@@ -15,8 +15,7 @@ class ClassroomsController < ApplicationController
   # GET /classrooms
   # GET /classrooms.xml
   def index
-    @classrooms = Classroom.find(:all, :conditions => ["mairie_id = ?",session[:mairie]], :order => 'nom')
-
+    @classrooms = Classroom.find_all_by_mairie_id(session[:mairie], :order => 'nom')
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @classrooms }

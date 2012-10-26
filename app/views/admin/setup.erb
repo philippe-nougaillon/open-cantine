@@ -1,20 +1,22 @@
 <br>
 <h3>Vos paramètres</h3>
 
-<div id="form_actions">
-	<%= link_to "Coordonnées", "#coordonnees" %> |
-	<%= link_to "Classes", "#classes" %> |
-	<%= link_to "Tarifs", "#tarifs" %> |
-	<%= link_to "Formules", "#formules" %> |
-	<%= link_to "Vacances", "#vacances" %> |
-	<%= link_to "Utilisateurs", "#utilisateurs" %> |
-	<%= link_to "Importer/Exporter les données", "#export" %> |
-	<%= link_to "Options Opencantine", "#options" %> 
-	<br>	<br>
+<div class="span-16 last">	
+	<div id="form_actions">
+		| 
+		<%= link_to "Coordonnées", "#coordonnees" %> |
+		<%= link_to "Classes", "#classes" %> |
+		<%= link_to "Tarifs", "#tarifs" %> |
+		<%= link_to "Formules", "#formules" %> |
+		<%= link_to "Vacances", "#vacances" %> |
+		<%= link_to "Utilisateurs", "#utilisateurs" %> |
+		<%= link_to "Importer/Exporter les données", "#export" %> |
+	</div>
+	<br>
 </div>
-<br>
+<hr>
 <div>
-   <div class="span-12">	
+   <div class="span-12 last">	
 	    <a name="coordonnees"></a>
 	    <h3>Coordonnées</h3>
 
@@ -66,10 +68,11 @@
 	    <%= link_to "Modifier", :controller => 'classrooms' if session[:user_readwrite] %>
 	    <p></p>
     </div>
-<hr>
+	<hr>
     <div class="span-24 last">	
 	    <a name="tarifs"></a>
 	    <h3>Tarifs</h3>
+		<small>Ces tarifs pourront être attribués aux familles ou aux enfants pour leur appliquer un tarif particulier.</small>
 	    <table class="sample">
 	     <tr>
 			<th>Nom</th>
@@ -98,10 +101,11 @@
 	    <br>
     	<br>
     </div>
-<hr>
+	<hr>
     <div class="span-24">
       <a name="formules"></a>
       <h3>Facturation</h3>
+	  <small>Choisissez comment seront calculées vos factures. Si vous souhaitez un mode de facturation personnalisé, <a href="mailto:philippe.nougaillon@gmail.com">contactez-moi</a>. </small>
       <table class="sample">
          <tr>
 	    <th>Nom</th>
@@ -112,7 +116,7 @@
 	  	   <tr  class="<%= cycle('list-line-even','list-line-odd')%>">
 		         <td><%= f.nom  %></td>
 		         <td><%= f.memo %></td>
-			 <td><%= 'Oui' if (@mairie.FacturationModuleName == f.module_name) %></td>
+			 <td><%= image_tag "ok.jpeg" if (@mairie.FacturationModuleName == f.module_name) %></td>
            </tr>	 
          <% end %>
       </table>
@@ -120,21 +124,21 @@
       <br><br>	
     </div>
 <hr>
-    <div class="span-24 last">	
+    <div class="span-18 last">	
 	<a name="vacances"></a>
 	<h3>Vacances</h3>
 	    <table class="sample">
 	      <tr>
-		<th>Nom</th>
-		<th>Débutent le</th>
-		<th>Se terminent le</th>
+			<th>Nom</th>
+			<th>Débutent le</th>
+			<th>Se terminent le</th>
 	      </tr>
 	      <% for vacance in @vacances %>
-		<tr class="<%= cycle('list-line-even','list-line-odd')%>">
-		  <td><%=h vacance.nom %></td>
-		  <td><%=h vacance.debut.to_s(:fr) %></td>
-		  <td><%=h vacance.fin.to_s(:fr) %></td>
-		</tr>
+			<tr class="<%= cycle('list-line-even','list-line-odd')%>">
+			  <td><%=h vacance.nom %></td>
+			  <td><%=h vacance.debut.to_s(:fr) %></td>
+			  <td><%=h vacance.fin.to_s(:fr) %></td>
+			</tr>
 	      <% end -%>
 	    </table>
 	    <%= link_to 'Modifier', vacances_url %>
@@ -142,15 +146,16 @@
     </div>
     <hr>
 
-    <div class="span-24 last">	
+    <div class="span-18 last">	
 		<a name="utilisateurs"></a>
 		<h3>Utilisateurs</h3>
+		<small>Plusieurs utilisateurs peuvent travailler simultanément sur un compte openCantine et lire et/ou modifier les données.</small>
 		<table class="sample">
 	      <tr>
-			<th style="color:black">Utilisateurs</th>
+			<th />
 			<th>Nom</th>
 			<th>Droits</th>
-			<th>Connecté le</th>
+			<th>Dernière connexion le</th>
 		   </tr>
 		   <% for u in @users %>
 			  <tr class="<%= cycle('list-line-even','list-line-odd')%>">
@@ -162,9 +167,11 @@
        	   <% end -%>
 	    </table>
 		<%= link_to "Modifier", :action => "users_admin" %> 
-    </div>
+		<br><br>    
+	</div>
+	
     <hr>
-	<div class="span-24 last">	
+	<div class="span-18 last">	
 	   <a name="export"></a>
 	   <h3>Exporter les données</h3>
       		<table class="sample">

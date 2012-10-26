@@ -119,16 +119,16 @@ class AdminController < ApplicationController
   def setup
     mairie = session[:mairie]
     @mairie = Ville.find(mairie)
-    @classrooms = Classroom.find(:all, :conditions => ["mairie_id = ?",mairie], :order => 'nom')
-    @tarifs = Tarif.find_all_by_mairie_id(mairie)
-    @users = User.find_all_by_mairie_id(mairie)
+    @classrooms = Classroom.find_all_by_mairie_id(mairie, :order => 'nom')
+    @tarifs = Tarif.find_all_by_mairie_id(mairie, :order => "memo")
+    @users = User.find_all_by_mairie_id(mairie, :order => "username")
     @facture_chrono = FactureChrono.find_by_mairie_id(mairie)
-    @vacances = Vacance.find(:all, :conditions => ["mairie_id = ?",session[:mairie]], :order => 'debut')
+    @vacances = Vacance.find_all_by_mairie_id(mairie, :order => 'debut')
     @enfants= Enfant.find_by_sql("SELECT id FROM enfants WHERE famille_id IN (SELECT id FROM familles WHERE mairie_id= #{session[:mairie]} )")
   end
 
   def users_admin
-    @users = User.find_all_by_mairie_id(session[:mairie])
+	@users = User.find_all_by_mairie_id(session[:mairie], :order => "username")
   end
 
   def user_add

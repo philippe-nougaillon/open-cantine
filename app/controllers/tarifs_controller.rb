@@ -14,7 +14,7 @@ class TarifsController < ApplicationController
   # GET /tarifs
   # GET /tarifs.xml
   def index
-    @tarifs = Tarif.find(:all,:conditions => ["mairie_id = ?",session[:mairie]], :order => "type_id")
+    @tarifs = Tarif.find_all_by_mairie_id(session[:mairie], :order => "memo")
 
     respond_to do |format|
       format.html # index.html.erb
