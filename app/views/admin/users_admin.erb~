@@ -1,6 +1,5 @@
 <br>
-<div class="span-24 last">	
-	<a name="utilisateurs"></a>
+<div class="span-18 last">	
 	<h3>Utilisateurs</h3>
 	<table class="sample">
       <tr>
@@ -16,14 +15,13 @@
 			<td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
 			<td><%= u.lastconnection.to_s(:fr) %> </td>
 		</tr>
-   	   <% end -%>
+   	   <% end %>
     </table>
 	<br>
 	<h3>Ajouter</h3>
 	<%= simple_form_for(User.new, :url => 'user_add') do |f| %>
-		<%= f.input :username , :label => "Utilisateur", :hint => "généralement son adresse email" %>
+		<%= f.input :username , :label => "Utilisateur", :hint => "généralement son adresse email. Sert aussi de mot de passe" %>
 		<%= f.input :readwrite, :label => "Lecture + Ecriture", :hint => "cet utilisateur peut modifier les données ?" %>
-		<br>
 		<%= f.submit '' %>
 	<% end %>
 </div>
