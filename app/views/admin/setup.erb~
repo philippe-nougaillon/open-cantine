@@ -161,6 +161,7 @@
 		  </tr>
 	       <% end -%>
 	    </table>
+		<%= link_to "Modifier", :action => "users_admin" %> 
     </div>
     <hr>
 	<div class="span-24 last">	
@@ -171,7 +172,6 @@
 		<th style="color:black">Données associées à ce compte</th>
 		<th>Familles</th>
 		<th>Enfants</th>
-		<th>Prestations</th>
 		<th>Factures</th>
 		<th>Paiements</th>
 	</tr>
@@ -179,7 +179,6 @@
 	    <td></td>
 	    <td><b><%= Famille.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
 	    <td><b><%= @enfants.count %></b></td>
-	    <td><b><%= @prestations.count %></b></td>
 	    <td><b><%= Facture.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
 	    <td><b><%= Paiement.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td> 
 	</td></tr>	 
@@ -192,23 +191,4 @@
 	
     </div>
     <hr>
-    <div class="span-24 last">
-       <a name="options"></a>
-       <h3>Options disponibles</h3>
-       <table class="sample">
-	   <tr>
-            <th>Nom</th>
-       	    <th>Description</th>
-        </tr>
-	     <tr><td>Portail Parents</td>
-	     <td>Consultation en ligne par les parents des inscriptions et factures. Paiement factures par PayPal.</td></tr>
-         <tr><td>Smartphones</td>
-	     <td>Accès au portail parents depuis un iPhone et autres smartphones</td></tr>
-         <tr><td>Hébergement</td><td>Prestation d'hébergement avec infogérance</td></tr>
-         <tr><td>Formule calcul personnalisée</td><td>Pour personnaliser les règles de calcul de votre facturation</td></tr>
-	 	 <tr><td>Multi-Utilisateurs</td>
-		 <td>Permet l'ajout illimité d'utilisateurs pour la consultation et/ou la modification des données</td></tr>
-       </table>
-       <br><br>
-    </div>
 </div>

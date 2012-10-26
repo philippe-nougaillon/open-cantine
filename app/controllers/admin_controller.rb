@@ -120,12 +120,32 @@ class AdminController < ApplicationController
     mairie = session[:mairie]
     @mairie = Ville.find(mairie)
     @classrooms = Classroom.find(:all, :conditions => ["mairie_id = ?",mairie], :order => 'nom')
-    @tarifs = Tarif.find(:all,:conditions => ["mairie_id = ?",mairie])
-    @users = User.find(:all,:conditions => ["mairie_id = ?",mairie])
+    @tarifs = Tarif.find_all_by_mairie_id(mairie)
+    @users = User.find_all_by_mairie_id(mairie)
     @facture_chrono = FactureChrono.find(:first, :conditions => ["mairie_id = ?",mairie])
     @tarifsNom = ["","Normal","Famille","Majoré"]
     @vacances = Vacance.find(:all, :conditions => ["mairie_id = ?",session[:mairie]], :order => 'debut')
     @enfants= Enfant.find_by_sql("SELECT id FROM enfants WHERE famille_id IN (SELECT id FROM familles WHERE mairie_id= #{session[:mairie]} )")
+  end
+
+  def users_admin
+    @users = User.find_all_by_mairie_id(session[:mairie])
+  end
+
+  def user_add
+	@user = User.new(params[:user])
+    @user.mairie_id = session[:mairie]
+	@user.lastconnection = Date.today
+	@user.lastchange = Date.today
+	@user.password_hash = @user.username
+
+    if @user.save
+      flash[:notice] = "Utilisateur ajouté."
+    else
+      flash[:warning] = "Erreur! Cet utilisateur existe déjà"
+    end
+    redirect_to :action => "users_admin"
+
   end
 
   def show_facturation_module

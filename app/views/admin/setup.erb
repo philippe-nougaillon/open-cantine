@@ -143,24 +143,25 @@
     <hr>
 
     <div class="span-24 last">	
-	<a name="utilisateurs"></a>
-	<h3>Utilisateurs</h3>
-	    <table class="sample">
+		<a name="utilisateurs"></a>
+		<h3>Utilisateurs</h3>
+		<table class="sample">
 	      <tr>
-		<th style="color:black">Utilisateurs</th>
-		<th>Nom</th>
-		<th>Droits</th>
-		<th>Connecté le</th>
-	      </tr>
-	       <% for u in @users %>
-		  <tr class="<%= cycle('list-line-even','list-line-odd')%>">
-		    <td><%= image_tag avatar_url(u) %></td>
-		    <td><b><%= u.username[0..30] %></b></td>
-		    <td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
-		    <td><%= u.lastconnection.to_s(:fr) %> </td>
-		  </tr>
-	       <% end -%>
+			<th style="color:black">Utilisateurs</th>
+			<th>Nom</th>
+			<th>Droits</th>
+			<th>Connecté le</th>
+		   </tr>
+		   <% for u in @users %>
+			  <tr class="<%= cycle('list-line-even','list-line-odd')%>">
+				<td><%= image_tag avatar_url(u) %></td>
+				<td><b><%= u.username[0..30] %></b></td>
+				<td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
+				<td><%= u.lastconnection.to_s(:fr) %> </td>
+			</tr>
+       	   <% end -%>
 	    </table>
+		<%= link_to "Modifier", :action => "users_admin" %> 
     </div>
     <hr>
 	<div class="span-24 last">	
@@ -190,23 +191,4 @@
 	
     </div>
     <hr>
-    <div class="span-24 last">
-       <a name="options"></a>
-       <h3>Options disponibles</h3>
-       <table class="sample">
-	   <tr>
-            <th>Nom</th>
-       	    <th>Description</th>
-        </tr>
-	     <tr><td>Portail Parents</td>
-	     <td>Consultation en ligne par les parents des inscriptions et factures. Paiement factures par PayPal.</td></tr>
-         <tr><td>Smartphones</td>
-	     <td>Accès au portail parents depuis un iPhone et autres smartphones</td></tr>
-         <tr><td>Hébergement</td><td>Prestation d'hébergement avec infogérance</td></tr>
-         <tr><td>Formule calcul personnalisée</td><td>Pour personnaliser les règles de calcul de votre facturation</td></tr>
-	 	 <tr><td>Multi-Utilisateurs</td>
-		 <td>Permet l'ajout illimité d'utilisateurs pour la consultation et/ou la modification des données</td></tr>
-       </table>
-       <br><br>
-    </div>
 </div>

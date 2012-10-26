@@ -2,8 +2,11 @@
 
 class User < ActiveRecord::Base
 
+  attr_protected :id
+
   belongs_to :ville
   validates_presence_of :username
+  validates_uniqueness_of :username
 
 
   # TODO : scope mairie_id
@@ -17,9 +20,9 @@ class User < ActiveRecord::Base
   def self.authenticate(username, password)
     user = User.find_by_username(username)
     if user.blank? || password  != user.password_hash
-      return nil
+       return nil
     else
-      return user
+       return user
     end
   end
 
