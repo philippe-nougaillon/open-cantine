@@ -1,9 +1,11 @@
 task :rehash_users => :environment do
 	@users = User.all
 	@users.each do | u |
-		u.password= u.password_hash
-		u.save
-		puts u.password_hash
+		if u.username
+			u.password= u.username
+			u.save
+			puts u.id
+		end 
 	end
 end
 
