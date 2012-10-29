@@ -7,6 +7,7 @@
 			<th>Nom</th>
 			<th>Droits</th>
 			<th>Connecté le</th>
+			<th>Mot de passe changé le</th>
 	   </tr>
 	   <% for u in @users %>
 		  <tr class="<%= cycle('list-line-even','list-line-odd')%>">
@@ -14,15 +15,20 @@
 			<td><b><%= u.username[0..30] %></b></td>
 			<td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
 			<td><%= u.lastconnection.to_s(:fr) %> </td>
+			<td><%= u.lastchange.to_s(:fr) %></td>
 		</tr>
    	   <% end %>
     </table>
 	<br>
-	<h3>Ajouter</h3>
+	<hr>
+	<h3>Ajouter un utilisateur</h3>
 	<%= simple_form_for(User.new, :url => 'user_add') do |f| %>
-		<%= f.input :username , :label => "Utilisateur", :hint => "généralement son adresse email. Sert aussi de mot de passe" %>
-		<%= f.input :readwrite, :label => "Lecture + Ecriture", :hint => "cet utilisateur peut modifier les données ?" %>
+		<%= f.input :username , :label => "Utilisateur", :hint => "Généralement son adresse email." %>
+		<%= f.input :password, :label => "Mot de passe", :required => true %>
+		<%= f.input :readwrite, :label => "Lecture + Ecriture ?", :hint => "Cet utilisateur peut modifier les données ?" %>
 		<%= f.submit '' %>
 	<% end %>
+	<br>
+	<br>
 </div>
 

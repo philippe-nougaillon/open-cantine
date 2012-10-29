@@ -1,41 +1,16 @@
 <div class="span-14 last">
 	<br><br>
 
-	<h3>Modifier compte utilisateur</h3>
+	<h3>Changer de mot de passe</h3>
 	<br>
-	<%= form_for(@user, :url => { :action => 'user_update' }) do |f| %>
 
-		<table class="form">
-		  <tr>
-		    <td id="label"><%= f.label "Utilisateur" %> </td>
-		    <td><%= f.text_field :username, :size => 30, :disabled => true %></td>
-		  </tr>
-		  <tr>
-		    <td id="label"><%= f.label 'Mot de passe' %> </td>
-		    <td><%= password_field_tag :password %></td>
-		  </tr>
-		  <tr>
-		    <td id="label"><%= f.label 'Droits' %> </td>
-		    <td>Lecture<% if session[:user_readwrite] %>+Ecriture <% end %></td>
-		  </tr>
-		  <tr>
-		    <td id="label">Dernière connexion le</td>
-		    <td><%= @user.lastconnection.to_s(:fr) %></td>
-		  </tr>
-		    <tr>
-		    <td id="label">Mot de passe changé le</td>
-		    <td><%= @user.lastchange.to_s(:fr) %></td>
-		  </tr>
-		  <tr>
-		     <td></td>
-		     <td>
-		       <div style="margin-top:10px;">
-			  <%= image_submit_tag "valider.gif" %>
-		       </div>
-		     </td>
-		   </tr>
-		</table>
+	<%= simple_form_for(@user, :url => 'user_update') do |f| %>
 
+		<%= f.input :username , :label => "Utilisateur", :disabled => true %>
+		<%= f.input :password, :label => "Mot de passe", :required => true %>
+		<%= f.submit '' %>
+			
 	<% end %>
+
 </div>
 

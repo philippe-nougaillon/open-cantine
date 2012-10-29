@@ -141,7 +141,9 @@
 			</tr>
 	      <% end -%>
 	    </table>
-	    <%= link_to 'Modifier', vacances_url %>
+		<% if session[:user_readwrite] %>
+		    <%= link_to 'Modifier', vacances_url %>
+		<% end %>
 	    <br><br>
     </div>
     <hr>
@@ -155,7 +157,7 @@
 			<th />
 			<th>Nom</th>
 			<th>Droits</th>
-			<th>Connecté le</th>
+			<th>Dernière connexion le</th>
 		   </tr>
 		   <% for u in @users %>
 			  <tr class="<%= cycle('list-line-even','list-line-odd')%>">
@@ -166,36 +168,39 @@
 			</tr>
        	   <% end -%>
 	    </table>
-		<%= link_to "Modifier", :action => "users_admin" %> 
+		<% if session[:user_readwrite] %>
+			<%= link_to "Modifier", :action => "users_admin" %>
+		<% end %> 
 		<br><br>    
 	</div>
-	
-    <hr>
-	<div class="span-18 last">	
-	   <a name="export"></a>
-	   <h3>Exporter les données</h3>
-      		<table class="sample">
+	<% if session[:user_readwrite] %>
+		<hr>
+		<div class="span-18 last">	
+		   <a name="export"></a>
+		   <h3>Exporter les données</h3>
+		  		<table class="sample">
+			<tr>
+			<th style="color:black">Données associées à ce compte</th>
+			<th>Familles</th>
+			<th>Enfants</th>
+			<th>Factures</th>
+			<th>Paiements</th>
+		</tr>
 		<tr>
-		<th style="color:black">Données associées à ce compte</th>
-		<th>Familles</th>
-		<th>Enfants</th>
-		<th>Factures</th>
-		<th>Paiements</th>
-	</tr>
-	<tr>
-	    <td></td>
-	    <td><b><%= Famille.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
-	    <td><b><%= @enfants.count %></b></td>
-	    <td><b><%= Facture.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
-	    <td><b><%= Paiement.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td> 
-	</td></tr>	 
-      </table>
-      <%= link_to "Importer données Familles et Enfants", :action => "import" %><br>
-      <%= link_to "Export XML des Familles et données liées (enfants, prestations)", "/familles.xml" %><br>
-      <%= link_to "Export XML des Factures et données liées (lignes de factures)", "/factures.xml" %><br>
-      <%= link_to "Export XML des Paiement", "/paiements.xml" %>
-      <br><br>
+			<td></td>
+			<td><b><%= Famille.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
+			<td><b><%= @enfants.count %></b></td>
+			<td><b><%= Facture.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
+			<td><b><%= Paiement.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td> 
+		</td></tr>	 
+		  </table>
+		  <%= link_to "Importer données Familles et Enfants", :action => "import" %><br>
+		  <%= link_to "Export XML des Familles et données liées (enfants, prestations)", "/familles.xml" %><br>
+		  <%= link_to "Export XML des Factures et données liées (lignes de factures)", "/factures.xml" %><br>
+		  <%= link_to "Export XML des Paiement", "/paiements.xml" %>
+		  <br><br>
 	
-    </div>
+		</div>
+	<% end %>
     <hr>
 </div>

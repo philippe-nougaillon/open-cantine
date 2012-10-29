@@ -7,7 +7,7 @@
 	<%= f.input :ville %>
 </div>
 
-<div class="span-10 last">
+<div class="span-12 last">
 	<%= f.input :allocataire, :input_html => {:size => 20} %>
 	<%= f.hint "Indiquez ici le tarif spécial ou QF à appliquer à toute la famille" %>
 	<%= f.input :tarif_id, :label => 'Tarif', :collection => (Tarif.find(:all, :conditions => ["mairie_id = ?", session[:mairie]], :order => 'memo').collect {|p| [ "#{p.memo}", p.id ] }) %>

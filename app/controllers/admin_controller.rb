@@ -17,7 +17,7 @@ class AdminController < ApplicationController
   end
 
   def check_user
-    @u = User.authenticate(params[:user][:username], params[:user][:password])
+    @u = User.authenticate2(params[:user][:username], params[:user][:password])
     if @u 
       @u.lastconnection = Time.now
       @u.save
@@ -47,14 +47,13 @@ class AdminController < ApplicationController
     @user = User.find(session[:user])
     respond_to do |format|
      if @user.update_attributes(params[:user]) and @user.mairie_id != 2
-        @user.password_hash=params[:password]
         @user.lastchange = Time.now
         @user.save
         flash[:notice] = "Utilisateur modifié..."
         format.html { redirect_to :action => "setup", :controller => "admin" }
         format.xml  { head :ok }
       else
-        flash[:warning] = 'Modification utilisateur annulée...'
+        flash[:warning] = 'Modification annulée. Peut être essayez-vous de changer le mot de passe du compte de démonstration ?'
         format.html { render :action => "user_edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
@@ -132,16 +131,17 @@ class AdminController < ApplicationController
   end
 
   def user_add
-	@user = User.new(params[:user])
+	@user = User.new
+	@user.username = params[:user][:username]
+	@user.password = params[:user][:password]
     @user.mairie_id = session[:mairie]
 	@user.lastconnection = Date.today
 	@user.lastchange = Date.today
-	@user.password_hash = @user.username
 
     if @user.save
       flash[:notice] = "Utilisateur ajouté."
     else
-      flash[:warning] = "Erreur! Cet utilisateur existe déjà"
+      flash[:warning] = "Erreur! Cet utilisateur existe déjà ?"
     end
     redirect_to :action => "users_admin"
 

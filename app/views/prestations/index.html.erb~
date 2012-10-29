@@ -10,7 +10,8 @@
 	  <hr>	
 	  <% if params[:action] != 'print' %>
 	  <div id="adroite">
-		   <%= link_to "Liste", :action => 'print',  :id => 0 %> 
+		   <%= link_to "Liste", :action => 'print', :search => params[:prestation_date], 
+			:classe => params[:classe], :toutlemois => params[:toutlemois], :totaux => params[:totaux], :id => 0 %> 
 
 		   <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %> 
 

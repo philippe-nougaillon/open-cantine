@@ -36,18 +36,18 @@
         <td><%=h facture.echeance.to_s(:fr) %></td>
         <td><%= link_to facture.famille.nom, facture.famille  %> </td>
         <td style="text-align:right"><%=h number_to_currency(facture.montant, :unit => '') %> €</td>
-	<td style="text-align:center"><%= image_tag "ok.jpeg", :size => '15x15' if facture.checked %></td>
-	<td><%= facture.footer[0..15] if facture.footer %></td>
-	<td><%= link_to image_tag("pdf-logo.png", :size => "25x25"), facture_path(facture, :format => :pdf)  %></td>
-	<td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
-	<td>
+		<td style="text-align:center"><%= image_tag "ok.jpeg", :size => '15x15' if facture.checked %></td>
+		<td><%= facture.footer[0..15] if facture.footer %></td>
+		<td><%= link_to image_tag("pdf-logo.png", :size => "25x25"), facture_path(facture, :format => :pdf)  %></td>
+		<td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
+		<td>
 	   <% if Famille.find(facture.famille_id).email %>
   	      <% if !Famille.find(facture.famille_id).email.empty? %>
                   <%= link_to "Envoyer", :action => 'send_invoice', :id => facture.id %> 
               <% end %> 
            <% end %>
         </td>
-	<td><%= link_to 'Modifier', edit_facture_path(facture) %></td>
+		<td><%= link_to 'Modifier', edit_facture_path(facture) %></td>
       </tr>
     <% end %>
   </table>
