@@ -2,12 +2,12 @@
 
 class TodosController < ApplicationController
 
-  layout 'standard', :except => "editthewish"
+  layout 'standard'
 
   # GET /todos
   # GET /todos.xml
   def index
-    @todos = Todo.find(:all, :order => "done DESC, id")
+    @todos = Todo.find(:all, :order => "done, id")
 
     respond_to do |format|
       format.html # index.html.erb

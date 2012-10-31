@@ -37,9 +37,9 @@
           <td><%=h paiement.typepaiement %></td>
           <td><%=h paiement.banque %></td>
           <td><%=h paiement.chequenum %></td>
-          <td style="text-align:right"><%=h number_to_currency(paiement.montantCantine, :unit => '') %> €</td>
-          <td style="text-align:right"><%=h number_to_currency(paiement.montantGarderie, :unit => '') %> €</td>
-          <td style="text-align:right"><%=h number_to_currency(paiement.montant, :unit => '') %> €</td>
+          <td style="text-align:right"><%=h number_to_currency(paiement.montantCantine, :locale => "fr") %></td>
+          <td style="text-align:right"><%=h number_to_currency(paiement.montantGarderie, :locale => "fr") %></td>
+          <td style="text-align:right"><%=h number_to_currency(paiement.montant, :locale => "fr") %></td>
           <td><%=h paiement.remise.to_s(:fr) if paiement.remise %></td>
           <% if session[:user_readwrite] %> <td><%= link_to 'Modifier', edit_paiement_path(paiement) %></td> <% end %>
           <td><%= link_to 'Imprimer', :action => 'print', :id => paiement.id %></td>

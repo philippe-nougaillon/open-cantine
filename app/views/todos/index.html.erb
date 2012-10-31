@@ -1,24 +1,19 @@
 <br><br><br>
+<h2>Vos souhaits et vos remarques</h2> 
 
-<table>
-  <tr>
-	<th>Description</th>
-	<th>Fait?</th>
-	<th>Note</th>
-  </tr>
-
-	<% for todo in @todos %>
-	  <tr>
- 	    <td><%=h todo.description %></td>
-		<td><%= image_tag "ok.jpeg" if todo.done %></td>
-		<td><%=h todo.note %></td>
-	  </tr>
+<ul>
+<% for todo in @todos %>
+	<h3><li><%= todo.description %></li></h3>
+	<% if todo.done %>
+		<i><b><%= "Fait ! #{h todo.note}" if todo.note %></b></i>
+	<% else %>
+		<i><%= "Réponse: #{h todo.note}" if todo.note %></i>
 	<% end %>
-</table>
-
+	<hr>
+<% end %>
+</ul>
 <br />
-<strong>Vous souhaitez une nouvelle fonctionnalité ?</strong> 
-<br>
-Décrivez-la simplement en quelques mots et nous la développerons pour en faire profiter toute la communauté openCantine.
-<br>
-<%= link_to 'Ajouter', new_todo_path %>
+<h3>Vous aussi, vous souhaitez faire une remarque ou demander une nouvelle fonctionnalité ?</h3> 
+<%= link_to 'Nouvelle remarque', new_todo_path %>
+
+<br><br>

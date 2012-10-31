@@ -7,7 +7,7 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.xml
   def index
-    @todos = Todo.find(:all, :order => "done DESC, id")
+    @todos = Todo.find(:all, :order => "done, id DESC")
 
     respond_to do |format|
       format.html # index.html.erb

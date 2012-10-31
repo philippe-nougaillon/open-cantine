@@ -27,9 +27,9 @@ Le : <%= link_to "#{Date.today.to_s(:fr)}", :action => 'majdateremise', :id => 0
         <td><%=h paiement.ref %></td>
         <td><%=h paiement.banque.upcase %></td>
         <td><%=h paiement.chequenum %></td>
-        <td style="text-align:right"><%=h number_to_currency(paiement.montantCantine, :locale => "fr") %></td>
-        <td style="text-align:right"><%=h number_to_currency(paiement.montantGarderie, :locale => "fr") %></td>
-        <td style="text-align:right"><%=h number_to_currency(paiement.montant, :locale => "fr") %></td>
+        <td style="text-align:right"><%=h number_to_currency(paiement.montantCantine, :unit => '') %> €</td>
+        <td style="text-align:right"><%=h number_to_currency(paiement.montantGarderie, :unit => '') %> €</td>
+        <td style="text-align:right"><%=h number_to_currency(paiement.montant, :unit => '') %> €</td>
     </tr>
     <% @total+= paiement.montant %>
     <% @totalCantine += paiement.montantCantine if paiement.montantCantine %>
@@ -45,8 +45,8 @@ Le : <%= link_to "#{Date.today.to_s(:fr)}", :action => 'majdateremise', :id => 0
     <td></td>
     <td></td>
     <td></td>
-    <td style="text-align:right"><b><%= h number_to_currency(@totalCantine, :locale => "fr") %></b> </td>
-    <td style="text-align:right"><b><%= h number_to_currency(@totalGarderie, :locale => "fr") %></b> </td>
-    <td style="text-align:right"><b><%= h number_to_currency(@total, :locale => "fr") %></b> </td>
+    <td style="text-align:right"><b><%= h number_to_currency(@totalCantine, :unit => '') %> €</b> </td>
+    <td style="text-align:right"><b><%= h number_to_currency(@totalGarderie, :unit => '') %> €</b> </td>
+    <td style="text-align:right"><b><%= h number_to_currency(@total, :unit => '') %> €</b> </td>
   </tr>
 </table>

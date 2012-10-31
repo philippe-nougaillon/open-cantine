@@ -47,7 +47,7 @@
   <% end %>
   </table>
   <br />
-  <%= will_paginate @paiements %>
+  <%= will_paginate @paiements, :previous_label => "Prédédent", :next_label => "Suivant" %>
 <% else %>
   Pas de paiements à afficher. Réduisez le filtre et recommencez.
 <% end %>
