@@ -18,6 +18,17 @@ class Famille < ActiveRecord::Base
     self[:nom].upcase!
   end
 
+  def readable_phone
+    phone.gsub /\d\d(?=\d)/, '\\0 '
+  end
+
+  def readable_mobile1
+    mobile1.gsub /\d\d(?=\d)/, '\\0 '
+  end
+
+  def readable_mobile2
+    mobile2.gsub /\d\d(?=\d)/, '\\0 '
+  end
 
   def familles_by_ville(mairie_id)
   	Famille_find_all_by_mairie_id(mairie_id)

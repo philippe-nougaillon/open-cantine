@@ -12,19 +12,19 @@ Famille: <%= link_to @famille.nom, :action => 'show', :id => @famille.id %>
         <td><%= l[:date].to_s(:fr) %></td>
         <td><%= l[:type] %></td>
         <td><%= l[:ref]  %></td>
-	<% @montant = l[:mnt] || 0 %>
+		<% @montant = l[:mnt] || 0 %>
         <% if l[:type] == "Facture" %>
            <% @solde -= @montant %>
            <% @debit += @montant %>
-           <td id="number"> <%= number_to_currency(@montant, :unit => "")  %> € </td><td></td>
-           <td id="number"> <%= number_to_currency(@solde, :unit => "") %> € </td>
-           <td><%= link_to "Afficher", :controller => "factures", :action => 'print', :id => l[:id] %></td>	
+           <td id="number"> <%= number_to_currency(@montant, :locale => "fr")  %> </td><td></td>
+           <td id="number"> <%= number_to_currency(@solde, :locale => "fr") %> </td>
+           <td><%= link_to "Détails", :controller => "factures", :action => 'print', :id => l[:id] %></td>	
         <% else %>
            <% @solde += @montant %>
            <% @credit += @montant %>
-           <td></td><td id="number"> <%= number_to_currency(@montant, :unit => "") %> € </td>
-           <td id="number"> <%= number_to_currency(@solde, :unit => "") %> € </td>
-           <td><%= link_to "Afficher", :controller => "paiements", :action => 'show', :id => l[:id] %></td>	
+           <td></td><td id="number"> <%= number_to_currency(@montant, :locale => "fr") %> </td>
+           <td id="number"> <%= number_to_currency(@solde, :locale => "fr") %> </td>
+           <td><%= link_to "Détails", :controller => "paiements", :action => 'show', :id => l[:id] %></td>	
        <% end %>
      </tr>
   <% end %>
@@ -32,8 +32,8 @@ Famille: <%= link_to @famille.nom, :action => 'show', :id => @famille.id %>
   <tr style="background-color:#FFFFA0;">
     <td><%= Date.today.to_s(:fr) %></td>
     <td /><td />
-    <td id="number"><%= number_to_currency(@debit, :unit => "") %> € </td>
-    <td id="number"><%= number_to_currency(@credit, :unit => "") %> € </td>
-    <td id="sum">   <%= number_to_currency(@solde, :unit => "") %> € </td>
+    <td id="number"><%= number_to_currency(@debit, :locale => "fr") %> </td>
+    <td id="number"><%= number_to_currency(@credit, :locale => "fr") %> </td>
+    <td id="sum">   <%= number_to_currency(@solde, :locale => "fr") %> </td>
   </tr>
 </table>

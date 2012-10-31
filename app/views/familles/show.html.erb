@@ -31,11 +31,11 @@
           </tr>          
 	  <tr>
             <td>Téléphone fixe</td>
-            <td><b><%=h @famille.phone %></b></td>
+            <td><b><%=h @famille.readable_phone %></b></td>
           </tr>
           <tr>
             <td>Mob Maman/Papa</td>
-            <td><b><%= @famille.mobile1 %> / <%= @famille.mobile2 %></b></td>
+            <td><b><%= @famille.readable_mobile1 %> / <%= @famille.readable_mobile2 %></b></td>
           </tr>
           <tr>
             <td>Email</td>
@@ -57,11 +57,11 @@
 
         <table class="sample">
 
-	  <tr>
-            <td>N°Allocataire</td>
-            <td><b><%=h @famille.allocataire %> </b></td>
-          </tr>          
-	  <tr>
+		  <tr>
+		        <td>N°Allocataire</td>
+		        <td><b><%=h @famille.allocataire %> </b></td>
+		      </tr>          
+		  <tr>
     	    <td>Tarif ou QF</td>
     	    <td>
 	      <% if @famille.tarif_id %>
@@ -80,13 +80,13 @@
             </tr>
             <tr>
               <td id="sum">
-                  <%= link_to number_to_currency(@sumP, :unit => ""), :controller => 'factures', :action => 'index', :famille_id => @famille  %> € 
+                  <%= link_to number_to_currency(@sumP, :locale => "fr"), :controller => 'factures', :action => 'index', :famille_id => @famille  %>
               </td>
               <td id="sum">
-                  <%= link_to number_to_currency(@sumIn, :unit => ""), :controller => 'paiements', :action => 'index', :famille_id => @famille %> €
+                  <%= link_to number_to_currency(@sumIn, :locale => "fr"), :controller => 'paiements', :action => 'index', :famille_id => @famille %>
               </td>
               <td id="sum">
-                  <%= link_to number_to_currency(@solde, :unit => ""), :action => 'balance', :id => @famille.id  %> €
+                  <%= link_to number_to_currency(@solde, :locale => "fr"), :action => 'balance', :id => @famille.id  %>
               </td>
             </tr>
           </table>

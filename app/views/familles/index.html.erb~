@@ -33,12 +33,12 @@
       <td><%=h famille.adresse[0..25] %></td>
       <td><%=h famille.cp %></td>
       <td><%=h famille.ville %></td>
-      <td><%=h famille.phone %></td>
-      <td><%=h famille.mobile1 %></td>
-      <td><%=h famille.mobile2 %></td>
+      <td><%=h famille.readable_phone %></td>
+      <td><%=h famille.readable_mobile1 %></td>
+      <td><%=h famille.readable_obile2 %></td>
     </tr>
   <% end %>
 </table>
 
 <br />
-<%= will_paginate @familles %>
+<%= will_paginate @familles, :previous_label => "Prédédent", :next_label => "Suivant" %>

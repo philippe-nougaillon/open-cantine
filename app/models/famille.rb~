@@ -18,24 +18,20 @@ class Famille < ActiveRecord::Base
     self[:nom].upcase!
   end
 
+  def readable_phone
+    phone.gsub /\d\d(?=\d)/, '\\0 '
+  end
 
   def familles_by_ville(mairie_id)
   	Famille_find_all_by_mairie_id(mairie_id)
   end
  
   def self.search(nom, page, mairie_id, sort)
-
-     unless sort.blank?
-     	paginate :per_page => 18,
-              :page => page,
-              :conditions => ['nom like ? AND mairie_id = ?', "%#{nom}%", mairie_id],
-              :order => sort
-     else
-     	paginate :per_page => 18,
-              :page => page,
-              :conditions => ['nom like ? AND mairie_id = ?', "%#{nom}%", mairie_id],
-              :order => "nom"
-     end
+	@order_by = (sort.blank?) ? "nom" : sort	
+ 	paginate :per_page => 18,
+          :page => page,
+          :conditions => ['nom like ? AND mairie_id = ?', "%#{nom}%", mairie_id],
+          :order => @order_by
   end
 
   def nbrenfants
