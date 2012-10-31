@@ -414,7 +414,7 @@ class PrestationsController < ApplicationController
   def stats_mensuelle
 	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
 	@prestation_date = @stats_date.to_date
-	@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'classe,nom,prenom', '', true)
+	@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'nom,prenom', '', true)
 	
 	if @prestations.first
 		@classrooms = Ville.find(session[:mairie]).classrooms
