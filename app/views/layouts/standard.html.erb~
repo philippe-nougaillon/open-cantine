@@ -39,7 +39,7 @@
 
 
 	<div class="span-24 last">
-		<div id="menubar">
+		<div>
 			<% if !session[:user].nil? and params[:controller] == 'paiements' %>
 					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 						<input type="hidden" name="cmd" value="_s-xclick">

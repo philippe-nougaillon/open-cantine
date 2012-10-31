@@ -53,7 +53,7 @@ class FamillesController < ApplicationController
     @sumP  = @famille.factures.sum('montant')
     @sumIn = @famille.paiements.sum('montant')
     @solde = @sumIn - @sumP 
-    @facture = @famille.factures(:last)
+    @facture = @famille.factures.last
  
     respond_to do |format|
       format.html # show.html.erb

@@ -2,8 +2,6 @@
 
 class FamillesController < ApplicationController
 
-  #in_place_edit_for :famille, :memo 
-
   autocomplete :famille, :nom, :extra_data => [:cp, :ville]
   
   layout :determine_layout
