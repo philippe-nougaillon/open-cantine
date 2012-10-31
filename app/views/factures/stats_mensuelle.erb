@@ -4,10 +4,10 @@
 Nombre de factures: <%= @factures.count %><br>
 <br>
 
-Total Cantine:  <%= @total_cantine %>€<br>
-Total Garderie: <%= @total_garderie %>€<br>
-Total Centre:   <%= @total_centre %>€<br>
-Total Etude:	<%= @total_etude %>€<br>
+Total Cantine:  <%= number_to_currency(@total_cantine, :locale => "fr") %><br>
+Total Garderie: <%= number_to_currency(@total_garderie, :locale => "fr") %><br>
+Total Centre:   <%= number_to_currency(@total_centre, :locale => "fr") %><br>
+Total Etude:	<%= number_to_currency(@total_etude, :locale => "fr") %><br>
 <br>
 
 

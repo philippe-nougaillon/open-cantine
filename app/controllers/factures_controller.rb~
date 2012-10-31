@@ -73,7 +73,7 @@ class FacturesController < ApplicationController
 	end
 	UserMailer.send_invoice(@mairie, @famille, @facture).deliver
 	# update sent at	
-	@facture.envoyee = Time.now.getlocal.to_s
+	@facture.envoyee = Time.now
 	@facture.save
 	flash[:notice] = "Facture #{@facture.ref} #{@famille.nom} envoyée."
 	redirect_to factures_path

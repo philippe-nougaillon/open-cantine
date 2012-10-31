@@ -4,7 +4,7 @@
 Nombre de factures: <%= @factures.count %><br>
 <br>
 
-Total Cantine:  <%= @total_cantine %><br>
+Total Cantine:  <%= number_to_currency(@total_cantine, :locale => "fr") %><br>
 Total Garderie: <%= @total_garderie %><br>
 Total Centre:   <%= @total_centre %><br>
 Total Etude:	<%= @total_etude %><br>

@@ -40,33 +40,33 @@
 
 	    <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
 	      <td>
-		<%= "<b>".html_safe unless l.montant %>
-		<%= l.texte.gsub(";", "")  %>
-		<%= "</b>".html_safe unless l.montant %>
+			<%= "<b>".html_safe unless l.montant %>
+			<%= l.texte.gsub(";", "")  %>
+			<%= "</b>".html_safe unless l.montant %>
 	      </td>
 	      <td style="text-align:right">
-		<% if l.qte %>
-		  <%= l.qte %>
-		  <%# if l.texte[1..8] == "Garderie" %>  <%# end %>
-		<% end %>
+			<% if l.qte %>
+			  <%= l.qte %>
+			  <%# if l.texte[1..8] == "Garderie" %>  <%# end %>
+			<% end %>
 	      </td>
 	      <td style="text-align:right">
-		<% if l.montant and l.qte %>
-		   <% if l.prix %> 
-		      <%= number_to_currency( l.prix, :unit => "") %> €
-		   <% else %>
-		      <%= number_to_currency((l.montant / l.qte), :unit => "") %> €
-		   <% end %>
-		<% end %>
+			<% if l.montant and l.qte %>
+			   <% if l.prix %> 
+				  <%= number_to_currency( l.prix, :unit => "") %> €
+			   <% else %>
+				  <%= number_to_currency((l.montant / l.qte), :unit => "") %> €
+			   <% end %>
+			<% end %>
 	      </td>
 	      <td style="text-align:right">
-		<% if not l.montant.nil? %>
-		   <% if l.prix %>
-		      <%= number_to_currency((l.prix * l.qte), :unit => "") %> €
-		   <% else %>
-		      <%= number_to_currency((l.montant), :unit => "") %> €
-		   <% end %>
-		<% end %>
+			<% if not l.montant.nil? %>
+			   <% if l.prix %>
+				  <%= number_to_currency((l.prix * l.qte), :unit => "") %> €
+			   <% else %>
+				  <%= number_to_currency((l.montant), :unit => "") %> €
+			   <% end %>
+			<% end %>
 	      </td>
 	    </tr> 
 	  <% end %>
@@ -96,7 +96,7 @@
 		    </tr>
 		</table>
 	<% end %>
-	<% if !@facture.footer.empty? %>
+	<% if @facture.footer %>
    	   <fieldset>
 		<%= @facture.footer %>
 	   </fieldset>

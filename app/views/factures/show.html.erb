@@ -34,7 +34,7 @@
 		<td><b>
 		    <%=h l.texte %>
 		    <% if l.montant %>
-		       = <%= number_to_currency(l.montant, :unit => "") %> €
+		       = <%= number_to_currency(l.montant, :locale => "fr") %>
 		    <% end %>
 		    </b>
 		</td>
@@ -42,17 +42,17 @@
 	    <% end %>
 	    <tr>
 	      <td><b>Montant<b></td>
-	      <td><b><%=h number_to_currency(@facture.montant, :unit => "") %> €</b></td>
+	      <td><b><%=h number_to_currency(@facture.montant, :locale => "fr") %></b></td>
 	    </tr>
 	    <% if @facture.SoldeFamille %>
 		    <tr>
 		      <td>Solde Famille avant cette facture</td>
-		      <td><b><%=h number_to_currency(@facture.SoldeFamille, :unit => "") %> €</b></td>
+		      <td><b><%=h number_to_currency(@facture.SoldeFamille, :locale => "fr") %></b></td>
 		    </tr>
 		    <tr />
 		    <tr>
 		      <td><b>Solde Famille</b></td>
-		      <td><b><%=h number_to_currency((@facture.SoldeFamille + @facture.montant), :unit => "") %> €</b></td>
+		      <td><b><%=h number_to_currency((@facture.SoldeFamille + @facture.montant), :locale => "fr") %></b></td>
 		    </tr>
 		    <tr />
 	    <% end %>

@@ -6,7 +6,9 @@
   <% end %>
   <hr>
   <div id="adroite">
-     <%= link_to "Facturer le mois", :action => "new_all", :id => 0 %>
+	 <% if session[:user_readwrite] %>
+        <%= link_to "Facturer le mois", :action => "new_all", :id => 0 %>
+	 <% end %>
 	 <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %> 
   </div>
 </div>
@@ -35,7 +37,7 @@
         <td><%=h facture.date.to_date.to_s(:fr) %></td>
         <td><%=h facture.echeance.to_s(:fr) %></td>
         <td><%= link_to facture.famille.nom, facture.famille  %> </td>
-        <td style="text-align:right"><%=h number_to_currency(facture.montant, :unit => '') %> €</td>
+        <td style="text-align:right"><%=h number_to_currency(facture.montant, :locale => :fr) %></td>
 		<td style="text-align:center"><%= image_tag "ok.jpeg", :size => '15x15' if facture.checked %></td>
 		<td><%= facture.footer[0..15] if facture.footer %></td>
 		<td><%= link_to image_tag("pdf-logo.png", :size => "25x25"), facture_path(facture, :format => :pdf)  %></td>

@@ -10,7 +10,9 @@
 <br>
 <h3>Prestations du <%= @datedebut.to_s(:fr) %> au <%= @datefin.to_s(:fr) %></h3>
 <table class="sample">
-	<tr><th>Nom prénom</th><th>Total repas</th><th>Total Garderie Matin</th><th>Total Garderie Soir</th><th>Total Centre Matin</th><th>Total Centre Soir</th><th>Total Etude</th></tr>
+	<tr><th>Nom prénom</th><th>Total repas</th><th>Total Garderie Matin</th>
+	    <th>Total Garderie Soir</th><th>Total Centre Matin</th><th>Total Centre Soir</th><th>Total Etude</th>
+	</tr>
 	<tr><td><i>Classe <%= Classroom.find(@classe).nom %></i></td><td/></tr>
 
 	<% for prestation in @prestations %>
@@ -22,7 +24,7 @@
 		<% if prestation.enfant.id != @enfant_id %>
 			<% @enfant_id = prestation.enfant.id %>
 			<tr>
-				<td><b><%= prestation.enfant.famille.nom %></b> <%= prestation.enfant.prenom %></td>
+				<td><b><%= prestation.enfant.famille.nom %></b> <%= link_to prestation.enfant.prenom, :controller => "enfants", :action => "show", :id => prestation.enfant.id %></td>
 				<td><%= @sum[:repas] %></td>
 				<td><%= @sum[:garderieAM] %></td>
 				<td><%= @sum[:garderiePM] %></td> 

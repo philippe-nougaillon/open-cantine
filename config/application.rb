@@ -14,10 +14,6 @@ module OpenCantine3
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-
-#    config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
-#    config.gem "calendar_date_select"
-
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 
@@ -61,5 +57,6 @@ module OpenCantine3
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
   end
 end
