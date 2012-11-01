@@ -173,8 +173,9 @@
 		<% end %> 
 		<br><br>    
 	</div>
+	<hr>
+
 	<% if session[:user_readwrite] %>
-		<hr>
 		<div class="span-18 last">	
 		   <a name="export"></a>
 		   <h3>Exporter les données</h3>
@@ -199,8 +200,7 @@
 		  <%= link_to "Export XML des Factures et données liées (lignes de factures)", "/factures.xml" %><br>
 		  <%= link_to "Export XML des Paiement", "/paiements.xml" %>
 		  <br><br>
-	
 		</div>
+	    <hr>
 	<% end %>
-    <hr>
 </div>

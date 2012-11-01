@@ -87,13 +87,13 @@
 	      <% for tarif in @tarifs %>
 			<tr class="<%= cycle('list-line-even','list-line-odd')%>">
 			  <td><%=h tarif.memo %></td>
-			  <td id="sum"><%=h number_to_currency(tarif.RepasP, :unit => '') %> €</td>
-			  <td id="sum"><%=h number_to_currency(tarif.GarderieAMP, :unit => '') %> €</td>
-			  <td id="sum"><%=h number_to_currency(tarif.GarderiePMP, :unit => '') %> €</td>
-			  <td id="sum"><%=h number_to_currency(tarif.CentreAMP, :unit => '') %> €</td>
-			  <td id="sum"><%=h number_to_currency(tarif.CentrePMP, :unit => '') %> €</td>
-			  <td id="sum"><%=h number_to_currency(tarif.CentreAMPMP, :unit => '') %> €</td>
-			  <td id="sum"><%=h number_to_currency(tarif.Etude, :unit => '') %> €</td>
+			  <td id="sum"><%=h number_to_currency(tarif.RepasP, :locale => "fr") %></td>
+			  <td id="sum"><%=h number_to_currency(tarif.GarderieAMP, :locale => "fr") %></td>
+			  <td id="sum"><%=h number_to_currency(tarif.GarderiePMP, :locale => "fr") %></td>
+			  <td id="sum"><%=h number_to_currency(tarif.CentreAMP, :locale => "fr") %></td>
+			  <td id="sum"><%=h number_to_currency(tarif.CentrePMP, :locale => "fr") %></td>
+			  <td id="sum"><%=h number_to_currency(tarif.CentreAMPMP, :locale => "fr") %></td>
+			  <td id="sum"><%=h number_to_currency(tarif.Etude, :locale => "fr") %></td>
 			</tr>
 	      <% end %>
 	    </table>

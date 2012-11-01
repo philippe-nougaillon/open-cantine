@@ -29,9 +29,10 @@ Famille: <%= link_to @famille.nom, :action => 'show', :id => @famille.id %>
      </tr>
   <% end %>
   <tr /><tr />
-  <tr style="background-color:#FFFFA0;">
+  <tr>
     <td><%= Date.today.to_s(:fr) %></td>
-    <td /><td />
+    <td><b>Solde à ce jour</b></td>
+	<td />
     <td id="number"><%= number_to_currency(@debit, :locale => "fr") %> </td>
     <td id="number"><%= number_to_currency(@credit, :locale => "fr") %> </td>
     <td id="sum">   <%= number_to_currency(@solde, :locale => "fr") %> </td>

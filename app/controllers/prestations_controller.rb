@@ -27,7 +27,7 @@ class PrestationsController < ApplicationController
   # GET /prestations.xml
   def index
      @images = get_etat_images
-     if !params[:classe].blank? and !params[:toutlemois]
+     if !params[:classe].blank? and !params[:toutlemois] and session[:user_readwrite]
 		session[:date] = params[:prestation_date]
 		session[:classe] = params[:classe]
 		redirect_to '/presence'
