@@ -1,6 +1,6 @@
 @media print {
     body {  font-family: "serif"; }
-    #container {
+    #content {
                   width: auto;
                   margin: 0;
                   padding: 0;
@@ -14,3 +14,5 @@
 #pdf-no {
     display:none;
 }
+
+

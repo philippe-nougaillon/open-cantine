@@ -13,6 +13,7 @@ gem 'wicked_pdf'
 gem 'jquery_datepicker'
 gem 'mysql2'
 gem 'therubyracer'
+gem 'prawn'
 
 # Gems used only for assets and not required
 # in production environments by default.

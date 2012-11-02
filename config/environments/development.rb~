@@ -35,4 +35,6 @@ OpenCantine3::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  config.load_paths << "#{RAILS_ROOT}/vendor/prawn/lib"
+
 end

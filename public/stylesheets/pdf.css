@@ -1,7 +1,7 @@
 @media print {
     body {  font-family: "serif"; }
-    #container {
-                  width: 760px;
+    #content {
+                  width: 100px;
                   margin: 0;
                   padding: 0;
                   border: 2px;

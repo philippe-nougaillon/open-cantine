@@ -1,6 +1,9 @@
 # encoding: utf-8
 
+#require "factures.rb"
+
 class FacturesController < ApplicationController
+
 
   layout :determine_layout
 
@@ -42,6 +45,7 @@ class FacturesController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @facture }
       format.pdf do
+
 	  	  filename = @facture.id.to_s
           render :pdf => filename ,
                  :template => 'factures/show.pdf.erb',
@@ -51,9 +55,24 @@ class FacturesController < ApplicationController
    				 :print_media_type => true,
     			 :no_background    => true,
  		 		 :save_to_file => Rails.root + "pdfs/#{filename}.pdf"
+
+#		pdf = FacturePdf.new(@facture, view_context)
+#        send_data pdf.render, filename:
+#        "Facture_#{@facture.created_at.strftime("%d/%m/%Y")}.pdf",
+#        type: "application/pdf"
+
       end   
     end
   end
+
+	def show_pdf
+	 @facture = Facture.find(params[:id])
+	 respond_to do |format|
+	   format.pdf do
+		 prawnto :prawn => { :page_layout => :landscape, :page_size => "A5"}, :inline => false
+	   end
+	 end
+	end
 
   def print
     @facture = Facture.find(params[:id])
