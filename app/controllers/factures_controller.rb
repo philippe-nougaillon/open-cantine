@@ -48,7 +48,9 @@ class FacturesController < ApplicationController
                  :layout => 'pdf',
 				 :page_size => 'A4',
 				 :dpi => '300',  
-		 		 :save_to_file => Rails.root + "pdfs/#{filename}.pdf"
+   				 :print_media_type => true,
+    			 :no_background    => true,
+ 		 		 :save_to_file => Rails.root + "pdfs/#{filename}.pdf"
       end   
     end
   end

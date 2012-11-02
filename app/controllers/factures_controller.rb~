@@ -46,7 +46,14 @@ class FacturesController < ApplicationController
           render :pdf => filename ,
                  :template => 'factures/show.pdf.erb',
                  :layout => 'pdf',
-				 :page_size => 'A4',  
+				 :page_size => 'A4',
+				 :dpi => '300',  
+   				 :print_media_type => true,
+    			 :no_background    => true,
+    			 :margin           => {:top    => 0, # default 10 (mm)
+                          :bottom => 0,
+                          :left   => 0,
+                          :right  => 0},
 		 		 :save_to_file => Rails.root + "pdfs/#{filename}.pdf"
       end   
     end
