@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class UserMailer < ActionMailer::Base
-  default :from => "contact@opencantine.net"  
+  default :from => "nepasrepondre@opencantine.net"  
   
   def registration_confirmation(user)  
     mail(:to => user.email, :subject => "Registered")  
