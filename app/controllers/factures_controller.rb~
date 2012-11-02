@@ -106,7 +106,7 @@ class FacturesController < ApplicationController
 	@facture_date = @stats_date.to_date
 	
 	@datedebut  = @facture_date.to_date.at_beginning_of_month
-	@datefin = @facture_date.to_date.at_end_of_month	
+	@datefin = @facture_date.to_date.at_beginning_of_month.next_month
 
 	@factures = Facture.where("date between ? and ? and mairie_id= ?", @datedebut, @datefin, session[:mairie])
 
