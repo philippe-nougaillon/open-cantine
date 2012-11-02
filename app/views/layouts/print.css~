@@ -1,5 +1,5 @@
 @media print {
-    body {  }
+    body {  font-family: "serif"; }
     #container {
                   width: auto;
                   margin: 0;

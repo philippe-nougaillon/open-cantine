@@ -6,11 +6,8 @@
                   padding: 0;
                   border: 2px;
     }
-  #pdf_link {
-    display: none;
-  }
 }
-  .pdf_link {
+.pdf_link {
     display: none;
   }
 
