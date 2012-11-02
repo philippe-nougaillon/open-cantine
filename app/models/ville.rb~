@@ -20,4 +20,5 @@ class Ville < ActiveRecord::Base
 
 	has_many :paiements, 	:foreign_key => "mairie_id",  :dependent => :destroy
 
+
 end

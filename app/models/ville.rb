@@ -21,4 +21,9 @@ class Ville < ActiveRecord::Base
 	has_many :paiements, 	:foreign_key => "mairie_id",  :dependent => :destroy
 
 
+  def readable_tel
+    tel.gsub /\d\d(?=\d)/, '\\0 '
+  end
+
+
 end

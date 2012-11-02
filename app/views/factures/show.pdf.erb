@@ -4,7 +4,7 @@
 	<%= @mairie.cp %> <%= @mairie.ville %><br>
 	<br>
 	<small>
-    	   <%= @mairie.tel %><br>
+       <%= @mairie.readable_tel %><br>
 	   <%= @mairie.email %><br>
 	</small>
 
@@ -31,13 +31,12 @@
 	<br><br>
 
 	<table>
-	  <th style="text-align:left;width:80%">Désignation des prestations</th>
-	  <th>Qté</th>
-	  <th>Prix</th>
-	  <th>Total</th>
+	  <th style="text-align:left;width:77%">Désignation des prestations</th>
+	  <th>Qté | </th>
+	  <th>Prix U. | </th>
+	  <th>Montant total</th>
 	  <tr></tr>
 	  <% for l in @facture.facture_lignes %>
-
 	    <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
 	      <td>
 			<%= "<b>".html_safe unless l.montant %>

@@ -4,7 +4,7 @@
 	<%= @mairie.cp %> <%= @mairie.ville %><br>
 	<br>
 	<small>
-    	   <%= @mairie.tel %><br>
+       <%= @mairie.readable_tel %><br>
 	   <%= @mairie.email %><br>
 	</small>
 
@@ -31,13 +31,12 @@
 	<br><br>
 
 	<table>
-	  <th style="text-align:left;width:80%">Désignation des prestations</th>
-	  <th>Qté</th>
-	  <th>Prix</th>
-	  <th>Total</th>
+	  <th style="text-align:left;width:77%">Désignation des prestations</th>
+	  <th>Qté | </th>
+	  <th>Prix U. | </th>
+	  <th>Montant total |</th>
 	  <tr></tr>
 	  <% for l in @facture.facture_lignes %>
-
 	    <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
 	      <td>
 			<%= "<b>".html_safe unless l.montant %>
@@ -53,18 +52,18 @@
 	      <td style="text-align:right">
 			<% if l.montant and l.qte %>
 			   <% if l.prix %> 
-				  <%= number_to_currency( l.prix, :unit => "") %> €
+				  <%= number_to_currency( l.prix, :locale => "fr") %>
 			   <% else %>
-				  <%= number_to_currency((l.montant / l.qte), :unit => "") %> €
+				  <%= number_to_currency((l.montant / l.qte), :locale => "fr") %>
 			   <% end %>
 			<% end %>
 	      </td>
 	      <td style="text-align:right">
 			<% if not l.montant.nil? %>
 			   <% if l.prix %>
-				  <%= number_to_currency((l.prix * l.qte), :unit => "") %> €
+				  <%= number_to_currency((l.prix * l.qte), :locale => "fr") %>
 			   <% else %>
-				  <%= number_to_currency((l.montant), :unit => "") %> €
+				  <%= number_to_currency((l.montant), :locale => "fr") %>
 			   <% end %>
 			<% end %>
 	      </td>
@@ -78,7 +77,7 @@
 	    </td>
 	    <td></td><td></td>
 	    <td style="text-align:right">
-	      <b><%=h number_to_currency(@facture.montant, :unit => "") %> €</b>
+	      <b><%=h number_to_currency(@facture.montant, :locale => "fr") %></b>
 	    </td>
 	  </tr>
 	  <tr></tr><tr></tr><tr></tr><tr></tr>
@@ -88,11 +87,11 @@
 	<% if @facture.SoldeFamille %>
 		<table  class="sample">
 		    <tr>
-		      <td style="text-align:left">Avant cette facture, vous deviez : <b><%=h number_to_currency(@facture.SoldeFamille, :unit => "") %> €</b></td>
+		      <td style="text-align:left">Avant cette facture, vous deviez : <b><%=h number_to_currency(@facture.SoldeFamille, :locale => "fr") %></b></td>
 		    </tr>
 		    <tr />
 		    <tr>
-		      <td style="text-align:left"><b>Votre nouveau solde dû est maintenant de : <%=h number_to_currency((@facture.SoldeFamille + @facture.montant), :unit => "") %> €</b></td>
+		      <td style="text-align:left"><b>Votre nouveau solde dû est maintenant de : <%=h number_to_currency((@facture.SoldeFamille + @facture.montant), :locale => "fr") %></b></td>
 		    </tr>
 		</table>
 	<% end %>
