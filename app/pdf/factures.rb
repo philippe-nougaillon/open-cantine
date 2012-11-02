@@ -1,7 +1,9 @@
 class FacturePdf < Prawn::Document
      
-  def initialize(invoice, view)
+  def initialize(facture, view)
     super()
+	@facture = facture
+
     text "This is an order invoice"
   end
 

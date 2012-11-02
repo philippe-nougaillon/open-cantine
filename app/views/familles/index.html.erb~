@@ -33,9 +33,9 @@
       <td><%=h famille.adresse[0..25] %></td>
       <td><%=h famille.cp %></td>
       <td><%=h famille.ville %></td>
-      <td><%=h famille.readable_phone %></td>
-      <td><%=h famille.readable_mobile1 %></td>
-      <td><%=h famille.readable_mobile2 %></td>
+      <td><%=h famille.readable_phone if famille.readable_phone %></td>
+      <td><%=h famille.readable_mobile1 if famille.readable_mobile1 %></td>
+      <td><%=h famille.readable_mobile2 if famille.readable_mobile2 %></td>
     </tr>
   <% end %>
 </table>

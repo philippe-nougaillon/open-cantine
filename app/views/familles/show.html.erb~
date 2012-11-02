@@ -31,11 +31,11 @@
           </tr>          
 	  	  <tr>
             <td>Téléphone fixe</td>
-            <td><b><%=h @famille.readable_phone %></b></td>
+            <td><b><%=h @famille.readable_phone if @famille.readable_phone %></b></td>
           </tr>
           <tr>
             <td>Mob Maman/Papa</td>
-            <td><b><%= @famille.readable_mobile1 %> / <%= @famille.readable_mobile2 %></b></td>
+            <td><b><%= @famille.readable_mobile1 if @famille.readable_mobile1 %> / <%= @famille.readable_mobile2 if @famille.readable_mobile2 %></b></td>
           </tr>
           <tr>
             <td>Email</td>
