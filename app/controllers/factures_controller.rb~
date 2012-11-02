@@ -46,6 +46,7 @@ class FacturesController < ApplicationController
           render :pdf => filename ,
                  :template => 'factures/show.pdf.erb',
                  :layout => 'pdf',
+				 :page_size => 'A4',  
 		 		 :save_to_file => Rails.root + "pdfs/#{filename}.pdf"
       end   
     end
