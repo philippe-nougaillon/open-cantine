@@ -1,11 +1,15 @@
 <div class="span-14 last">
 	<h3>Création d'un compte</h3>
 	</hr>
-	Merci de renseigner ce formulaire d'inscription<br>
-	<% form_for @ville, :url => { :action => "nouveau_compte_create" } do |f| %>
+	Merci de renseigner ce formulaire<br>
+	<%= form_for @ville, :url => { :action => "nouveau_compte_create" } do |f| %>
 		<br>
 		<table class="form">
-     		  <%= f.error_messages %>
+
+		  <% @ville.errors.full_messages.each do |msg| %>
+			 <p><%= msg %></p>
+		  <% end %>
+	  
 		  <tr>
 		    <td id="label">Nom du compte</td>
 		    <td>
@@ -22,14 +26,13 @@
 		     <td></td>
 		     <td>
 		       <div style="margin-top:10px;">
-			  <%= image_submit_tag "valider.gif" %>
+			  		<%= image_submit_tag "valider.gif" %>
 		       </div>
 		     </td>
 		   </tr>
 		</table>
 	<% end %>
       <br><br>
-      Une fois ce formulaire enregistré, un nouveau compte sera créé et vous serez automatiquement connecté à openCantine.
-      Pour vos prochaines connexions, un courriel récapitulatif indiquant votre mot de passe va être envoyé dans l'heure.<br><br>
+      Une fois ce formulaire validé, vous serez automatiquement connecté à openCantine  et un mail indiquant votre mot de passe vous sera envoyé.<br><br>
 </div>
 

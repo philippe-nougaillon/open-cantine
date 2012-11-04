@@ -6,6 +6,7 @@ class VillesController < ApplicationController
 
   def nouveau_compte
     @ville = Ville.new
+	flash[:notice] =""
   end	
 
   # POST /villes
@@ -17,15 +18,15 @@ class VillesController < ApplicationController
     if @ville.save
 		u = User.new
 		u.mairie_id = @ville.id
-		    u.username = @ville.email
-		    u.password_hash = @ville.email
+		u.username = @ville.email
+		u.password = @ville.email
 		u.lastconnection = Time.now
-		    u.lastchange = Time.now
-		    u.readwrite = true
+		u.lastchange = Time.now
+		u.readwrite = true
 		u.save
 
 	 	prochain = FactureChrono.new
-		    prochain.mairie_id = @ville.id
+		prochain.mairie_id = @ville.id
 		prochain.prochain = 1
 		prochain.save
 
