@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>openCantine</title>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application", "rails.validations" %>
 
   <%= stylesheet_link_tag '/stylesheets/standard', :media => "all"  %>
   <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
@@ -22,7 +22,7 @@
 	         <%= link_to User.find(session[:user]).username, :controller => 'admin', :action => 'user_edit' %>
 			| <%= link_to "Paramètres", :controller => 'admin', :action => 'setup' %>
 	        | <%= link_to "Aide", :controller => 'admin', :action => 'bienvenue' %>
-	        | <%= link_to "Souhaits", :controller => 'todos' %>
+	        | <%= link_to "Participer", :controller => 'todos' %>
 	        | <%= link_to "Déconnexion", {:controller => 'admin', :action => 'signout', :id => 0 } %>
 	    <% end %>
 	</div>

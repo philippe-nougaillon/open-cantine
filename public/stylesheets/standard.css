@@ -167,7 +167,7 @@ table.sample .center {
 table.sample #sum {
 	text-align:right;
 	font-weight:bold; 
-	font-size:120%;
+	font-size:110%;
 }
 table.sample #number {
 	text-align:right;
@@ -184,7 +184,6 @@ table.sample a:hover {
 #adroite {
 	text-align:right;
 	margin-right: 5px;
-
 }
 
 #adroite a {
@@ -212,44 +211,8 @@ table.sample a:hover {
     position: absolute;
     left: 44%;
     top: 80px;
-    background-color: red;
+    background-color: orange;
     color: white;
-}
-.fieldWithErrors {
-  background-color: red;
-  display: table;
-}
-
-#errorExplanation {
-  width: 400px;
-  border: 1px solid red;
-  padding: 7px;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-}
-
-#errorExplanation h2 {
-  display:none;
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  background-color: #c00aaa;
-  color: #fff;
-}
-
-#errorExplanation p {
-  color:#f0f0f0 ;
-  margin-bottom: 0;
-  padding: 1px;
-}
-
-#errorExplanation ul li {
-  font-size: 12px;
-  list-style: square;
-  color:black;
 }
 
 table.form {
@@ -370,7 +333,13 @@ label.collection_radio_buttons {
 }
 
 .field_with_errors {
-  background-color: #ff3333;
+  display: inline;
+}
+
+.field_with_errors .message {
+  color: #D00;
+  padding-left: 5px;
+  font-size: 12px;
 }
 
 .simple_form .error {

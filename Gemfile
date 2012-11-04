@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
 gem 'rails', '3.2.7'
 
 gem 'in_place_editing'
@@ -14,6 +13,8 @@ gem 'jquery_datepicker'
 gem 'mysql2'
 gem 'therubyracer'
 gem 'prawn'
+gem 'client_side_validations'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

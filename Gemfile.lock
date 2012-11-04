@@ -31,6 +31,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.0)
+    client_side_validations (3.2.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -132,6 +133,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  client_side_validations
   coffee-rails (~> 3.2.1)
   in_place_editing
   jquery-rails

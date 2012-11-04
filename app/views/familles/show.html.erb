@@ -88,17 +88,18 @@
               </td>
             </tr>
           </table>
-          <br>
-	      <% if @facture %>
-          	Dernière facture : 
-		    <%= link_to @facture.ref, :controller => 'factures', :action => 'show', :id => @facture  %>
-          |
-          <% end %>
+	      |
           <%= link_to 'Facturer', :controller => 'factures', :action => 'new', :famille_id => @famille if session[:user_readwrite] %>
           |
           <%= link_to 'Encaisser', :controller => 'paiements', :action => 'new', :famille_id => @famille if session[:user_readwrite] %>
-	  |
-          <br>
+	      |
+		  <%= link_to 'Relevé de compte', :action => 'balance', :id => @famille.id  %>
+      	  | <br><br>
+		  <% if @facture %>
+          	Dernière facture : 
+		    <%= link_to @facture.ref, :controller => 'factures', :action => 'show', :id => @facture  %>
+          <% end %>
+		  <br>
       </td>
     </tr>
   </table>

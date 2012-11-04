@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>openCantine</title>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application", "rails.validations" %>
 
   <%= stylesheet_link_tag '/stylesheets/standard', :media => "all"  %>
   <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
@@ -40,7 +40,7 @@
 
 	<div class="span-24 last">
 		<div>
-			<% if !session[:user].nil? and params[:controller] == 'paiements' %>
+			<% if !session[:user].nil? and params[:controller] == 'todos' %>
 					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 						<input type="hidden" name="cmd" value="_s-xclick">
 						<input type="hidden" name="hosted_button_id" value="2E6TX7L2NZUH6">
