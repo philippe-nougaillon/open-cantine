@@ -38,3 +38,5 @@ Famille: <%= link_to @famille.nom, :action => 'show', :id => @famille.id %>
     <td id="sum">   <%= number_to_currency(@solde, :locale => "fr") %> </td>
   </tr>
 </table>
+<%= link_to image_tag("pdf-logo.png", :size => "35x35"), :controller => 'familles', :action => 'balance', :id => @famille.id, :format => :pdf %>
+

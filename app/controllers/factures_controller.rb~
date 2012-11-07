@@ -146,7 +146,7 @@ class FacturesController < ApplicationController
    		facture_id = create_facture(params[:famille_id], 0, session[:mairie], false, params[:facturer][:mois], params[:facturer][:an], params[:facturer][:commentaire])
  	    if facture_id 
 	   		flash[:notice] = 'Facture créée.'
-	   		redirect_to(:controller => 'factures')
+	   		redirect_to(:controller => 'factures', :sort => 'id DESC')
 		else
 	   		flash[:warning] = 'Aucune prestation à facturer.'
 	   		redirect_to(:controller => 'familles', :action => 'show', :id => params[:famille_id])

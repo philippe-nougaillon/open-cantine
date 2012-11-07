@@ -4,7 +4,7 @@ class FacturesController < ApplicationController
 
   layout :determine_layout
 
-  before_filter :check, :except => ['index', 'new','new_all','create', 'stats_mensuelle_params', 'stats_mensuelle']
+  before_filter :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle']
 
   def check
     unless Facture.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", params[:id], session[:mairie]])

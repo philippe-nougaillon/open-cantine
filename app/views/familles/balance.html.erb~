@@ -31,10 +31,13 @@ Famille: <%= link_to @famille.nom, :action => 'show', :id => @famille.id %>
   <tr /><tr />
   <tr>
     <td><%= Date.today.to_s(:fr) %></td>
-    <td>Solde à ce jour</td>
+    <td><b>Solde à ce jour</b></td>
 	<td />
     <td id="number"><%= number_to_currency(@debit, :locale => "fr") %> </td>
     <td id="number"><%= number_to_currency(@credit, :locale => "fr") %> </td>
     <td id="sum">   <%= number_to_currency(@solde, :locale => "fr") %> </td>
   </tr>
 </table>
+<br>
+<%= link_to image_tag("pdf-logo.png", :size => "35x35"), :controller => 'familles', :action => 'balance', :id => @famille.id, :format => :pdf %>
+
