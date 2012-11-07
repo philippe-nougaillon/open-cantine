@@ -17,7 +17,12 @@ class AdminController < ApplicationController
   end
 
   def check_user
-    @u = User.authenticate2(params[:user][:username], params[:user][:password])
+	if params[:demo] 
+       @u = User.authenticate2('demo', 'demo')
+	else
+       @u = User.authenticate2(params[:user][:username], params[:user][:password])
+	end
+
     if @u 
       @u.lastconnection = Time.now
       @u.save
@@ -29,6 +34,7 @@ class AdminController < ApplicationController
     end
 	respond_to do |format|
   	  format.js { render :js => "window.location = '/familles/index'" if @u }
+	  format.html { redirect_to familles_path }	
 	end
   end
 
