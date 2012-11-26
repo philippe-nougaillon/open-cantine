@@ -6,7 +6,8 @@
   <% end %>
   <hr>
   <div id="adroite">
-  <%= link_to("Imprimer", :action => 'listing',:id => 0) %>
+  	<%= link_to("Imprimer", :action => 'listing',:id => 0) %> | 
+	<%= link_to("Excel", paiements_path(format: "xls")) %>
   </div>
 </div>
 

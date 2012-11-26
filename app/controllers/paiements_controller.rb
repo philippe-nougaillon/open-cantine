@@ -28,7 +28,8 @@ class PaiementsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @paiements }
-	  format.csv {  render :text => @paiements.to_csv }
+	  format.csv  { render :text => @paiements.to_csv }
+	  format.xls
     end
   end
 
