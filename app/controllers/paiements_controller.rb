@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'csv'
 
 class PaiementsController < ApplicationController
 
@@ -27,6 +28,7 @@ class PaiementsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @paiements }
+	  format.csv {  render :text => @paiements.to_csv }
     end
   end
 
