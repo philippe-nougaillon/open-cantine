@@ -27,6 +27,7 @@ class FacturesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => Facture.find_all_by_mairie_id(session[:mairie]).to_xml( :include => [:facture_lignes]) }
+	  format.xls { @factures = Facture.find_all_by_mairie_id(session[:mairie]) }	
    end
   end
 

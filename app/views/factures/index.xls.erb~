@@ -1,0 +1,39 @@
+<table border="0">
+  <tr>
+    <th>ID</th>
+	<th>Ref</th>
+	<th>Date</th>
+	<th>Echeance</th>
+	<th>Famille</th>
+	<th>Montant Cantine</th>
+	<th>Montant Garderie</th>
+	<th>Montant Centre</th>
+	<th>Montant</th>
+	<th>Vérifiée?</th>
+	<th>Memo</th>
+	<th>Envoyée le</th>
+	<th>Crée le</th>
+	<th>Modifée le</th>
+  </tr>
+  <% @factures.each do |f| %>
+	  <tr>
+		<td><%= f.id %></td>
+		<td><%= f.ref %></td>
+		<td><%= f.date %></td>
+		<td><%= f.echeance %></td>
+		<% famille = Famille.find_or_create_by_id(f.famille_id) %>
+	    <td><%= famille.nom.upcase if famille.nom %></td>
+	 	<td><%= f.total_cantine %></td>
+		<td><%= f.total_garderie %></td>
+		<td><%= f.total_centre %></td>
+		<td><%= f.montant %></td>
+		<td><%= f.checked %></td>
+		<td><%= f.footer %></td>
+		<td><%= f.envoyee %></td>
+		<td><%= f.created_at %></td>
+		<td><%= f.updated_at %></td>
+	  </tr>
+  <% end %>
+</table>
+
+

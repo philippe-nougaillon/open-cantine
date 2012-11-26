@@ -17,23 +17,24 @@
 	<th>Updated_at</th>
   </tr>
   <% @paiements.each do |p| %>
-  <tr>
-    <td><%= p.id %></td>
-    <td><%= p.date %></td>
-    <td><%= Famille.find(p.famille).nom.upcase %></td>
-    <td><%= p.ref %></td>
-    <td><%= p.typepaiement %></td>
-    <td><%= p.banque %></td>
-	<td><%= p.chequenum %></td>
-	<td><%= p.montantCantine %></td>
-	<td><%= p.montantGarderie %></td>
-    <td><%= p.montant %></td>
-	<td><%= p.remise %></td>
-	<td><%= p.memo %></td>
-	<td><%= p.facture_id %></td>
-    <td><%= p.created_at %></td>
-    <td><%= p.updated_at %></td>
-  </tr>
+	  <tr>
+		<td><%= p.id %></td>
+		<td><%= p.date %></td>
+		<% famille = Famille.find_or_create_by_id(f.famille_id) %>
+	    <td><%= famille.nom.upcase if famille.nom %></td>
+		<td><%= p.ref %></td>
+		<td><%= p.typepaiement %></td>
+		<td><%= p.banque %></td>
+		<td><%= p.chequenum %></td>
+		<td><%= p.montantCantine %></td>
+		<td><%= p.montantGarderie %></td>
+		<td><%= p.montant %></td>
+		<td><%= p.remise %></td>
+		<td><%= p.memo %></td>
+		<td><%= p.facture_id %></td>
+		<td><%= p.created_at %></td>
+		<td><%= p.updated_at %></td>
+	  </tr>
   <% end %>
 </table>
 

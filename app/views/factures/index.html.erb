@@ -9,7 +9,8 @@
 	 <% if session[:user_readwrite] %>
         <%= link_to "Facturer le mois", :action => "new_all", :id => 0 %>
 	 <% end %>
-	 <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %> 
+	 <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %> |
+	 <%= link_to("Excel", factures_path(format: "xls")) %>
   </div>
 </div>
 
@@ -43,17 +44,16 @@
 		<td><%= link_to image_tag("pdf-logo.png", :size => "25x25"), facture_path(facture, :format => :pdf)  %></td>
 		<td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
 		<td>
-	   <% if Famille.find(facture.famille_id).email %>
+	    <% if Famille.find(facture.famille_id).email %>
   	      <% if !Famille.find(facture.famille_id).email.empty? %>
                   <%= link_to "Envoyer", :action => 'send_invoice', :id => facture.id %> 
-              <% end %> 
-           <% end %>
+          <% end %> 
+        <% end %>
         </td>
 		<td><%= link_to 'Modifier', edit_facture_path(facture) %></td>
       </tr>
     <% end %>
   </table>
-
   <br>
   <%= will_paginate @factures, :previous_label => "Prédédent", :next_label => "Suivant" %>
 <% else %>
