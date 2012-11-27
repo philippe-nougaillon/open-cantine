@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "open-uri"
 
 class FacturesController < ApplicationController
 
@@ -27,7 +28,7 @@ class FacturesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => Facture.find_all_by_mairie_id(session[:mairie]).to_xml( :include => [:facture_lignes]) }
-	  format.xls {@factures = Facture.find_all_by_mairie_id(session[:mairie]) }	
+	  format.xls { @factures = Facture.find_all_by_mairie_id(session[:mairie]) }	
    end
   end
 
@@ -451,9 +452,9 @@ class FacturePdf < Prawn::Document
 	@mairie = mairie
 	@facture = facture
 
-	if @mairie.id = 2
-		logopath =  "#{Rails.root}/public/images/school.png"
-	    image logopath, :height => 40
+	if @mairie.logo_url
+		#logopath =  "#{Rails.root}/public/images/school.png"
+	    image open(@mairie.logo_url), :height => 40
 		move_down 10
 	else
 		move_down 20

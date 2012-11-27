@@ -30,6 +30,10 @@
 	      <dt><%=f.label :nom, "Courriel" %></dt>
 	      <dt><%=f.text_field :email, :class=>"text required", :minlength=>"3" %></dt>
 
+	      <dt><%=f.label :nom, "Chemin vers le logo (PNG) qui s'affichera en entête de vos factures" %></dt>
+	      <dt><%=f.text_field :logo_url, :size => 80 %></dt>
+		  <dt><small>ex : http://upload.wikimedia.org/wikipedia/commons/4/45/Logo-Mairie.png</small></dt>
+		  <br>
 	      <dt><%=f.check_box :newsletter %> <%=f.label "Recevoir la newsletter openCantine ?" %></dt>
 		
 		<br><br>

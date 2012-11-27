@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022083846) do
+ActiveRecord::Schema.define(:version => 20121127181635) do
 
   create_table "blogs", :force => true do |t|
     t.string   "titre"
@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(:version => 20121022083846) do
     t.string   "FacturationModuleName"
     t.string   "email"
     t.boolean  "newsletter"
+    t.string   "logo_url"
   end
 
 end

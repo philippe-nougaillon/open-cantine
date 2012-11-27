@@ -1,0 +1,5 @@
+class AddLogoPathToVille < ActiveRecord::Migration
+  def change
+	add_column :villes, :logo_path, :string
+  end
+end

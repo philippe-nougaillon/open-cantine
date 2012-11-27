@@ -16,7 +16,7 @@
 </div>
 <hr>
 <div>
-   <div class="span-12 last">	
+   <div class="span-15 last">	
 	    <a name="coordonnees"></a>
 	    <h3>Coordonnées</h3>
 
@@ -45,6 +45,10 @@
 		<td>Email</td>
 		<td><%= @mairie.email %></td>
 	      </tr>
+		  <tr>
+			<td>Logo</td>
+			<td><%= @mairie.logo_url %></td>
+	     </tr>
 	    </table>
 	    <%= link_to "Modifier", :controller => 'villes', :action => 'edit', :id => @mairie.id if session[:user_readwrite] %>
             <br><br>
@@ -197,7 +201,8 @@
 		  </table>
 		  <%= link_to "Importer données Familles et Enfants", :action => "import" %><br>
 		  <%= link_to "Export XML des Familles et données liées (enfants, prestations)", "/familles.xml" %><br>
-		  <%= link_to "Export XML des Factures et données liées (lignes de factures)", "/factures.xml" %><br>
+		  <%= link_to "Export XML des Factures et données liées (lignes de factures)", "/factures.xml" %>
+		  <%= link_to "Excel", factures_path(format: "xls") %><br>
 		  <%= link_to "Export XML des Paiements", "/paiements.xml" %><br>
 		  <%= link_to "Excel", paiements_path(format: "xls") %>
 		  <br><br>

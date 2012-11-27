@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "open-uri"
 
 class FacturesController < ApplicationController
 
@@ -451,9 +452,14 @@ class FacturePdf < Prawn::Document
 	@mairie = mairie
 	@facture = facture
 
-	if @mairie.id = 2
-		logopath =  "#{Rails.root}/public/images/school.png"
-	    image logopath, :height => 40
+	if @mairie.logo_url	
+		if @mairie.logo_url.empty?
+		   logo_url =  "#{Rails.root}/public/images/school.png" 
+	       image logo_url, :height => 40
+		else
+		   logo_url =  @mairie.logo_url 
+	       image open(logo_url), :height => 40
+		end
 		move_down 10
 	else
 		move_down 20
