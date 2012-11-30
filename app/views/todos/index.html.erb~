@@ -18,12 +18,12 @@ Les plus anciens et non réalisés d'abord. <i>Mes commentaires en dessous, en i
 	<br>
 <% end %>
 </ul>
-Vous aussi, vous souhaitez faire une remarque ou demander une nouvelle fonctionnalité ? 
-<%= link_to 'Nouvelle remarque', new_todo_path %>
+Vous souhaitez proposer une nouvelle fonctionnalité ? 
+<%= link_to 'Nouvelle proposition', new_todo_path %>
 <br><br>
 <h3>openCantine vous aide au quotidien ?</h3> 
-Vous pouvez participer en faisant un don ou en me passant commande d'un travail facturé.<br>
-Merci d'avance. Philippe Nougaillon<br>
+<h5>Vous pouvez m'aider à continuer son évolution en faisant un don, en passant commande d'un travail facturé ou d'une journée de formation.</h5><br>
+<br>
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 	<input type="hidden" name="cmd" value="_s-xclick">

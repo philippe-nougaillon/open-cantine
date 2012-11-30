@@ -2,7 +2,7 @@
   <table>
     <tr>
       <td>
-        <b>Application libre de facturation péri-scolaire.</b><br>
+        <b>Application libre de gestion et de facturation des prestations périscolaires.</b><br>
 		<span style="color:red;font-size:85%">Version 3</span>
 	    <br><br>
         <h3 style="font-size:150%">Quoi de neuf ?</h3>
@@ -23,12 +23,11 @@
 </div>
 
 <div id="main" class="span-6">
-  <br><br>
      <% if session[:user].nil? %>
 	  <fieldset>
 	  		<legend>Connexion</legend> 
 	 	 	<%= form_for(User.new, :remote => true, :url => { :controller => "admin", :action => "check_user"}) do |f| %>
-		    <label for="username">Utilisateur</label><br>
+		    <label for="username">Nom d'utilisateur</label><br>
 		    <%=  f.text_field "username", :size => 20 %><br>
 		    <label for="password">Mot de passe</label><br>
 		    <%=  f.password_field "password", :size => 20 %><br>
@@ -42,17 +41,16 @@
 	  </fieldset>
 	  <fieldset>
 	  	<legend></legend> 
-		  	<%= link_to "Démonstration", :controller => "admin", :action => "check_user", :demo => true %>
-		  	<br><br>
-		  	<%= link_to "Créer un compte", :controller => "villes", :action => "nouveau_compte" %>
-		  	<br><br>
 		  	<%= link_to "Points forts", :action => "points_forts" %>
 		  	<br><br>
 		  	<%= link_to "Guide d'utilisation", :action => "guide" %>
 		  	<br><br>
-  	      	<%= link_to "Contact", "mailto:philippe.nougaillon@gmail.com" %>
+		  	<%= link_to "Accès Démonstration", :controller => "admin", :action => "check_user", :demo => true %>
 		  	<br><br>
-		  	<%= link_to "Accès parents", :controller => "moncompte", :action => "famillelogin" %>
+		  	<%= link_to "Créer un compte", :controller => "villes", :action => "nouveau_compte" %>
+		  	<br><br>
+  	      	<%= link_to "Contact", "mailto:philippe.nougaillon@gmail.com" %>
+
 	   </fieldset>
 	   <small>Optimisé pour</small><br>
 	   <%= link_to image_tag("firefox.png"), "http://www.mozilla.org/fr/firefox/fx/" %>

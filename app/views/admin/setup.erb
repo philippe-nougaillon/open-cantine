@@ -48,6 +48,7 @@
 		  <tr>
 			<td>Logo</td>
 			<td><%= @mairie.logo_url %></td>
+			<td><%= image_tag(@mairie.logo_url) %></td>
 	     </tr>
 	    </table>
 	    <%= link_to "Modifier", :controller => 'villes', :action => 'edit', :id => @mairie.id if session[:user_readwrite] %>
