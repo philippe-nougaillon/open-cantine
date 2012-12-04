@@ -217,7 +217,6 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
     @sumIn = @famille.paiements.sum('montant')
     @solde = @sumP - @sumIn  
 
-
     @prochain = FactureChrono.find(:first, :conditions => ["mairie_id = ?", mairie_id])
     @facture = Facture.new
     @facture.famille_id = famille_id
@@ -491,14 +490,17 @@ class FacturePdf < Prawn::Document
 	move_down 50
 	
 	items = [["Désignation","Qté","Prix Unitaire","Total"]] 
-	items += @facture.facture_lignes.map do |item|
-		[
-			item.texte.gsub(";", ""),
-			item.qte,
-			number_to_currency(item.prix, :locale => 'fr'),
-			number_to_currency(item.montant, :locale => 'fr')
-		]
+	
+	@facture.facture_lignes.each do |item|
+		if item.montant != 0 #cacher ligne sans montant
+    		items +=[[
+						item.texte.gsub(";", ""), item.qte, 
+						number_to_currency(item.prix, :locale => 'fr'),
+						number_to_currency(item.montant, :locale => 'fr')
+					]]
+		end
 	end
+
 	items += [["TOTAL FACTURE","","", number_to_currency(@facture.montant, :locale => "fr") ]]
 
 	table(items, :row_colors => ["F0F0F0", "FFFFCC"],  :width => 550) do
