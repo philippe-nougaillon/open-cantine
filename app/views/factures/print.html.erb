@@ -45,22 +45,24 @@
 		<% end %>
 	      </td>
 	      <td style="text-align:right">
-		<% if l.montant and l.qte %>
-		   <% if l.prix %> 
-		      <%= number_to_currency( l.prix, :unit => "") %> €
-		   <% else %>
-		      <%= number_to_currency((l.montant / l.qte), :unit => "") %> €
-		   <% end %>
-		<% end %>
+
+			<% if l.montant and l.qte %>
+			   <% if l.prix %> 
+				  <%= number_to_currency( l.prix, :unit => "") %> €
+			   <% else %>
+				  <%= number_to_currency((l.montant / l.qte), :unit => "") %> €
+			   <% end %>
+			<% end %>
 	      </td>
 	      <td style="text-align:right">
-		<% if not l.montant.nil? %>
-		   <% if l.prix %>
-		      <%= number_to_currency((l.prix * l.qte), :unit => "") %> €
-		   <% else %>
-		      <%= number_to_currency((l.montant), :unit => "") %> €
-		   <% end %>
-		<% end %>
+
+			<% if not l.montant.nil? %>
+			   <% if l.prix %>
+				  <%= number_to_currency((l.prix * l.qte), :unit => "") %> €
+			   <% else %>
+				  <%= number_to_currency((l.montant), :unit => "") %> €
+			   <% end %>
+			<% end %>
 	      </td>
 	    </tr> 
 	  <% end %>

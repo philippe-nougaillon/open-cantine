@@ -493,14 +493,19 @@ class FacturePdf < Prawn::Document
 	
 	@facture.facture_lignes.each do |item|
 		if item.montant != 0 #cacher ligne sans montant
+			if item.prix
+				@total_ligne = item.prix * item.qte
+			end
     		items +=[[
 						item.texte.gsub(";", ""), item.qte, 
 						number_to_currency(item.prix, :locale => 'fr'),
-						number_to_currency(item.montant, :locale => 'fr')
+						#number_to_currency(item.montant, :locale => 'fr')
+						number_to_currency(@total_ligne, :locale => 'fr')
 					]]
 		end
 	end
 
+	items += [["","","",""]]
 	items += [["TOTAL FACTURE","","", number_to_currency(@facture.montant, :locale => "fr") ]]
 
 	table(items, :row_colors => ["F0F0F0", "FFFFCC"],  :width => 550) do
