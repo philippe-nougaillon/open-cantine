@@ -81,7 +81,7 @@
 	</table>
 	<br><br><br>
 
-	<% if @facture.SoldeFamille %>
+	<% if @facture.SoldeFamille and @mairie.id != 1 %>
 		<table  class="sample">
 		    <tr>
 		      <td style="text-align:right">Avant cette facture, vous deviez : <b><%=h number_to_currency(@facture.SoldeFamille, :unit => "") %> €</b></td>
