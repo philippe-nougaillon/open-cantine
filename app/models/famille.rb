@@ -60,7 +60,6 @@ class Famille < ActiveRecord::Base
         end
       end
       return (total)
-
   end
 
 end

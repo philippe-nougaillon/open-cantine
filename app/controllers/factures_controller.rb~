@@ -505,6 +505,7 @@ class FacturePdf < Prawn::Document
 		end
 	end
 
+	items += [["","","",""]]
 	items += [["TOTAL FACTURE","","", number_to_currency(@facture.montant, :locale => "fr") ]]
 
 	table(items, :row_colors => ["F0F0F0", "FFFFCC"],  :width => 550) do

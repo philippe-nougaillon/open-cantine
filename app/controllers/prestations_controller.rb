@@ -186,6 +186,13 @@ class PrestationsController < ApplicationController
     end
   end
 
+  def calendrier
+
+
+
+  end
+
+
   # PUT /prestations/1
   # PUT /prestations/1.xml
   def update
