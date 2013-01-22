@@ -87,7 +87,7 @@ class FacturePdf < Prawn::Document
 	end
 	move_down 20
 
-	if @facture.SoldeFamille
+	if @facture.SoldeFamille and @mairie.id != 1 # pas de solde pour Attainville
 		text "Avant cette facture, vous deviez : #{number_to_currency(@facture.SoldeFamille, :locale => 'fr')}", :size => 12
 		text "Votre nouveau solde dû est maintenant de : #{number_to_currency((@facture.SoldeFamille + @facture.montant), :locale => 'fr')}", :size => 12, :style => :bold	
 	end
