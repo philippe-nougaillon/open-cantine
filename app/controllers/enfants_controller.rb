@@ -38,9 +38,9 @@ class EnfantsController < ApplicationController
     @enfant = Enfant.find(params[:id])
 	@classroom = Classroom.find_by_id(@enfant.classe)
     if params[:facturees] == 'on'
-       @prestations = @enfant.prestations.facturees	
+       @prestations = @enfant.prestations.facturees
     else
-       @prestations = @enfant.prestations.afacturer	
+       @prestations = @enfant.prestations.afacturer		
     end
 
     respond_to do |format|

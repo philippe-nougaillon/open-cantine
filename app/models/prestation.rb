@@ -8,8 +8,8 @@ class Prestation < ActiveRecord::Base
   validates_presence_of :date, :message => "Date manquante !"
   validates_uniqueness_of :enfant_id, :scope => [:date], :message => "&Prestation en doublon de date"
 
-  scope :afacturer,   :conditions => "facture_id is null"
-  scope :facturees,   :conditions => "facture_id is not null"
+  scope :afacturer,   :conditions => "facture_id is null", :order => 'date'
+  scope :facturees,   :conditions => "facture_id is not null", :order => 'date'
 
   scope :_repas,       :conditions => "repas = '1'"
   scope :_garderieAM,  :conditions => "garderieAM = '1'"
@@ -29,7 +29,6 @@ class Prestation < ActiveRecord::Base
                           "%#{search.to_date.to_s(:en)}%", "%#{classe}%", mairie]
      end
      Prestation.find(:all, :conditions => conditions, :order =>  sort + " " + order, :joins => :enfants, :joins => :familles)
-     
   end
 
   def tarif
