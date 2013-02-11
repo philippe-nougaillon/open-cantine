@@ -21,7 +21,7 @@ class Enfant < ActiveRecord::Base
 	@order_by = (sort.blank?) ? "nom, prenom" : sort	
 	paginate :per_page => 10,
 	          :page => page,
-	          :conditions => ['nom like ? AND classe like ? AND mairie_id = ?', "%#{search}%", "%#{classe}%", mairie],
+	          :conditions => ['nom like ? AND classe = ? AND mairie_id = ?', "%#{search}%", "%#{classe}%", mairie],
 	          :joins => :famille,
 	          :order => @order_by
   end
