@@ -5,6 +5,6 @@ Le : <%= Date.today.to_s(:fr) %>
 <h3>Liste des prestations</h3>
 
 <div id="mainform">
-  <%= render :partial => "list_print", :locals => { :prestations => @prestations } %>
+  <%= render :partial => "list", :locals => { :prestations => @prestations } %>
 </div>
 

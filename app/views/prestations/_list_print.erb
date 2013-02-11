@@ -1,0 +1,57 @@
+ <% if @prestations.size > 0 %>
+
+    <table class="sample">
+      <tr>
+        <th>Date</th>
+        <th>Classe</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Repas</th>
+        <th>Garderie Matin</th>
+        <th>Garderie Soir</th>
+        <th>Centre Matin</th>
+        <th>Centre Après-midi</th>
+        <th>Etude</th>
+		<th>Mémo</th>
+      </tr>
+	
+      <% for prestation in @prestations %>
+        	<% enfant = Enfant.find(prestation.enfant_id) %>
+
+			<tr class="<%= cycle('list-line-even','list-line-odd') %> ">
+				<td><%=h format_date(prestation.date) %></td>
+				<td><%=h Classroom.find(prestation.enfant.classe).nom %> <%=h Classroom.find(prestation.enfant.classe).referant %></td>
+				<td><b><%=h Famille.find(enfant.famille_id).nom[0..20] %></b></td>
+				<td><%= enfant.prenom[0..16]%></td>
+				<td class="center">
+					<% if prestation.repas != "0" %>
+					   <%= image_tag @images[prestation.repas.to_i], :size => '15x15' %>
+					<% end %>
+				</td>
+				<td class="center">
+					<% if prestation.garderieAM != "0" %>
+					   <%= image_tag @images[prestation.garderieAM.to_i], :size => '15x15' %>
+					<% end %> 
+				</td>
+				<td class="center">
+					<% if prestation.garderiePM != "0" %>
+					<% end %>
+				</td>
+				<td class="center"><%= image_tag @images[prestation.centreAM.to_i], :size => '15x15'   if prestation.centreAM != "0" %> </td>
+				<td class="center"><%= image_tag @images[prestation.centrePM.to_i], :size => '15x15'   if prestation.centrePM != "0" %> </td>
+				<td class="center"><%= image_tag @images[prestation.etude.to_i], :size => '15x15'      if prestation.etude != "0" %> </td>
+
+				<td>
+					<% if enfant.age %>
+					   <%= 'A' if enfant.age > 15 -%>
+					<% end %>
+					<%= 'SP' if enfant.sansPorc -%>
+					<%= 'ALG!' if enfant.allergies -%>
+				</td>
+			</tr>
+      <% end %>
+
+    </table>
+  <% else %>
+     Aucune prestation pour ce jour. Veuillez choisir une autre date ou réduire le filtre.
+  <% end  %>

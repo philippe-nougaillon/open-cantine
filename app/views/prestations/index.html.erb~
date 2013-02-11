@@ -4,6 +4,7 @@
 	  <%= text_field_tag('prestation_date', params[:prestation_date], :size => 10) %>
 	  Classe :
 	  <%= select_tag "classe", options_from_collection_for_select(@classrooms, "id", "nom", params[:classe]), :include_blank => true %>
+	  <%= check_box_tag "pointage",   params[:pointage],   params[:pointage] %> Pointage ?
 	  <%= check_box_tag "toutlemois", params[:toutlemois], params[:toutlemois] %> Voir tout le mois ?
 	  <%= submit_tag 'Rechercher' %>
 	  <%= check_box_tag "totaux", params[:totaux], params[:totaux] %> Voir uniquement les totaux ?
@@ -14,8 +15,9 @@
 			:classe => params[:classe], :toutlemois => params[:toutlemois], :totaux => params[:totaux], :id => 0 %> 
 
 		   <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %> 
-
-		   <%= link_to "Importer pointages", :controller => 'upload' %>
+			<% if session[:user_readwrite] %>	
+		   		<%= link_to "Importer pointages", :controller => 'upload' %>
+			<% end %>
 	  </div>
 	  <% end %>
 	<% end %>
