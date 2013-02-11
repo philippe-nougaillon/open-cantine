@@ -27,8 +27,11 @@ class PrestationsController < ApplicationController
   # GET /prestations.xml
   def index
      @images = get_etat_images
-     if !params[:classe].blank? and !params[:toutlemois] and session[:user_readwrite]
-		session[:date] = params[:prestation_date]
+
+     #if !params[:classe].blank? and !params[:toutlemois] and session[:user_readwrite]
+
+     if !params[:classe].blank? and !params[:toutlemois]
+		session[:date]   = params[:prestation_date]
 		session[:classe] = params[:classe]
 		redirect_to '/presence'
      else
@@ -40,13 +43,13 @@ class PrestationsController < ApplicationController
      params[:prestation_date] ||= Date.today.to_s(:fr)
      sort_param_in_session(params[:sort] ||= 'date,classe,nom,prenom', params[:page])
      @prestations = Prestation.search(params[:prestation_date], params[:classe], session[:mairie], params[:sort], session[:order], params[:toutlemois])
-     @classrooms = Ville.find(session[:mairie]).classrooms
+     @classrooms  = Ville.find(session[:mairie]).classrooms
   end
 
   def print
 	 @images = get_etat_images
      @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], 'date,classe,nom,prenom', '', params[:toutlemois])
-     @classrooms = Ville.find(session[:mairie]).classrooms
+     @classrooms  = Ville.find(session[:mairie]).classrooms
   end
 
   # GET /prestations/1
