@@ -18,12 +18,12 @@ class Enfant < ActiveRecord::Base
   end
 
   def self.search(search, page, classe, mairie,  sort)
-		 paginate :per_page => 10,
-		          :page => page,
-		          :conditions => ['nom like ? AND classe like ? AND mairie_id = ?', "%#{search}%", "%#{classe}%", mairie],
-		          :joins => :famille,
-		          :order => (sort.blank?) ? "nom, prenom" : sort
-	   end
+	@order_by = (sort.blank?) ? "nom, prenom" : sort	
+	paginate :per_page => 10,
+	          :page => page,
+	          :conditions => ['nom like ? AND classe like ? AND mairie_id = ?', "%#{search}%", "%#{classe}%", mairie],
+	          :joins => :famille,
+	          :order => @order_by
   end
 
   def r

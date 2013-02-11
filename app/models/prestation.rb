@@ -22,10 +22,10 @@ class Prestation < ActiveRecord::Base
      if toutlemois
          datedebut = search.to_date.at_beginning_of_month
          datefin = search.to_date.at_end_of_month
-         conditions = ['(date between ? AND ? ) AND (classe like ? ) AND mairie_id = ? ',
+         conditions = ['(date between ? AND ? ) AND (classe = ? ) AND mairie_id = ? ',
                           datedebut, datefin, "%#{classe}%", mairie]
      else
-         conditions = ['prestations.date like ? AND enfants.classe like ? AND mairie_id = ? AND prestations.facture_id is null',
+         conditions = ['prestations.date like ? AND enfants.classe = ? AND mairie_id = ? AND prestations.facture_id is null',
                           "%#{search.to_date.to_s(:en)}%", "%#{classe}%", mairie]
      end
      Prestation.find(:all, :conditions => conditions, :order =>  sort + " " + order, :joins => :enfants, :joins => :familles)
