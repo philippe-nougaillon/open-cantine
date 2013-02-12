@@ -16,3 +16,6 @@
 
 #ignore pdfs
 /pdfs/*.pdf
+
+#ignore dev configuration
+/config/environments/development.rb
