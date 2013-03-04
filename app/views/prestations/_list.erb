@@ -59,11 +59,11 @@
         <% enfant = Enfant.find(prestation.enfant_id) %>
 
 		<%  if prestation.date != @date %>
-    		<% @date = prestation.date %>
+    		
 			<% if params[:totaux] %>
-				<tr><td><%= prestation.date.to_s(:fr) %></td></tr> 
+				<tr><td><%= @date.to_s(:fr) %></td></tr> 
 			<% end %>
-
+			<% @date = prestation.date %>
 			<tr id="sum">
 				<td><small><i>Sous-total jour</i></small></td>
 				<td></td>
@@ -134,19 +134,22 @@
 
       <% end %>
 
-		<tr id="sum">
-			<td><b>Sous-total </b></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td class="center"><b><%= sprintf("%03d", (total_repasEnfant  + total_repasAdulte) - total_repas_jour) %></b></td>
-			<td class="center"><b><%= sprintf("%03d", (total_garderieAMP + total_garderieAMM) - total_garderieAM_jour) %></b></td>
-			<td class="center"><b><%= sprintf("%03d", (total_garderiePMP + total_garderiePMM) - total_garderiePM_jour) %></b></td>
-			<td class="center"><b><%= sprintf("%03d", (total_centreAMP + total_centreAMM) - total_centreAM_jour) %></b></td>
-			<td class="center"><b><%= sprintf("%03d", (total_centrePMP + total_centrePMM) - total_centrePM_jour) %></b></td>
-			<td class="center"><b><%= sprintf("%03d", total_etude - total_etude_jour) %></b></td>
-			<td></td>
-	    </tr>
+	  <% if params[:totaux] %>
+			<tr><td><%= @date.to_s(:fr) %></td></tr> 
+  	  <% end %>
+	  <tr id="sum">
+		<td><small><i>Sous-total jour</i></small></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td class="center"><small><i><%= sprintf("%03d", (total_repasEnfant  + total_repasAdulte) - total_repas_jour) %></i></small></td>
+		<td class="center"><small><i><%= sprintf("%03d", (total_garderieAMP + total_garderieAMM) - total_garderieAM_jour) %></i></small></td>
+		<td class="center"><small><i><%= sprintf("%03d", (total_garderiePMP + total_garderiePMM) - total_garderiePM_jour) %></i></small></td>
+		<td class="center"><small><i><%= sprintf("%03d", (total_centreAMP + total_centreAMM) - total_centreAM_jour) %></i></small></td>
+		<td class="center"><small><i><%= sprintf("%03d", (total_centrePMP + total_centrePMM) - total_centrePM_jour) %></i></small></td>
+		<td class="center"><small><i><%= sprintf("%03d", total_etude - total_etude_jour) %></i></small></td>
+		<td></td>
+	  </tr>		
 
       <tr>
         <td><b>Total Repas Enfants</b></td>
