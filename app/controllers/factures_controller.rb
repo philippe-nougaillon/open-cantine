@@ -268,7 +268,7 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
           # ajout des prestations
           total_prestations = prestations_normales['MntRepas'] + prestations_normales['MntGarderieAM'] + prestations_normales['MntGarderiePM'] + prestations_normales['MntCentreAM'] + prestations_normales['MntCentrePM'] + prestations_normales['MntCentreAMPM'] + prestations_normales['MntEtude']
 
-          header = "#{format_mois(date_debut.month).upcase} - #{enfant.prenom} "
+          header = "#{format_mois(date_debut.month).upcase} - #{enfant.prenom.upcase} (#{Classroom.find(enfant.classe).nom})"
           FactureLigne.create(:facture_id => facture_id,:texte => header.to_s) 
     
           if total_prestations > 0
