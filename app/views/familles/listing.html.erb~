@@ -30,7 +30,7 @@ Le: <%= Date.today.to_date.to_s(:fr) %>
          <%=h Tarif.find(famille.tarif_id).memo unless famille.tarif_id.blank?  %>
       <% end %>
       </td>
-      <td><%=h famille.phone.to_phone %></td>
+      <td><%=h famille.phone %></td>
       <td><%=h famille.mobile1 %></td>
       <td><%=h famille.mobile2 %></td>
       <td><%=h famille.email %></td>
