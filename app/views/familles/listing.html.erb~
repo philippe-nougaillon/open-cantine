@@ -1,9 +1,12 @@
-<h3>Liste des familles</h3>
-<table class="sample">
+<h2>Liste des familles</h2>
+Le: <%= Date.today.to_date.to_s(:fr) %>
+<br><br>
+
+<table>
   <tr>
     <th>Nom</th>
     <th>Adresse</th>
-    <th>Cp</th>
+    <th>CP</th>
     <th>Ville</th>
     <th>Allocataire</th>
     <th>QF</th>
@@ -12,26 +15,30 @@
     <th>Mob. papa</th>	
 	<th>Email</th>
     <th>Enfant(s)</h>
+    <th>Solde</h>
    </tr>
   <% total_enfant = 0 %>
   <% for famille in @familles %>
     <tr>
-      <td><b><%=h famille.nom %></b></td>
+      <td><b><%=h famille.nom.upcase %></b></td>
       <td><%=h famille.adresse[0..25] %></td>
       <td><%=h famille.cp %></td>
-      <td><%=h famille.ville %></td>
+      <td><%=h famille.ville.upcase %></td>
       <td><%=h famille.allocataire %></td>
       <td>
       <% if famille.tarif_id %>
          <%=h Tarif.find(famille.tarif_id).memo unless famille.tarif_id.blank?  %>
       <% end %>
       </td>
-      <td><%=h famille.phone %></td>
+      <td><%=h famille.phone.to_phone %></td>
       <td><%=h famille.mobile1 %></td>
       <td><%=h famille.mobile2 %></td>
       <td><%=h famille.email %></td>
 
       <td style="text-align:right"><%=h famille.enfants.count %></td>
+      <% @sumP  = famille.factures.sum('montant') %>
+      <% @sumIn = famille.paiements.sum('montant') %>
+	  <td style="text-align:right"><%= number_to_currency(@sumIn - @sumP, :locale => "fr") %></td>
     </tr>
     <% total_enfant += famille.enfants.count %>
   <% end %>
@@ -43,6 +50,7 @@
       <td></td>
       <td></td>
       <td></td>
+	  <td></td>
       <td></td>
       <td></td>
       <td  style="text-align:right"><b><%= total_enfant %></b></td>

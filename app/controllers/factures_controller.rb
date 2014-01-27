@@ -23,6 +23,7 @@ class FacturesController < ApplicationController
 
   # GET /factures
   # GET /factures.xml
+  # GET /factures.xls
   def index
     @factures = Facture.search(params[:search],params[:page], session[:mairie], params[:sort], params[:famille_id])
     respond_to do |format|
