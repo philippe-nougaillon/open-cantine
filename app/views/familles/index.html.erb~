@@ -29,13 +29,13 @@
 
   <% for famille in @familles %>
     <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
-      <td><b><%= link_to famille.nom, famille %></b></td>
+      <td><b><%= link_to famille.nom.upcase, famille %></b></td>
       <td><%=h famille.adresse[0..25] %></td>
       <td><%=h famille.cp %></td>
       <td><%=h famille.ville %></td>
-      <td><%=h famille.readable_phone if famille.readable_phone %></td>
-      <td><%=h famille.readable_mobile1 if famille.readable_mobile1 %></td>
-      <td><%=h famille.readable_mobile2 if famille.readable_mobile2 %></td>
+      <td><%=h famille.readable_phone if famille.phone %></td>
+      <td><%=h famille.readable_mobile1 if famille.mobile1 %></td>
+      <td><%=h famille.readable_mobile2 if famille.mobile2 %></td>
     </tr>
   <% end %>
 </table>

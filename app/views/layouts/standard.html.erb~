@@ -37,7 +37,6 @@
 		<h3><%= Ville.find(session[:mairie]).nom if !session[:user].nil? %></h3>	
 	</div>
 
-
 	<div class="span-24 last">
 	    <hr>
 	    <div id="error_message">  <%= flash[:notice]  %></div>
@@ -66,6 +65,7 @@
 		       <%= image_tag "/images/euro.png"   %>
 		       <%= link_to "Paiements", :controller => 'paiements' %>
 		</div>
+		<div class="span-24 last" style="background:black"></div>
 	    <% end %>
 	</div>
 	<div class="span-24 last">

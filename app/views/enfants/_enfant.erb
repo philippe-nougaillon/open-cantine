@@ -5,7 +5,7 @@
   <% end %>
   <tr>
     <td id="label"><%= f.label :famille_id %></td>
-    <td><b><%= Famille.find(@enfant.famille_id).nom %></b></td>
+    <td><b><%= Famille.find(@enfant.famille_id).nom.upcase %></b></td>
 	<%= f.hidden_field :famille_id %>
   </tr>
   <tr>

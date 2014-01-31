@@ -7,7 +7,7 @@
         <table class="sample">
           <tr>
             <td>Nom</td>
-            <td><b><%=h @famille.nom %></b></td>
+            <td><b><%=h @famille.nom.upcase %></b></td>
           </tr>
           <tr>
             <td>Civilité</td>
@@ -94,7 +94,7 @@
           <%= link_to 'Encaisser', :controller => 'paiements', :action => 'new', :famille_id => @famille if session[:user_readwrite] %>
 	      |
 		  <%= link_to 'Relevé de compte', :action => 'balance', :id => @famille.id  %>
-      	  <br><br>
+      	  | <br><br>
 		  <% if @facture %>
           	Dernière facture : 
 		    <%= link_to @facture.ref, :controller => 'factures', :action => 'show', :id => @facture  %>

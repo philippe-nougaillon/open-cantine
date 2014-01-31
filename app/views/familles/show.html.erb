@@ -7,7 +7,7 @@
         <table class="sample">
           <tr>
             <td>Nom</td>
-            <td><b><%=h @famille.nom %></b></td>
+            <td><b><%=h @famille.nom.upcase %></b></td>
           </tr>
           <tr>
             <td>Civilité</td>
@@ -23,7 +23,7 @@
           </tr>
           <tr>
             <td>Ville</td>
-            <td><b><%=h @famille.cp %> <%=h @famille.ville %></b></td>
+            <td><b><%=h @famille.cp %> <%=h @famille.ville.upcase %></b></td>
           </tr>
 	  	  <tr>
             <td>N°Allocataire</td>

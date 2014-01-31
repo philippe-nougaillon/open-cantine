@@ -16,7 +16,7 @@
     <tr>
       <td>
         <td>Famille</td>
-        <td><b><%= link_to Famille.find(@enfant.famille_id).nom, :controller => 'familles', :action => 'show', :id => @enfant.famille_id %></b></td>
+        <td><b><%= link_to Famille.find(@enfant.famille_id).nom.upcase, :controller => 'familles', :action => 'show', :id => @enfant.famille_id %></b></td>
       </td>
     </tr>
     <tr>

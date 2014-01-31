@@ -29,7 +29,7 @@
     <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
       <% famille = Famille.find(enfant.famille_id) %>
       <% classroom = Classroom.find_by_id(enfant.classe) %>
-      <td><b><%=link_to famille.nom, :controller => 'familles', :action => 'show', :id => enfant.famille_id %></b></td>
+      <td><b><%=link_to famille.nom.upcase, :controller => 'familles', :action => 'show', :id => enfant.famille_id %></b></td>
       <td><b><%=link_to enfant.prenom, enfant %></b></td>
       <td><%=h classroom.nom if classroom %></td>
       <td><%=h classroom.referant if classroom %></td>

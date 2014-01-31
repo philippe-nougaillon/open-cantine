@@ -167,7 +167,7 @@ table.sample .center {
 table.sample #sum {
 	text-align:right;
 	font-weight:bold; 
-	font-size:120%;
+	font-size:110%;
 }
 table.sample #number {
 	text-align:right;
