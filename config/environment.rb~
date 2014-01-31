@@ -10,13 +10,15 @@ Date::DATE_FORMATS.merge!(
 
   :default => '%d.%m.%Y',
   :date_time12  => "%m/%d/%Y %I:%M%p",
-  :date_time24  => "%d.%m.%Y %I:%M",
+  :date_time24  => "%d.%m.%Y %H:%M",
   :fr => '%d.%m.%Y',
   :en => '%Y-%m-%d'
 )
 
 Time::DATE_FORMATS.merge!(
-  :fr => '%d.%m.%Y %H:%M'
+  :fr => '%d.%m.%Y %H:%M',
+  :short => '%d.%m.%Y'
+
 )
 
 

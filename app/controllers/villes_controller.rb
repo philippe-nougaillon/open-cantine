@@ -14,6 +14,12 @@ class VillesController < ApplicationController
     @ville = Ville.new(params[:ville])
     @ville.FacturationModuleName = "01-Standard.rb"
     @ville.newsletter = true
+	
+	if params[:antispam] != "26"
+		flash[:warning] = 'Mauvaise réponse à la question anti-spam. Veuillez entrer une autre réponse'
+		render :action => "nouveau_compte"
+		return
+	end
 
     if @ville.save
 		u = User.new

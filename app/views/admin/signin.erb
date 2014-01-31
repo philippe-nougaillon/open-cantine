@@ -2,15 +2,12 @@
   <table>
     <tr>
       <td>
-        <h3>Gestion et facturation des prestations périscolaires</h3><br>
-	    <br><br>
-        <h3>Quoi de neuf ?</h3>
-        <hr>
+        <h3>Gestion et facturation des prestations de cantine et périscolaires</h3><br>
         <% for b in @blogs %>
            <div style="color:darkblue;font-size:120%"><%= b.titre %></div>
-		   <small><%= b.updated_at.to_s(:fr) %></small><br>
+		   <small><%= b.updated_at.to_s(:short) %></small><br>
            <%= b.texte.html_safe %>
- 	       <hr>
+ 	       <br><br>
         <% end %>
       </td>
 	</tr>
@@ -26,16 +23,16 @@
 	  <fieldset>
 	  		<legend>Connexion</legend> 
 	 	 	<%= form_for(User.new, :remote => true, :url => { :controller => "admin", :action => "check_user"}) do |f| %>
-		    <label for="username">Nom d'utilisateur</label><br>
-		    <%=  f.text_field "username", :size => 20 %><br>
-		    <label for="password">Mot de passe</label><br>
-		    <%=  f.password_field "password", :size => 20 %><br>
- 
-   		    <div id="login_msg"></div>
+				<label for="username">Nom d'utilisateur</label><br>
+				<%=  f.text_field "username", :size => 20 %><br>
+				<label for="password">Mot de passe</label><br>
+				<%=  f.password_field "password", :size => 20 %><br>
+	 
+	   		    <div id="login_msg"></div>
 
-		    <div style="margin-top:25px;">
-		       <%= submit_tag "Connexion" %>
-		    </div>
+				<div style="margin-top:25px;">
+				   <%= submit_tag "Connexion" %>
+				</div>
 		  <% end %>	  
 	  </fieldset>
 	  <fieldset>
@@ -44,7 +41,7 @@
 		  	<br><br>
 		  	<%= link_to "Guide d'utilisation", :action => "guide" %>
 		  	<br><br>
-		  	<%= link_to "Accès Démonstration", :controller => "admin", :action => "check_user", :demo => true %>
+		  	<%= link_to "Connexion avec le compte de démonstration", :controller => "admin", :action => "check_user", :demo => true %>
 		  	<br><br>
 		  	<%= link_to "Créer un compte", :controller => "villes", :action => "nouveau_compte" %>
 		  	<br><br>

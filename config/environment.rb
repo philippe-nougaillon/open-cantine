@@ -16,7 +16,9 @@ Date::DATE_FORMATS.merge!(
 )
 
 Time::DATE_FORMATS.merge!(
-  :fr => '%d.%m.%Y %H:%M'
+  :fr => '%d.%m.%Y %H:%M',
+  :short => '%d/%m/%Y'
+
 )
 
 

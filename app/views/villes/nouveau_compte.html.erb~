@@ -1,7 +1,6 @@
-<div class="span-16 last">
+<div class="span-20 last">
 	<h3>Création d'un compte</h3>
 	</hr>
-	Merci de renseigner ce formulaire<br>
 	<%= form_for @ville, :validate => true, :url => { :action => "nouveau_compte_create" } do |f| %>
 		<br>
 		<table class="form">
@@ -15,19 +14,24 @@
 		  <tr>
 		    <td id="label">Email</td>
 		    <td><%= f.text_field :email %><br>
-	   	    <small>Une adresse email valide est nécessaire pour vous envoyer le mot de passe. </small></td>	
+	   	    <small>Une adresse email valide est nécessaire pour vous envoyer le mot de passe </small></td>	
+		  </tr>
+		  <tr>
+		    <td id="label">Anti-Spam</td>
+		    <td><%= text_field_tag :antispam %><br>
+	   	    <small>Entrez la somme de 19+7 afin de vérifier que vous n'êtes pas une machine :o)</small></td>	
 		  </tr>
 		  <tr>
 		     <td></td>
 		     <td>
 		       <div style="margin-top:10px;">
-			  		<%= image_submit_tag "valider.gif" %>
+			  		<%= submit_tag "Créer un nouveau compte" %>
 		       </div>
 		     </td>
 		   </tr>
 		</table>
 	<% end %>
       <br>
-      Une fois ce formulaire validé, vous serez automatiquement connecté à openCantine et un mail indiquant votre mot de passe vous sera envoyé.<br><br>
+      Merci de renseigner ce formulaire. Une fois validé, vous serez automatiquement connecté à openCantine et un mail indiquant votre mot de passe vous sera envoyé.<br><br>
 </div>
 
