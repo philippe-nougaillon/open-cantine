@@ -33,7 +33,8 @@
            <%= image_tag '/images/picnic.png' %><br>
            <%= link_to 'openCantine', '/' %>
 	</div>
-	<div class="span-14 last">
+	<div>
+		<br><br>
 		<h3><%= Ville.find(session[:mairie]).nom if !session[:user].nil? %></h3>	
 	</div>
 

@@ -13,7 +13,11 @@ pre {
 
 #login {
   text-align: right;
-  background-color: #eee;
+  background-color: gray;
+}
+#login a {
+  color: white;	
+  text-decoration: none;
 }
 
 #ajaxzone {
@@ -90,6 +94,7 @@ fieldset {
 
 #menu a {
     text-decoration: none;
+	color: gray;
 }
 
 #menuCurrent {
@@ -111,6 +116,7 @@ fieldset {
 #menuCurrent a {
     color: green;
     text-decoration: none;
+	font-size: 120%;
 }
 
 #menuCurrent img {
