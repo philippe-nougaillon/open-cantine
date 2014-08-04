@@ -3,10 +3,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>openCantine</title>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />  
+  <% unless session[:user].nil? %>
+	 <title>openCantine - <%= User.find(session[:user]).username %></title>
+  <% else %>
+	 <title>openCantine</title>
+  <% end %>
   <%= javascript_include_tag "application", "rails.validations" %>
-
   <%= stylesheet_link_tag '/stylesheets/standard', :media => "all"  %>
   <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
   <link rel="stylesheet" href="/stylesheets/blueprint/print.css" type="text/css" media="print">	
@@ -14,6 +17,12 @@
   <%= csrf_meta_tags %> 
 </head>
 <body>
+	<script language="javascript">
+	    $(document).ready(function() {
+	        $("#error_message").fadeOut(5500);
+	        $("#warning_message").fadeOut(5500);
+	    });
+	</script>
    <div class="container">
 	<div id="login" class="span-24 last">
 	    <% unless session[:user].nil? %>

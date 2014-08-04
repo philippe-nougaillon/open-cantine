@@ -1,71 +1,71 @@
-<div id="form_body">
-    <div class="span-10">
-        <table class="sample">
-          <tr>
-            <td>Nom</td>
-            <td><b><%=h @famille.nom.upcase %></b></td>
-          </tr>
-          <tr>
-            <td>Civilité</td>
-            <td><b><%=h @famille.civilité %></b></td>
-          </tr>
-          <tr>
-            <td>Adresse</td>
-            <td><b><%=h @famille.adresse %></b></td>
-          </tr>
-          <tr>
-            <td>Adresse</td>
-            <td><b><%=h @famille.adresse2 %></b></td>
-          </tr>
-          <tr>
-            <td>Ville</td>
-            <td><b><%=h @famille.cp %> <%=h @famille.ville.upcase %></b></td>
-          </tr>
-	  	  <tr>
-            <td>N°Allocataire</td>
-            <td><b><%=h @famille.allocataire %> </b></td>
-          </tr>          
-	  	  <tr>
-            <td>Téléphone fixe</td>
-            <td><b><%=h @famille.readable_phone if @famille.phone %></b></td>
-          </tr>
-          <tr>
-            <td>Mob Maman/Papa</td>
-            <td><b><%= @famille.readable_mobile1 if @famille.mobile1 %> / <%= @famille.readable_mobile2 if @famille.mobile2 %></b></td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td><b><%= mail_to @famille.email %></b></td>
-          </tr>
-	  	  <tr><td></td><td></td></tr>
-        </table>
-		<% if session[:user_readwrite] %>
-			   <%= link_to "Modifier", edit_famille_path(@famille) %> |
-		   	   <%= link_to("[X]", @famille, 
-					:confirm => 'Certain(e) de vouloir supprimer cette fiche famille ?', :method => :delete) %> 	  
-		<% end %>
-		<br /><br />
-    </div>
+<div id="form_actions">
+  <h3> Famille <%=h @famille.nom.upcase %></h3>
+</div>
+<div class="span-10">
+    <table class="sample">
+      <tr>
+        <td>Nom</td>
+        <td><b><%=h @famille.nom.upcase %></b></td>
+      </tr>
+      <tr>
+        <td>Civilité</td>
+        <td><b><%=h @famille.civilité %></b></td>
+      </tr>
+      <tr>
+        <td>Adresse</td>
+        <td><b><%=h @famille.adresse %></b></td>
+      </tr>
+      <tr>
+        <td>Adresse</td>
+        <td><b><%=h @famille.adresse2 %></b></td>
+      </tr>
+      <tr>
+        <td>Ville</td>
+        <td><b><%=h @famille.cp %> <%=h @famille.ville.upcase %></b></td>
+      </tr>
+	  <tr>
+        <td>N°Allocataire</td>
+        <td><b><%=h @famille.allocataire %> </b></td>
+      </tr>          
+	  <tr>
+        <td>Téléphone fixe</td>
+        <td><b><%=h @famille.readable_phone if @famille.phone %></b></td>
+      </tr>
+      <tr>
+        <td>Mob Maman/Papa</td>
+        <td><b><%= @famille.readable_mobile1 if @famille.mobile1 %> / <%= @famille.readable_mobile2 if @famille.mobile2 %></b></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><b><%= mail_to @famille.email %></b></td>
+      </tr>
+      <tr>
+          <td>N°Allocataire</td>
+          <td><b><%=h @famille.allocataire %> </b></td>
+      </tr>          
+      <tr>
+          <td>Tarif ou QF</td>
+          <td>
+            <% if @famille.tarif_id %>
+               <%= Tarif.find(@famille.tarif_id).memo %> 
+            <% else %>
+               Automatique
+            <% end %>
+          </td>
+      </tr>
+    </table>
+    <% if session[:user_readwrite] %>
+    	   <%= link_to "Modifier", edit_famille_path(@famille) %> |
+       	   <%= link_to("[X]", @famille, 
+    			:confirm => 'Certain(e) de vouloir supprimer cette fiche famille ?', :method => :delete) %> 	  
+    <% end %>
+    <br /><br />
+</div>
 
-    <div class="span-2"> <br>	</div>
-
-    <div class="span-12 last">
+<div class="span-2"> <br>	</div>
+    <div class="span-10 last">
         <table class="sample">
-		  <tr>
-	        <td>N°Allocataire</td>
-	        <td><b><%=h @famille.allocataire %> </b></td>
-		  </tr>          
-		  <tr>
-    	    <td>Tarif ou QF</td>
-    	    <td>
-			  <% if @famille.tarif_id %>
-	   	         <%= Tarif.find(@famille.tarif_id).memo %> 
-			  <% else %>
-			     Automatique
-			  <% end %>
-            </td>
-  	  	   </tr>
-		</table>
+    		</table>
         <table class="sample">
             <tr>
               <th>Total Factures</th>
@@ -157,7 +157,6 @@
   	<% end %>
 	 
      </div>
-</div>
 
 
 

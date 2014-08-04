@@ -14,31 +14,31 @@
   </span> 	
   <% end %>
 </div>
-<br>
+<div id="form_body">
+  <table class="sample">
+    <tr>
+      <th><%= link_to "Nom", :sort => "nom" %></th>
+      <th>Adresse</th>
+      <th><%= link_to "Cp", :sort => "cp" %></th>
+      <th><%= link_to "Ville", :sort => "ville" %></th>
+      <th>Tél. fixe</th>
+      <th>Mob. maman</th>
+      <th>Mob. papa</th>
+     </tr>
 
-<table class="sample">
-  <tr>
-    <th><%= link_to "Nom", :sort => "nom" %></th>
-    <th>Adresse</th>
-    <th><%= link_to "Cp", :sort => "cp" %></th>
-    <th><%= link_to "Ville", :sort => "ville" %></th>
-    <th>Tél. fixe</th>
-    <th>Mob. maman</th>
-    <th>Mob. papa</th>
-   </tr>
+    <% for famille in @familles %>
+      <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
+        <td><b><%= link_to famille.nom.upcase, famille %></b></td>
+        <td><%=h famille.adresse[0..25] %></td>
+        <td><%=h famille.cp %></td>
+        <td><%=h famille.ville.upcase %></td>
+        <td><%=h famille.readable_phone if famille.phone %></td>
+        <td><%=h famille.readable_mobile1 if famille.mobile1 %></td>
+        <td><%=h famille.readable_mobile2 if famille.mobile2 %></td>
+      </tr>
+    <% end %>
+  </table>
 
-  <% for famille in @familles %>
-    <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
-      <td><b><%= link_to famille.nom.upcase, famille %></b></td>
-      <td><%=h famille.adresse[0..25] %></td>
-      <td><%=h famille.cp %></td>
-      <td><%=h famille.ville.upcase %></td>
-      <td><%=h famille.readable_phone if famille.phone %></td>
-      <td><%=h famille.readable_mobile1 if famille.mobile1 %></td>
-      <td><%=h famille.readable_mobile2 if famille.mobile2 %></td>
-    </tr>
-  <% end %>
-</table>
-
-<br />
-<%= will_paginate @familles, :previous_label => "Prédédent", :next_label => "Suivant" %>
+  <br />
+  <%= will_paginate @familles, :previous_label => "Prédédent", :next_label => "Suivant" %>
+</div>
