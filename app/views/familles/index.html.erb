@@ -5,14 +5,14 @@
       <%= autocomplete_field_tag 'nom', '', autocomplete_famille_nom_familles_path, :size => 25, :id_element => '#famille_id' %>
       <%= hidden_field_tag 'famille_id','' %>
       <%= submit_tag 'Rechercher'   %>
-  <% end %>
-  <hr>	
-  <div id="adroite"> 	
+  
+  <span id="adroite"> 	
   	<% if session[:user_readwrite] %>
          <%= link_to 'Ajouter une famille', new_famille_path %>
   	<% end %>
   	<%= link_to 'Listing Familles', :action => "listing", :id => 0 %>
-  </div> 	
+  </span> 	
+  <% end %>
 </div>
 <br>
 

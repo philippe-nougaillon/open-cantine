@@ -5,11 +5,10 @@
     Classe :
     <%= select_tag 'classe', options_for_select(@classes, params[:classe]) %>
     <%= submit_tag 'Rechercher' %>
+    <span id="adroite">  
+      <%= link_to "Imprimer", :action => 'liste', :id => 1 %>
+    </span>
   <% end %>
-  <hr>	
-  <div id="adroite"> 	
-    <%= link_to "Imprimer", :action => 'liste', :id => 1 %>
-  </div>
 </div>
 <br>
 

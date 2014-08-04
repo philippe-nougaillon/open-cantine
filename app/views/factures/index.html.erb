@@ -3,15 +3,14 @@
       Référence :
       <%= text_field_tag "search", params[:search] %>
       <%= submit_tag 'Rechercher' %>
+    <span id="adroite">
+     <% if session[:user_readwrite] %>
+          <%= link_to "Facturer le mois", :action => "new_all", :id => 0 %>
+     <% end %>
+     <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %>
+     <%= link_to("Export Excel", factures_path(format: "xls")) %>
+    </span>
   <% end %>
-  <hr>
-  <div id="adroite">
-	 <% if session[:user_readwrite] %>
-        <%= link_to "Facturer le mois", :action => "new_all", :id => 0 %>
-	 <% end %>
-	 <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %> |
-	 <%= link_to("Excel", factures_path(format: "xls")) %>
-  </div>
 </div>
 
 <br>
@@ -28,7 +27,7 @@
       <th><%= link_to "Mémo bas de page", :sort => "footer" %></th>
       <th>PDF</th>
       <th>PDF envoyé le</th>
-	  <th/>	
+	    <th/>	
       <th/>
     </tr>
 
@@ -39,18 +38,20 @@
         <td><%=h facture.echeance.to_s(:fr) %></td>
         <td><%= link_to facture.famille.nom, facture.famille  %> </td>
         <td style="text-align:right"><%=h number_to_currency(facture.montant, :locale => :fr) %></td>
-		<td style="text-align:center"><%= image_tag "ok.jpeg", :size => '15x15' if facture.checked %></td>
-		<td><%= facture.footer[0..15] if facture.footer %></td>
-		<td><%= link_to image_tag("pdf-logo.png", :size => "25x25"), facture_path(facture, :format => :pdf)  %></td>
-		<td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
-		<td>
-	    <% if Famille.find(facture.famille_id).email %>
-  	      <% if !Famille.find(facture.famille_id).email.empty? %>
-                  <%= link_to "Envoyer", :action => 'send_invoice', :id => facture.id %> 
-          <% end %> 
-        <% end %>
+		    <td style="text-align:center"><%= image_tag "ok.jpeg", :size => '15x15' if facture.checked %></td>
+		    <td><%= facture.footer[0..15] if facture.footer %></td>
+		    <td>
+          <%= link_to image_tag("pdf-logo.png", :size => "25x25"), facture_path(facture, :format => :pdf)  %>
         </td>
-		<td><%= link_to 'Modifier', edit_facture_path(facture) %></td>
+		    <td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
+		    <td>
+	         <% if Famille.find(facture.famille_id).email %>
+  	         <% if !Famille.find(facture.famille_id).email.empty? %>
+                <%= link_to "Envoyer", :action => 'send_invoice', :id => facture.id %> 
+             <% end %> 
+           <% end %>
+        </td>
+		    <td><%= link_to 'Modifier', edit_facture_path(facture) %></td>
       </tr>
     <% end %>
   </table>

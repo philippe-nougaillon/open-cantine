@@ -1,0 +1,23 @@
+@familles = Ville.find(59).familles
+
+@enfants = Enfant.find(:all, :conditions => ["famille_id in (?)", @familles.collect(&:id)])
+
+@prestations = Prestation.where("date between DATE('2012-10-04') and DATE('2012-10-05') and enfant_id in (?)", @enfants.collect(&:id))
+
+@prestations = Prestation.find(:all, :conditions => ["date='2012-12-24' and enfant_id in (?)", @enfants.collect(&:id) ])
+
+
+
+Prestation.destroy_all(["id in (?)", @prestations.collect(&:id)])
+
+
+#convertir un array en hash
+@prestations_by_date = Hash[*@prestations.all.map{ |p| [p.date.to_s(:en), p] }.flatten]
+
+#trouver un objet par une date
+p = @prestations_by_date[@day_to_check.to_s(:en)] 
+
+
+
+
+

@@ -13,11 +13,10 @@ pre {
 
 #login {
   text-align: right;
-  background-color: gray;
 }
+
 #login a {
-  color: white;	
-  text-decoration: none;
+  color: black;	
 }
 
 #ajaxzone {
@@ -39,11 +38,11 @@ fieldset {
 }
 
 #form_actions {
-    background-color: #eee;
-    padding-top:15px;
-    padding-bottom:5px;
-    padding-left: 10px;
-    width: 99%;
+  background-color: #eee;
+  padding-top:15px;
+  padding-bottom:5px;
+  padding-left: 10px;
+  width: 99%;
 	-webkit-border-bottom-right-radius: 6px;
 	-webkit-border-bottom-left-radius: 6px;
 	-moz-border-radius-bottomright: 6px;
@@ -57,11 +56,19 @@ fieldset {
 	color:black;
 }
 
+#form_body {
+  background-color: #eee;
+  padding-top:15px;
+  padding-bottom:5px;
+  padding-left: 10px;
+  padding-bottom: 20px;
+  width: 100%;
+
+}
 
 #msgzone {
 	height: 40px;
 }
-
 
 #title {
     color:  black;
@@ -82,24 +89,26 @@ fieldset {
 
 
 #menu {
-    font-weight: bold;
-    padding-left:10px;
-    padding-right:10px;	
+  font-size: 14px;
+  font-weight: bold;
+  padding-left:10px;
+  padding-right:10px;	
 	padding-top:5px;
 }
 
 #menu img {
-    width: 25px;
+  width: 25px;
 }
 
 #menu a {
-    text-decoration: none;
+  text-decoration: none;
 	color: gray;
 }
 
 #menuCurrent {
-    font-weight: bold;
-    background-color: #eee;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #eee;
 	border-width: 1px 1px 0px 1px;
 	padding-top:5px;
 	padding-left:10px;
@@ -116,7 +125,6 @@ fieldset {
 #menuCurrent a {
     color: green;
     text-decoration: none;
-	font-size: 120%;
 }
 
 #menuCurrent img {
@@ -148,21 +156,17 @@ table.sample {
 }
 
 table.sample th {
-	border-width: 1px 1px 1px 1px;
-	padding: 5px 5px 5px 5px;
-	border-style: groove groove groove groove;
 	background-color: rgb(250, 250, 250);
-        color: 	green;
+  color: 	green;
 }
 
 table.sample th a {
-        color: 	green;
+  color: 	green;
 }
 
 table.sample th a:hover {
-        color: 	black;
+  color: 	black;
 }
-
 
 table.sample .center {
     text-align:center;
@@ -180,43 +184,38 @@ table.sample a {
      color: black;
 }
 table.sample a:hover {
-     text-decoration: none;
-     background-color: white;
-     color: black;
+  text-decoration: none;
+  background-color: white;
+  color: black;
 }
 
 #adroite {
-	text-align:right;
-	margin-right: 5px;
+  margin-left: 20px;
 }
 
 #adroite a {
-    font: bold 12px Arial;
-    text-decoration: none;
-    background-color: #EEEEEE;
-    color: #333333;
-    padding: 2px 6px 2px 6px;
-    border-top: 1px solid #CCCCCC;
-    border-right: 1px solid #333333;
-    border-bottom: 1px solid #333333;
-    border-left: 1px solid #CCCCCC;
-   }
-
+  font: 14px Arial;
+  text-decoration: none;
+  background-color: #808080;
+  color: white;
+  border-radius: 4px;
+  padding: 0px 1.5rem;
+}
 
 #error_message {
-    position:absolute;
-    left:44%;
-    top:80px;
-    background-color: green;
-    color:white;
+  position:absolute;
+  left:44%;
+  top:80px;
+  background-color: green;
+  color:white;
 }
 
 #warning_message {
-    position: absolute;
-    left: 44%;
-    top: 80px;
-    background-color: orange;
-    color: white;
+  position: absolute;
+  left: 44%;
+  top: 80px;
+  background-color: orange;
+  color: white;
 }
 
 table.form {
@@ -235,6 +234,15 @@ table.form th {
 table.form #label {
     color:navy;
     text-align:right;
+}
+
+table.form input[type="submit"] {
+  font: 14px Arial;
+  text-decoration: none;
+  background-color: green;
+  color: white;
+  border-radius: 4px;
+  padding: 0px 1.5rem;
 }
 
 
@@ -319,9 +327,12 @@ div.boolean {
 
 .simple_form input[type="submit"] {
   margin-left: 120px;
-  width: 133px;
-  height: 31px;	
-  background:url("valider.gif");
+  font: 14px Arial;
+  text-decoration: none;
+  background-color: green;
+  color: white;
+  border-radius: 4px;
+  padding: 0px 1.5rem;
 }
 
 

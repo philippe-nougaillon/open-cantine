@@ -11,9 +11,7 @@
   <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
   <link rel="stylesheet" href="/stylesheets/blueprint/print.css" type="text/css" media="print">	
   <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-
-  <%= csrf_meta_tags %>  
-
+  <%= csrf_meta_tags %> 
 </head>
 <body>
    <div class="container">
@@ -35,7 +33,7 @@
 	</div>
 	<div>
 		<br><br>
-		<h3><%= Ville.find(session[:mairie]).nom if !session[:user].nil? %></h3>	
+		<h3><%= Ville.find(session[:mairie]).nom unless session[:user].nil? %></h3>	
 	</div>
 
 	<div class="span-24 last">

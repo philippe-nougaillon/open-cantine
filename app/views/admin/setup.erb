@@ -201,6 +201,9 @@
 		</td></tr>	 
 		  </table>
 		  <%= link_to "Importer données Familles et Enfants", :action => "import" %><br>
+		  <% if session[:user_readwrite] %>	
+			 <%= link_to "Importer pointages", :controller => 'upload' %><br>
+		  <% end %>
 		  <%= link_to "Export XML des Familles et données liées (enfants, prestations)", "/familles.xml" %><br>
 		  <%= link_to "Export XML des Factures et données liées (lignes de factures)", "/factures.xml" %>
 		  <%= link_to "Excel", factures_path(format: "xls") %><br>

@@ -3,12 +3,11 @@
     Référence :
     <%= text_field_tag "search", params[:search] %>
     <%= submit_tag 'Rechercher' %>
+    <span id="adroite">
+      <%= link_to("Imprimer", :action => 'listing',:id => 0) %>
+      <%= link_to("Export Excel", paiements_path(format: "xls")) %>
+    </span>
   <% end %>
-  <hr>
-  <div id="adroite">
-  	<%= link_to("Imprimer", :action => 'listing',:id => 0) %> | 
-	<%= link_to("Excel", paiements_path(format: "xls")) %>
-  </div>
 </div>
 
 <br>

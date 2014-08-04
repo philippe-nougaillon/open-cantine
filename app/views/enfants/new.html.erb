@@ -1,9 +1,10 @@
-<br>
-<h3>Nouvel enfant</h3>
+<div id="form_body">
+	<br>
+	<h3>Ajout d'un nouvel enfant</h3>
 
-<%= form_for(@enfant) do |f| %>
+	<%= form_for(@enfant) do |f| %>
 
-  <%= render :partial => 'enfant', :locals => { :f => f } %>
+	  <%= render :partial => 'enfant', :locals => { :f => f } %>
 
-<% end %>
-
+	<% end %>
+</div>

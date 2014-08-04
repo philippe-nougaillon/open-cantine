@@ -1,11 +1,10 @@
-<br>
-<br>
-<h3>Modification famille</h3>
+<div id="form_body">
+	<br>
+	<h3>Modification famille</h3>
 
+	<%= simple_form_for(@famille) do |f| %>
 
-<%= simple_form_for(@famille) do |f| %>
+	  <%= render :partial => 'famille', :locals => { :f => f } %>
 
-  <%= render :partial => 'famille', :locals => { :f => f } %>
-
-<% end %>
-
+	<% end %>
+</div>

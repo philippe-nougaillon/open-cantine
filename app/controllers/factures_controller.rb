@@ -29,8 +29,8 @@ class FacturesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => Facture.find_all_by_mairie_id(session[:mairie]).to_xml( :include => [:facture_lignes]) }
-	  format.xls { @factures = Facture.find_all_by_mairie_id(session[:mairie]) }	
-   end
+	    format.xls { @factures = Facture.find_all_by_mairie_id(session[:mairie]) }	
+    end
   end
 
   # GET /factures/1
@@ -45,7 +45,7 @@ class FacturesController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @facture }
       format.pdf do
- 		pdf = FacturePdf.new(@facture, @mairie, view_context)
+ 		    pdf = FacturePdf.new(@facture, @mairie, view_context)
         send_data pdf.render, :type => "application/pdf", 
 				:filename => "Facture_#{@facture.ref}_#{@facture.created_at.strftime("%d/%m/%Y")}.pdf"
       end   
@@ -63,26 +63,16 @@ class FacturesController < ApplicationController
     @famille = Famille.find(@facture.famille_id)
     @mairie  = Ville.find(session[:mairie])
 	
-	# render pdf
-    #pdf = render_to_string :pdf => filename, :template => 'factures/show.pdf.erb', :layout => 'pdf'
-	
-	pdf = FacturePdf.new(@facture, @mairie, view_context)
-
-	# then save to a file
-	filename = @facture.id.to_s
+  	pdf = FacturePdf.new(@facture, @mairie, view_context)
+  	filename = @facture.id.to_s
     save_path = Rails.root.join('pdfs',"#{filename}.pdf")
-	pdf.render_file(save_path)
-    
-	#File.open(save_path, 'wb') do |file|
-	#  file << pdf
-	#end
-	
-    UserMailer.send_invoice(@mairie, @famille, @facture).deliver
-	# update sent at	
-	@facture.envoyee = Time.now
-	@facture.save
-	flash[:notice] = "Facture #{@facture.ref} #{@famille.nom} envoyée."
-	redirect_to factures_path
+  	pdf.render_file(save_path) # then save to a file
+      
+  	UserMailer.send_invoice(@mairie, @famille, @facture).deliver
+    @facture.envoyee = Time.now
+  	@facture.save
+  	flash[:notice] = "Facture #{@facture.ref} #{@famille.nom} envoyée."
+  	redirect_to factures_path
   end
 
   # GET /factures/1/edit
@@ -108,29 +98,29 @@ class FacturesController < ApplicationController
 
 
   def stats_mensuelle
-	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
-	@facture_date = @stats_date.to_date
-	
-	@datedebut  = @facture_date.to_date.at_beginning_of_month
-	@datefin = @facture_date.to_date.at_beginning_of_month.next_month
+  	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
+  	@facture_date = @stats_date.to_date
+  	
+  	@datedebut  = @facture_date.to_date.at_beginning_of_month
+  	@datefin = @facture_date.to_date.at_beginning_of_month.next_month
 
-	@factures = Facture.where("date between ? and ? and mairie_id= ?", @datedebut, @datefin, session[:mairie])
+  	@factures = Facture.where("date between ? and ? and mairie_id= ?", @datedebut, @datefin, session[:mairie])
 
-	if @factures.first
-		@total_cantine = 0.00
-		@total_garderie = 0.00
-		@total_centre = 0.00
-		@total_etude = 0.00
-		for f in @factures
-			@total_cantine += f.total_cantine if f.total_cantine
-			@total_garderie += f.total_garderie if f.total_garderie
-			@total_centre += f.total_centre if f.total_centre
-			@total_etude += f.total_etude if f.total_etude
-		end
-	else
-		flash[:notice] = "Pas de factures ce mois là."
-		redirect_to "/factures/stats_mensuelle_params/0"
-	end
+  	if @factures.first
+  		@total_cantine = 0.00
+  		@total_garderie = 0.00
+  		@total_centre = 0.00
+  		@total_etude = 0.00
+  		for f in @factures
+  			@total_cantine += f.total_cantine if f.total_cantine
+  			@total_garderie += f.total_garderie if f.total_garderie
+  			@total_centre += f.total_centre if f.total_centre
+  			@total_etude += f.total_etude if f.total_etude
+  		end
+  	else
+  		flash[:notice] = "Pas de factures ce mois là."
+  		redirect_to "/factures/stats_mensuelle_params/0"
+  	end
   end	
 
   # POST /factures

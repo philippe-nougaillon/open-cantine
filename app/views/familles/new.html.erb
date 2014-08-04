@@ -1,10 +1,7 @@
-<br>
-
-<h3>Nouvelle famille</h3>
-
-<%= simple_form_for @famille do |f| %>
-
-  <%= render :partial => 'famille', :locals => { :f => f } %>
-
-<% end %>
-
+<div id="form_body">
+	<br>
+	<h3>Ajout d'une nouvelle famille</h3>
+	<%= simple_form_for @famille do |f| %>
+	  <%= render :partial => 'famille', :locals => { :f => f } %>
+	<% end %>
+</div>
