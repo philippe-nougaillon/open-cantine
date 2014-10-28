@@ -4,20 +4,276 @@
 		"selected_items":
 		[
 			[
-				"he",
-				"Helvetica"
+				"fla",
+				"flash"
 			],
 			[
-				"mar",
-				"margin-top"
+				"se",
+				"session"
 			],
 			[
-				"margin",
-				"margin-left"
+				"Prest",
+				"Prestations"
 			],
 			[
-				"border",
-				"border-radius"
+				"no",
+				"notice"
+			],
+			[
+				"prestat",
+				"prestations"
+			],
+			[
+				"export",
+				"export1"
+			],
+			[
+				"expo",
+				"export4"
+			],
+			[
+				"dossier",
+				"dossier_id"
+			],
+			[
+				"da",
+				"date280"
+			],
+			[
+				"for",
+				"format"
+			],
+			[
+				"I",
+				"I18n"
+			],
+			[
+				"date2",
+				"date260"
+			],
+			[
+				"date",
+				"date260"
+			],
+			[
+				"lin",
+				"link_to"
+			],
+			[
+				"ja",
+				"jalon_next"
+			],
+			[
+				"dossiers_",
+				"dossiers_path"
+			],
+			[
+				"ta",
+				"table	Tag"
+			],
+			[
+				"tag_",
+				"tag_filter"
+			],
+			[
+				"tag",
+				"tag_seleted"
+			],
+			[
+				"in",
+				"include_blank"
+			],
+			[
+				"options_",
+				"options_for_select"
+			],
+			[
+				"op",
+				"options_for_select"
+			],
+			[
+				"curre",
+				"current_user"
+			],
+			[
+				"comm",
+				"Comment"
+			],
+			[
+				"messa",
+				"message"
+			],
+			[
+				"b",
+				"blank"
+			],
+			[
+				"tache",
+				"tache_id"
+			],
+			[
+				"or",
+				"order_by"
+			],
+			[
+				"u",
+				"utilisateur"
+			],
+			[
+				"utili",
+				"utilisateurs_path"
+			],
+			[
+				"jalon",
+				"jalon"
+			],
+			[
+				"index_",
+				"index_admin"
+			],
+			[
+				"ori",
+				"original_value"
+			],
+			[
+				"chan",
+				"changes"
+			],
+			[
+				"ch",
+				"changes"
+			],
+			[
+				"enregis",
+				"enregistrés"
+			],
+			[
+				"chang",
+				"changements"
+			],
+			[
+				"im",
+				"importation"
+			],
+			[
+				"i",
+				"inline-block"
+			],
+			[
+				"th",
+				"th	Tag"
+			],
+			[
+				"curr",
+				"current_user_admin"
+			],
+			[
+				"dos",
+				"dossier"
+			],
+			[
+				"do",
+				"dossier"
+			],
+			[
+				"inde",
+				"indice"
+			],
+			[
+				"to",
+				"to_i"
+			],
+			[
+				"Lo",
+				"logements"
+			],
+			[
+				"nbre",
+				"nbre_lgt_reel"
+			],
+			[
+				"er",
+				"errors"
+			],
+			[
+				"syn",
+				"syndic"
+			],
+			[
+				"num",
+				"num_pa"
+			],
+			[
+				"nb",
+				"nbre_lgt_theo"
+			],
+			[
+				"eta",
+				"etat_site"
+			],
+			[
+				"et",
+				"etat_technique"
+			],
+			[
+				"sy",
+				"syndic_before"
+			],
+			[
+				"us",
+				"user_id"
+			],
+			[
+				"doss",
+				"dossier"
+			],
+			[
+				"firs",
+				"first_or_initialize"
+			],
+			[
+				"actio",
+				"action_id"
+			],
+			[
+				"li",
+				"ligne_entete"
+			],
+			[
+				"num_",
+				"num_pa"
+			],
+			[
+				"o",
+				"optimum_row"
+			],
+			[
+				"O",
+				"optimum"
+			],
+			[
+				"up",
+				"upcase"
+			],
+			[
+				"opti",
+				"optimum_row"
+			],
+			[
+				"Code",
+				"CODE_SYN"
+			],
+			[
+				"opt",
+				"optimum_row"
+			],
+			[
+				"row",
+				"row_value"
+			],
+			[
+				"pra",
+				"params"
 			],
 			[
 				"sa",
@@ -28,16 +284,16 @@
 				"current_user_admin"
 			],
 			[
-				"ja",
-				"jalon_id"
-			],
-			[
 				"ca",
 				"skip_callback"
 			],
 			[
 				"checklist",
 				"checklist_id"
+			],
+			[
+				"mar",
+				"margin-right"
 			],
 			[
 				"lo",
@@ -56,14 +312,6 @@
 				"page_size"
 			],
 			[
-				"in",
-				"inspect"
-			],
-			[
-				"dossier",
-				"dossier_id"
-			],
-			[
 				"acio",
 				"action_name"
 			],
@@ -74,18 +322,6 @@
 			[
 				"r",
 				"role"
-			],
-			[
-				"curr",
-				"current_user_admin"
-			],
-			[
-				"jalon",
-				"jalon_role_id"
-			],
-			[
-				"ta",
-				"tache"
 			],
 			[
 				"role",
@@ -108,18 +344,6 @@
 				"field_id"
 			],
 			[
-				"et",
-				"etat_site"
-			],
-			[
-				"dos",
-				"dossiers_path"
-			],
-			[
-				"doss",
-				"dossiers_path"
-			],
-			[
 				"text",
 				"text-decoration"
 			],
@@ -132,32 +356,16 @@
 				"code_syn"
 			],
 			[
-				"syn",
-				"syndic"
-			],
-			[
 				"un",
 				"unless	unless … end"
-			],
-			[
-				"sy",
-				"syndic"
 			],
 			[
 				"mess",
 				"messages_last"
 			],
 			[
-				"firs",
-				"first_or_initialize"
-			],
-			[
 				"pr",
 				"priorite_id"
-			],
-			[
-				"im",
-				"image_tag"
 			],
 			[
 				"co",
@@ -166,10 +374,6 @@
 			[
 				"utilisa",
 				"utilisateur"
-			],
-			[
-				"us",
-				"utilisateur_id"
 			],
 			[
 				"che",
@@ -192,10 +396,6 @@
 				"destroy"
 			],
 			[
-				"th",
-				"th	Tag"
-			],
-			[
 				"fait",
 				"fait_par"
 			],
@@ -212,20 +412,8 @@
 				"taches"
 			],
 			[
-				"op",
-				"optp	option_parse { .. }"
-			],
-			[
-				"chan",
-				"chantiers"
-			],
-			[
 				"chantier",
 				"chantier_current"
-			],
-			[
-				"o",
-				"otpclient"
 			],
 			[
 				"meu",
@@ -288,24 +476,12 @@
 				"checklist_id"
 			],
 			[
-				"ch",
-				"check_item"
-			],
-			[
 				"n",
 				"new"
 			],
 			[
-				"li",
-				"link_to_sort"
-			],
-			[
 				"jalon_",
 				"jalon_id"
-			],
-			[
-				"to",
-				"to_yaml"
 			],
 			[
 				"t",
@@ -318,10 +494,6 @@
 			[
 				"dossi",
 				"dossiers"
-			],
-			[
-				"messa",
-				"messages"
 			],
 			[
 				"messag",
@@ -342,212 +514,51 @@
 			[
 				"ti",
 				"titre"
-			],
-			[
-				"create",
-				"create"
-			],
-			[
-				"col",
-				"columns"
-			],
-			[
-				"obs",
-				"obs_doe"
-			],
-			[
-				"DOSSIER",
-				"dossier"
-			],
-			[
-				"da",
-				"date_retour"
-			],
-			[
-				"be",
-				"be_stt_commentaires"
-			],
-			[
-				"be_",
-				"be_stt"
-			],
-			[
-				"la",
-				"label"
-			],
-			[
-				"P",
-				"Prawn"
-			],
-			[
-				"els",
-				"else"
-			],
-			[
-				"par",
-				"params"
-			],
-			[
-				"STR",
-				"strong"
-			],
-			[
-				"comm",
-				"commune"
-			],
-			[
-				"do",
-				"documents_url"
-			],
-			[
-				"docu",
-				"document"
-			],
-			[
-				"uti",
-				"utilisateur"
-			],
-			[
-				"u",
-				"utilisateur_id"
-			],
-			[
-				"Com",
-				"Commentaire"
-			],
-			[
-				"C",
-				"CommentaireTest"
-			],
-			[
-				"Checli",
-				"ChecklistTest"
-			],
-			[
-				"na",
-				"name"
-			],
-			[
-				"nb",
-				"nb_lgt_reel"
-			],
-			[
-				"def",
-				"default_value"
-			],
-			[
-				"or",
-				"order"
-			],
-			[
-				"UTILISA",
-				"utilisateur_id"
-			],
-			[
-				"OR",
-				"order"
-			],
-			[
-				"DOSSI",
-				"dossiers_path"
-			],
-			[
-				"fla",
-				"flash"
-			],
-			[
-				"al",
-				"alert"
-			],
-			[
-				"va",
-				"value_before"
-			],
-			[
-				"value",
-				"value_after"
-			],
-			[
-				"value_",
-				"value_before"
-			],
-			[
-				"utili",
-				"utilisateur_id"
-			],
-			[
-				"date",
-				"date_butoir"
-			],
-			[
-				"action_",
-				"action_name"
-			],
-			[
-				"dossiers",
-				"dossiers_path"
-			],
-			[
-				"ba",
-				"background-origin"
-			],
-			[
-				"rw",
-				"raw"
-			],
-			[
-				"impo",
-				"importes"
-			],
-			[
-				"nu",
-				"num_pa"
-			],
-			[
-				"num",
-				"num_pa"
-			],
-			[
-				"nbre",
-				"nbre_lgt_theo"
-			],
-			[
-				"nbr",
-				"nbre_lgt_theo"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "public/stylesheets/standard.css",
+			"file": "config/routes.rb",
 			"settings":
 			{
-				"buffer_size": 5726,
+				"buffer_size": 2443,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/views/familles/index.html.erb",
+			"file": "app/views/prestations/new_manual_classroom.erb",
 			"settings":
 			{
-				"buffer_size": 1445,
+				"buffer_size": 1826,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/views/enfants/index.html.erb",
+			"file": "app/views/prestations/stats_mensuelle_params.erb",
 			"settings":
 			{
-				"buffer_size": 2076,
+				"buffer_size": 684,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/views/factures/index.html.erb",
+			"file": "app/views/prestations/stats_mensuelle.erb",
 			"settings":
 			{
-				"buffer_size": 2534,
+				"buffer_size": 2344,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "# encoding: utf-8\n\nclass PrestationsController < ApplicationController\n\n  before_filter :check, :only => ['edit', 'edit_from_enfants']\n  layout :determine_layout, :except => ['create', 'refresh', 'ajaxupdate', 'new_manual_calc']\n\n  def check\n    @presta = Prestation.find(params[:id])\n    @enfant = Enfant.find(@presta.enfant_id)\n    unless Famille.find(:first, :conditions => [\" id = ? AND mairie_id = ?\", @enfant.famille_id, session[:mairie]])\n       redirect_to :action => 'index'\n    end\n  rescue\n    redirect_to :action => 'index'\n  end\n\n  def determine_layout\n    if params[:action] == 'print'\n      \"printer\"\n    else\n      \"standard\"\n    end\n  end\n\n  # GET /prestations\n  # GET /prestations.xml\n  def index\n     @images = get_etat_images\n\n     if !params[:classe].blank? and !params[:toutlemois] and session[:user_readwrite] and params[:pointage]\n		  session[:date]   = params[:prestation_date]\n		  session[:classe] = params[:classe]\n		  redirect_to '/presence'\n     else\n		  refresh 	 \n	   end\n  end\n\n  def refresh\n     params[:prestation_date] ||= Date.today.to_s(:fr)\n     sort_param_in_session(params[:sort] ||= 'date,classe,nom,prenom', params[:page])\n     @prestations = Prestation.search(params[:prestation_date], params[:classe], session[:mairie], params[:sort], session[:order], params[:toutlemois])\n     @classrooms  = Ville.find(session[:mairie]).classrooms\n  end\n\n  def print\n	 @images = get_etat_images\n     @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], 'date,classe,nom,prenom', '', params[:toutlemois])\n     @classrooms  = Ville.find(session[:mairie]).classrooms\n  end\n\n  # GET /prestations/1\n  # GET /prestations/1.xml\n  def show\n    @prestation = Prestation.find(params[:id])\n\n    respond_to do |format|\n      format.html # show.html.erb\n      format.xml  { render :xml => @prestation }\n    end\n  end\n\n  # GET /prestations/new\n  # GET /prestations/new.xml\n  def new\n    @prestation = Prestation.new\n    @prestation.enfant_id = params[:enfant_id] if params[:enfant_id]\n    @prestations = Prestation.find(:all)\n    @enfants = Enfant.find(:all, :conditions => [\"famille_id = ? \", params[:famille_id]]) if params[:famille_id]\n    \n    respond_to do |format|\n      format.html # new.html.erb\n      format.xml  { render :xml => @prestation }\n    end\n  end\n\n  # GET /prestations/1/edit\n  def edit\n    @prestation = Prestation.find(params[:id])\n    @enfant = Enfant.find(@prestation.enfant_id)\n    @famille = Famille.find(@enfant.famille_id)\n	@images = get_etat_images\n  end\n\n  # GET /prestations/1/edit\n  def edit_from_enfants\n    @prestation = Prestation.find(params[:id])\n    params[:enfant_id] = @prestation.enfant_id\n    @enfant  = Enfant.find(@prestation.enfant_id)\n    @famille = Famille.find(@enfant.famille_id)\n    @images = get_etat_images\n  end\n\n  def is_weekday?(date)\n    date.wday != 0 && date.wday != 6\n  end\n  \n  def days_in_month(date)\n    year = date.year\n    month = date.month\n    d = (Date.new(year, 12, 31) << (12-month)).day\n    return d\n  end\n\n  # POST /prestations\n  # POST /prestations.xml\n  def create\n    @prestation_foo = Prestation.new(params[:prestation])\n	@prestation_date = params[:prestation_date]\n\n    if not @prestation_date.nil?\n\n      unless params[:famille_id].blank?\n          @famille_id = params[:famille_id]\n          @enfants = Enfant.find_all_by_famille_id(@famille_id)\n       else\n          @enfants = Enfant.find(:all, :conditions => [\"id = ? \", @prestation_foo.enfant_id])\n       end\n\n       @enfants.count.times { |i|\n          @enfant = @enfants[i]\n\n          start_date = @prestation_date.to_date\n\n          if (params[:toutlemois] or params[:toutelannee]) and (params[:lundi] or params[:mardi] or params[:mercredi] or params[:jeudi] or params[:vendredi])\n			   ndays = 5\n               \n              ndays = days_in_month(start_date) - (start_date.day - 1) if params[:toutlemois]\n              ndays = (Date.parse(\"2013-07-05\") - start_date).to_i if params[:toutelannee]\n		\n               date = start_date\n               ndays.times {\n                 if is_weekday?(date)\n                    # test si date est dans une période de vacance\n                    @vacances = Vacance.find(:all, :conditions => [\"debut <= ? AND fin >= ? AND mairie_id = ?\", date.to_s(:en), date.to_s(:en), session[:mairie]])\n\n                    if (params[:mercredi] and date.wday == 3) or\n                       (params[:lundi] and date.wday == 1) or\n                       (params[:mardi] and date.wday == 2) or\n                       (params[:jeudi] and date.wday == 4) or\n                       (params[:vendredi] and date.wday == 5)\n                          @prestation = Prestation.new(params[:prestation])\n                          @prestation.etude = 0 if date.wday == 3 or not @vacances.empty?\n                          @prestation.enfant_id = @enfant.id\n			  			  # test si habitude enfant garderie\n	       	 	  		  @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM\n	       		  		  @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM \n                          @prestation.date = date\n                          @prestation.totalP = 0.00\n                          @prestation.totalA = 0.00\n						  if @prestation.save\n					          flash[:notice] = \"Prestations ajoutées sur #{ndays} jours\"\n						  else\n					          flash[:warning] = \"Prestations ajoutées mais en doublons sur certaines dates.. Veuillez faire une vérification.\"\n						  end\n                    end\n                 end\n                 date = date + 1.day\n               }\n            else\n               @prestation = Prestation.new(params[:prestation])\n               @prestation.enfant_id = @enfant.id\n	       	   # test si habitude enfant garderie\n	       	   @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM\n	       	   @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM \n               @prestation.date = @prestation_date\n               @prestation.totalP = 0.00\n               @prestation.totalA = 0.00\n 			   if @prestation.save\n		          flash[:notice] = 'Prestation ajoutée.'\n			   else\n		          flash[:warning] = \"Erreur lors de l'ajout des prestation, peut-être en doublon...\"\n			   end\n            end\n         }\n        flash[:notice] = 'Prestation(s) ajoutée(s).'\n\n        if @famille_id\n          redirect_to :controller => 'familles', :action => 'show', :id => @famille_id\n        else\n          redirect_to :controller => 'prestations', :action => 'new', :enfant_id => @enfant.id\n        end\n    else\n       flash[:warning] = 'Manque date de début...'\n       redirect_to :action => \"new\", :enfant_id => @prestation_foo.enfant_id\n    end\n  end\n\n  def calendrier\n\n\n\n  end\n\n\n  # PUT /prestations/1\n  # PUT /prestations/1.xml\n  def update\n    @prestation = Prestation.find(params[:id])\n\n    respond_to do |format|\n      if @prestation.update_attributes(params[:prestation])\n        flash[:notice] = 'Prestation modifiée.'\n        format.html { redirect_to :action => 'index'  }\n        format.xml  { head :ok }\n      else\n        format.html { render :action => \"edit\" }\n        format.xml  { render :xml => @prestation.errors, :status => :unprocessable_entity }\n      end\n    end\n  end\n\n   # GET /prestations/1/edit\n  def test\n    @prestation = Prestation.find(params[:id])\n  end\n\n  def ajaxupdate\n    @prestation = Prestation.find(params[:id])\n    respond_to do |format|\n      format.js\n    end\n  end\n\n  # PUT /prestations/1\n  # PUT /prestations/1.xml\n  def update_from_enfants\n    @prestation = Prestation.find(params[:id])\n\n    respond_to do |format|\n      if @prestation.update_attributes(params[:prestation])\n        flash[:notice] = 'Prestation modifiée.'\n        format.html { redirect_to :controller => 'enfants', :id => @prestation.enfant_id, :action => \"show\" }\n        format.xml  { head :ok }\n      else\n        format.html { render :action => \"edit\" }\n        format.xml  { render :xml => @prestation.errors, :status => :unprocessable_entity }\n      end\n    end\n  end\n\n  # DELETE /prestations/1\n  # DELETE /prestations/1.xml\n  def destroy\n    @prestation = Prestation.find(params[:id])\n    @prestation.destroy\n\n    respond_to do |format|\n      format.html { redirect_to :controller => 'enfants', :action => 'show', :id => @prestation.enfant_id }\n      format.xml  { head :ok }\n    end\n  end\n\n  def new_manual\n    @mois = params[:mois]\n    @year = params[:year]\n    if @mois.to_i > 1\n       @mois_down = @mois.to_i - 1\n       @year_down = @year\n    else\n       @mois_down = 12\n       @year_down = @year.to_i - 1\n    end\n    if @mois.to_i < 12\n       @mois_up = @mois.to_i + 1\n       @year_up = @year\n    else\n       @mois_up = 1\n       @year_up = @year.to_i + 1\n    end\n    date = Date.new(@year.to_i, @mois.to_i, 1)\n    @days=[]\n    days_in_month(date).times {\n      @days.push(date) if is_weekday?(date)\n      date = date + 1.day\n    }\n    if params[:famille_id]\n       @famille_id = params[:famille_id]\n       @enfants = Enfant.find_by_famille_id(@famille_id)\n       @enfant = @enfants[0]	\n    else\n       @enfant = Enfant.find(params[:id])\n    end\n    respond_to do |format|\n        format.html\n        format.js\n    end\n    \n  end\n\n  def new_manual_calc\n    @mois = params[:mois]\n    @year = params[:year]\n    @total = 0.00\n\n    if params[:famille_id]\n       @famille_id = params[:famille_id]\n       @enfants = Enfant.find_all_by_famille_id(@famille_id)\n    else\n       @enfants = Enfant.find(:all, :conditions => [\"id = ? \", params[:enfant_id]])\n    end\n\n    @famille = Famille.find(@enfants[0].famille_id)\n    @sumP  = @famille.factures.sum('montant')\n    @sumIn = @famille.paiements.sum('montant')\n    @solde = @sumIn - @sumP\n\n    @enfants.count.times { |i|\n        @enfant = @enfants[i]\n\n	    date = Date.new(@year.to_i, @mois.to_i, 1)\n  \n        days_in_month(date).times {\n          if params[:\"#{date.day}RepasAM\"] or\n             params[:\"#{date.day}GarderieAM\"] or params[:\"#{date.day}GarderiePM\"] or\n             params[:\"#{date.day}CentreAM\"] or params[:\"#{date.day}CentrePM\"] or params[:etude]\n\n             # test si date est dans une période de vacance\n             #@vacances = Vacance.find(:all, :conditions => [\"debut <= ? AND fin >= ? AND mairie_id = ?\", date.to_s(:en), date.to_s(:en), session[:mairie]])\n\n             @prestation = Prestation.new\n             @prestation.enfant_id = @enfant.id\n             @prestation.date = date\n             @prestation.repas = '1' if params[:\"#{date.day}RepasAM\"]\n             @prestation.garderieAM = '1' if params[:\"#{date.day}GarderieAM\"]\n             @prestation.garderiePM = '1' if params[:\"#{date.day}GarderiePM\"]\n             @prestation.centreAM = '1' if params[:\"#{date.day}CentreAM\"]\n             @prestation.centrePM = '1' if params[:\"#{date.day}CentrePM\"]\n             @prestation.etude = '1' if params[:etude] and ( date.wday != 3 and date.wday != 6 and date.wday != 0 and @vacances.empty?)\n             @prestation.totalA = 0.00\n\n             # calcul prestations type 1 ' Normale\n             nbr_prestation = {'Repas' => 0,'GarderieAM' => 0,'GarderiePM' => 0, 'CentreAM' => 0, 'CentrePM' => 0, 'CentreAMPM' => 0, 'Etude' => 0, 'MntRepas' => 0,'MntGarderieAM' => 0,'MntGarderiePM' => 0, 'MntCentreAM' => 0, 'MntCentrePM' => 0, 'MntCentreAMPM' => 0, 'MntEtude' => 0 ,'JoursRepas' => \"\",'JoursGarderieAM' => \"\",'JoursGarderiePM' => \"\", 'JoursCentreAM' =>\"\", 'JoursCentrePM' => \"\", 'JoursCentreAMPM' => \"\", 'JoursEtude' => \"\",'PrixCentreAMPM' => 0, 'PrixCentreAM' => 0, 'PrixCentrePM' => 0}\n\n             nbr_prestation = @prestation.calc_prestation(nbr_prestation)\n             \n             total_prestations = nbr_prestation['MntRepas'] + nbr_prestation['MntGarderieAM'] + nbr_prestation['MntGarderiePM'] + nbr_prestation['MntCentreAM'] + nbr_prestation['MntCentrePM'] + nbr_prestation['MntCentreAMPM'] + nbr_prestation['Etude']\n             @total = @total + total_prestations\n             @prestation.totalP = total_prestations\n	     @tarif = @prestation.tarif\n	             \n	    #if params[:enregistre] and (date.wday != 6 and date.wday != 0)	\n		begin\n		   @prestation.save!\n		rescue ActiveRecord::RecordInvalid => error\n		   #Doublon de prestation ?	\n		   logger.info(error)\n		   @prestation_originale = Prestation.find(:first , :conditions => [\"enfant_id = ? and date = ?\", @enfant.id, date])	\n		   #On sauvegarde si pas facturée\n		   if @prestation_originale.facture_id.nil?	\n		      @prestation_originale.update_attribute(:repas, @prestation.repas)  \n		      @prestation_originale.update_attribute(:garderieAM , @prestation.garderieAM)\n		      @prestation_originale.update_attribute(:garderiePM , @prestation.garderiePM)		\n\n		      @prestation_originale.update_attribute(:centreAM , @prestation.centreAM)\n		      @prestation_originale.update_attribute(:centrePM , @prestation.centrePM)\n		   end\n 		end\n	     end\n          #end\n          date = date + 1.day\n        }\n    }\n\n    respond_to do |format|\n       format.html\n	   format.js\n 	end\n  end\n\n  def new_manual_classroom\n	  @date = session[:date]\n	  @classe = session[:classe]\n\n    @kids_to_show=[]\n	  @kids_to_show_presta=[]\n\n	  @enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')\n	  @enfants.each do |e|\n		  @kids_to_show.push(e)\n		  @presta = e.prestations.where(\"date = ? and facture_id is null\", @date.to_date.to_s(:en)).last\n		  if @presta\n		     @kids_to_show_presta.push(@presta)\n		  else\n		     @kids_to_show_presta.push(nil)\n		  end\n    end\n  end\n  \n  def new_manual_classroom_check\n  	@date   = session[:date] \n  	@classe = session[:classe] \n\n  	@enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')\n\n  	@enfants.each do |e|\n  		if params[:\"#{e.id}RepasAM\"] or params[:\"#{e.id}GarderieAM\"] or params[:\"#{e.id}GarderiePM\"] or params[:\"#{e.id}CentreAM\"] or params[:\"#{e.id}CentrePM\"] then\n  			@prestation = Prestation.find_or_create_by_date_and_enfant_id(@date.to_date.to_s(:en), e.id)\n  		    @prestation.repas = params[:\"#{e.id}RepasAM\"] ? '1' : '0'\n  		    @prestation.garderieAM = params[:\"#{e.id}GarderieAM\"] ? '1' : '0'\n  		    @prestation.garderiePM = params[:\"#{e.id}GarderiePM\"] ? '1' : '0'\n  		    @prestation.centreAM = params[:\"#{e.id}CentreAM\"] ? '1' : '0'\n  		    @prestation.centrePM = params[:\"#{e.id}CentrePM\"] ? '1' : '0'\n  			@prestation.save\n  		end\n  	end\n    flash[:notice]=\"Prestations enregistrées...\"\n    redirect_to prestations_path\n  end \n\n  def stats_mensuelle_params\n	  @classrooms = Ville.find(session[:mairie]).classrooms\n  end\n\n  def stats_mensuelle\n  	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'\n  	@prestation_date = @stats_date.to_date\n  	@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'nom,prenom', '', true)\n  	\n  	if @prestations.first\n  		@classrooms = Ville.find(session[:mairie]).classrooms\n  		@datedebut  = @prestation_date.to_date.at_beginning_of_month\n  		@datefin = @prestation_date.to_date.at_end_of_month	\n  		@classe = @prestations.first.enfant.classe\n  		@enfant_id = @prestations.first.enfant.id\n  	else\n  		flash[:notice] = \"Pas de prestations ce mois là.\"\n  		redirect_to \"/prestations/stats_mensuelle_params/0\"\n  	end\n  end	\n\nend\n",
+			"file": "app/controllers/prestations_controller.rb",
+			"file_size": 15297,
+			"file_write_time": 130589789267764288,
+			"settings":
+			{
+				"buffer_size": 15294,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,40 +566,17 @@
 			"file": "app/views/prestations/index.html.erb",
 			"settings":
 			{
-				"buffer_size": 1119,
+				"buffer_size": 1112,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/views/layouts/application.html.erb",
+			"file": "app/views/prestations/editions.html.erb",
 			"settings":
 			{
-				"buffer_size": 239,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/layouts/standard.html.erb",
-			"settings":
-			{
-				"buffer_size": 3215,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/admin/setup.erb",
-			"settings":
-			{
-				"buffer_size": 6879,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/paiements/index.html.erb",
-			"settings":
-			{
-				"buffer_size": 2365,
-				"line_ending": "Unix"
+				"buffer_size": 359,
+				"line_ending": "Unix",
+				"name": "<h3>Editions</h3>"
 			}
 		}
 	],
@@ -627,34 +615,100 @@
 	},
 	"file_history":
 	[
-		"/home/philippe/RailsProjects/openCantine3/app/views/layouts/standard.html.erb",
-		"/home/philippe/RailsProjects/alh/app/assets/javascripts/rails.validations.simple_form.js",
-		"/home/philippe/RailsProjects/alh/app/assets/javascripts/chantiers.js.coffee",
-		"/home/philippe/RailsProjects/etf/public/stylesheets/blueprint/screen.css",
-		"/home/philippe/RailsProjects/etf/app/assets/stylesheets/chantiers.css.scss",
-		"/home/philippe/RailsProjects/etf/public/javascripts/autocomplete-rails.js",
-		"/home/philippe/RailsProjects/scopelec/app/assets/stylesheets/application.css",
-		"/home/philippe/RailsProjects/alh/app/assets/javascripts/application.js",
-		"/home/philippe/RailsProjects/alh/app/views/chantiers/index.html.erb",
-		"/home/philippe/RailsProjects/etf/app/assets/javascripts/chantiers.js.coffee",
-		"/home/philippe/RailsProjects/etf/app/assets/stylesheets/application.css",
-		"/home/philippe/RailsProjects/alh/app/assets/stylesheets/chantiers.css.scss",
-		"/home/philippe/RailsProjects/alh/app/assets/stylesheets/application.css",
+		"/home/philippe/RailsProjects/scopelec/config/initializers/mime_types.rb",
+		"/home/philippe/RailsProjects/alh/config/initializers/mime_types.rb",
+		"/home/philippe/RailsProjects/alh/app/views/controles/index.xls.erb",
+		"/home/philippe/RailsProjects/alh/app/controllers/controles_controller.rb",
+		"/home/philippe/RailsProjects/alh/app/views/receptions/checklist2.xls.erb",
+		"/home/philippe/RailsProjects/alh/app/views/controles/checklist2.xls.erb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/taches_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/views/layouts/application.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/sessions_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/db/seeds.rb",
+		"/home/philippe/RailsProjects/scopelec/app/views/tools/import.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/tools/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/prestataires/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/tools/slice_fis.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/syndics/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/taches/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/roles/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/utilisateurs/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/jalons/index_admin.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/documents/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/messages/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/models/message.rb",
 		"/home/philippe/RailsProjects/scopelec/app/models/dossier.rb",
-		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140711",
+		"/home/philippe/RailsProjects/scopelec/app/views/tools/export_optimum.html.erb",
+		"/home/philippe/RailsProjects/scopelec/config/locales/fr.yml",
+		"/home/philippe/RailsProjects/scopelec/config/routes.rb",
+		"/home/philippe/RailsProjects/scopelec/app/views/messages/show.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/dossiers_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/messages_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/lib/tasks/dossiers.rake",
+		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140826",
+		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140717-2",
+		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140717",
+		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140716",
 		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140715",
+		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/export_optimum.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/index.xls.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/messages/index_dossier.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/taches/action.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/syndics_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/prestataires_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/documents_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/utilisateurs_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/show.html.erb",
+		"/home/philippe/RailsProjects/scopelec/config/environments/development.rb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/application_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/roles_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/views/roles/edit.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/action.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/helpers/dossiers_helper.rb",
+		"/home/philippe/RailsProjects/scopelec/app/models/document.rb",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/jalons_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/views/jalons/index.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/jalons/show.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/models/tache.rb",
+		"/home/philippe/RailsProjects/scopelec/public/ImportOptimum.csv",
+		"/home/philippe/RailsProjects/scopelec/app/models/tag.rb",
+		"/home/philippe/RailsProjects/scopelec/Gemfile",
+		"/home/philippe/Téléchargements/TALEA_Import-essai_14-09-09_3.csv",
+		"/home/philippe/Téléchargements/TALEA_Import-essai_14-09-09_1.csv",
+		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/_form.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/edit.html.erb",
+		"/home/philippe/Bureau/Import Optimum",
+		"/home/philippe/RailsProjects/scopelec/app/controllers/tools_controller.rb",
+		"/home/philippe/RailsProjects/scopelec/app/assets/stylesheets/application.css",
+		"/home/philippe/RailsProjects/scopelec/db/migrate/20140825124421_dossier_voie_default_value.rb",
+		"/home/philippe/RailsProjects/scopelec/db/migrate/20140825125913_dossier_voie_null_false.rb",
+		"/home/philippe/Téléchargements/Talea_Import-0_ZAPA_14-08-21_3.csv",
+		"/home/philippe/RailsProjects/scopelec/app/views/documents/show.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/tools/importer.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/sessions/new.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/messages/daily_newsletter.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/models/syndic.rb",
+		"/home/philippe/RailsProjects/scopelec/app/helpers/taches_helper.rb",
+		"/home/philippe/RailsProjects/scopelec/db/schema.rb",
+		"/home/philippe/RailsProjects/scopelec/db/migrate/20140625122533_add_index_to_dossier_obs.rb",
+		"/home/philippe/RailsProjects/scopelec/db/migrate/20140826115919_add_index_dossiers_fis.rb",
+		"/home/philippe/RailsProjects/scopelec/app/models/jalon.rb",
+		"/home/philippe/RailsProjects/scopelec/app/assets/stylesheets/dossiers.css.scss",
+		"/home/philippe/RailsProjects/scopelec/app/views/taches/new.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/taches/_form.html.erb",
+		"/home/philippe/RailsProjects/scopelec/app/views/jalons/_form.html.erb",
+		"/home/philippe/RailsProjects/scopelec/Export_sites 21.07-2.csv",
+		"/home/philippe/Téléchargements/Windows XP Professional SP3 Nov 2013 + SATA Drivers [ThumperDC]/key.txt",
+		"/home/philippe/RailsProjects/scopelec/IMPORT-SI_14-07-17_V5.1_ajout D2.csv",
+		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140711",
 		"/home/philippe/Bureau/Link to Scopelec/88.176.48.132",
 		"/home/philippe/Bureau/Link to Scopelec/Scopelec_20140627",
 		"/home/philippe/Bureau/Link to Scopelec/Scopelec_20140703",
 		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140708",
 		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140709",
 		"/home/philippe/Bureau/Link to Scopelec/SCOPELEC 20140710",
-		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/index.xls.erb",
 		"/home/philippe/RailsProjects/scopelec/IMPORT-SI_14-07-09_V4.csv",
-		"/home/philippe/RailsProjects/scopelec/app/views/layouts/application.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/show.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/dossiers_controller.rb",
-		"/home/philippe/RailsProjects/scopelec/lib/tasks/dossiers.rake",
 		"/home/philippe/RailsProjects/scopelec/app/models/commentaire.rb",
 		"/home/philippe/Téléchargements/IMPORT-SI_14-07-09_V4.csv",
 		"/home/philippe/RailsProjects/scopelec/config/environment.rb",
@@ -671,90 +725,24 @@
 		"/home/philippe/RailsProjects/etf/app/controllers/controles_controller.rb",
 		"/home/philippe/RailsProjects/etf/app/controllers/receptions_controller.rb",
 		"/home/philippe/RailsProjects/etf/app/views/chantiers/edit.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/models/tache.rb",
-		"/home/philippe/RailsProjects/scopelec/app/models/document.rb",
 		"/home/philippe/Bureau/types",
 		"/home/philippe/RailsProjects/scopelec/app/views/documents/new.html.erb",
 		"/home/philippe/RailsProjects/scopelec/app/views/documents/_form.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/documents/index.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/documents_controller.rb",
 		"/home/philippe/RailsProjects/scopelec/db/migrate/20140710151041_add_type_doc_to_document.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/_form.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/index.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/taches/index.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/taches/new.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/taches_controller.rb",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/application_controller.rb",
 		"/home/philippe/RailsProjects/scopelec/app/views/checklists/_form.html.erb",
 		"/home/philippe/RailsProjects/scopelec/app/views/checklists/edit.html.erb",
 		"/home/philippe/RailsProjects/scopelec/app/controllers/checklists_controller.rb",
 		"/home/philippe/RailsProjects/scopelec/db/migrate/20140709125019_add_role_id_to_taches.rb",
 		"/home/philippe/RailsProjects/scopelec/db/migrate/20140710072353_add_roleid_to_checklist.rb",
-		"/home/philippe/RailsProjects/scopelec/app/models/message.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/edit.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/jalons/show.html.erb",
-		"/home/philippe/RailsProjects/scopelec/config/routes.rb",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/jalons_controller.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/utilisateurs/index.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/helpers/dossiers_helper.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/messages/show.html.erb",
 		"/home/philippe/RailsProjects/scopelec/app/views/utilisateurs/show.html.erb",
 		"/home/philippe/RailsProjects/openCantine3/app/pdf/factures.rb",
 		"/home/philippe/RailsProjects/openCantine3/app/controllers/factures_controller.rb",
 		"/home/philippe/Bureau/MySQLdump.sh",
 		"/home/philippe/RailsProjects/openCantine3/app/views/factures/index.html.erb",
 		"/home/philippe/RailsProjects/openCantine3/app/views/factures/show.pdf.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/syndics/index.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/syndics_controller.rb",
 		"/home/philippe/RailsProjects/scopelec/db/migrate/20140703122432_add_default0_to_num.rb",
 		"/home/philippe/RailsProjects/scopelec/db/migrate/20140703102328_add_fo_aet_troncon_to_dossier.rb",
-		"/home/philippe/RailsProjects/scopelec/Gemfile",
-		"/home/philippe/RailsProjects/scopelec/app/models/syndic.rb",
-		"/home/philippe/RailsProjects/scopelec/app/models/checklist.rb",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/messages_controller.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/messages/index.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/models/action.rb",
-		"/home/philippe/RailsProjects/scopelec/app/models/field.rb",
-		"/home/philippe/RailsProjects/scopelec/app/models/value.rb",
-		"/home/philippe/RailsProjects/scopelec/db/migrate/20140703072220_add_etats_to_dossier.rb",
-		"/home/philippe/RailsProjects/lsf/public/stylesheets/blueprint/src/forms.css",
-		"/home/philippe/RailsProjects/lsf/public/stylesheets/blueprint/src/typography.css",
-		"/home/philippe/RailsProjects/lsf/public/stylesheets/blueprint/screen.css",
-		"/home/philippe/RailsProjects/lsf/app/views/soudures/index.html.erb",
-		"/home/philippe/RailsProjects/lsf/app/assets/stylesheets/scaffolds.css.scss",
-		"/home/philippe/RailsProjects/lsf/app/assets/stylesheets/application.css",
-		"/home/philippe/RailsProjects/lsf/app/assets/stylesheets/soudures.css.scss",
-		"/home/philippe/Bureau/Scopelec_20140625",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/utilisateurs_controller.rb",
-		"/home/philippe/RailsProjects/lsf/app/models/intervention.rb",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/values_controller.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/dossiers/action.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/values/new.html.erb",
-		"/home/philippe/RailsProjects/lsf/app/models/localization.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/tools/index.html.erb",
-		"/home/philippe/RailsProjects/scopelec/test/models/action_test.rb",
-		"/home/philippe/RailsProjects/testing/Gemfile",
-		"/home/philippe/RailsProjects/testing/app/controllers/fields_controller.rb",
-		"/home/philippe/RailsProjects/testing/spec/spec_helper.rb",
-		"/home/philippe/RailsProjects/testing/.rspec",
-		"/home/philippe/RailsProjects/testing/config/application.rb",
-		"/home/philippe/RailsProjects/testing/app/models/field.rb",
-		"/home/philippe/RailsProjects/testing/spec/factories/fields.rb",
-		"/home/philippe/RailsProjects/testing/spec/models/field_rspec.rb",
-		"/home/philippe/RailsProjects/lsf/db/schema.rb",
-		"/home/philippe/Bureau/Scopelec_20140627",
-		"/home/philippe/Bureau/Scopelec_20140626",
-		"/home/philippe/RailsProjects/scopelec/app/views/checklists/index.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/jalons/index.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/views/taches/fermer_from_checklist.js.erb",
-		"/home/philippe/RailsProjects/lsf/app/views/layouts/application.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/assets/stylesheets/dossiers.css.scss",
-		"/home/philippe/RailsProjects/scopelec/app/assets/stylesheets/jalons.css.scss",
-		"/home/philippe/RailsProjects/lsf/config/application.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/messages/index_dossier.html.erb",
-		"/home/philippe/RailsProjects/scopelec/app/models/utilisateur.rb",
-		"/home/philippe/RailsProjects/scopelec/config/initializers/mime_types.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/jalons/_form.html.erb"
+		"/home/philippe/RailsProjects/scopelec/app/models/checklist.rb"
 	],
 	"find":
 	{
@@ -772,6 +760,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"session[:user_id]",
+			"@ctrl",
+			"msg.dossier",
+			"|msg|",
+			"msg.dossier",
+			"|msg|",
+			"'IMB'",
+			"replaceIdWithNameInChanges",
+			"action_id=7",
+			"action_id = 7",
+			"action_id:7",
+			"config",
+			"replaceIdWithNameInChanges",
+			"SYN31050",
+			"nbre_modifies",
 			"created_at",
 			"updated_at",
 			"visited",
@@ -829,6 +832,13 @@
 		"regex": false,
 		"replace_history":
 		[
+			"user_id",
+			"ctrl",
+			"dossier",
+			"|dossier_id|",
+			"dossier",
+			"|dossier_id|",
+			"'Dossier'",
 			":philippe",
 			"",
 			"@taches",
@@ -852,165 +862,16 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/stylesheets/standard.css",
+					"file": "config/routes.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5726,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1686,
-								1686
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1498.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/views/familles/index.html.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1445,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								521,
-								521
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/views/enfants/index.html.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2076,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								363,
-								363
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/views/factures/index.html.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2534,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								447,
-								447
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/views/prestations/index.html.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1119,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								967,
-								967
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/views/layouts/application.html.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 239,
+						"buffer_size": 2443,
 						"regions":
 						{
 						},
@@ -1023,7 +884,155 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 1026.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/views/prestations/new_manual_classroom.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1826,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								379,
+								379
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 171.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/prestations/stats_mensuelle_params.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 684,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								596,
+								596
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/views/prestations/stats_mensuelle.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2344,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2291,
+								2291
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/controllers/prestations_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15294,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1008,
+								1008
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 285.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/prestations/index.html.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1112,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								949,
+								949
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1034,23 +1043,24 @@
 				},
 				{
 					"buffer": 6,
-					"file": "app/views/layouts/standard.html.erb",
+					"file": "app/views/prestations/editions.html.erb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3215,
+						"buffer_size": 359,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								281,
+								281
 							]
 						],
 						"settings":
 						{
+							"auto_name": "<h3>Editions</h3>",
 							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
 						},
 						"translation.x": 0.0,
@@ -1058,65 +1068,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "app/views/admin/setup.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6879,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6421,
-								6421
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3705.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "app/views/paiements/index.html.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2365,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								293,
-								293
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1161,7 +1112,7 @@
 	{
 		"height": 0.0
 	},
-	"project": "",
+	"project": "opencantine.sublime-project",
 	"replace":
 	{
 		"height": 64.0
@@ -1202,7 +1153,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 282.0,
+	"side_bar_width": 207.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -1,0 +1,10 @@
+<br>
+<h3>Editions des prestations</h3>
+<ul>
+	<li>
+		<%= link_to "#{@titre}", :action => 'print', :search => @date, :classe => @classe, :toutlemois => @toutlemois, :totaux => @totaux, :id => 0 %> 
+	</li>
+	<li>
+		<%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %>
+	</li>
+</ul>

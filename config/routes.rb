@@ -66,16 +66,19 @@ OpenCantine3::Application.routes.draw do
   resources :paiements
   resources :tarifs
   resources :classrooms
-  resources :prestations
+  resources :prestations 
   resources :enfants
+  resources :users
+  resources :upload
+  
   resources :familles  do
      get :autocomplete_famille_nom, :on => :collection
   end
-  resources :users
-  resources :upload
+
   match 'admin' => 'admin#signin'
   match 'nouveau' => 'villes#nouveau_compte', :as => :nouveau
   match 'presence' => 'prestations#new_manual_classroom', :as => 'new_manual_classroom'
+  
   match '/' => 'familles#index'
   match '/:controller(/:action(/:id))'
 

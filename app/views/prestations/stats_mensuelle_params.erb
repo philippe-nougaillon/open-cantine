@@ -12,7 +12,7 @@ Compte le nombre de repas et prestations par enfant sur un mois
 			<%= f.input :classe do %>
 				<%= f.select "classe", options_from_collection_for_select(@classrooms, "id", "nom", params[:classe]) %>
 			<% end %>
-			<%= f.submit "" %>
+			<%= f.submit "Afficher" %>
 		<% end %>
 	</fieldset>
 </div>

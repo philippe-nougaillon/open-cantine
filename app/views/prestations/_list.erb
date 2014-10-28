@@ -129,9 +129,6 @@
         <% total_centrePMM   +=  1 if prestation.centrePM == '3' %>
 
         <% total_etude       +=  1 if prestation.etude == '1' %>
-
-		
-
       <% end %>
 
 	  <% if params[:totaux] %>
@@ -221,5 +218,6 @@
       </tr>
     </table>
   <% else %>
-     Aucune prestation pour ce jour. Veuillez choisir une autre date ou réduire le filtre.
+    <b>Aucune prestation enregistrée pour ce jour.</b><br>
+    Pour une saisie rapide de prestations, veuillez choisir une date et une classe puis appuyer sur 'Saisir pointage'. Vous pourrez aussi enregistrer les pré-inscriptions à partir de la fiche famille ou d'un enfant.   
   <% end  %>

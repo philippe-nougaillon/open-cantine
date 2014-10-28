@@ -26,15 +26,20 @@ class PrestationsController < ApplicationController
   # GET /prestations
   # GET /prestations.xml
   def index
-     @images = get_etat_images
+    @images = get_etat_images
 
-     if !params[:classe].blank? and !params[:toutlemois] and session[:user_readwrite] and params[:pointage]
-		session[:date]   = params[:prestation_date]
-		session[:classe] = params[:classe]
-		redirect_to '/presence'
-     else
-		refresh 	 
-	end
+    if params[:pointage] and session[:user_readwrite]
+      unless params[:classe].blank?
+        session[:date]   = params[:prestation_date]
+        session[:classe] = params[:classe]
+        redirect_to '/presence'
+      else
+        flash[:notice] = "Veuillez choisir une classe"
+        redirect_to prestations_path(prestation_date:params[:prestation_date])  
+      end
+    else
+		  refresh 	 
+	 end
   end
 
   def refresh
@@ -45,10 +50,22 @@ class PrestationsController < ApplicationController
   end
 
   def print
-	 @images = get_etat_images
+	   @images = get_etat_images
      @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], 'date,classe,nom,prenom', '', params[:toutlemois])
      @classrooms  = Ville.find(session[:mairie]).classrooms
   end
+
+  def editions
+    @date = params[:search] unless params[:search].blank?
+    @classe = params[:classe] unless params[:classe].blank?
+    @toutlemois = params[:toutlemois] unless params[:toutlemois].blank?
+    @totaux = params[:totaux] unless params[:totaux].blank?
+    if @toutlemois
+      @titre = "Liste des prestations du mois"
+    else
+      @titre =  "Liste des prestations au #{@date}"
+    end  
+  end  
 
   # GET /prestations/1
   # GET /prestations/1.xml
@@ -80,7 +97,7 @@ class PrestationsController < ApplicationController
     @prestation = Prestation.find(params[:id])
     @enfant = Enfant.find(@prestation.enfant_id)
     @famille = Famille.find(@enfant.famille_id)
-	@images = get_etat_images
+	  @images = get_etat_images
   end
 
   # GET /prestations/1/edit
@@ -107,7 +124,7 @@ class PrestationsController < ApplicationController
   # POST /prestations.xml
   def create
     @prestation_foo = Prestation.new(params[:prestation])
-	@prestation_date = params[:prestation_date]
+	  @prestation_date = params[:prestation_date]
 
     if not @prestation_date.nil?
 
@@ -370,70 +387,64 @@ class PrestationsController < ApplicationController
   end
 
   def new_manual_classroom
-	@date = session[:date]
-	@classe = session[:classe]
+	  @date = session[:date]
+	  @classe = session[:classe]
 
     @kids_to_show=[]
-	@kids_to_show_presta=[]
+	  @kids_to_show_presta=[]
 
-	@enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')
-	@enfants.each do |e|
-		@kids_to_show.push(e)
-		@presta = e.prestations.where("date = ? and facture_id is null", @date.to_date.to_s(:en)).last
-		if @presta
-		   @kids_to_show_presta.push(@presta)
-		else
-		   @kids_to_show_presta.push(nil)
-		end
-    end
-    respond_to do |format|
-        format.html
-        format.js
+	  @enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')
+	  @enfants.each do |e|
+		  @kids_to_show.push(e)
+		  @presta = e.prestations.where("date = ? and facture_id is null", @date.to_date.to_s(:en)).last
+		  if @presta
+		     @kids_to_show_presta.push(@presta)
+		  else
+		     @kids_to_show_presta.push(nil)
+		  end
     end
   end
   
   def new_manual_classroom_check
-	@date   = session[:date] 
-	@classe = session[:classe] 
+  	@date   = session[:date] 
+  	@classe = session[:classe] 
 
-	@enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')
+  	@enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')
 
-	@enfants.each do |e|
-		if params[:"#{e.id}RepasAM"] or params[:"#{e.id}GarderieAM"] or params[:"#{e.id}GarderiePM"] or params[:"#{e.id}CentreAM"] or params[:"#{e.id}CentrePM"] then
-			@prestation = Prestation.find_or_create_by_date_and_enfant_id(@date.to_date.to_s(:en), e.id)
-		    @prestation.repas = params[:"#{e.id}RepasAM"] ? '1' : '0'
-		    @prestation.garderieAM = params[:"#{e.id}GarderieAM"] ? '1' : '0'
-		    @prestation.garderiePM = params[:"#{e.id}GarderiePM"] ? '1' : '0'
-		    @prestation.centreAM = params[:"#{e.id}CentreAM"] ? '1' : '0'
-		    @prestation.centrePM = params[:"#{e.id}CentrePM"] ? '1' : '0'
-			@prestation.save
-		end
-	end
-	respond_to do |format|
-        format.html
-        format.js
-    end
+  	@enfants.each do |e|
+  		if params[:"#{e.id}RepasAM"] or params[:"#{e.id}GarderieAM"] or params[:"#{e.id}GarderiePM"] or params[:"#{e.id}CentreAM"] or params[:"#{e.id}CentrePM"] then
+  			@prestation = Prestation.find_or_create_by_date_and_enfant_id(@date.to_date.to_s(:en), e.id)
+  		    @prestation.repas = params[:"#{e.id}RepasAM"] ? '1' : '0'
+  		    @prestation.garderieAM = params[:"#{e.id}GarderieAM"] ? '1' : '0'
+  		    @prestation.garderiePM = params[:"#{e.id}GarderiePM"] ? '1' : '0'
+  		    @prestation.centreAM = params[:"#{e.id}CentreAM"] ? '1' : '0'
+  		    @prestation.centrePM = params[:"#{e.id}CentrePM"] ? '1' : '0'
+  			@prestation.save
+  		end
+  	end
+    flash[:notice]="Prestations enregistrées..."
+    redirect_to prestations_path
   end 
 
   def stats_mensuelle_params
-	@classrooms = Ville.find(session[:mairie]).classrooms
+	  @classrooms = Ville.find(session[:mairie]).classrooms
   end
 
   def stats_mensuelle
-	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
-	@prestation_date = @stats_date.to_date
-	@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'nom,prenom', '', true)
-	
-	if @prestations.first
-		@classrooms = Ville.find(session[:mairie]).classrooms
-		@datedebut  = @prestation_date.to_date.at_beginning_of_month
-		@datefin = @prestation_date.to_date.at_end_of_month	
-		@classe = @prestations.first.enfant.classe
-		@enfant_id = @prestations.first.enfant.id
-	else
-		flash[:notice] = "Pas de prestations ce mois là."
-		redirect_to "/prestations/stats_mensuelle_params/0"
-	end
+  	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
+  	@prestation_date = @stats_date.to_date
+  	@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'nom,prenom', '', true)
+  	
+  	if @prestations.first
+  		@classrooms = Ville.find(session[:mairie]).classrooms
+  		@datedebut  = @prestation_date.to_date.at_beginning_of_month
+  		@datefin = @prestation_date.to_date.at_end_of_month	
+  		@classe = @prestations.first.enfant.classe
+  		@enfant_id = @prestations.first.enfant.id
+  	else
+  		flash[:notice] = "Pas de prestations ce mois là."
+  		redirect_to "/prestations/stats_mensuelle_params/0"
+  	end
   end	
 
 end

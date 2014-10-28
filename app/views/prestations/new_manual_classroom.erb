@@ -1,13 +1,16 @@
 <div id="form_actions">
-	<h3>Pointage présences <%= Classroom.find(@classe).nom %> le <%= @date %></h3>
-
-	Cochez la prestation effectuée, elle sera automatique enregistrée.<br>
-	Attention ! Décocher une prestation ne la supprimera pas automatiquement. Veuillez supprimer la prestation manuellement.  
+	<h3>Saisie / Pointage rapide des présences</h3>
+	<b>Le: <%= @date %></b>
+	<b>Classe: <%= Classroom.find(@classe).nom %></b>
+	<br><br>
+	Cochez les prestations effectuées et n'oubliez pas d'enregistrer.<br>
+	Notez que décocher une prestation déjà enregistrée ne la supprimera pas automatiquement. Si vous souhaitez vraiment la supprimer, utiliser le bouton 'modifier' en face de chaque jour/enfant dans 
+	la <%= link_to "liste des prestations", prestations_path(prestation_date:@date, classe:@classe) %>.  
 </div>
 
 <div style="color:green" id="msgzone"></div>
 
-<%= form_for(Prestation.new, :remote => true, :url => { :controller => "prestations", :action => "new_manual_classroom_check"}) do |f| %>
+<%= form_for(Prestation.new, :url => { :controller => "prestations", :action => "new_manual_classroom_check"}) do |f| %>
 	<table class="sample">
 	    <tr>
 	      <th>Nom</th>
@@ -29,26 +32,19 @@
 			  <td><%= enfant.famille.nom %>
 			  <td><%= link_to enfant.prenom, enfant_path(enfant.id) %>
 
-			  <td><%= check_box_tag(:"#{enfant.id}RepasAM", params[:"#{enfant.id}RepasAM"], @presta ? (@presta.repas !="0") : false, 
-				  { :onclick => "this.form.commit.click();" }) %></td>
+			  <td><%= check_box_tag(:"#{enfant.id}RepasAM", params[:"#{enfant.id}RepasAM"], @presta ? (@presta.repas !="0") : false) %></td>
 
-			  <td><%= check_box_tag(:"#{enfant.id}GarderieAM", params[:"#{enfant.id}GarderieAM"], @presta ? (@presta.garderieAM !="0") : false,
-				 { :onclick => "this.form.commit.click();" }) %></td>
+			  <td><%= check_box_tag(:"#{enfant.id}GarderieAM", params[:"#{enfant.id}GarderieAM"], @presta ? (@presta.garderieAM !="0") : false) %></td>
 
-			  <td><%= check_box_tag(:"#{enfant.id}GarderiePM", params[:"#{enfant.id}GarderiePM"], @presta ? (@presta.garderiePM !="0") : false,
-				 { :onclick => "this.form.commit.click();" }) %></td>
+			  <td><%= check_box_tag(:"#{enfant.id}GarderiePM", params[:"#{enfant.id}GarderiePM"], @presta ? (@presta.garderiePM !="0") : false) %></td>
 
-			  <td><%= check_box_tag(:"#{enfant.id}CentreAM", params[:"#{enfant.id}CentreAM"], @presta ? (@presta.centreAM !="0") : false, 
-				 { :onclick => "this.form.commit.click();"  }) %></td>
+			  <td><%= check_box_tag(:"#{enfant.id}CentreAM", params[:"#{enfant.id}CentreAM"], @presta ? (@presta.centreAM !="0") : false) %></td>
 
-			  <td><%= check_box_tag(:"#{enfant.id}CentrePM", params[:"#{enfant.id}CentrePM"], @presta ? (@presta.centrePM !="0") : false, 
-				 { :onclick => "this.form.commit.click();"  }) %></td>
+			  <td><%= check_box_tag(:"#{enfant.id}CentrePM", params[:"#{enfant.id}CentrePM"], @presta ? (@presta.centrePM !="0") : false) %></td>
 			</tr>
 		<% end %>
 	</table>
-	<div style="display:none">
-		<%= f.submit "Enregistrer", :visible => false %>
-	</div>
+	<%= f.submit "Enregistrer" %>
 <% end %>
 
 

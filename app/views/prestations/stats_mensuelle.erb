@@ -1,3 +1,9 @@
+<br>
+<h3>Prestations du <%= @datedebut.to_s(:fr) %> au <%= @datefin.to_s(:fr) %></h3>
+<i>Classe <%= Classroom.find(@classe).nom %></i>
+<br>
+<br>
+
 <% @sum = Hash.new %>
 <% @sum[:repas] = 0 %>
 <% @sum[:garderieAM] = 0 %>
@@ -6,12 +12,6 @@
 <% @sum[:centrePM] = 0 %>
 <% @sum[:etude] = 0 %>
 
-
-<br>
-<h3>Prestations du <%= @datedebut.to_s(:fr) %> au <%= @datefin.to_s(:fr) %></h3>
-<i>Classe <%= Classroom.find(@classe).nom %></i>
-<br>
-<br>
 <table class="sample">
 	<tr>
 		<th>Nom prénom</th><th>Total repas</th><th>Total Garderie Matin</th>
@@ -58,6 +58,6 @@
 <tr>		
 </table>
 <br>
-<%= link_to 'retour', '/prestations/stats_mensuelle_params/0' %>
+<%= link_to 'Retour', '/prestations/stats_mensuelle_params/0' %>
 
 
