@@ -2,13 +2,17 @@
 	<%= form_tag request.path, :method => 'get' do %>
 		Du:
 	  	<%= text_field_tag('prestation_date', params[:prestation_date], :size => 5) %>
-		Classe:
+
+		Période:
+		<%= radio_button_tag "periode", 'jour', (params[:periode] == 'jour') %> Jour
+		<%= radio_button_tag "periode", 'semaine', (params[:periode] == 'semaine') %> Semaine
+		<%= radio_button_tag "periode", 'mois', (params[:periode] == 'mois') %> Mois
+
+		| Classe:
 		<%= select_tag "classe", options_from_collection_for_select(@classrooms, "id", "nom", params[:classe]), :include_blank => true %>
 
-		<%= check_box_tag "toutlemois", params[:toutlemois], params[:toutlemois] %> Voir le mois entier ?
-		<%= check_box_tag "totaux", params[:totaux], params[:totaux] %> Afficher que les totaux ?
-
 		<%= submit_tag 'Afficher' %>
+		<%= check_box_tag "totaux", params[:totaux], params[:totaux] %> Que les totaux?
 		<%= submit_tag 'Saisie pointage', name: "pointage" %>
 
 	    <span id="adroite">

@@ -44,8 +44,9 @@ class PrestationsController < ApplicationController
 
   def refresh
      params[:prestation_date] ||= Date.today.to_s(:fr)
-     sort_param_in_session(params[:sort] ||= 'date,classe,nom,prenom', params[:page])
-     @prestations = Prestation.search(params[:prestation_date], params[:classe], session[:mairie], params[:sort], session[:order], params[:toutlemois])
+     params[:periode] ||= 'jour'
+     sort_param_in_session(params[:sort] ||= 'date,enfants.classe,nom,enfants.prenom', params[:page])
+     @prestations = Prestation.search(params[:prestation_date], params[:classe], session[:mairie], params[:sort], session[:order], params[:periode])
      @classrooms  = Ville.find(session[:mairie]).classrooms
   end
 

@@ -528,35 +528,95 @@
 			}
 		},
 		{
-			"file": "app/views/prestations/stats_mensuelle_params.erb",
+			"file": "app/views/layouts/standard.html.erb",
 			"settings":
 			{
-				"buffer_size": 684,
+				"buffer_size": 3556,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/controllers/prestations_controller.rb",
+			"file": "app/assets/stylesheets/application.css",
 			"settings":
 			{
-				"buffer_size": 15858,
+				"buffer_size": 547,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/views/prestations/index.html.erb",
+			"file": "app/views/familles/show.html.erb",
 			"settings":
 			{
-				"buffer_size": 937,
+				"buffer_size": 5797,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/views/prestations/_list.erb",
+			"file": "app/views/factures/new.html.erb",
 			"settings":
 			{
-				"buffer_size": 10091,
+				"buffer_size": 742,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/admin/signin.erb",
+			"settings":
+			{
+				"buffer_size": 1716,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/admin_controller.rb",
+			"settings":
+			{
+				"buffer_size": 6270,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/application_controller.rb",
+			"settings":
+			{
+				"buffer_size": 1793,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/environment.rb",
+			"settings":
+			{
+				"buffer_size": 493,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "  OpenCantine3::Application.configure do\n  # Settings specified here will take precedence over those in config/application.rb\n\n  # Code is not reloaded between requests\n  config.cache_classes = true\n\n  # Full error reports are disabled and caching is turned on\n  config.consider_all_requests_local       = false\n  config.action_controller.perform_caching = true\n\n  # Disable Rails's static asset server (Apache or nginx will already do this)\n  config.serve_static_assets = false\n\n  # Compress JavaScripts and CSS\n  config.assets.compress = true\n\n  # Don't fallback to assets pipeline if a precompiled asset is missed\n  config.assets.compile = true\n\n  # Generate digests for assets URLs\n  config.assets.digest = true\n\n  # Defaults to nil and saved in location specified by config.assets.prefix\n  # config.assets.manifest = YOUR_PATH\n\n  # Specifies the header that your server uses for sending files\n  # config.action_dispatch.x_sendfile_header = \"X-Sendfile\" # for apache\n  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx\n\n  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.\n  # config.force_ssl = true\n\n  # See everything in the log (default is :info)\n  # config.log_level = :debug\n\n  # Prepend all log lines with the following tags\n  # config.log_tags = [ :subdomain, :uuid ]\n\n  # Use a different logger for distributed setups\n  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)\n\n  # Use a different cache store in production\n  # config.cache_store = :mem_cache_store\n\n  # Enable serving of images, stylesheets, and JavaScripts from an asset server\n  # config.action_controller.asset_host = \"http://assets.example.com\"\n\n  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)\n  # config.assets.precompile += %w( search.js )\n\n  # Disable delivery errors, bad email addresses will be ignored\n  # config.action_mailer.raise_delivery_errors = false\n\n  # Enable threaded mode\n  # config.threadsafe!\n\n  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to\n  # the I18n.default_locale when a translation can not be found)\n  config.i18n.fallbacks = true\n\n  # Send deprecation notices to registered listeners\n  config.active_support.deprecation = :notify\n\n  # Log the query plan for queries taking more than this (works\n  # with SQLite, MySQL, and PostgreSQL)\n  # config.active_record.auto_explain_threshold_in_seconds = 0.5\nend\n",
+			"file": "config/environments/production.rb",
+			"file_size": 2485,
+			"file_write_time": 129908189076798060,
+			"settings":
+			{
+				"buffer_size": 2487,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/environments/development.rb",
+			"settings":
+			{
+				"buffer_size": 1379,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/layouts/_ga.html.erb",
+			"settings":
+			{
+				"buffer_size": 408,
+				"line_ending": "Unix",
+				"name": "<script type=”text/javascript”>"
 			}
 		},
 		{
@@ -620,6 +680,12 @@
 	},
 	"file_history":
 	[
+		"/home/philippe/RailsProjects/openCantine3/app/views/prestations/index.html.erb",
+		"/home/philippe/RailsProjects/openCantine3/app/controllers/prestations_controller.rb",
+		"/home/philippe/RailsProjects/openCantine3/app/views/prestations/stats_mensuelle_params.erb",
+		"/home/philippe/RailsProjects/openCantine3/app/views/layouts/application.html.erb",
+		"/home/philippe/RailsProjects/openCantine3/app/views/prestations/_list.erb",
+		"/home/philippe/RailsProjects/openCantine3/config/database.yml",
 		"/home/philippe/RailsProjects/openCantine3/app/views/prestations/stats_mensuelle.erb",
 		"/home/philippe/RailsProjects/openCantine3/app/views/prestations/new_manual_classroom.erb",
 		"/home/philippe/RailsProjects/scopelec/config/initializers/mime_types.rb",
@@ -741,13 +807,7 @@
 		"/home/philippe/RailsProjects/scopelec/app/controllers/checklists_controller.rb",
 		"/home/philippe/RailsProjects/scopelec/db/migrate/20140709125019_add_role_id_to_taches.rb",
 		"/home/philippe/RailsProjects/scopelec/db/migrate/20140710072353_add_roleid_to_checklist.rb",
-		"/home/philippe/RailsProjects/scopelec/app/views/utilisateurs/show.html.erb",
-		"/home/philippe/RailsProjects/openCantine3/app/pdf/factures.rb",
-		"/home/philippe/RailsProjects/openCantine3/app/controllers/factures_controller.rb",
-		"/home/philippe/Bureau/MySQLdump.sh",
-		"/home/philippe/RailsProjects/openCantine3/app/views/factures/index.html.erb",
-		"/home/philippe/RailsProjects/openCantine3/app/views/factures/show.pdf.erb",
-		"/home/philippe/RailsProjects/scopelec/db/migrate/20140703122432_add_default0_to_num.rb"
+		"/home/philippe/RailsProjects/scopelec/app/views/utilisateurs/show.html.erb"
 	],
 	"find":
 	{
@@ -765,6 +825,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"%> ",
 			"session[:user_id]",
 			"@ctrl",
 			"msg.dossier",
@@ -867,7 +928,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -894,33 +955,60 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1140.0,
+						"translation.y": 928.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/views/prestations/stats_mensuelle_params.erb",
+					"file": "app/views/layouts/standard.html.erb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 684,
+						"buffer_size": 3556,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								596,
-								596
+								3486,
+								3486
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1177.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/assets/stylesheets/application.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 547,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								542,
+								542
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -930,20 +1018,136 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "app/controllers/prestations_controller.rb",
+					"buffer": 3,
+					"file": "app/views/familles/show.html.erb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15858,
+						"buffer_size": 5797,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1081,
-								1081
+								5785,
+								5785
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2583.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/views/factures/new.html.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 742,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								700,
+								700
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/admin/signin.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1716,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/controllers/admin_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6270,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								474,
+								474
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/controllers/application_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1793,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -953,35 +1157,6 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 342.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/views/prestations/index.html.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 937,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								527,
-								527
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -989,37 +1164,124 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "app/views/prestations/_list.erb",
+					"buffer": 8,
+					"file": "config/environment.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10091,
+						"buffer_size": 493,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10075,
-								10075
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 4503.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 9,
+					"file": "config/environments/production.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2487,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2,
+								2
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "config/environments/development.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1379,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "app/views/layouts/_ga.html.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "<script type=”text/javascript”>",
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
 					"file": "app/views/prestations/new_manual_classroom.erb",
 					"semi_transient": false,
 					"settings":
@@ -1044,11 +1306,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 13,
 					"file": "app/views/prestations/_prestation_full.erb",
 					"semi_transient": false,
 					"settings":
@@ -1074,11 +1336,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 14,
 					"file": "app/views/prestations/editions.html.erb",
 					"semi_transient": false,
 					"settings":
@@ -1103,7 +1365,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 14,
 					"type": "text"
 				}
 			]
