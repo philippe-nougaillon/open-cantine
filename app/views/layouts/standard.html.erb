@@ -19,8 +19,8 @@
 <body>
 	<script language="javascript">
 	    $(document).ready(function() {
-	        $("#error_message").fadeOut(5500);
-	        $("#warning_message").fadeOut(5500);
+	        $("#error_message").fadeOut(7000);
+	        $("#warning_message").fadeOut(7000);
 	    });
 	</script>
    <div class="container">
@@ -82,5 +82,8 @@
 	   </div> 
     </div>
    </div>
+   <% if Rails.env.production? %>
+   	 <%= render "layouts/ga" %>
+   <% end %>
   </body>
 </html>

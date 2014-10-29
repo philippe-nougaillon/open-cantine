@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"prestations",
+				"prestations_path"
+			],
+			[
+				"ret",
+				"redirect_to"
+			],
+			[
+				"pres",
+				"prestation_date"
+			],
+			[
 				"fla",
 				"flash"
 			],
@@ -502,18 +514,6 @@
 			[
 				"find_by",
 				"find_by_code"
-			],
-			[
-				"find",
-				"find_by_nom"
-			],
-			[
-				"tas",
-				"task_name"
-			],
-			[
-				"ti",
-				"titre"
 			]
 		]
 	},
@@ -523,15 +523,7 @@
 			"file": "config/routes.rb",
 			"settings":
 			{
-				"buffer_size": 2443,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/prestations/new_manual_classroom.erb",
-			"settings":
-			{
-				"buffer_size": 1826,
+				"buffer_size": 2451,
 				"line_ending": "Unix"
 			}
 		},
@@ -544,21 +536,10 @@
 			}
 		},
 		{
-			"file": "app/views/prestations/stats_mensuelle.erb",
-			"settings":
-			{
-				"buffer_size": 2344,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "# encoding: utf-8\n\nclass PrestationsController < ApplicationController\n\n  before_filter :check, :only => ['edit', 'edit_from_enfants']\n  layout :determine_layout, :except => ['create', 'refresh', 'ajaxupdate', 'new_manual_calc']\n\n  def check\n    @presta = Prestation.find(params[:id])\n    @enfant = Enfant.find(@presta.enfant_id)\n    unless Famille.find(:first, :conditions => [\" id = ? AND mairie_id = ?\", @enfant.famille_id, session[:mairie]])\n       redirect_to :action => 'index'\n    end\n  rescue\n    redirect_to :action => 'index'\n  end\n\n  def determine_layout\n    if params[:action] == 'print'\n      \"printer\"\n    else\n      \"standard\"\n    end\n  end\n\n  # GET /prestations\n  # GET /prestations.xml\n  def index\n     @images = get_etat_images\n\n     if !params[:classe].blank? and !params[:toutlemois] and session[:user_readwrite] and params[:pointage]\n		  session[:date]   = params[:prestation_date]\n		  session[:classe] = params[:classe]\n		  redirect_to '/presence'\n     else\n		  refresh 	 \n	   end\n  end\n\n  def refresh\n     params[:prestation_date] ||= Date.today.to_s(:fr)\n     sort_param_in_session(params[:sort] ||= 'date,classe,nom,prenom', params[:page])\n     @prestations = Prestation.search(params[:prestation_date], params[:classe], session[:mairie], params[:sort], session[:order], params[:toutlemois])\n     @classrooms  = Ville.find(session[:mairie]).classrooms\n  end\n\n  def print\n	 @images = get_etat_images\n     @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], 'date,classe,nom,prenom', '', params[:toutlemois])\n     @classrooms  = Ville.find(session[:mairie]).classrooms\n  end\n\n  # GET /prestations/1\n  # GET /prestations/1.xml\n  def show\n    @prestation = Prestation.find(params[:id])\n\n    respond_to do |format|\n      format.html # show.html.erb\n      format.xml  { render :xml => @prestation }\n    end\n  end\n\n  # GET /prestations/new\n  # GET /prestations/new.xml\n  def new\n    @prestation = Prestation.new\n    @prestation.enfant_id = params[:enfant_id] if params[:enfant_id]\n    @prestations = Prestation.find(:all)\n    @enfants = Enfant.find(:all, :conditions => [\"famille_id = ? \", params[:famille_id]]) if params[:famille_id]\n    \n    respond_to do |format|\n      format.html # new.html.erb\n      format.xml  { render :xml => @prestation }\n    end\n  end\n\n  # GET /prestations/1/edit\n  def edit\n    @prestation = Prestation.find(params[:id])\n    @enfant = Enfant.find(@prestation.enfant_id)\n    @famille = Famille.find(@enfant.famille_id)\n	@images = get_etat_images\n  end\n\n  # GET /prestations/1/edit\n  def edit_from_enfants\n    @prestation = Prestation.find(params[:id])\n    params[:enfant_id] = @prestation.enfant_id\n    @enfant  = Enfant.find(@prestation.enfant_id)\n    @famille = Famille.find(@enfant.famille_id)\n    @images = get_etat_images\n  end\n\n  def is_weekday?(date)\n    date.wday != 0 && date.wday != 6\n  end\n  \n  def days_in_month(date)\n    year = date.year\n    month = date.month\n    d = (Date.new(year, 12, 31) << (12-month)).day\n    return d\n  end\n\n  # POST /prestations\n  # POST /prestations.xml\n  def create\n    @prestation_foo = Prestation.new(params[:prestation])\n	@prestation_date = params[:prestation_date]\n\n    if not @prestation_date.nil?\n\n      unless params[:famille_id].blank?\n          @famille_id = params[:famille_id]\n          @enfants = Enfant.find_all_by_famille_id(@famille_id)\n       else\n          @enfants = Enfant.find(:all, :conditions => [\"id = ? \", @prestation_foo.enfant_id])\n       end\n\n       @enfants.count.times { |i|\n          @enfant = @enfants[i]\n\n          start_date = @prestation_date.to_date\n\n          if (params[:toutlemois] or params[:toutelannee]) and (params[:lundi] or params[:mardi] or params[:mercredi] or params[:jeudi] or params[:vendredi])\n			   ndays = 5\n               \n              ndays = days_in_month(start_date) - (start_date.day - 1) if params[:toutlemois]\n              ndays = (Date.parse(\"2013-07-05\") - start_date).to_i if params[:toutelannee]\n		\n               date = start_date\n               ndays.times {\n                 if is_weekday?(date)\n                    # test si date est dans une période de vacance\n                    @vacances = Vacance.find(:all, :conditions => [\"debut <= ? AND fin >= ? AND mairie_id = ?\", date.to_s(:en), date.to_s(:en), session[:mairie]])\n\n                    if (params[:mercredi] and date.wday == 3) or\n                       (params[:lundi] and date.wday == 1) or\n                       (params[:mardi] and date.wday == 2) or\n                       (params[:jeudi] and date.wday == 4) or\n                       (params[:vendredi] and date.wday == 5)\n                          @prestation = Prestation.new(params[:prestation])\n                          @prestation.etude = 0 if date.wday == 3 or not @vacances.empty?\n                          @prestation.enfant_id = @enfant.id\n			  			  # test si habitude enfant garderie\n	       	 	  		  @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM\n	       		  		  @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM \n                          @prestation.date = date\n                          @prestation.totalP = 0.00\n                          @prestation.totalA = 0.00\n						  if @prestation.save\n					          flash[:notice] = \"Prestations ajoutées sur #{ndays} jours\"\n						  else\n					          flash[:warning] = \"Prestations ajoutées mais en doublons sur certaines dates.. Veuillez faire une vérification.\"\n						  end\n                    end\n                 end\n                 date = date + 1.day\n               }\n            else\n               @prestation = Prestation.new(params[:prestation])\n               @prestation.enfant_id = @enfant.id\n	       	   # test si habitude enfant garderie\n	       	   @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM\n	       	   @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM \n               @prestation.date = @prestation_date\n               @prestation.totalP = 0.00\n               @prestation.totalA = 0.00\n 			   if @prestation.save\n		          flash[:notice] = 'Prestation ajoutée.'\n			   else\n		          flash[:warning] = \"Erreur lors de l'ajout des prestation, peut-être en doublon...\"\n			   end\n            end\n         }\n        flash[:notice] = 'Prestation(s) ajoutée(s).'\n\n        if @famille_id\n          redirect_to :controller => 'familles', :action => 'show', :id => @famille_id\n        else\n          redirect_to :controller => 'prestations', :action => 'new', :enfant_id => @enfant.id\n        end\n    else\n       flash[:warning] = 'Manque date de début...'\n       redirect_to :action => \"new\", :enfant_id => @prestation_foo.enfant_id\n    end\n  end\n\n  def calendrier\n\n\n\n  end\n\n\n  # PUT /prestations/1\n  # PUT /prestations/1.xml\n  def update\n    @prestation = Prestation.find(params[:id])\n\n    respond_to do |format|\n      if @prestation.update_attributes(params[:prestation])\n        flash[:notice] = 'Prestation modifiée.'\n        format.html { redirect_to :action => 'index'  }\n        format.xml  { head :ok }\n      else\n        format.html { render :action => \"edit\" }\n        format.xml  { render :xml => @prestation.errors, :status => :unprocessable_entity }\n      end\n    end\n  end\n\n   # GET /prestations/1/edit\n  def test\n    @prestation = Prestation.find(params[:id])\n  end\n\n  def ajaxupdate\n    @prestation = Prestation.find(params[:id])\n    respond_to do |format|\n      format.js\n    end\n  end\n\n  # PUT /prestations/1\n  # PUT /prestations/1.xml\n  def update_from_enfants\n    @prestation = Prestation.find(params[:id])\n\n    respond_to do |format|\n      if @prestation.update_attributes(params[:prestation])\n        flash[:notice] = 'Prestation modifiée.'\n        format.html { redirect_to :controller => 'enfants', :id => @prestation.enfant_id, :action => \"show\" }\n        format.xml  { head :ok }\n      else\n        format.html { render :action => \"edit\" }\n        format.xml  { render :xml => @prestation.errors, :status => :unprocessable_entity }\n      end\n    end\n  end\n\n  # DELETE /prestations/1\n  # DELETE /prestations/1.xml\n  def destroy\n    @prestation = Prestation.find(params[:id])\n    @prestation.destroy\n\n    respond_to do |format|\n      format.html { redirect_to :controller => 'enfants', :action => 'show', :id => @prestation.enfant_id }\n      format.xml  { head :ok }\n    end\n  end\n\n  def new_manual\n    @mois = params[:mois]\n    @year = params[:year]\n    if @mois.to_i > 1\n       @mois_down = @mois.to_i - 1\n       @year_down = @year\n    else\n       @mois_down = 12\n       @year_down = @year.to_i - 1\n    end\n    if @mois.to_i < 12\n       @mois_up = @mois.to_i + 1\n       @year_up = @year\n    else\n       @mois_up = 1\n       @year_up = @year.to_i + 1\n    end\n    date = Date.new(@year.to_i, @mois.to_i, 1)\n    @days=[]\n    days_in_month(date).times {\n      @days.push(date) if is_weekday?(date)\n      date = date + 1.day\n    }\n    if params[:famille_id]\n       @famille_id = params[:famille_id]\n       @enfants = Enfant.find_by_famille_id(@famille_id)\n       @enfant = @enfants[0]	\n    else\n       @enfant = Enfant.find(params[:id])\n    end\n    respond_to do |format|\n        format.html\n        format.js\n    end\n    \n  end\n\n  def new_manual_calc\n    @mois = params[:mois]\n    @year = params[:year]\n    @total = 0.00\n\n    if params[:famille_id]\n       @famille_id = params[:famille_id]\n       @enfants = Enfant.find_all_by_famille_id(@famille_id)\n    else\n       @enfants = Enfant.find(:all, :conditions => [\"id = ? \", params[:enfant_id]])\n    end\n\n    @famille = Famille.find(@enfants[0].famille_id)\n    @sumP  = @famille.factures.sum('montant')\n    @sumIn = @famille.paiements.sum('montant')\n    @solde = @sumIn - @sumP\n\n    @enfants.count.times { |i|\n        @enfant = @enfants[i]\n\n	    date = Date.new(@year.to_i, @mois.to_i, 1)\n  \n        days_in_month(date).times {\n          if params[:\"#{date.day}RepasAM\"] or\n             params[:\"#{date.day}GarderieAM\"] or params[:\"#{date.day}GarderiePM\"] or\n             params[:\"#{date.day}CentreAM\"] or params[:\"#{date.day}CentrePM\"] or params[:etude]\n\n             # test si date est dans une période de vacance\n             #@vacances = Vacance.find(:all, :conditions => [\"debut <= ? AND fin >= ? AND mairie_id = ?\", date.to_s(:en), date.to_s(:en), session[:mairie]])\n\n             @prestation = Prestation.new\n             @prestation.enfant_id = @enfant.id\n             @prestation.date = date\n             @prestation.repas = '1' if params[:\"#{date.day}RepasAM\"]\n             @prestation.garderieAM = '1' if params[:\"#{date.day}GarderieAM\"]\n             @prestation.garderiePM = '1' if params[:\"#{date.day}GarderiePM\"]\n             @prestation.centreAM = '1' if params[:\"#{date.day}CentreAM\"]\n             @prestation.centrePM = '1' if params[:\"#{date.day}CentrePM\"]\n             @prestation.etude = '1' if params[:etude] and ( date.wday != 3 and date.wday != 6 and date.wday != 0 and @vacances.empty?)\n             @prestation.totalA = 0.00\n\n             # calcul prestations type 1 ' Normale\n             nbr_prestation = {'Repas' => 0,'GarderieAM' => 0,'GarderiePM' => 0, 'CentreAM' => 0, 'CentrePM' => 0, 'CentreAMPM' => 0, 'Etude' => 0, 'MntRepas' => 0,'MntGarderieAM' => 0,'MntGarderiePM' => 0, 'MntCentreAM' => 0, 'MntCentrePM' => 0, 'MntCentreAMPM' => 0, 'MntEtude' => 0 ,'JoursRepas' => \"\",'JoursGarderieAM' => \"\",'JoursGarderiePM' => \"\", 'JoursCentreAM' =>\"\", 'JoursCentrePM' => \"\", 'JoursCentreAMPM' => \"\", 'JoursEtude' => \"\",'PrixCentreAMPM' => 0, 'PrixCentreAM' => 0, 'PrixCentrePM' => 0}\n\n             nbr_prestation = @prestation.calc_prestation(nbr_prestation)\n             \n             total_prestations = nbr_prestation['MntRepas'] + nbr_prestation['MntGarderieAM'] + nbr_prestation['MntGarderiePM'] + nbr_prestation['MntCentreAM'] + nbr_prestation['MntCentrePM'] + nbr_prestation['MntCentreAMPM'] + nbr_prestation['Etude']\n             @total = @total + total_prestations\n             @prestation.totalP = total_prestations\n	     @tarif = @prestation.tarif\n	             \n	    #if params[:enregistre] and (date.wday != 6 and date.wday != 0)	\n		begin\n		   @prestation.save!\n		rescue ActiveRecord::RecordInvalid => error\n		   #Doublon de prestation ?	\n		   logger.info(error)\n		   @prestation_originale = Prestation.find(:first , :conditions => [\"enfant_id = ? and date = ?\", @enfant.id, date])	\n		   #On sauvegarde si pas facturée\n		   if @prestation_originale.facture_id.nil?	\n		      @prestation_originale.update_attribute(:repas, @prestation.repas)  \n		      @prestation_originale.update_attribute(:garderieAM , @prestation.garderieAM)\n		      @prestation_originale.update_attribute(:garderiePM , @prestation.garderiePM)		\n\n		      @prestation_originale.update_attribute(:centreAM , @prestation.centreAM)\n		      @prestation_originale.update_attribute(:centrePM , @prestation.centrePM)\n		   end\n 		end\n	     end\n          #end\n          date = date + 1.day\n        }\n    }\n\n    respond_to do |format|\n       format.html\n	   format.js\n 	end\n  end\n\n  def new_manual_classroom\n	  @date = session[:date]\n	  @classe = session[:classe]\n\n    @kids_to_show=[]\n	  @kids_to_show_presta=[]\n\n	  @enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')\n	  @enfants.each do |e|\n		  @kids_to_show.push(e)\n		  @presta = e.prestations.where(\"date = ? and facture_id is null\", @date.to_date.to_s(:en)).last\n		  if @presta\n		     @kids_to_show_presta.push(@presta)\n		  else\n		     @kids_to_show_presta.push(nil)\n		  end\n    end\n  end\n  \n  def new_manual_classroom_check\n  	@date   = session[:date] \n  	@classe = session[:classe] \n\n  	@enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')\n\n  	@enfants.each do |e|\n  		if params[:\"#{e.id}RepasAM\"] or params[:\"#{e.id}GarderieAM\"] or params[:\"#{e.id}GarderiePM\"] or params[:\"#{e.id}CentreAM\"] or params[:\"#{e.id}CentrePM\"] then\n  			@prestation = Prestation.find_or_create_by_date_and_enfant_id(@date.to_date.to_s(:en), e.id)\n  		    @prestation.repas = params[:\"#{e.id}RepasAM\"] ? '1' : '0'\n  		    @prestation.garderieAM = params[:\"#{e.id}GarderieAM\"] ? '1' : '0'\n  		    @prestation.garderiePM = params[:\"#{e.id}GarderiePM\"] ? '1' : '0'\n  		    @prestation.centreAM = params[:\"#{e.id}CentreAM\"] ? '1' : '0'\n  		    @prestation.centrePM = params[:\"#{e.id}CentrePM\"] ? '1' : '0'\n  			@prestation.save\n  		end\n  	end\n    flash[:notice]=\"Prestations enregistrées...\"\n    redirect_to prestations_path\n  end \n\n  def stats_mensuelle_params\n	  @classrooms = Ville.find(session[:mairie]).classrooms\n  end\n\n  def stats_mensuelle\n  	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'\n  	@prestation_date = @stats_date.to_date\n  	@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'nom,prenom', '', true)\n  	\n  	if @prestations.first\n  		@classrooms = Ville.find(session[:mairie]).classrooms\n  		@datedebut  = @prestation_date.to_date.at_beginning_of_month\n  		@datefin = @prestation_date.to_date.at_end_of_month	\n  		@classe = @prestations.first.enfant.classe\n  		@enfant_id = @prestations.first.enfant.id\n  	else\n  		flash[:notice] = \"Pas de prestations ce mois là.\"\n  		redirect_to \"/prestations/stats_mensuelle_params/0\"\n  	end\n  end	\n\nend\n",
 			"file": "app/controllers/prestations_controller.rb",
-			"file_size": 15297,
-			"file_write_time": 130589789267764288,
 			"settings":
 			{
-				"buffer_size": 15294,
+				"buffer_size": 15858,
 				"line_ending": "Unix"
 			}
 		},
@@ -566,7 +547,31 @@
 			"file": "app/views/prestations/index.html.erb",
 			"settings":
 			{
-				"buffer_size": 1112,
+				"buffer_size": 937,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/prestations/_list.erb",
+			"settings":
+			{
+				"buffer_size": 10091,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/prestations/new_manual_classroom.erb",
+			"settings":
+			{
+				"buffer_size": 2023,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/prestations/_prestation_full.erb",
+			"settings":
+			{
+				"buffer_size": 2188,
 				"line_ending": "Unix"
 			}
 		},
@@ -574,7 +579,7 @@
 			"file": "app/views/prestations/editions.html.erb",
 			"settings":
 			{
-				"buffer_size": 359,
+				"buffer_size": 301,
 				"line_ending": "Unix",
 				"name": "<h3>Editions</h3>"
 			}
@@ -615,6 +620,8 @@
 	},
 	"file_history":
 	[
+		"/home/philippe/RailsProjects/openCantine3/app/views/prestations/stats_mensuelle.erb",
+		"/home/philippe/RailsProjects/openCantine3/app/views/prestations/new_manual_classroom.erb",
 		"/home/philippe/RailsProjects/scopelec/config/initializers/mime_types.rb",
 		"/home/philippe/RailsProjects/alh/config/initializers/mime_types.rb",
 		"/home/philippe/RailsProjects/alh/app/views/controles/index.xls.erb",
@@ -740,9 +747,7 @@
 		"/home/philippe/Bureau/MySQLdump.sh",
 		"/home/philippe/RailsProjects/openCantine3/app/views/factures/index.html.erb",
 		"/home/philippe/RailsProjects/openCantine3/app/views/factures/show.pdf.erb",
-		"/home/philippe/RailsProjects/scopelec/db/migrate/20140703122432_add_default0_to_num.rb",
-		"/home/philippe/RailsProjects/scopelec/db/migrate/20140703102328_add_fo_aet_troncon_to_dossier.rb",
-		"/home/philippe/RailsProjects/scopelec/app/models/checklist.rb"
+		"/home/philippe/RailsProjects/scopelec/db/migrate/20140703122432_add_default0_to_num.rb"
 	],
 	"find":
 	{
@@ -862,7 +867,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -871,15 +876,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2443,
+						"buffer_size": 2451,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2188,
+								2188
 							]
 						],
 						"settings":
@@ -888,44 +893,15 @@
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 1026.0,
+						"translation.x": 0.0,
+						"translation.y": 1140.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/views/prestations/new_manual_classroom.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1826,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								379,
-								379
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 171.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "app/views/prestations/stats_mensuelle_params.erb",
 					"semi_transient": false,
 					"settings":
@@ -954,49 +930,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "app/views/prestations/stats_mensuelle.erb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2344,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2291,
-								2291
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
+					"buffer": 2,
 					"file": "app/controllers/prestations_controller.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15294,
+						"buffer_size": 15858,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1008,
-								1008
+								1081,
+								1081
 							]
 						],
 						"settings":
@@ -1006,27 +953,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 285.0,
+						"translation.y": 342.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "app/views/prestations/index.html.erb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1112,
+						"buffer_size": 937,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								949,
-								949
+								527,
+								527
 							]
 						],
 						"settings":
@@ -1038,24 +985,113 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "app/views/prestations/editions.html.erb",
+					"buffer": 4,
+					"file": "app/views/prestations/_list.erb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 359,
+						"buffer_size": 10091,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								281,
-								281
+								10075,
+								10075
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4503.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/prestations/new_manual_classroom.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2023,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								500,
+								500
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/views/prestations/_prestation_full.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2188,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/views/prestations/editions.html.erb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 301,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								68,
+								68
 							]
 						],
 						"settings":
@@ -1067,7 +1103,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
