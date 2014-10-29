@@ -52,19 +52,24 @@ class PrestationsController < ApplicationController
 
   def print
 	   @images = get_etat_images
-     @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], 'date,classe,nom,prenom', '', params[:toutlemois])
+     @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], 'date,enfants.classe,nom,enfants.prenom', '', params[:periode])
      @classrooms  = Ville.find(session[:mairie]).classrooms
   end
 
   def editions
     @date = params[:search] unless params[:search].blank?
     @classe = params[:classe] unless params[:classe].blank?
-    @toutlemois = params[:toutlemois] unless params[:toutlemois].blank?
+    @periode = params[:periode] 
     @totaux = params[:totaux] unless params[:totaux].blank?
-    if @toutlemois
+    case @periode
+    when "jour" 
+      @titre =  "Liste des prestations au #{@date}"
+    when "semaine" 
+      @titre = "Liste des prestations du #{@date} au #{@date.to_date + 1.week}"
+    when "mois" 
       @titre = "Liste des prestations du mois"
     else
-      @titre =  "Liste des prestations au #{@date}"
+      @titre =  "Liste des prestations"
     end  
   end  
 
@@ -434,7 +439,7 @@ class PrestationsController < ApplicationController
   def stats_mensuelle
   	@stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
   	@prestation_date = @stats_date.to_date
-  	@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'nom,prenom', '', true)
+  	@prestations = Prestation.search(@prestation_date, params[:stats][:classe], session[:mairie], 'nom, enfants.prenom', '', true)
   	
   	if @prestations.first
   		@classrooms = Ville.find(session[:mairie]).classrooms
