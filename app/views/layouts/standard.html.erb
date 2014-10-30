@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/stylesheets/blueprint/print.css" type="text/css" media="print">	
   <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
   <%= csrf_meta_tags %> 
+  <%= favicon_link_tag 'fav.ico' %>
 </head>
 <body>
 	<script language="javascript">
@@ -41,9 +42,9 @@
 		</div>
 
 		<div id="title" class="span-10">
-	           <%= image_tag '/images/playground.png' %>
-	           <%= image_tag '/images/diner.png' %>
-	           <%= image_tag '/images/picnic.png' %><br>
+	           <%= image_tag 'playground.png' %>
+	           <%= image_tag 'diner.png' %>
+	           <%= image_tag 'picnic.png' %><br>
 	           <%= link_to 'openCantine', '/' %>
 		</div>
 		<div>
@@ -60,23 +61,23 @@
 		<div id="menubar" class="span-24 last">
 		   <% if ['familles','enfants','prestations','factures','paiements'].include?(controller) %>
 				<div class="span-4" id="menu<%= 'Current' if controller == 'familles' %>">
-	       			<%= image_tag "/images/school.png"  %>
+	       			<%= image_tag "school.png"  %>
 	       			<%= link_to "Familles", familles_path %>
 				</div>
 		    	<div class="span-4" id="menu<%= 'Current' if controller == 'enfants' %>">
-			       <%= image_tag "/images/kid.png"  %>
+			       <%= image_tag "kid.png"  %>
 			       <%= link_to "Enfants", enfants_path %>
 				</div>
 				<div class="span-4" id="menu<%= 'Current' if controller == 'prestations' %>">
-		      		<%= image_tag "/images/diner.png"  %>
+		      		<%= image_tag "diner.png"  %>
 		      		<%= link_to "Prestations", prestations_path %>
 				</div>
 				<div class="span-4" id="menu<%= 'Current' if controller == 'factures' %>">
-			       <%= image_tag "/images/factures.png"   %>
+			       <%= image_tag "factures.png"   %>
 			       <%= link_to "Factures", factures_path %>  
 				</div>
 				<div class="span-4 last" id="menu<%= 'Current' if controller == 'paiements' %>">
-			       <%= image_tag "/images/euro.png"   %>
+			       <%= image_tag "euro.png"   %>
 			       <%= link_to "Paiements", paiements_path %>
 				</div>
 				<div class="span-24 last" style="background-color: #eee;"></div>
@@ -84,9 +85,7 @@
 		</div>
 
 		<div class="span-24 last">
-	   		<div>
-				<%= yield -%>
-	   		</div> 
+			<%= yield -%>
     	</div>
    </div>
    <%= render "layouts/ga" %>
