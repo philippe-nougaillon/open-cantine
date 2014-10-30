@@ -31,6 +31,7 @@
 	     <%= text_field_tag "famille_id", @famille_id if @famille_id %>
 	     <%= text_field_tag "mois", @mois %>
 	     <%= text_field_tag "year", @year %>
+	     <%= text_field_tag "solde", @solde %>
 	  </p>
 	  <table class="sample">
 	    <tr>
@@ -77,13 +78,13 @@
 		   </table>
 		   <table class="sample">
 			<tr>
-			      <th>Semaine</th>
-			      <th>Date</th>
-			      <th>Repas</th>
-			      <th>Garderie Matin</th>
-			      <th>Garderie Soir</th>
-			      <th>Centre Matin</th>
-			      <th>Centre Soir</th>
+		      <th>Semaine</th>
+		      <th>Date</th>
+		      <th>Repas</th>
+		      <th>Garderie Matin</th>
+		      <th>Garderie Soir</th>
+		      <th>Centre Matin</th>
+		      <th>Centre Soir</th>
 			</tr>
                 <% end %>
 	     <% end %>
@@ -92,8 +93,6 @@
 	   
 	   <%= f.submit "Enregistrer" %>
 	   <a href="#top">Haut de la page</a>
-
-
 	<% end %>
 	<br>
 	<br>

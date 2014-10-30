@@ -63,13 +63,13 @@ class PrestationsController < ApplicationController
     @totaux = params[:totaux] unless params[:totaux].blank?
     case @periode
     when "jour" 
-      @titre =  "Liste des prestations au #{@date}"
+      @titre = "Liste des prestations au #{@date}"
     when "semaine" 
       @titre = "Liste des prestations du #{@date} au #{@date.to_date + 1.week}"
     when "mois" 
       @titre = "Liste des prestations du mois"
     else
-      @titre =  "Liste des prestations"
+      @titre = "Liste des prestations"
     end  
   end  
 
@@ -211,11 +211,7 @@ class PrestationsController < ApplicationController
   end
 
   def calendrier
-
-
-
   end
-
 
   # PUT /prestations/1
   # PUT /prestations/1.xml
@@ -302,9 +298,16 @@ class PrestationsController < ApplicationController
        @famille_id = params[:famille_id]
        @enfants = Enfant.find_by_famille_id(@famille_id)
        @enfant = @enfants[0]	
+       @famille = Famille.find(@famille_id) 
     else
        @enfant = Enfant.find(params[:id])
+       @famille = Famille.find(@enfant.famille_id) 
     end
+
+    sumP  = @famille.factures.sum('montant')
+    sumIn = @famille.paiements.sum('montant')
+    @solde = sumIn - sumP
+
     respond_to do |format|
         format.html
         format.js
@@ -315,6 +318,7 @@ class PrestationsController < ApplicationController
   def new_manual_calc
     @mois = params[:mois]
     @year = params[:year]
+    @solde = params[:solde].to_f
     @total = 0.00
 
     if params[:famille_id]
@@ -325,72 +329,103 @@ class PrestationsController < ApplicationController
     end
 
     @famille = Famille.find(@enfants[0].famille_id)
-    @sumP  = @famille.factures.sum('montant')
-    @sumIn = @famille.paiements.sum('montant')
-    @solde = @sumIn - @sumP
 
     @enfants.count.times { |i|
         @enfant = @enfants[i]
 
-	    date = Date.new(@year.to_i, @mois.to_i, 1)
+	      date = Date.new(@year.to_i, @mois.to_i, 1)
+        #logger.debug "Date:#{date} "
   
         days_in_month(date).times {
-          if params[:"#{date.day}RepasAM"] or
-             params[:"#{date.day}GarderieAM"] or params[:"#{date.day}GarderiePM"] or
-             params[:"#{date.day}CentreAM"] or params[:"#{date.day}CentrePM"] or params[:etude]
+          day = date.day
+          #logger.debug "Day loop #{day}"
 
-             # test si date est dans une période de vacance
-             #@vacances = Vacance.find(:all, :conditions => ["debut <= ? AND fin >= ? AND mairie_id = ?", date.to_s(:en), date.to_s(:en), session[:mairie]])
+          if params[:"#{day}RepasAM"] or params[:"#{day}GarderieAM"] or params[:"#{day}GarderiePM"] or
+            params[:"#{day}CentreAM"] or params[:"#{day}CentrePM"] or params[:etude]
 
-             @prestation = Prestation.new
-             @prestation.enfant_id = @enfant.id
-             @prestation.date = date
-             @prestation.repas = '1' if params[:"#{date.day}RepasAM"]
-             @prestation.garderieAM = '1' if params[:"#{date.day}GarderieAM"]
-             @prestation.garderiePM = '1' if params[:"#{date.day}GarderiePM"]
-             @prestation.centreAM = '1' if params[:"#{date.day}CentreAM"]
-             @prestation.centrePM = '1' if params[:"#{date.day}CentrePM"]
-             @prestation.etude = '1' if params[:etude] and ( date.wday != 3 and date.wday != 6 and date.wday != 0 and @vacances.empty?)
-             @prestation.totalA = 0.00
+            #logger.debug "Day loop :#{@year}-#{@mois}-#{day}"
 
-             # calcul prestations type 1 ' Normale
-             nbr_prestation = {'Repas' => 0,'GarderieAM' => 0,'GarderiePM' => 0, 'CentreAM' => 0, 'CentrePM' => 0, 'CentreAMPM' => 0, 'Etude' => 0, 'MntRepas' => 0,'MntGarderieAM' => 0,'MntGarderiePM' => 0, 'MntCentreAM' => 0, 'MntCentrePM' => 0, 'MntCentreAMPM' => 0, 'MntEtude' => 0 ,'JoursRepas' => "",'JoursGarderieAM' => "",'JoursGarderiePM' => "", 'JoursCentreAM' =>"", 'JoursCentrePM' => "", 'JoursCentreAMPM' => "", 'JoursEtude' => "",'PrixCentreAMPM' => 0, 'PrixCentreAM' => 0, 'PrixCentrePM' => 0}
+            # test si date est dans une période de vacance
+            # @vacances = Vacance.find(:all, :conditions => ["debut <= ? AND fin >= ? AND mairie_id = ?", date.to_s(:en), date.to_s(:en), session[:mairie]])
 
-             nbr_prestation = @prestation.calc_prestation(nbr_prestation)
-             
-             total_prestations = nbr_prestation['MntRepas'] + nbr_prestation['MntGarderieAM'] + nbr_prestation['MntGarderiePM'] + nbr_prestation['MntCentreAM'] + nbr_prestation['MntCentrePM'] + nbr_prestation['MntCentreAMPM'] + nbr_prestation['Etude']
-             @total = @total + total_prestations
-             @prestation.totalP = total_prestations
-	     @tarif = @prestation.tarif
-	             
-	    #if params[:enregistre] and (date.wday != 6 and date.wday != 0)	
-		begin
-		   @prestation.save!
-		rescue ActiveRecord::RecordInvalid => error
-		   #Doublon de prestation ?	
-		   logger.info(error)
-		   @prestation_originale = Prestation.find(:first , :conditions => ["enfant_id = ? and date = ?", @enfant.id, date])	
-		   #On sauvegarde si pas facturée
-		   if @prestation_originale.facture_id.nil?	
-		      @prestation_originale.update_attribute(:repas, @prestation.repas)  
-		      @prestation_originale.update_attribute(:garderieAM , @prestation.garderieAM)
-		      @prestation_originale.update_attribute(:garderiePM , @prestation.garderiePM)		
+            @prestation = Prestation.where(enfant_id:@enfant.id, date:date).first
+            if @prestation.nil?
+               @prestation = Prestation.new
+               @prestation.enfant_id = @enfant.id
+               @prestation.date = date
+            end
+            @prestation.repas = '1' if params[:"#{day}RepasAM"]
+            @prestation.garderieAM = '1' if params[:"#{day}GarderieAM"]
+            @prestation.garderiePM = '1' if params[:"#{day}GarderiePM"]
+            @prestation.centreAM = '1' if params[:"#{day}CentreAM"]
+            @prestation.centrePM = '1' if params[:"#{day}CentrePM"]
+            @prestation.etude = '1' if params[:etude] and ( date.wday != 3 and date.wday != 6 and date.wday != 0 and @vacances.empty?)
+            @prestation.totalA = 0.00
+            @prestation.save
 
-		      @prestation_originale.update_attribute(:centreAM , @prestation.centreAM)
-		      @prestation_originale.update_attribute(:centrePM , @prestation.centrePM)
-		   end
- 		end
-	     end
-          #end
+            # calcul prestations type 1 ' Normale
+            nbr_prestation = {'Repas' => 0,'GarderieAM' => 0,'GarderiePM' => 0, 'CentreAM' => 0, 'CentrePM' => 0, 'CentreAMPM' => 0, 'Etude' => 0, 'MntRepas' => 0,'MntGarderieAM' => 0,'MntGarderiePM' => 0, 'MntCentreAM' => 0, 'MntCentrePM' => 0, 'MntCentreAMPM' => 0, 'MntEtude' => 0 ,'JoursRepas' => "",'JoursGarderieAM' => "",'JoursGarderiePM' => "", 'JoursCentreAM' =>"", 'JoursCentrePM' => "", 'JoursCentreAMPM' => "", 'JoursEtude' => "",'PrixCentreAMPM' => 0, 'PrixCentreAM' => 0, 'PrixCentrePM' => 0}
+            nbr_prestation = @prestation.calc_prestation(nbr_prestation)
+            total_prestations = nbr_prestation['MntRepas'] + nbr_prestation['MntGarderieAM'] + nbr_prestation['MntGarderiePM'] + nbr_prestation['MntCentreAM'] + nbr_prestation['MntCentrePM'] + nbr_prestation['MntCentreAMPM'] + nbr_prestation['Etude']
+            @total = @total + total_prestations
+            @prestation.totalP = total_prestations
+	          @tarif = @prestation.tarif
+
+      		  @prestation.save
+  	      end
           date = date + 1.day
         }
     }
 
     respond_to do |format|
        format.html
-	   format.js
- 	end
+	     format.js
+ 	  end
   end
+
+
+  def new_manual_calc_test
+    if params[:famille_id]
+       @famille_id = params[:famille_id]
+       @enfants = Enfant.find_all_by_famille_id(@famille_id)
+    else
+       @enfants = Enfant.find(:all, :conditions => ["id = ? ", params[:enfant_id]])
+    end
+
+    @enfant = @enfants[0]
+    @famille = Famille.find(@enfants[0].famille_id)
+
+    @sumP  = @famille.factures.sum('montant')
+    @sumIn = @famille.paiements.sum('montant')
+    @solde = @sumIn - @sumP
+    @total = 0.00
+
+    #{}"enfant_id"=>"650", "mois"=>"10", "year"=>"2014", 
+    #{}"9RepasAM"=>"on", "10RepasAM"=>"on", "13RepasAM"=>"on", "14RepasAM"=>"on", 
+    #{}"15RepasAM"=>"on", "16RepasAM"=>"on"
+
+    mois = params[:mois]
+    year = params[:year]
+
+    params.each do |param|
+      key = param.first
+      value = param.last
+      if value == 'on'
+        d = key.split(".").first
+        type = key.split(".").last
+        date = Date.new(year.to_i, mois.to_i, d.to_i)
+        logger.debug "!!! DATE : #{date} Type: #{type}"
+        presta = Prestation.first_or_create(enfant_id:params[:enfant_id], date:date)
+        logger.debug "!!! Presta : #{presta.inspect}"
+      end  
+    end
+        
+    respond_to do |format|
+       format.html
+       format.js
+    end
+  end
+
 
   def new_manual_classroom
 	  @date = session[:date]
