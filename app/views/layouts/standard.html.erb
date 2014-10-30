@@ -4,11 +4,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />  
+
+  <% controller = params[:controller] %> 
+
   <% unless session[:user].nil? %>
-	 <title>openCantine - <%= User.find(session[:user]).username %></title>
+    <% user_id = session[:user] %> 
+    <% user = User.find(user_id) %>
+	<title>openCantine - <%= user.username %></title>
   <% else %>
 	 <title>openCantine</title>
   <% end %>
+
   <%= javascript_include_tag "application", "rails.validations" %>
   <%= stylesheet_link_tag '/stylesheets/standard', :media => "all"  %>
   <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
@@ -23,65 +29,66 @@
 	        $("#warning_message").fadeOut(7000);
 	    });
 	</script>
-   <div class="container">
-	<div id="login" class="span-24 last">
-	    <% unless session[:user].nil? %>
-	         <%= link_to User.find(session[:user]).username, :controller => 'admin', :action => 'user_edit' %>
-			| <%= link_to "Paramètres", :controller => 'admin', :action => 'setup' %>
-	        | <%= link_to "Aide", :controller => 'admin', :action => 'bienvenue' %>
-	        | <%= link_to "Participer", :controller => 'todos' %>
-	        | <%= link_to "Déconnexion", {:controller => 'admin', :action => 'signout', :id => 0 } %>
-	    <% end %>
-	</div>
+    <div class="container">
+		<div id="login" class="span-24 last">
+		    <% unless user_id.nil? %>
+		         <%= link_to user.username, :controller => 'admin', :action => 'user_edit' %>
+				| <%= link_to "Paramètres", :controller => 'admin', :action => 'setup' %>
+		        | <%= link_to "Aide", :controller => 'admin', :action => 'bienvenue' %>
+		        | <%= link_to "Participer", :controller => 'todos' %>
+		        | <%= link_to "Déconnexion", {:controller => 'admin', :action => 'signout', :id => 0 } %>
+		    <% end %>
+		</div>
 
-	<div id="title" class="span-10">
-           <%= image_tag '/images/playground.png' %>
-           <%= image_tag '/images/diner.png' %>
-           <%= image_tag '/images/picnic.png' %><br>
-           <%= link_to 'openCantine', '/' %>
-	</div>
-	<div>
-		<br><br>
-		<h3><%= Ville.find(session[:mairie]).nom unless session[:user].nil? %></h3>	
-	</div>
+		<div id="title" class="span-10">
+	           <%= image_tag '/images/playground.png' %>
+	           <%= image_tag '/images/diner.png' %>
+	           <%= image_tag '/images/picnic.png' %><br>
+	           <%= link_to 'openCantine', '/' %>
+		</div>
+		<div>
+			<br><br>
+			<h3><%= link_to Ville.find(session[:mairie]).nom, "/" unless user_id.nil? %></h3>	
+		</div>
 
-	<div class="span-24 last">
-	    <hr>
-	    <div id="error_message">  <%= flash[:notice]  %></div>
-	    <div id="warning_message"><%= flash[:warning] %></div>
-	</div>
+		<div class="span-24 last">
+		    <hr>
+		    <div id="error_message">  <%= flash[:notice]  %></div>
+		    <div id="warning_message"><%= flash[:warning] %></div>
+		</div>
 
-	<div id="menubar" class="span-24 last">
-	   <% unless session[:user].nil? %>
-		<div class="span-4" id="menu<%= 'Current' if params[:controller] == 'familles' %>">
-       			<%= image_tag "/images/school.png"  %>
-       			<%= link_to "Familles", :controller => 'familles' %>
+		<div id="menubar" class="span-24 last">
+		   <% if ['familles','enfants','prestations','factures','paiements'].include?(controller) %>
+				<div class="span-4" id="menu<%= 'Current' if controller == 'familles' %>">
+	       			<%= image_tag "/images/school.png"  %>
+	       			<%= link_to "Familles", familles_path %>
+				</div>
+		    	<div class="span-4" id="menu<%= 'Current' if controller == 'enfants' %>">
+			       <%= image_tag "/images/kid.png"  %>
+			       <%= link_to "Enfants", enfants_path %>
+				</div>
+				<div class="span-4" id="menu<%= 'Current' if controller == 'prestations' %>">
+		      		<%= image_tag "/images/diner.png"  %>
+		      		<%= link_to "Prestations", prestations_path %>
+				</div>
+				<div class="span-4" id="menu<%= 'Current' if controller == 'factures' %>">
+			       <%= image_tag "/images/factures.png"   %>
+			       <%= link_to "Factures", factures_path %>  
+				</div>
+				<div class="span-4 last" id="menu<%= 'Current' if controller == 'paiements' %>">
+			       <%= image_tag "/images/euro.png"   %>
+			       <%= link_to "Paiements", paiements_path %>
+				</div>
+				<div class="span-24 last" style="background-color: #eee;"></div>
+		    <% end %>
 		</div>
-	    	<div class="span-4" id="menu<%= 'Current' if params[:controller] == 'enfants' %>">
-		       <%= image_tag "/images/kid.png"  %>
-		       <%= link_to "Enfants", :controller => 'enfants' %>
-		</div>
-		<div class="span-4" id="menu<%= 'Current' if params[:controller] == 'prestations' %>">
-	      		<%= image_tag "/images/diner.png"  %>
-	      		<%= link_to "Prestations", :controller => 'prestations' %>
-		</div>
-		<div class="span-4" id="menu<%= 'Current' if params[:controller] == 'factures' %>">
-		       <%= image_tag "/images/factures.png"   %>
-		       <%= link_to "Factures", :controller => 'factures' %>  
-		</div>
-		<div class="span-4 last" id="menu<%= 'Current' if params[:controller] == 'paiements' %>">
-		       <%= image_tag "/images/euro.png"   %>
-		       <%= link_to "Paiements", :controller => 'paiements' %>
-		</div>
-		<div class="span-24 last" style="background-color: #eee;"></div>
-	    <% end %>
-	</div>
-	<div class="span-24 last">
-	   <div>
-		<%= yield -%>
-	   </div> 
-    </div>
+
+		<div class="span-24 last">
+	   		<div>
+				<%= yield -%>
+	   		</div> 
+    	</div>
    </div>
    <%= render "layouts/ga" %>
-  </body>
+</body>
 </html>

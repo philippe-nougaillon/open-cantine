@@ -2,7 +2,7 @@
   <td><%=h vacance.nom %></td>
   <td><%=h vacance.debut.to_s(:fr) %></td>
   <td><%=h vacance.fin.to_s(:fr) %></td>
-  <td><%= link_to 'Modifier', edit_vacance_path(vacance) %></td>
+  <td><%= link_to image_tag('modif.png', size:"15x15"), edit_vacance_path(vacance) %></td>
   <td>
   	<%= link_to 'X', vacance, data:{confirm: 'Etes-vous certain(e) de vouloir supprimer ?'}, :method => :delete %>
   </td>

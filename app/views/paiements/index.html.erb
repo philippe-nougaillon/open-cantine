@@ -40,13 +40,16 @@
             <td style="text-align:right"><%=h number_to_currency(paiement.montantGarderie, :locale => "fr") %></td>
             <td style="text-align:right"><%=h number_to_currency(paiement.montant, :locale => "fr") %></td>
             <td><%=h paiement.remise.to_s(:fr) if paiement.remise %></td>
-            <% if session[:user_readwrite] %> <td><%= link_to 'Modifier', edit_paiement_path(paiement) %></td> <% end %>
+            <% if session[:user_readwrite] %> 
+                <td><%= link_to image_tag('modif.png', size:"15x15"), edit_paiement_path(paiement) %></td>
+            <% end %>
             <td><%= link_to 'Imprimer', :action => 'print', :id => paiement.id %></td>
         </tr>
     <% end %>
     </table>
     <br />
-    <%= will_paginate @paiements, :previous_label => "Prédédent", :next_label => "Suivant" %>
+     <%= page_entries_info @paiements %>
+    <%= will_paginate @paiements %>
   <% else %>
     Pas de paiements à afficher. Réduisez le filtre et recommencez.
   <% end %>

@@ -1,5 +1,5 @@
 <br>
-<div class="span-18 last">	
+<div class="span-16 last">	
 	<h3>Utilisateurs</h3>
 	<table class="sample">
       <tr>
@@ -11,24 +11,26 @@
 	   </tr>
 	   <% for u in @users %>
 		  <tr class="<%= cycle('list-line-even','list-line-odd')%>">
-			<td><%= image_tag avatar_url(u) %></td>
+			<td><%= image_tag("icon_user.png" ) %></td>
 			<td><b><%= u.username[0..30] %></b></td>
 			<td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
 			<td><%= u.lastconnection.to_s(:fr) %> </td>
 			<td><%= u.lastchange.to_s(:fr) %></td>
-		</tr>
+		  </tr>
    	   <% end %>
     </table>
 	<br>
-	<hr>
-	<h3>Ajouter un utilisateur</h3>
+<hr>
+	<h3>Ajout d'un utilisateur</h3>
 	<%= simple_form_for(User.new, :url => 'user_add') do |f| %>
 		<%= f.input :username , :label => "Utilisateur", :hint => "Généralement son adresse email." %>
 		<%= f.input :password, :label => "Mot de passe", :required => true %>
-		<%= f.input :readwrite, :label => "Lecture + Ecriture ?", :hint => "Cet utilisateur peut modifier les données ?" %>
-		<%= f.submit '' %>
+		<%= f.input :readwrite, :label => "Cet utilisateur pourra modifier les données ?" %>
+		<br>
+		<%= f.submit 'Ajouter' %>
 	<% end %>
 	<br>
-	<br>
+<hr>
+
 </div>
 

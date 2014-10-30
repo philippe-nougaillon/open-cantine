@@ -18,6 +18,7 @@
   <table class="sample">
     <tr>
       <th><%= link_to "Nom", :sort => "nom" %></th>
+      <th>Enfant(s)</th>
       <th>Adresse</th>
       <th><%= link_to "Cp", :sort => "cp" %></th>
       <th><%= link_to "Ville", :sort => "ville" %></th>
@@ -29,6 +30,7 @@
     <% for famille in @familles %>
       <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
         <td><b><%= link_to famille.nom.upcase, famille %></b></td>
+        <td><%= famille.enfants.count %></td>
         <td><%=h famille.adresse[0..25] %></td>
         <td><%=h famille.cp %></td>
         <td><%=h famille.ville.upcase %></td>
@@ -38,7 +40,7 @@
       </tr>
     <% end %>
   </table>
-
   <br />
-  <%= will_paginate @familles, :previous_label => "Prédédent", :next_label => "Suivant" %>
+  <%= page_entries_info @familles %>
+  <%= will_paginate @familles %>
 </div>

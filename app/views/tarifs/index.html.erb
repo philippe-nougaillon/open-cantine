@@ -25,7 +25,7 @@
       <td style="text-align:right"><%=h number_to_currency(tarif.CentrePMP, :locale => "fr") %></td>
       <td style="text-align:right"><%=h number_to_currency(tarif.CentreAMPMP, :locale => "fr") %></td>
       <td style="text-align:right"><%=h number_to_currency(tarif.Etude, :locale => "fr") %></td>
-      <td><%= link_to 'Modifier', edit_tarif_path(tarif) %></td>
+      <td><%= link_to image_tag('modif.png', size:"15x15"), edit_tarif_path(tarif) %></td>
   </tr>
 <% end %>
 </table>

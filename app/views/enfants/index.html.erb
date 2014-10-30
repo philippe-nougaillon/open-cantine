@@ -35,7 +35,6 @@
         <td style="text-align:right"><%=h enfant.age %></td>
         <td><% if enfant.sansPorc %>Sans Porc. <% end %> <% if enfant.allergies %>Allergies.<% end %></td>
         <% if session[:user_readwrite] %>
-
           <td><%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :year => Date.today.year, :id  => enfant.id %></td>
           <td><%= link_to "Automatique", :controller => 'prestations', :action => 'new', :enfant_id  => enfant.id %></td>
         <% end %>
@@ -43,6 +42,7 @@
     <% end %>
   </table>
   <br>
-  <%= will_paginate @enfants, :previous_label => "Prédédent", :next_label => "Suivant" %>
+  <%= page_entries_info @enfants %>
+  <%= will_paginate @enfants %>
   <br>
 </div>

@@ -45,6 +45,6 @@
     </td>
 
     <% if session[:user_readwrite] and params[:action] != 'print' %>
-       <td><%= link_to 'Modifier', :controller => 'prestations', :action => 'edit', :id => prestation %></td>
+       <td><%= link_to image_tag('modif.png', size:"15x15"), :controller => 'prestations', :action => 'edit', :id => prestation %></td>
     <% end %>
 </tr>

@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   layout "standard"
 
   def stats
-     @users = User.find(:all, :order => 'lastconnection DESC')
+     @users = User.order('lastconnection DESC').limit(20)
   end
 
   def signin
@@ -129,20 +129,20 @@ class AdminController < ApplicationController
     @users = User.find_all_by_mairie_id(mairie, :order => "username")
     @facture_chrono = FactureChrono.find_by_mairie_id(mairie)
     @vacances = Vacance.find_all_by_mairie_id(mairie, :order => 'debut')
-    @enfants= Enfant.find_by_sql("SELECT id FROM enfants WHERE famille_id IN (SELECT id FROM familles WHERE mairie_id= #{session[:mairie]} )")
+    @enfants = @mairie.enfants
   end
 
   def users_admin
-	@users = User.find_all_by_mairie_id(session[:mairie], :order => "username")
+	  @users = User.find_all_by_mairie_id(session[:mairie], :order => "username")
   end
 
   def user_add
-	@user = User.new
-	@user.username = params[:user][:username]
-	@user.password = params[:user][:password]
+	  @user = User.new
+	  @user.username = params[:user][:username]
+	  @user.password = params[:user][:password]
     @user.mairie_id = session[:mairie]
-	@user.lastconnection = Date.today
-	@user.lastchange = Date.today
+	  @user.lastconnection = Date.today
+	  @user.lastchange = Date.today
 
     if @user.save
       flash[:notice] = "Utilisateur ajouté."
@@ -150,7 +150,6 @@ class AdminController < ApplicationController
       flash[:warning] = "Erreur! Cet utilisateur existe déjà ?"
     end
     redirect_to :action => "users_admin"
-
   end
 
   def show_facturation_module

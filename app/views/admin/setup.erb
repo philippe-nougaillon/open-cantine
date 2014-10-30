@@ -18,7 +18,9 @@
 <div>
    <div class="span-15 last">	
 	    <a name="coordonnees"></a>
-	    <h3>Coordonnées</h3>
+	    <h3>Coordonnées
+	    	<%= link_to image_tag('modif.png', size:"15x15"), edit_ville_path(@mairie.id) if session[:user_readwrite] %>
+	    </h3>
 
 	    <table class="sample">
 	      <tr>
@@ -48,16 +50,16 @@
 		  <tr>
 			<td>Logo</td>
 			<td><%= @mairie.logo_url %></td>
-			<td><%= image_tag(@mairie.logo_url) %></td>
+			<td><%= image_tag(@mairie.logo_url, size:'50x50') %></td>
 	     </tr>
 	    </table>
-	    <%= link_to "Modifier", :controller => 'villes', :action => 'edit', :id => @mairie.id if session[:user_readwrite] %>
-            <br><br>
     </div>
 <hr>
     <div class="span-12 last">	
 	    <a name="classes"></a>
-        <h3>Classes</h3>
+        <h3>Classes
+	        <%= link_to image_tag('modif.png', size:"15x15"), classrooms_path if session[:user_readwrite] %>
+        </h3>
 	    <table class="sample">
 		<th>Nom</th>
 		<th>Enseignant</th>
@@ -70,13 +72,13 @@
 		      </tr>
 		 <% end %>
 	    </table>
-	    <%= link_to "Modifier", :controller => 'classrooms' if session[:user_readwrite] %>
-	    <p></p>
     </div>
 	<hr>
     <div class="span-24 last">	
 	    <a name="tarifs"></a>
-	    <h3>Tarifs</h3>
+	    <h3>Tarifs
+	    	<%= link_to image_tag('modif.png', size:"15x15"), tarifs_path if session[:user_readwrite] %> 
+	    </h3>
 		<small>Ces tarifs pourront être attribués aux familles ou aux enfants pour leur appliquer un tarif particulier.</small>
 	    <table class="sample">
 	     <tr>
@@ -102,15 +104,14 @@
 			</tr>
 	      <% end %>
 	    </table>
-	    <%= link_to "Modifier", :controller => 'tarifs' if session[:user_readwrite] %> 
-	    <br>
-    	<br>
     </div>
 	<hr>
     <div class="span-24">
       <a name="formules"></a>
-      <h3>Facturation</h3>
-	  <small>Choisissez comment seront calculées vos factures. Si vous souhaitez un mode de facturation personnalisé, <a href="mailto:philippe.nougaillon@gmail.com">contactez-moi</a>. </small>
+      <h3>Facturation
+		 <%= link_to image_tag('modif.png', size:"15x15"), edit_ville_path(@mairie.id) if session[:user_readwrite] %>
+      </h3>
+	  <small>Choisissez comment seront calculées vos factures. Si vous souhaitez un mode de facturation plus personnalisé, <a href="mailto:philippe.nougaillon@gmail.com">contactez-moi</a>. </small>
       <table class="sample">
          <tr>
 	    <th>Nom</th>
@@ -125,13 +126,13 @@
            </tr>	 
          <% end %>
       </table>
-      <%= link_to "Modifier", :controller => 'villes', :action => 'edit', :id => @mairie.id if session[:user_readwrite] %>
-      <br><br>	
     </div>
 <hr>
     <div class="span-18 last">	
-	<a name="vacances"></a>
-	<h3>Vacances</h3>
+		<a name="vacances"></a>
+		<h3>Vacances
+		    <%= link_to image_tag('modif.png', size:"15x15"), vacances_url  if session[:user_readwrite] %>
+		</h3>
 	    <table class="sample">
 	      <tr>
 			<th>Nom</th>
@@ -146,16 +147,13 @@
 			</tr>
 	      <% end -%>
 	    </table>
-		<% if session[:user_readwrite] %>
-		    <%= link_to 'Modifier', vacances_url %>
-		<% end %>
-	    <br><br>
     </div>
-    <hr>
-
+<hr>
     <div class="span-18 last">	
 		<a name="utilisateurs"></a>
-		<h3>Utilisateurs</h3>
+		<h3>Utilisateurs
+			<%= link_to image_tag('modif.png', size:"15x15"), :action => "users_admin" if session[:user_readwrite] %>
+		</h3>
 		<small>Plusieurs utilisateurs peuvent travailler simultanément sur un compte openCantine et lire et/ou modifier les données.</small>
 		<table class="sample">
 	      <tr>
@@ -166,24 +164,19 @@
 		   </tr>
 		   <% for u in @users %>
 			  <tr class="<%= cycle('list-line-even','list-line-odd')%>">
-				<td><%= image_tag avatar_url(u) %></td>
+				<td><%= image_tag("icon_user.png" ) %></td>
 				<td><b><%= u.username[0..30] %></b></td>
 				<td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
 				<td><%= u.lastconnection.to_s(:fr) %> </td>
 			</tr>
        	   <% end -%>
 	    </table>
-		<% if session[:user_readwrite] %>
-			<%= link_to "Modifier", :action => "users_admin" %>
-		<% end %> 
-		<br><br>    
 	</div>
-	<hr>
-
+<hr>
 	<% if session[:user_readwrite] %>
 		<div class="span-18 last">	
 		   <a name="export"></a>
-		   <h3>Exporter les données</h3>
+		   <h3>Import/Exporter des données</h3>
 		  		<table class="sample">
 			<tr>
 			<th style="color:black">Données associées à ce compte</th>
@@ -208,7 +201,7 @@
 		  <%= link_to "Export XML des Factures et données liées (lignes de factures)", "/factures.xml" %>
 		  <%= link_to "Excel", factures_path(format: "xls") %><br>
 		  <%= link_to "Export XML des Paiements", "/paiements.xml" %><br>
-		  <%= link_to "Excel", paiements_path(format: "xls") %>
+		  <%= link_to "Export Excel des Paiements", paiements_path(format: "xls") %>
 		  <br><br>
 		</div>
 	    <hr>

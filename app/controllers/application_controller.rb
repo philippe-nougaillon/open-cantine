@@ -3,7 +3,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-
   before_filter :check_authentification, 
   				:except => 	[:signin, :check_user, :compte_login, :famillelogin, :familleshow, :famillelogout, 
 							:site_presentation, :nouveau_compte, :nouveau_compte_create, :stats, :guide, :points_forts]
@@ -19,7 +18,7 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
 
-   def check_authentification
+    def check_authentification
       unless session[:user]
          redirect_to :action => 'signin', :controller => "admin"
       end
@@ -47,7 +46,7 @@ class ApplicationController < ActionController::Base
       request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"][/(Mobile\/.+Safari)/]
     end
 
-	def get_etat_images
+	  def get_etat_images
       @images = ["","ok.jpeg","no.jpeg","orange.jpeg","cancel.jpeg","ok.jpeg","ok.jpeg","ok.jpeg"]
     end
 

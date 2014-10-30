@@ -30,17 +30,16 @@ class FamillesController < ApplicationController
   # GET /familles
   # GET /familles.xml
   def index
+  		# if params.has_key?('famille_id') and !params[:famille_id].empty?
+  		#    @famille = Famille.find(params[:famille_id])
+  		#    format.html { redirect_to(@famille) }
+
+    @familles = Famille.search(params[:nom], params[:page], session[:mairie], params[:sort])
     respond_to do |format|
-		if params.has_key?('famille_id') and !params[:famille_id].empty?
-		   @famille = Famille.find(params[:famille_id])
-		   format.html { redirect_to(@famille) }
-		else
-           @familles = Famille.search(params[:nom], params[:page], session[:mairie], params[:sort])
-	       format.html # index.html.erb
-      	   format.xml { render :xml => Famille.find_all_by_mairie_id(session[:mairie]).to_xml( :include => [:enfants,:prestations]) }
-      	   format.js
-		end
-     end
+      format.html # index.html.erb
+      format.xml { render :xml => Famille.find_all_by_mairie_id(session[:mairie]).to_xml( :include => [:enfants,:prestations]) }
+      format.js
+    end
   end
 
   # GET /familles/1
