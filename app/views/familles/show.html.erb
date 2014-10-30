@@ -55,9 +55,8 @@
       </tr>
     </table>
     <% if session[:user_readwrite] %>
-    	   <%= link_to "Modifier", edit_famille_path(@famille) %> |
-       	   <%= link_to("[X]", @famille, 
-    			:confirm => 'Certain(e) de vouloir supprimer cette fiche famille ?', :method => :delete) %> 	  
+    	<%= link_to "Modifier", edit_famille_path(@famille) %> |
+      <%= link_to("[X]", @famille, data: { confirm:'Certain(e) de vouloir supprimer cette fiche famille et toutes les données associées (enfants, prestations) ?' } , method: :delete) %> 	  
     <% end %>
     <br /><br />
 </div>

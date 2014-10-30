@@ -1,7 +1,7 @@
 <div id="form_actions">
    <div id="login">
        <%= link_to "| APERCU AVANT IMPRESSION |", :action => 'print', :id => @facture.id %>        
-       <%= link_to "| SUPPRIMER |", @facture, :confirm => 'Etes-vous certain(e) de vouloir supprimer cette facture ?', :method => :delete %>
+       <%= link_to "| SUPPRIMER |", @facture, data:{confirm:'Etes-vous certain(e) de vouloir supprimer cette facture ?'}, method: :delete %>
    </div> 
 </div>
 

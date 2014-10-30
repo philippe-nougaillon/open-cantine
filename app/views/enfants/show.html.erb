@@ -46,7 +46,7 @@
   </table>
 	<% if session[:user_readwrite] %>
 		<%= link_to "Modifier", edit_enfant_path(@enfant) %> |
-		<%= link_to("[X]", @enfant, :data => { :confirm => 'Certain(e) de vouloir supprimer cette fiche enfant ?'}, :method => :delete) %> 
+		<%= link_to("[X]", @enfant, data: { confirm:'Certain(e) de vouloir supprimer cette fiche enfant ?'}, method: :delete) %> 
 	<% end %>
 </div>
 <div class="span-1">

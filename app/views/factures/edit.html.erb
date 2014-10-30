@@ -11,8 +11,7 @@
 	  <p>
 	    <%= f.label :reglement_id %><br />
 	    <%= f.select :reglement_id, @paiements.collect {|p| [ "#{p.date} - #{p.typepaiement} - #{p.ref} : #{p.montant} €", p.id ] }, { :include_blank => true } %>
-
-	</p>
+	  </p>
 	  <p>
 	    <%= f.label :montant %><br />
 	    <%= f.text_field :montant %>
@@ -39,6 +38,6 @@
 	</p>
 	<p>
 		<%= f.submit "Sauvegarder" %> | 
-		<%= link_to "[Supprimer]", @facture, :confirm => 'Etes-vous certain(e) de vouloir supprimer la facture ?', :method => :delete %>
+		<%= link_to "[Supprimer]", @facture, data: {confirm:'Etes-vous certain(e) de vouloir supprimer la facture ?'}, method: :delete %>
 	</p>
 <% end %>
