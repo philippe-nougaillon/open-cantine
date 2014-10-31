@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127181635) do
+ActiveRecord::Schema.define(:version => 20141031104152) do
 
   create_table "blogs", :force => true do |t|
     t.string   "titre"
@@ -33,6 +33,9 @@ ActiveRecord::Schema.define(:version => 20121127181635) do
     t.string   "referant"
     t.integer  "mairie_id"
   end
+
+  add_index "classrooms", ["id"], :name => "index_classrooms_on_id"
+  add_index "classrooms", ["mairie_id"], :name => "index_classrooms_on_mairie_id"
 
   create_table "data_files", :force => true do |t|
     t.datetime "created_at"
@@ -100,6 +103,10 @@ ActiveRecord::Schema.define(:version => 20121127181635) do
     t.datetime "envoyee"
   end
 
+  add_index "factures", ["famille_id"], :name => "index_factures_on_famille_id"
+  add_index "factures", ["id"], :name => "index_factures_on_id"
+  add_index "factures", ["mairie_id"], :name => "index_factures_on_mairie_id"
+
   create_table "familles", :force => true do |t|
     t.string   "nom"
     t.string   "adresse"
@@ -120,6 +127,10 @@ ActiveRecord::Schema.define(:version => 20121127181635) do
     t.text     "memo"
     t.string   "allocataire"
   end
+
+  add_index "familles", ["id"], :name => "index_familles_on_id"
+  add_index "familles", ["mairie_id"], :name => "index_familles_on_mairie_id"
+  add_index "familles", ["nom"], :name => "index_familles_on_nom"
 
   create_table "formules", :force => true do |t|
     t.string   "nom"
@@ -159,6 +170,11 @@ ActiveRecord::Schema.define(:version => 20121127181635) do
     t.integer  "facture_id"
   end
 
+  add_index "paiements", ["facture_id"], :name => "index_paiements_on_facture_id"
+  add_index "paiements", ["famille_id"], :name => "index_paiements_on_famille_id"
+  add_index "paiements", ["id"], :name => "index_paiements_on_id"
+  add_index "paiements", ["mairie_id"], :name => "index_paiements_on_mairie_id"
+
   create_table "paiments", :force => true do |t|
     t.date     "date"
     t.string   "type"
@@ -185,6 +201,10 @@ ActiveRecord::Schema.define(:version => 20121127181635) do
     t.string   "repas",      :limit => 1,                               :default => "0"
   end
 
+  add_index "prestations", ["date"], :name => "index_prestations_on_date"
+  add_index "prestations", ["enfant_id"], :name => "index_prestations_on_enfant_id"
+  add_index "prestations", ["id"], :name => "index_prestations_on_id"
+
   create_table "tarifs", :force => true do |t|
     t.decimal  "RepasP",      :precision => 5, :scale => 2
     t.decimal  "GarderieAMP", :precision => 5, :scale => 2
@@ -199,6 +219,9 @@ ActiveRecord::Schema.define(:version => 20121127181635) do
     t.integer  "type_id"
     t.string   "memo"
   end
+
+  add_index "tarifs", ["id"], :name => "index_tarifs_on_id"
+  add_index "tarifs", ["mairie_id"], :name => "index_tarifs_on_mairie_id"
 
   create_table "todos", :force => true do |t|
     t.string   "description"
@@ -220,6 +243,9 @@ ActiveRecord::Schema.define(:version => 20121127181635) do
     t.boolean  "readwrite"
   end
 
+  add_index "users", ["id"], :name => "index_users_on_id"
+  add_index "users", ["mairie_id"], :name => "index_users_on_mairie_id"
+
   create_table "vacances", :force => true do |t|
     t.string   "nom"
     t.date     "debut"
@@ -228,6 +254,9 @@ ActiveRecord::Schema.define(:version => 20121127181635) do
     t.datetime "updated_at"
     t.integer  "mairie_id"
   end
+
+  add_index "vacances", ["id"], :name => "index_vacances_on_id"
+  add_index "vacances", ["mairie_id"], :name => "index_vacances_on_mairie_id"
 
   create_table "villes", :force => true do |t|
     t.string   "nom"

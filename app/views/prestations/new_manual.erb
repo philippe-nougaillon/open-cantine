@@ -1,6 +1,7 @@
 
 <div id="form_actions"><h3>Inscription manuelle</h3></div>
-Cochez les prestations à ajouter pour ce mois. Une fois l'inscription terminée, cliquez sur le nom de l'enfant pour vérifier les prestations enregistrées. Les prestations pré-cochées ne pourront pas être supprimées sur cette page.
+Cochez les prestations à ajouter pour ce mois. Une fois l'inscription terminée, cliquez sur le nom de l'enfant pour vérifier les prestations enregistrées.<br>
+Les inscriptions existantes sont pré-cochées et les prestations déjà facturées apparaissent en grisé. 
 <hr/>
 
 <% if @famille_id %>
@@ -53,21 +54,47 @@ Cochez les prestations à ajouter pour ce mois. Une fois l'inscription terminée
 		<tr>
 		  <td><% if @current_week != @week %><%= @week %><% @current_week = @week %><% end %></td>
 		  <td><b><%= format_date(d) %></b></td>
-		  <td><%= check_box_tag(:"#{d.day}.repas", params[:"#{d.day}.repas"], 
-			@presta ? (@presta.repas !="0")  : false , { :onclick => "this.form.commit.click();",
-			 :disabled => @locked }) %></td>
-		  <td><%= check_box_tag(:"#{d.day}.garderieAM", params[:"#{d.day}.garderieAM"],
-			 @presta ? (@presta.garderieAM != "0") : false, { :onclick => "this.form.commit.click();", 
-			:disabled => @locked  }) %></td>
-		  <td><%= check_box_tag(:"#{d.day}.garderiePM", params[:"#{d.day}.garderiePM"], 
-			@presta ? (@presta.garderiePM != "0") : false, { :onclick => "this.form.commit.click();", 
-			:disabled => @locked  }) %></td>
-		  <td><%= check_box_tag(:"#{d.day}.centreAM", params[:"#{d.day}.centreAM"], 
-			@presta ? (@presta.centreAM != "0") : false, { :onclick => "this.form.commit.click();", 
-			:disabled => @locked  }) %></td>
-		  <td><%= check_box_tag(:"#{d.day}.centrePM", params[:"#{d.day}.centrePM"], 
-			@presta ? (@presta.centrePM != "0") : false, { :onclick => "this.form.commit.click();", 
-			:disabled => @locked  }) %></td>
+		  <td>
+		  	<%= check_box_tag(:"#{d.day}.repas", params[:"#{d.day}.repas"], 
+				@presta ? (@presta.repas !="0")  : false , { :onclick => "this.form.commit.click();",
+			 	:disabled => @locked }) %>
+		  	<% if @presta %> 
+			   <% session[:lastparams] << "#{d.day}.repas" if @presta.repas !="0" %>
+			<% end %>
+		  </td>
+
+		  <td>
+		  	<%= check_box_tag(:"#{d.day}.garderieAM", params[:"#{d.day}.garderieAM"],
+			 	@presta ? (@presta.garderieAM != "0") : false, { :onclick => "this.form.commit.click();", 
+				:disabled => @locked  }) %>
+			<% if @presta %> 
+			   <% session[:lastparams] << "#{d.day}.garderieAM" if @presta.garderieAM !="0" %>
+			<% end %>
+		  </td>
+		  <td>
+		  	<%= check_box_tag(:"#{d.day}.garderiePM", params[:"#{d.day}.garderiePM"], 
+				@presta ? (@presta.garderiePM != "0") : false, { :onclick => "this.form.commit.click();", 
+				:disabled => @locked  }) %>
+			<% if @presta %> 
+			   <% session[:lastparams] << "#{d.day}.garderiePM" if @presta.garderiePM !="0" %>
+			<% end %>	
+		  </td>
+		  <td>
+		  	<%= check_box_tag(:"#{d.day}.centreAM", params[:"#{d.day}.centreAM"], 
+				@presta ? (@presta.centreAM != "0") : false, { :onclick => "this.form.commit.click();", 
+				:disabled => @locked  }) %>
+			<% if @presta %> 
+			   <% session[:lastparams] << "#{d.day}.centreAM" if @presta.centreAM !="0" %>
+			<% end %>	
+		  </td>
+		  <td>
+		  	<%= check_box_tag(:"#{d.day}.centrePM", params[:"#{d.day}.centrePM"], 
+				@presta ? (@presta.centrePM != "0") : false, { :onclick => "this.form.commit.click();", 
+				:disabled => @locked  }) %>
+			<% if @presta %> 
+			   <% session[:lastparams] << "#{d.day}.centrePM" if @presta.centrePM !="0" %>
+			<% end %>	
+		  </td>
 		</tr>
 
 		<% if d.wday == 5 %><% @week = @week + 1 %>
@@ -86,8 +113,9 @@ Cochez les prestations à ajouter pour ce mois. Une fois l'inscription terminée
 	<% end %>
 	</table>
 	<%= check_box_tag("etude", params[:etude]) %> Etude pour tout le mois ?
-	   
-    <%= f.submit "Enregistrer" %>
+	<div style="display:none"> 
+		<%= f.submit "Enregistrer" %>
+    </div>   
     <a href="#top">Haut de la page</a>
   <% end %>
 <br>

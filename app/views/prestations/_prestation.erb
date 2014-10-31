@@ -25,7 +25,7 @@
     <td class="center"><%= image_tag @images[prestation.etude.to_i], :size => '15x15'      if prestation.etude != "0" %> </td>
   
     <% if not prestation.facture_id and session[:user_readwrite] %>
-       <td><%= link_to 'Modifier', :controller => 'prestations', :action => 'edit_from_enfants', :id => prestation %></td>
+       <td><%= link_to image_tag("modif.png", size:"15x15"), :controller => 'prestations', :action => 'edit_from_enfants', :id => prestation %></td>
        <td><%= link_to '(X)', prestation, data: {confirm: 'Etes-vous certain(e) ?'}, :method => :delete %></td>
     <% end %>
 </tr>

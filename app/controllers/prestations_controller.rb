@@ -324,7 +324,7 @@ class PrestationsController < ApplicationController
     @solde = params[:solde].to_f
     @total = 0.00
 
-    # test si des décochés ?
+    # test si l'utilisateur a décoché ?
     if session[:lastparams]
       supprimees = session[:lastparams] - params.keys
       logger.debug "[DEBUG] suppr: #{supprimees}"
@@ -338,11 +338,17 @@ class PrestationsController < ApplicationController
     else
        @enfants = Enfant.find(:all, :conditions => ["id = ? ", params[:enfant_id]])
     end
-
     @famille = Famille.find(@enfants[0].famille_id)
+    @mairie = Ville.find(@famille.mairie_id)
+
+    #charge le module Facturation de cette mairie
+    load "facturation_modules/#{@mairie.FacturationModuleName}"
 
     @enfants.count.times { |i|
         @enfant = @enfants[i]
+
+        #retourne le tarif
+        @tarif = Facturation.best_tarif(@enfant)
 
 	      date = Date.new(@year.to_i, @mois.to_i, 1)
         #logger.debug "Date:#{date} "
@@ -386,11 +392,13 @@ class PrestationsController < ApplicationController
 
             # calcul prestations type 1 ' Normale
             nbr_prestation = {'Repas' => 0,'GarderieAM' => 0,'GarderiePM' => 0, 'CentreAM' => 0, 'CentrePM' => 0, 'CentreAMPM' => 0, 'Etude' => 0, 'MntRepas' => 0,'MntGarderieAM' => 0,'MntGarderiePM' => 0, 'MntCentreAM' => 0, 'MntCentrePM' => 0, 'MntCentreAMPM' => 0, 'MntEtude' => 0 ,'JoursRepas' => "",'JoursGarderieAM' => "",'JoursGarderiePM' => "", 'JoursCentreAM' =>"", 'JoursCentrePM' => "", 'JoursCentreAMPM' => "", 'JoursEtude' => "",'PrixCentreAMPM' => 0, 'PrixCentreAM' => 0, 'PrixCentrePM' => 0}
-            nbr_prestation = @prestation.calc_prestation(nbr_prestation)
+            nbr_prestation = Facturation.calc_prestation(nbr_prestation, @prestation, @tarif, date)
+
+            #nbr_prestation = @prestation.calc_prestation(nbr_prestation)
             total_prestations = nbr_prestation['MntRepas'] + nbr_prestation['MntGarderieAM'] + nbr_prestation['MntGarderiePM'] + nbr_prestation['MntCentreAM'] + nbr_prestation['MntCentrePM'] + nbr_prestation['MntCentreAMPM'] + nbr_prestation['Etude']
             @total = @total + total_prestations
             @prestation.totalP = total_prestations
-	          @tarif = @prestation.tarif
+	          #@tarif = @prestation.tarif
 
       		  @prestation.save
   	      end

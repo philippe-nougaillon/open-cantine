@@ -35,7 +35,7 @@ module Facturation
       # Repas
       if prestation.repas == '1' or prestation.repas == '2' or prestation.repas == '4'
          prestations_normales['MntRepas'] += tarif.RepasP
-	 	 prestations_normales['PrixRepas'] = tarif.RepasP
+	 	     prestations_normales['PrixRepas'] = tarif.RepasP
          prestations_normales['Repas'] += 1
          prestations_normales['JoursRepas'] += "#{jour}, "
       end
@@ -43,7 +43,7 @@ module Facturation
       #Garderie
       if prestation.garderieAM == '1' or prestation.garderieAM == '2' or prestation.garderieAM == '4'
          prestations_normales['MntGarderieAM'] += tarif.GarderieAMP
-	 	 prestations_normales['PrixGarderieAM'] = tarif.GarderieAMP
+	 	     prestations_normales['PrixGarderieAM'] = tarif.GarderieAMP
          prestations_normales['GarderieAM'] += 1
          prestations_normales['JoursGarderieAM'] += "#{jour}, "
       end
