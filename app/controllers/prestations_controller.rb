@@ -305,6 +305,12 @@ class PrestationsController < ApplicationController
        @famille = Famille.find(@enfant.famille_id) 
     end
 
+    @mairie = Ville.find(@famille.mairie_id)
+
+    #charge le module Facturation de cette mairie
+    load "facturation_modules/#{@mairie.FacturationModuleName}"
+
+
     sumP  = @famille.factures.sum('montant')
     sumIn = @famille.paiements.sum('montant')
     @solde = sumIn - sumP
@@ -316,9 +322,8 @@ class PrestationsController < ApplicationController
     
   end
 
+  #calcul les prestations ajoutées ou supprimées dans grille de saisie manuelle
   def new_manual_calc
-    #calcul les prestations ajoutées ou supprimées dans grille de saisie manuelle
-
     @mois = params[:mois]
     @year = params[:year]
     @solde = params[:solde].to_f
@@ -327,10 +332,10 @@ class PrestationsController < ApplicationController
     # test si l'utilisateur a décoché ?
     if session[:lastparams]
       supprimees = session[:lastparams] - params.keys
-      logger.debug "[DEBUG] suppr: #{supprimees}"
+      #logger.debug "[DEBUG] suppr: #{supprimees}"
     end
     session[:lastparams] = params.keys
-    logger.debug "[DEBUG] last params: #{session[:lastparams]}"
+    #logger.debug "[DEBUG] last params: #{session[:lastparams]}"
 
     if params[:famille_id]
        @famille_id = params[:famille_id]
@@ -338,18 +343,16 @@ class PrestationsController < ApplicationController
     else
        @enfants = Enfant.find(:all, :conditions => ["id = ? ", params[:enfant_id]])
     end
-    @famille = Famille.find(@enfants[0].famille_id)
-    @mairie = Ville.find(@famille.mairie_id)
+    #@famille = Famille.find(@enfants[0].famille_id)
+    #@mairie = Ville.find(@famille.mairie_id)
 
     #charge le module Facturation de cette mairie
-    load "facturation_modules/#{@mairie.FacturationModuleName}"
+    #load "facturation_modules/#{@mairie.FacturationModuleName}"
 
     @enfants.count.times { |i|
         @enfant = @enfants[i]
-
         #retourne le tarif
         @tarif = Facturation.best_tarif(@enfant)
-
 	      date = Date.new(@year.to_i, @mois.to_i, 1)
         #logger.debug "Date:#{date} "
 
@@ -359,7 +362,7 @@ class PrestationsController < ApplicationController
            d = Date.new(@year.to_i, @mois.to_i, keys.first.to_i)
            @p = Prestation.where(enfant_id:@enfant.id, date:d).first
            @p.update_attributes(keys.last => '0')
-           logger.debug "[DEBUG] presta à suppr: #{@p.inspect}"  
+           #logger.debug "[DEBUG] presta à suppr: #{@p.inspect}"  
            supprimees = []            
         end
            
