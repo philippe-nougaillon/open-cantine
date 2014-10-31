@@ -46,7 +46,10 @@
   </table>
 	<% if session[:user_readwrite] %>
 		<%= link_to "Modifier", edit_enfant_path(@enfant) %> |
-		<%= link_to("[X]", @enfant, data: { confirm:'Certain(e) de vouloir supprimer cette fiche enfant ?'}, method: :delete) %> 
+		<%= link_to("[X]", @enfant, data: { confirm:'Certain(e) de vouloir supprimer cette fiche enfant ?'}, method: :delete) %> | Inscriptions 
+    <%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :id  => @enfant.id, :year => Date.today.year %> | 
+    <%= link_to "Automatique", :controller => 'prestations', :action => 'new', :enfant_id  => @enfant.id %>
+    |
 	<% end %>
 </div>
 <div class="span-1">
@@ -137,9 +140,9 @@
             <th>Date</th>
             <th>Repas</th>
             <th>Garderie Matin</th>
-            <th>Garderie Après-midi</th>
+            <th>Garderie Soir</th>
             <th>Centre Matin</th>
-            <th>Centre Après-midi</th>
+            <th>Centre Soir</th>
             <th>Etude</th>
           </tr>
           <% for prestation in @prestations %>

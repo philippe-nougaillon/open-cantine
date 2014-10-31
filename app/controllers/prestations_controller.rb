@@ -272,6 +272,7 @@ class PrestationsController < ApplicationController
   end
 
   def new_manual
+    session[:lastparams] =[]
     @mois = params[:mois]
     @year = params[:year]
     if @mois.to_i > 1
@@ -316,10 +317,20 @@ class PrestationsController < ApplicationController
   end
 
   def new_manual_calc
+    #calcul les prestations ajoutées ou supprimées dans grille de saisie manuelle
+
     @mois = params[:mois]
     @year = params[:year]
     @solde = params[:solde].to_f
     @total = 0.00
+
+    # test si des décochés ?
+    if session[:lastparams]
+      supprimees = session[:lastparams] - params.keys
+      logger.debug "[DEBUG] suppr: #{supprimees}"
+    end
+    session[:lastparams] = params.keys
+    logger.debug "[DEBUG] last params: #{session[:lastparams]}"
 
     if params[:famille_id]
        @famille_id = params[:famille_id]
@@ -335,13 +346,23 @@ class PrestationsController < ApplicationController
 
 	      date = Date.new(@year.to_i, @mois.to_i, 1)
         #logger.debug "Date:#{date} "
-  
+
+        # supprime les décochés
+        if supprimees.any? 
+           keys = supprimees.first.split(".")  
+           d = Date.new(@year.to_i, @mois.to_i, keys.first.to_i)
+           @p = Prestation.where(enfant_id:@enfant.id, date:d).first
+           @p.update_attributes(keys.last => '0')
+           logger.debug "[DEBUG] presta à suppr: #{@p.inspect}"  
+           supprimees = []            
+        end
+           
         days_in_month(date).times {
           day = date.day
           #logger.debug "Day loop #{day}"
 
-          if params[:"#{day}RepasAM"] or params[:"#{day}GarderieAM"] or params[:"#{day}GarderiePM"] or
-            params[:"#{day}CentreAM"] or params[:"#{day}CentrePM"] or params[:etude]
+          if params[:"#{day}.repas"] or params[:"#{day}.garderieAM"] or params[:"#{day}.garderiePM"] or
+            params[:"#{day}.centreAM"] or params[:"#{day}.centrePM"] or params[:etude]
 
             #logger.debug "Day loop :#{@year}-#{@mois}-#{day}"
 
@@ -354,11 +375,11 @@ class PrestationsController < ApplicationController
                @prestation.enfant_id = @enfant.id
                @prestation.date = date
             end
-            @prestation.repas = '1' if params[:"#{day}RepasAM"]
-            @prestation.garderieAM = '1' if params[:"#{day}GarderieAM"]
-            @prestation.garderiePM = '1' if params[:"#{day}GarderiePM"]
-            @prestation.centreAM = '1' if params[:"#{day}CentreAM"]
-            @prestation.centrePM = '1' if params[:"#{day}CentrePM"]
+            @prestation.repas = '1' if params[:"#{day}.repas"]
+            @prestation.garderieAM = '1' if params[:"#{day}.garderieAM"]
+            @prestation.garderiePM = '1' if params[:"#{day}.garderiePM"]
+            @prestation.centreAM = '1' if params[:"#{day}.centreAM"]
+            @prestation.centrePM = '1' if params[:"#{day}.centrePM"]
             @prestation.etude = '1' if params[:etude] and ( date.wday != 3 and date.wday != 6 and date.wday != 0 and @vacances.empty?)
             @prestation.totalA = 0.00
             @prestation.save
