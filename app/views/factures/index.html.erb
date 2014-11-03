@@ -1,14 +1,14 @@
-<div  id="form_actions">
+<div id="form_actions">
   <%= form_tag request.path, :method => 'get' do %>
       Référence :
       <%= text_field_tag "search", params[:search] %>
       <%= submit_tag 'Rechercher' %>
-    <span id="adroite">
-     <% if session[:user_readwrite] %>
+      <span id="adroite">
+        <% if session[:user_readwrite] %>
           <%= link_to "Facturer le mois", :action => "new_all", :id => 0 %>
-     <% end %>
-     <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %>
-     <%= link_to("Export Excel", factures_path(format: "xls")) %>
+        <% end %>
+        <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %>
+        <%= link_to "Export Excel", factures_path(format: "xls") %>
     </span>
   <% end %>
 </div>
@@ -34,7 +34,7 @@
       <% for facture in @factures %>
         <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
           <td><%= link_to facture.ref, :action => 'print', :id => facture.id %></td>
-          <td><%=h facture.date.to_date.to_s(:fr) %></td>
+          <td><%= I18n.l(facture.date) %></td>
           <td><%=h facture.echeance.to_s(:fr) %></td>
           <td><%= link_to facture.famille.nom, facture.famille  %> </td>
           <td style="text-align:right"><%=h number_to_currency(facture.montant, :locale => :fr) %></td>
@@ -45,10 +45,8 @@
           </td>
   		    <td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
   		    <td>
-  	         <% if Famille.find(facture.famille_id).email %>
-    	         <% if !Famille.find(facture.famille_id).email.empty? %>
-                  <%= link_to "Envoyer", :action => 'send_invoice', :id => facture.id %> 
-               <% end %> 
+  	         <% unless facture.famille.email.empty? %>
+                <%= link_to "Envoyer", :action => 'send_invoice', :id => facture.id %> 
              <% end %>
           </td>
   		    <td><%= link_to image_tag('modif.png', size:"15x15"), edit_facture_path(facture) %></td>

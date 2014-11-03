@@ -1,14 +1,12 @@
 <div id="form_actions">
-   <div id="login">
-       <%= link_to "| APERCU AVANT IMPRESSION |", :action => 'print', :id => @facture.id %>        
-       <%= link_to "| SUPPRIMER |", @facture, data:{confirm:'Etes-vous certain(e) de vouloir supprimer cette facture ?'}, method: :delete %>
-   </div> 
+  <b>Facture <%= @facture.ref %></b>
+  <span id="adroite">
+    <%= link_to "Aperçu avant impression", :action => 'print', :id => @facture.id %>        
+    <%= link_to "Supprimer", @facture, data:{confirm:'Etes-vous certain(e) de vouloir supprimer cette facture ?'}, method: :delete %>
+   </span> 
 </div>
-
+<br>
 <div>
-  <br><br>
-  <h3>Facture <%= @facture.ref %> </h3>
-  <hr/>
   	<div class="span-24 last">
 	  <table>
 	    <tr>
@@ -52,7 +50,13 @@
 		    <tr />
 		    <tr>
 		      <td><b>Solde Famille</b></td>
-		      <td><b><%=h number_to_currency((@facture.SoldeFamille + @facture.montant), :locale => "fr") %></b></td>
+		      <td>
+		      	<% if @facture.montant %>
+			      <b>
+			      	<%=h number_to_currency((@facture.SoldeFamille + @facture.montant), :locale => "fr") %>
+		      	  </b>
+		      	<% end %>
+		      </td>
 		    </tr>
 		    <tr />
 	    <% end %>

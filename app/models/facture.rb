@@ -15,11 +15,12 @@ class Facture < ActiveRecord::Base
       conditions =  ['ref like ? AND factures.mairie_id = ?', "%#{search}%", mairie_id]
     end
 	
-	@order_by = (sort.blank?) ? "id DESC" : sort	
+	  @order_by = (sort.blank?) ? "id DESC" : sort	
     paginate :per_page => 18,
          :page => page,
          :conditions => conditions,
          :joins => :famille,
          :order => @order_by
   end
+  
 end

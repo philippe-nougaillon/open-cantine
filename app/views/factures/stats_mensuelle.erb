@@ -1,14 +1,18 @@
-<br>
-<h3>Facturation du <%= @datedebut.to_s(:fr) %> au <%= @datefin.to_s(:fr) %></h3>
+<% datefin = @datefin - 1.day %>
 
-Nombre de factures: <%= @factures.count %><br>
 <br>
+<h3>Facturation du <%= @datedebut.to_s(:fr) %> au <%= datefin.to_s(:fr) %></h3>
 
-Total Cantine:  <%= number_to_currency(@total_cantine, :locale => "fr") %><br>
-Total Garderie: <%= number_to_currency(@total_garderie, :locale => "fr") %><br>
-Total Centre:   <%= number_to_currency(@total_centre, :locale => "fr") %><br>
-Total Etude:	<%= number_to_currency(@total_etude, :locale => "fr") %><br>
-<br>
-
+<hr>
+<table class="sample">
+	<tr><td>Total Cantine</td><td><%= number_to_currency(@total_cantine, :locale => "fr") %></td></tr>
+	<tr><td>Total Garderie</td><td><%= number_to_currency(@total_garderie, :locale => "fr") %></td></tr>
+	<tr><td>Total Centre</td><td><%= number_to_currency(@total_centre, :locale => "fr") %></td></tr>
+	<tr><td>Total Etude</td><td><%= number_to_currency(@total_etude, :locale => "fr") %></td></tr>
+</table>
+<%= @factures.count %> Factures: 
+<% @factures.each do |f| %>
+	<%= link_to f.ref, f %>
+<% end -%>
 
 

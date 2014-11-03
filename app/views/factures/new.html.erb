@@ -11,7 +11,7 @@
 
   	    	<label for="famille_id">Famille</label>
 			<%= text_field_tag("Famille_name", Famille.find(params[:famille_id]).nom ,:size => 20) %><br>
-			<%= f.input :commentaire, :as => :text, :required => false %>
+			<%= f.input :commentaire, :as => :text, :required => false, label: "Commentaires"  %>
 			<%= f.submit "Facturer"  %>
 		<% end %>
    </fieldset>
