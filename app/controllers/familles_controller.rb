@@ -34,7 +34,15 @@ class FamillesController < ApplicationController
   		#    @famille = Famille.find(params[:famille_id])
   		#    format.html { redirect_to(@famille) }
 
-    @familles = Famille.search(params[:nom], params[:page], session[:mairie], params[:sort])
+    unless params[:sort].blank?
+      sort = params[:sort]
+      if session[:order_by] == sort
+         sort = sort.split(" ").last == "DESC" ? sort.split(" ").first : sort + " DESC"   
+      end  
+      session[:order_by] = sort
+    end
+
+    @familles = Famille.search(params[:nom], params[:page], session[:mairie], sort)
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => Famille.find_all_by_mairie_id(session[:mairie]).to_xml( :include => [:enfants,:prestations]) }

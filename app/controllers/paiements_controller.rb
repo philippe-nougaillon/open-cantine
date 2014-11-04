@@ -23,8 +23,15 @@ class PaiementsController < ApplicationController
   # GET /paiements
   # GET /paiements.xml
   def index
-    @paiements = Paiement.search(params[:search], params[:page], session[:mairie], params[:famille_id], params[:sort])
-   
+     unless params[:sort].blank?
+      sort = params[:sort]
+      if session[:order_by] == sort
+         sort = sort.split(" ").last == "DESC" ? sort.split(" ").first : sort + " DESC"   
+      end  
+      session[:order_by] = sort
+    end
+
+    @paiements = Paiement.search(params[:search], params[:page], session[:mairie], params[:famille_id], sort)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @paiements }

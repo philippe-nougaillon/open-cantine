@@ -18,28 +18,7 @@ class Prestation < ActiveRecord::Base
   scope :_centrePM,    :conditions => "centrePM = '1'"
   scope :_etude,	   :conditions => "etude = '1'"
 
-  def self.search_old(search, classe, mairie, sort, order, toutlemois)
-    if toutlemois
-       datedebut = search.to_date.at_beginning_of_month
-       datefin = search.to_date.at_end_of_month
-		   if classe and !classe.blank? 
-	       conditions = ['(date between ? AND ? ) AND (classe = ? ) AND mairie_id = ? ',datedebut, datefin, classe, mairie]
-		   else
-	       conditions = ['(date between ? AND ? ) AND mairie_id = ? ',datedebut, datefin, mairie]
-		  end
-    else
-		  if classe and !classe.blank? 
-       	conditions = ['prestations.date like ? AND enfants.classe = ? AND mairie_id = ? AND prestations.facture_id is null',
-                        "%#{search.to_date.to_s(:en)}%", classe, mairie]
-		  else
-       	conditions = ['prestations.date like ? AND mairie_id = ? AND prestations.facture_id is null',
-                          "%#{search.to_date.to_s(:en)}%", mairie]
-		  end
-    end
-    Prestation.find(:all, :conditions => conditions, :order => sort + " " + order, :joins => :enfants, :joins => :familles)
-  end
-
-  def self.search(search, classe, mairie, sort, order, periode)
+  def self.search(search, classe, mairie, sort, periode)
     @prestations = Prestation.joins(:enfant).joins(:familles).where("familles.mairie_id = ?", mairie)
     unless classe.blank?
       @prestations = @prestations.where("enfants.classe = ?",classe)
@@ -57,7 +36,7 @@ class Prestation < ActiveRecord::Base
       datefin = search.to_date.at_end_of_month
       @prestations = @prestations.where('(prestations.date between ? AND ? )',datedebut, datefin)
     end  
-    @prestations.order(sort + " " + order)
+    @prestations.order(sort)
   end  
 
   

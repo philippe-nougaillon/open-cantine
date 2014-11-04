@@ -1,6 +1,3 @@
-<br>
-<br>
-
 <%= form_for(@ville, :url=>{:action=> :update}) do |f|%>
 
 	<% @ville.errors.full_messages.each do |msg| %>
@@ -8,8 +5,8 @@
     <% end %>
 
 	<fieldset id="report_form">
-	  <legend>Modifier coordonnées</legend>
-	  <div class="span-10 column last">
+	  <legend>Modification des coordonnées</legend>
+	  <div class="span-12 column last">
 
 	    <dl>
 	      <dt><%=f.label :nom, "Nom" %></dt>
@@ -37,7 +34,7 @@
 	      <dt><%=f.check_box :newsletter %> <%=f.label "Recevoir la newsletter openCantine ?" %></dt>
 		
 		<br><br>
-		<legend>Facturation</legend>
+		<legend>Mode de facturation</legend>
 
 	 	<div class="span-22">
 		      <table class="sample">

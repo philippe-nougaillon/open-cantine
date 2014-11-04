@@ -18,8 +18,17 @@ class EnfantsController < ApplicationController
   # GET /enfants
   # GET /enfants.xml
   def index
-    @enfants = Enfant.search(params[:search], params[:page], params[:classe], session[:mairie], params[:sort])
-    @classes = Classroom.find(:all, :conditions => ["mairie_id = ?",session[:mairie]],:order=> "nom").collect {|p| [ "#{p.nom} - #{p.referant}", p.id ] }
+    unless params[:sort].blank?
+      sort = params[:sort]
+      if session[:order_by] == sort
+         sort = sort.split(" ").last == "DESC" ? sort.split(" ").first : sort + " DESC"   
+      end  
+      session[:order_by] = sort
+    end
+
+    mairie = Ville.find(session[:mairie])
+    @enfants = Enfant.search(params[:search], params[:page], params[:classe], session[:mairie], sort)
+    @classes = mairie.classrooms.order('nom').collect {|p| [ "#{p.nom} - #{p.referant}", p.id ] }
     @classes.insert(0, '')
 
     respond_to do |format|
@@ -29,14 +38,15 @@ class EnfantsController < ApplicationController
   end
 
   def liste
-   @enfants = Enfant.find(:all, :conditions => ["mairie_id = ?",session[:mairie]], :joins => :famille, :order => 'classe,nom,prenom')
+    mairie = Ville.find(session[:mairie])
+    @enfants = mairie.enfants.joins(:famille).order('classe,familles.nom,prenom')
   end
 
   # GET /enfants/1
   # GET /enfants/1.xml
   def show
     @enfant = Enfant.find(params[:id])
-	@classroom = Classroom.find_by_id(@enfant.classe)
+	  @classroom = Classroom.find_by_id(@enfant.classe)
     if params[:facturees] == 'on'
        @prestations = @enfant.prestations.facturees
     else

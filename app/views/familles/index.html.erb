@@ -22,9 +22,9 @@
       <th>Adresse</th>
       <th><%= link_to "Cp", :sort => "cp" %></th>
       <th><%= link_to "Ville", :sort => "ville" %></th>
-      <th>Tél. fixe</th>
-      <th>Mob. maman</th>
-      <th>Mob. papa</th>
+      <th><%= link_to "Tél.", :sort => "phone" %></th>
+      <th><%= link_to "Email", :sort => "email" %></th>  
+      <th>Dernière facture</th>
      </tr>
 
     <% for famille in @familles %>
@@ -35,8 +35,8 @@
         <td><%=h famille.cp %></td>
         <td><%=h famille.ville.upcase %></td>
         <td><%=h famille.readable_phone if famille.phone %></td>
-        <td><%=h famille.readable_mobile1 if famille.mobile1 %></td>
-        <td><%=h famille.readable_mobile2 if famille.mobile2 %></td>
+        <td><%= famille.email %></td>
+        <td><%= link_to famille.factures.last.ref, famille.factures.last  if famille.factures.any? %></td>
       </tr>
     <% end %>
   </table>

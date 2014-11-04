@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery-ui-rails
 //= require autocomplete-rails
 //= require_tree .
 

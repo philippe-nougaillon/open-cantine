@@ -7,7 +7,6 @@ class Famille < ActiveRecord::Base
   has_many :paiements
   has_many :factures
 
-  
   validates_presence_of   :nom, :message => " manquant !"
   #validates_uniqueness_of :nom, :scope => [:nom, :adresse], :message => "Cette famille existe déjà dans la base !"
 
@@ -35,11 +34,11 @@ class Famille < ActiveRecord::Base
   end
  
   def self.search(nom, page, mairie_id, sort)
-	@order_by = (sort.blank?) ? "nom" : sort	
- 	paginate :per_page => 18,
+	  order_by = (sort.blank?) ? "nom" : sort	
+ 	  paginate :per_page => 18,
           :page => page,
           :conditions => ['nom like ? AND mairie_id = ?', "%#{nom}%", mairie_id],
-          :order => @order_by
+          :order => order_by
   end
 
   def nbrenfants

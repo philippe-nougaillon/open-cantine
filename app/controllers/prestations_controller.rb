@@ -38,21 +38,29 @@ class PrestationsController < ApplicationController
         redirect_to prestations_path(prestation_date:params[:prestation_date])  
       end
     else
+      params[:sort] ||= 'date,enfants.classe,familles.nom,enfants.prenom'
 		  refresh 	 
 	 end
   end
 
   def refresh
-     params[:prestation_date] ||= Date.today.to_s(:fr)
-     params[:periode] ||= 'jour'
-     sort_param_in_session(params[:sort] ||= 'date,enfants.classe,nom,enfants.prenom', params[:page])
-     @prestations = Prestation.search(params[:prestation_date], params[:classe], session[:mairie], params[:sort], session[:order], params[:periode])
-     @classrooms  = Ville.find(session[:mairie]).classrooms
+    params[:prestation_date] ||= Date.today.to_s(:fr)
+    params[:periode] ||= 'jour'
+ 
+    unless params[:sort].blank?
+      sort = params[:sort]
+      if session[:order_by] == sort
+         sort = sort.split(" ").last == "DESC" ? sort.split(" ").first : sort + " DESC"   
+      end  
+      session[:order_by] = sort
+    end
+    @prestations = Prestation.search(params[:prestation_date], params[:classe], session[:mairie], sort, params[:periode])
+    @classrooms  = Ville.find(session[:mairie]).classrooms
   end
 
   def print
 	   @images = get_etat_images
-     @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], 'date,enfants.classe,nom,enfants.prenom', '', params[:periode])
+     @prestations = Prestation.search(params[:search], params[:classe], session[:mairie], 'date,enfants.classe,familles.nom,enfants.prenom', params[:periode])
      @classrooms  = Ville.find(session[:mairie]).classrooms
   end
 
@@ -88,10 +96,14 @@ class PrestationsController < ApplicationController
   # GET /prestations/new.xml
   def new
     @prestation = Prestation.new
-    @prestation.enfant_id = params[:enfant_id] if params[:enfant_id]
-    @prestations = Prestation.find(:all)
-    @enfants = Enfant.find(:all, :conditions => ["famille_id = ? ", params[:famille_id]]) if params[:famille_id]
-    
+    @enfants = []
+    if params[:famille_id]
+      @enfants = Famille.find(params[:famille_id]).enfants
+    else
+      @enfants << Enfant.find(params[:enfant_id])
+    end
+    @prestation.enfant_id = @enfants.first.id
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @prestation }
@@ -131,81 +143,70 @@ class PrestationsController < ApplicationController
   def create
     @prestation_foo = Prestation.new(params[:prestation])
 	  @prestation_date = params[:prestation_date]
+    ajouts = jours = erreurs = 0
 
-    if not @prestation_date.nil?
-
-      unless params[:famille_id].blank?
-          @famille_id = params[:famille_id]
-          @enfants = Enfant.find_all_by_famille_id(@famille_id)
+    unless @prestation_date.blank?
+       unless params[:famille_id].blank?
+          @enfants = Famille.find(params[:famille_id]).enfants
        else
-          @enfants = Enfant.find(:all, :conditions => ["id = ? ", @prestation_foo.enfant_id])
+          @enfants = Enfant.where(id:@prestation_foo.enfant_id)
        end
 
-       @enfants.count.times { |i|
-          @enfant = @enfants[i]
+       mairie = Ville.find(session[:mairie])
+       vacances = mairie.vacances 
 
+       logger.debug "[ DEBUG ] #{@enfants.count}"
+
+       @enfants.each do |enfant|
           start_date = @prestation_date.to_date
+          logger.debug "[ DEBUG ] #{enfant.prenom} : #{start_date}"
 
           if (params[:toutlemois] or params[:toutelannee]) and (params[:lundi] or params[:mardi] or params[:mercredi] or params[:jeudi] or params[:vendredi])
-			   ndays = 5
-               
+      			  ndays = 5
               ndays = days_in_month(start_date) - (start_date.day - 1) if params[:toutlemois]
-              ndays = (Date.parse("2013-07-05") - start_date).to_i if params[:toutelannee]
+              ndays = (Date.parse("2015-07-04") - start_date).to_i if params[:toutelannee]
 		
-               date = start_date
-               ndays.times {
+              date = start_date
+              ndays.times do
+                 wday = date.wday  
+                 logger.debug "[ DEBUG ] #{date} ndays = #{ndays}"
                  if is_weekday?(date)
-                    # test si date est dans une période de vacance
-                    @vacances = Vacance.find(:all, :conditions => ["debut <= ? AND fin >= ? AND mairie_id = ?", date.to_s(:en), date.to_s(:en), session[:mairie]])
-
-                    if (params[:mercredi] and date.wday == 3) or
-                       (params[:lundi] and date.wday == 1) or
-                       (params[:mardi] and date.wday == 2) or
-                       (params[:jeudi] and date.wday == 4) or
-                       (params[:vendredi] and date.wday == 5)
-                          @prestation = Prestation.new(params[:prestation])
-                          @prestation.etude = 0 if date.wday == 3 or not @vacances.empty?
-                          @prestation.enfant_id = @enfant.id
-			  			  # test si habitude enfant garderie
-	       	 	  		  @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM
-	       		  		  @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM 
-                          @prestation.date = date
-                          @prestation.totalP = 0.00
-                          @prestation.totalA = 0.00
-						  if @prestation.save
-					          flash[:notice] = "Prestations ajoutées sur #{ndays} jours"
-						  else
-					          flash[:warning] = "Prestations ajoutées mais en doublons sur certaines dates.. Veuillez faire une vérification."
-						  end
+                    # passe au jour suivant si vacances mais "appliquer si vacances" pas coché
+                    en_vacances = vacances.where("debut <= ? AND fin >= ?", date.to_s(:en), date.to_s(:en)).any?
+                    if (params[:en_vacances] == 'non' and en_vacances) or (params[:en_vacances] == 'oui' and !en_vacances)
+                       logger.debug "[ DEBUG ] #{date} Vacances #{params[:en_vacances]} NEXT !"
+                       date = date + 1.day
+                       next
                     end
+                      
+                    if (params[:lundi] and wday == 1) or (params[:mardi] and wday == 2) or (params[:mercredi] and wday == 3) or (params[:jeudi] and wday == 4) or (params[:vendredi] and wday == 5)
+                      @prestation = Prestation.new(params[:prestation])
+                      @prestation.enfant_id = enfant.id
+                      @prestation.date = date
+                      @prestation.totalP = 0.00
+                      @prestation.totalA = 0.00
+        						  if @prestation.save
+                         ajouts += 1
+                      else 
+                        erreurs += 1   
+        						  end
+                      jours += 1
+                   end
                  end
                  date = date + 1.day
-               }
-            else
-               @prestation = Prestation.new(params[:prestation])
-               @prestation.enfant_id = @enfant.id
-	       	   # test si habitude enfant garderie
-	       	   @prestation.garderieAM = @enfant.habitudeGarderieAM if @enfant.habitudeGarderieAM
-	       	   @prestation.garderiePM = @enfant.habitudeGarderiePM if @enfant.habitudeGarderiePM 
-               @prestation.date = @prestation_date
-               @prestation.totalP = 0.00
-               @prestation.totalA = 0.00
- 			   if @prestation.save
-		          flash[:notice] = 'Prestation ajoutée.'
-			   else
-		          flash[:warning] = "Erreur lors de l'ajout des prestation, peut-être en doublon..."
-			   end
+              end
             end
-         }
-        flash[:notice] = 'Prestation(s) ajoutée(s).'
-
+        end
+        
+        flash[:notice] = "#{ajouts} prestations ajoutées sur #{jours} jours ouvrés, #{erreurs} doublon  (s)."
+    
         if @famille_id
           redirect_to :controller => 'familles', :action => 'show', :id => @famille_id
         else
-          redirect_to :controller => 'prestations', :action => 'new', :enfant_id => @enfant.id
+          redirect_to :controller => 'prestations', :action => 'new', :enfant_id => @enfants.first.id
         end
     else
-       flash[:warning] = 'Manque date de début...'
+       flash[:warning] = 'Veuillez saisir une date de début !'
        redirect_to :action => "new", :enfant_id => @prestation_foo.enfant_id
     end
   end
@@ -309,7 +310,6 @@ class PrestationsController < ApplicationController
 
     #charge le module Facturation de cette mairie
     load "facturation_modules/#{@mairie.FacturationModuleName}"
-
 
     sumP  = @famille.factures.sum('montant')
     sumIn = @famille.paiements.sum('montant')
@@ -458,7 +458,6 @@ class PrestationsController < ApplicationController
     end
   end
 
-
   def new_manual_classroom
 	  @date = session[:date]
 	  @classe = session[:classe]
@@ -487,11 +486,11 @@ class PrestationsController < ApplicationController
   	@enfants.each do |e|
   		if params[:"#{e.id}RepasAM"] or params[:"#{e.id}GarderieAM"] or params[:"#{e.id}GarderiePM"] or params[:"#{e.id}CentreAM"] or params[:"#{e.id}CentrePM"] then
   			@prestation = Prestation.find_or_create_by_date_and_enfant_id(@date.to_date.to_s(:en), e.id)
-  		    @prestation.repas = params[:"#{e.id}RepasAM"] ? '1' : '0'
-  		    @prestation.garderieAM = params[:"#{e.id}GarderieAM"] ? '1' : '0'
-  		    @prestation.garderiePM = params[:"#{e.id}GarderiePM"] ? '1' : '0'
-  		    @prestation.centreAM = params[:"#{e.id}CentreAM"] ? '1' : '0'
-  		    @prestation.centrePM = params[:"#{e.id}CentrePM"] ? '1' : '0'
+  		  @prestation.repas = params[:"#{e.id}RepasAM"] ? '1' : '0'
+  		  @prestation.garderieAM = params[:"#{e.id}GarderieAM"] ? '1' : '0'
+  		  @prestation.garderiePM = params[:"#{e.id}GarderiePM"] ? '1' : '0'
+  		  @prestation.centreAM = params[:"#{e.id}CentreAM"] ? '1' : '0'
+  		  @prestation.centrePM = params[:"#{e.id}CentrePM"] ? '1' : '0'
   			@prestation.save
   		end
   	end

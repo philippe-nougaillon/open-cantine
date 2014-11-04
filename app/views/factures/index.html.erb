@@ -14,7 +14,6 @@
 </div>
 
 <div id="form_body">
-
   <% if @factures.any? %>
     <table class="sample">
       <tr>
@@ -24,9 +23,9 @@
         <th><%= link_to "Famille",   :sort => "familles.nom" %></th>
         <th><%= link_to "Montant",   :sort => "montant" %></th>
         <th><%= link_to "Vérifiée?", :sort => "checked" %></th>
-        <th><%= link_to "Mémo bas de page", :sort => "footer" %></th>
+        <th><%= link_to "Mémo", :sort => "footer" %></th>
         <th>PDF</th>
-        <th>PDF envoyé le</th>
+        <th><%= link_to "Envoyée le", :sort => "envoyee" %></th>
   	    <th/>	
         <th/>
       </tr>
@@ -45,9 +44,11 @@
           </td>
   		    <td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
   		    <td>
-  	         <% unless facture.famille.email.empty? %>
+            <% if facture.famille %> 
+    	        <% unless facture.famille.email.blank? %>
                 <%= link_to "Envoyer", :action => 'send_invoice', :id => facture.id %> 
-             <% end %>
+              <% end %>
+            <% end %>
           </td>
   		    <td><%= link_to image_tag('modif.png', size:"15x15"), edit_facture_path(facture) %></td>
         </tr>

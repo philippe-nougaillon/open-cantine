@@ -13,6 +13,7 @@ gem 'mysql2'
 gem 'therubyracer'
 gem 'prawn'
 gem 'client_side_validations'
+gem 'jquery-ui-rails'
 
 
 # Gems used only for assets and not required

@@ -1,22 +1,25 @@
+<div id="form_actions">
+  <h3>Inscription automatique</h3>
+  Permet de générer facilement des inscriptions répétitives (mêmes prestations sur toute la semaine/le mois/l'année)
+</div>
+- Pour une seule journée: entrez la date et cochez les prestations voulues et validez.
 <br>
+- Pour une semaine: entrez la date de début et cochez les prestations voulues puis les jours souhaités.  
 <br>
-
-<h3>Inscription automatique</h3>
+- Pour un mois: idem semaine plus cochez 'Répéter jusqu'à la fin du mois ?'
+<br>
+- Pour une année: idem semaine plus cochez 'Répéter jusqu'à la fin de l'année scolaire ?'
+<br>
+Si 'Inscrire en période de scolaire est coché', les incriptions seront faites que sur les jours scolaires, aucune prestations ne sera ajoutée sur une période de vacances. (<%= link_to "Voir dates de vacances", "/admin/setup#vacances" %> )
 <hr/>
-<br>
-<% if @enfants %>
-    <% for enfant in @enfants %>
-        Enfant : <%= link_to enfant.prenom + " "+ Famille.find(enfant.famille_id).nom, :controller => 'enfants', :action => 'show', :id => enfant %>
-        <br>
-    <% end %>
-    <br>
-<% else %>
-    Enfant : <%= link_to Enfant.find(@prestation.enfant_id).prenom + " "+ Famille.find(Enfant.find(@prestation.enfant_id).famille_id).nom, :controller => 'enfants', :action => 'show', :id => @prestation.enfant_id %>
-    <br><br>
+
+Enfant(s) :
+<% for enfant in @enfants %>
+    <%= link_to "#{enfant.prenom} #{enfant.famille.nom}", enfant %>
 <% end %>
+<br><br>
 
 <%= form_for(@prestation) do |f| %>
-  
   <% @prestation.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>
   <% end %>
@@ -41,8 +44,8 @@
     <tr>
       <td>
         A partir du : 
-		<%= text_field_tag('prestation_date', params[:prestation_date], :size => 10) %>
-     <td>
+		    <%= text_field_tag('prestation_date', params[:prestation_date], :size => 10) %>
+      <td>
         <%= f.check_box :repas%>
       </td>
       <td>
@@ -61,30 +64,22 @@
         <%= f.check_box :etude %>
       </td>
     </tr>
-    <tr>
-      <td>
-        <%= check_box_tag(:lundi, params[:lundi]) %>Lundi ?
-        <%= check_box_tag(:mardi, params[:mardi]) %>Mardi ?
-        <%= check_box_tag(:mercredi, params[:mercredi]) %>Mercredi ?
-        <%= check_box_tag(:jeudi, params[:jeudi]) %>Jeudi ?
-        <%= check_box_tag(:vendredi, params[:vendredi]) %>Vendredi ?
-      </td>
-    </tr>
   </table>
+
+  <%= check_box_tag(:lundi, params[:lundi]) %>Lundi ?
+  <%= check_box_tag(:mardi, params[:mardi]) %>Mardi ?
+  <%= check_box_tag(:mercredi, params[:mercredi]) %>Mercredi ?
+  <%= check_box_tag(:jeudi, params[:jeudi]) %>Jeudi ?
+  <%= check_box_tag(:vendredi, params[:vendredi]) %>Vendredi ?
+  <br><br>
   <%= check_box_tag(:toutlemois, params[:toutlemois]) %> Répéter jusqu'à la fin du mois ?
-  <br>
-  <%= check_box_tag(:toutelannee, params[:toutelannee]) %> Répéter jusqu'à la fin de l'année scolaire (5 juillet 2013) ?
-  <br>
-  <p><small>
-    Pour une seule journée, entrez la date et cochez les prestations voulues.
-    <br>
-    Pour un mois, entrez la date du début du mois puis cochez les jours souhaités, les prestations voulues et cochez 'Répéter jusqu'à la fin du mois ?'
-     </small>
-  </p>
-  <br>
+  <br><br>
+  <%= check_box_tag(:toutelannee, params[:toutelannee]) %> Répéter jusqu'à la fin de l'année scolaire ?
+  <br><br>
+  <%= radio_button_tag(:en_vacances, "non", true) %> Inscriptions en période scolaire
+  <%= radio_button_tag(:en_vacances, "oui", false) %> Inscriptions en période de vacances
+  <br><br>
   <%= image_submit_tag "valider.gif" %>
-  <br>
-  
-  
+  <br>  <br>
 <% end %>
 

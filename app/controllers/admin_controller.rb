@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   layout "standard"
 
   def stats
-     @users = User.order('lastconnection DESC').limit(20)
+    @users = User.order('lastconnection DESC').limit(20)
   end
 
   def signin
@@ -13,36 +13,38 @@ class AdminController < ApplicationController
     respond_to do |format|
     	format.html 
     	format.js
-	end
+	  end
   end
 
   def check_user
-	if params[:demo] 
-       @u = User.authenticate2('demo', 'demo')
-	else
-       @u = User.authenticate2(params[:user][:username], params[:user][:password])
-	end
+  	if params[:demo] 
+      @u = User.authenticate2('demo', 'demo')
+  	else
+      @u = User.authenticate2(params[:user][:username], params[:user][:password])
+  	end
 
     if @u 
-      @u.lastconnection = Time.now
-      @u.save
       session[:user] = @u.id
       session[:user_readwrite] = @u.readwrite
       session[:mairie] = @u.mairie_id
-	else
-	  flash[:notice] = "Compte inconnu..."
+      @u.lastconnection = Time.now
+      @u.save
+      flash[:notice] = "B i e n v e n u e  :)"
+	  else
+	    flash[:notice] = "Compte inconnu..."
     end
-	respond_to do |format|
+
+	  respond_to do |format|
   	  format.js { render :js => "window.location = '/familles/index'" if @u }
-	  format.html { redirect_to familles_path }	
-	end
+	    format.html { redirect_to familles_path }	
+	  end
   end
 
   def signout
     @user = User.find(session[:user])
     session[:user] = nil
     redirect_to :controller => 'admin', :action => 'signin'
-    flash[:notice] = "Session #{@user.username} terminée." 
+    flash[:notice] = "Session '#{@user.username}' terminée. A bientôt..." 
   end
 
   def user_edit
@@ -122,13 +124,12 @@ class AdminController < ApplicationController
   end
 
   def setup
-    mairie = session[:mairie]
-    @mairie = Ville.find(mairie)
-    @classrooms = Classroom.find_all_by_mairie_id(mairie, :order => 'nom')
-    @tarifs = Tarif.find_all_by_mairie_id(mairie, :order => "memo")
-    @users = User.find_all_by_mairie_id(mairie, :order => "username")
-    @facture_chrono = FactureChrono.find_by_mairie_id(mairie)
-    @vacances = Vacance.find_all_by_mairie_id(mairie, :order => 'debut')
+    @mairie = Ville.find(session[:mairie])
+    @users = @mairie.users.order('username')
+    @classrooms = @mairie.classrooms.order('nom')
+    @tarifs = @mairie.tarifs.order('memo')
+    @facture_chrono = @mairie.factureChronos
+    @vacances = @mairie.vacances.order('debut')
     @enfants = @mairie.enfants
   end
 

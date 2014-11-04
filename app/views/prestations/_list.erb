@@ -39,16 +39,16 @@
     <table class="sample">
       <tr>
         <th><%= link_to "Date", :sort => "date", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
-        <th><%= link_to "Classe", :sort => "classe", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Classe", :sort => "enfants.classe", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
         <th><%= link_to "Nom", :sort => "nom", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
-        <th><%= link_to "Prénom", :sort => "prenom", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Prénom", :sort => "enfants.prenom", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
         <th><%= link_to "Repas", :sort => "repas", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
         <th><%= link_to "Garderie Matin", :sort => "garderieAM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
-        <th><%= link_to "Garderie Soir", :sort => "garderiePM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Soir", :sort => "garderiePM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
         <th><%= link_to "Centre Matin", :sort => "centreAM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
-        <th><%= link_to "Centre Après-midi", :sort => "centrePM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
+        <th><%= link_to "Après-midi", :sort => "centrePM", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
         <th><%= link_to "Etude", :sort => "etude", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
-	<th>Mémo</th>
+	    <th>Mémo</th>
         <th></th>
       </tr>
 	

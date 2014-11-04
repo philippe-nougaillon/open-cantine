@@ -25,7 +25,15 @@ class FacturesController < ApplicationController
   # GET /factures.xml
   # GET /factures.xls
   def index
-    @factures = Facture.search(params[:search],params[:page], session[:mairie], params[:sort], params[:famille_id])
+    unless params[:sort].blank?
+      sort = params[:sort]
+      if session[:order_by] == sort
+         sort = sort.split(" ").last == "DESC" ? sort.split(" ").first : sort + " DESC"   
+      end  
+      session[:order_by] = sort
+    end
+
+    @factures = Facture.search(params[:search],params[:page], session[:mairie], sort, params[:famille_id])
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => Facture.find_all_by_mairie_id(session[:mairie]).to_xml( :include => [:facture_lignes]) }
