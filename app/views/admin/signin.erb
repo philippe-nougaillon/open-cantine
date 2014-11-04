@@ -1,13 +1,16 @@
 <div id="main" class="span-16">
  <h3>Gestion et facturation des prestations de cantine et périscolaires</h3>
 
- <%= link_to "Présentation de l'application", :action => "points_forts" %> |
- <%= link_to "Guide", :action => "guide" %> |
- <%= link_to "Tester", :controller => "admin", :action => "check_user", :demo => true %> |
- <%= link_to "S'incrire", :controller => "villes", :action => "nouveau_compte" %>
+ <h4>
+ 	<%= link_to "Présentation de l'application", :action => "points_forts" %> |
+ 	<%= link_to "Guide", :action => "guide" %> |
+ 	<%= link_to "Tester", :controller => "admin", :action => "check_user", :demo => true %> |
+ 	<%= link_to "S'incrire", :controller => "villes", :action => "nouveau_compte" %>
+ </h4>
 
- <br><br>
+ <br>
  <b>Quoi de neuf ?</b>
+ <hr>
  <% for b in @blogs %>
    <div style="color:darkblue;font-size:120%"><%= b.titre %></div>
    <small>il y a <%= time_ago_in_words(b.updated_at) %></small><br>
@@ -23,19 +26,20 @@
 <div id="main" class="span-6">
     <% if session[:user].nil? %>
 	  <fieldset>
-	  		<legend>Connexion</legend> 
-	 	 	<%= form_for(User.new, :remote => true, :url => { :controller => "admin", :action => "check_user"}) do |f| %>
-				<label for="username">Nom d'utilisateur</label><br>
-				<%=  f.text_field "username", :size => 20 %><br>
-				<label for="password">Mot de passe</label><br>
-				<%=  f.password_field "password", :size => 20 %><br>
+	  	<legend>Connexion</legend> 
+ 	 	<%= form_for(User.new, remote: true, url: { controller:'admin', action:'check_user'}) do |f| %>
+		
+			Nom d'utilisateur<br>
+			<%=  f.text_field "username", size:20 %><br>
+			Mot de passe<br>
+			<%=  f.password_field "password", size:20 %><br>
 	 
-	   		    <div id="login_msg"></div>
+   		    <div id="login_msg"></div>
 
-				<div style="margin-top:25px;">
-				   <%= submit_tag "Connexion" %>
-				</div>
-		  <% end %>	  
+			<div style="margin-top:25px;">
+			   <%= submit_tag "Connexion" %>
+			</div>
+		<% end %>	  
 	  </fieldset>
 	<% end %>
 </div>
