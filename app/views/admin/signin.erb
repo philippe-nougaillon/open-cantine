@@ -1,25 +1,27 @@
 <div id="main" class="span-16">
-  <table>
-    <tr>
-      <td>
-        <h3>Gestion et facturation des prestations de cantine et périscolaires</h3><br>
-        <% for b in @blogs %>
-           <div style="color:darkblue;font-size:120%"><%= b.titre %></div>
-		   <small><%= b.updated_at.to_s(:short) %></small><br>
-           <%= b.texte.html_safe %>
- 	       <br><br>
-        <% end %>
-      </td>
-	</tr>
-	</table>
-	<%= will_paginate @blogs, :previous_label => "<", :next_label => ">" %>
-</div>
-<div class="span-1">
-	<br>
+ <h3>Gestion et facturation des prestations de cantine et périscolaires</h3>
+
+ <%= link_to "Présentation de l'application", :action => "points_forts" %> |
+ <%= link_to "Guide", :action => "guide" %> |
+ <%= link_to "Tester", :controller => "admin", :action => "check_user", :demo => true %> |
+ <%= link_to "S'incrire", :controller => "villes", :action => "nouveau_compte" %>
+
+ <br><br>
+ <b>Quoi de neuf ?</b>
+ <% for b in @blogs %>
+   <div style="color:darkblue;font-size:120%"><%= b.titre %></div>
+   <small>il y a <%= time_ago_in_words(b.updated_at) %></small><br>
+   <%= b.texte.html_safe %>
+   <br><br>
+ <% end %>
+ <%= will_paginate @blogs %>
+ <br><br>
 </div>
 
+<div class="span-1"><br></div>
+
 <div id="main" class="span-6">
-     <% if session[:user].nil? %>
+    <% if session[:user].nil? %>
 	  <fieldset>
 	  		<legend>Connexion</legend> 
 	 	 	<%= form_for(User.new, :remote => true, :url => { :controller => "admin", :action => "check_user"}) do |f| %>
@@ -35,22 +37,6 @@
 				</div>
 		  <% end %>	  
 	  </fieldset>
-	  <fieldset>
-	  	<legend></legend> 
-		  	<%= link_to "Points forts", :action => "points_forts" %>
-		  	<br><br>
-		  	<%= link_to "Guide d'utilisation", :action => "guide" %>
-		  	<br><br>
-		  	<%= link_to "Connexion avec le compte de démonstration", :controller => "admin", :action => "check_user", :demo => true %>
-		  	<br><br>
-		  	<%= link_to "Créer un compte", :controller => "villes", :action => "nouveau_compte" %>
-		  	<br><br>
-  	      	<%= link_to "Contact", "mailto:philippe.nougaillon@gmail.com" %>
-	   </fieldset>
-	 <% end %>
-
-</div>
-<div class="span-2 last">
-	<br>
+	<% end %>
 </div>
 
