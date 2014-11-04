@@ -13,7 +13,7 @@ gem 'mysql2'
 gem 'therubyracer'
 gem 'prawn'
 gem 'client_side_validations'
-
+gem "dynamic_sitemaps"
 
 # Gems used only for assets and not required
 # in production environments by default.
