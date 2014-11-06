@@ -1,88 +1,75 @@
-<div class="span-24 last">
-<br>
-<h4>Relevé de compte</h4>
+<h2>Famille <%= @famille.nom %></h2> 
+<h3>Relevé de compte</h3>
+<% unless params[:all] %>
+  Liste des 5 derniers mouvements. <%= link_to "Afficher tout", action:"familleshow", all:1 %>
+<% else %>
+  Liste de tous les mouvements. <%= link_to "Afficher que les 5 derniers mouvements.", action:"familleshow" %>
+<% end %>
+<hr>
 <table class="sample">
-  <tr>
-    <th>Date</th><th>Type</th><th>Réf</th><th>PDF</th><th>Débit</th><th>Crédit</th><th>Solde</th>
-  </tr>
-  <% for l in @releve.sort { |a,b| a[:date] <=> b[:date] } %>
-     <tr>
-        <td> <%= l[:date].to_s(:fr) %></td>
-        <td> <%= l[:type] %> </td>
-        <td> <%= l[:ref]  %> </td>
-        <% if l[:type] == "Facture" %>
-           <td> <%= link_to image_tag("pdf-logo.png", :size => "20x20"), 
-			:controller => "factures", :action=>"show", :format=>"pdf",:id => Facture.find_by_ref(l[:ref]).id %> </td>
-           <% @solde -= l[:mnt] %>
-           <% @debit += l[:mnt] %>
-           <td style="text-align:right;"> <%= number_to_currency(l[:mnt], :unit => "")  %> € </td><td></td>
-        <%  else %>
-	   <td />
-           <% @solde += l[:mnt] %>
-           <% @credit += l[:mnt] %>
-           <td></td><td style="text-align:right;"> <%= number_to_currency(l[:mnt], :unit => "") %> € </td>
-       <% end %>
-       <td style="text-align:right;"> <%= number_to_currency(@solde, :unit => "") %> € </td>
-     </tr>
+  <thead>
+    <th>Date</th><th>Type</th><th>Référence</th><th>Facture</th><th>Débit</th><th>Crédit</th><th>Solde</th>
+  </thead>
+
+  <% for l in @releve %>
+    <tr>
+      <td><%= l[:date].to_s(:fr) %></td>
+      <td><%= l[:type] %></td>
+      <td><%= l[:ref] %></td>
+      <% if l[:type] == "Facture" %>
+        <td>
+          <%= link_to image_tag("pdf-logo.png", size:'20x20'), action:"famillefacture", ref:l[:ref] %>
+        </td>
+        <td id="euros"><%= number_to_currency(l[:mnt], unit:'€') %></td>
+        <td />
+      <% else %>
+        <td />
+        <td id="euros"><%= number_to_currency(l[:mnt], unit:'€') %></td>
+      <% end %>
+      <td id="euros"><%= number_to_currency(l[:solde], unit:'€') %></td>
+    </tr>
   <% end %>
   <tr style="background-color:#FFFFA0;">
-    <td><%= Date.today.to_s(:fr) %> </td><td>SOLDE DU COMPTE A CE JOUR</td><td /><td />
-    <td style="text-align:right;"><%= number_to_currency(@debit, :unit => "") %> € </td>
-    <td style="text-align:right;"><%= number_to_currency(@credit, :unit => "") %> € </td>
-    <td id="sum"> <%= number_to_currency(@solde, :unit => "") %> € </td>
+    <td><%= Date.today.to_s(:fr) %></td>
+    <td>SOLDE A CE JOUR</td>
+    <td />
+    <td />
+    <td id="euros"><%= number_to_currency(@debit, unit:'€') %></td>
+    <td id="euros"><%= number_to_currency(@credit, unit:'€') %></td>
+    <td id="sum"> <%= number_to_currency(@solde, unit:'€') %></td>
   </tr>
 </table>
-
-</div>
-
-<% if @solde < 0 %>
-<div class="span-20"><br></div>
-<div class="span-4 last">
-
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input type="hidden" name="cmd" value="_xclick">
-	<input type="hidden" name="business" value="philippe@capcod.com">
-	<input type="hidden" name="lc" value="FR">
-	<input type="hidden" name="item_name" value="openCantine">
-	<input type="hidden" name="item_number" value="F2011-055">
-	<input type="hidden" name="amount" value=<%= @solde.abs %>>
-	<input type="hidden" name="currency_code" value="EUR">
-	<input type="hidden" name="button_subtype" value="services">
-	<input type="hidden" name="no_note" value="0">
-	<input type="hidden" name="tax_rate" value="0.000">
-	<input type="hidden" name="shipping" value="0.00">
-	<input type="hidden" name="bn" value="PP-BuyNowBF:btn_paynowCC_LG.gif:NonHostedGuest">
-	<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
-	<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-	</form>
-</div>
-<% end %>
-
+<br />
+<h3>Inscriptions</h3>
+Liste des inscriptions en cours et non facturées
 <hr>
-<br>
-<h4>Inscriptions</h4>
 <% for e in @famille.enfants %>
+   <h3><%= e.prenom %></h3> 
 	 <table class="sample">
-          <tr>
-            <th>Date</th>
-	    <th>Enfant</th>
-            <th>Repas</th>
-            <th>Garderie Matin</th>
-            <th>Garderie Après-midi</th>
-            <th>Centre Matin</th>
-            <th>Centre Après-midi</th>
-            <th>Etude</th>
-          </tr>
-   	  <% for p in e.prestations %>
-
-            <%= render :partial => 'prestations/prestation_facture', :locals => { :prestation => p } %>
-	
-	  <% end %>
+      <tr>
+        <th>Date</th>
+        <th>Enfant</th>
+        <th>Repas</th>
+        <th>Garderie matin</th>
+        <th>Garderie soir</th>
+        <th>Centre matin</th>
+        <th>Centre soir</th>
+        <th>Etude</th>
+      </tr>
+   	  <% for p in e.prestations.afacturer %>
+        <tr>
+          <td><%=h format_date(p.date) %></td>
+          <td><%= p.enfant.prenom %></td>
+          <td class="center"><%= image_tag @images[p.repas.to_i] if p.repas != '0' %></td>
+          <td class="center"><%= image_tag @images[p.garderieAM.to_i] if p.garderieAM != '0' %></td>
+          <td class="center"><%= image_tag @images[p.garderiePM.to_i] if p.garderiePM != '0' %></td>
+          <td class="center"><%= image_tag @images[p.centreAM.to_i] if p.centreAM != '0' %></td>
+          <td class="center"><%= image_tag @images[p.centrePM.to_i] if p.centrePM != '0' %></td>
+          <td class="center"><%= image_tag @images[p.etude.to_i] if p.etude != '0' %></td>
+        </tr>
+	    <% end %>
 	</table>
 <% end %>
-
 <br>
 <br>
 <br>
-
-

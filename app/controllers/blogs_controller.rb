@@ -7,7 +7,7 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.xml
   def index
-    @blogs = Blog.find(:all)
+    @blogs = Blog.order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb

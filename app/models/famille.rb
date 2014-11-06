@@ -6,6 +6,7 @@ class Famille < ActiveRecord::Base
   has_many :prestations, :through => :enfants
   has_many :paiements
   has_many :factures
+  belongs_to :mairie, class_name:'Ville'
 
   validates_presence_of   :nom, :message => " manquant !"
   #validates_uniqueness_of :nom, :scope => [:nom, :adresse], :message => "Cette famille existe déjà dans la base !"

@@ -2,7 +2,7 @@ class Facture < ActiveRecord::Base
 
   attr_protected :id
 
-  belongs_to :ville
+  belongs_to :ville, foreign_key:"mairie_id"
   belongs_to :famille
 
   has_many :facture_lignes, :dependent => :destroy

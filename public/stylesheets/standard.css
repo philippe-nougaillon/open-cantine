@@ -175,8 +175,12 @@ table.sample .center {
 table.sample #sum {
 	text-align:right;
 	font-weight:bold; 
-	font-size:110%;
 }
+
+table.sample #euros {
+  text-align:right;
+}
+
 table.sample #number {
 	text-align:right;
 }

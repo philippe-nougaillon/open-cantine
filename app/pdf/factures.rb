@@ -55,11 +55,11 @@ class FacturePdf < Prawn::Document
 				@total_ligne = item.prix * item.qte
 			end
     		items +=[[
-						item.texte.gsub(";", ""), item.qte, 
-						number_to_currency(item.prix, :locale => 'fr'),
-						#number_to_currency(item.montant, :locale => 'fr')
-						number_to_currency(@total_ligne, :locale => 'fr')
-					]]
+					item.texte.gsub(";", ""), item.qte, 
+					number_to_currency(item.prix, :locale => 'fr'),
+					#number_to_currency(item.montant, :locale => 'fr')
+					number_to_currency(@total_ligne, :locale => 'fr')
+				]]
 		end
 	end
 

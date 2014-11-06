@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Portail parents</title>
+  <%= favicon_link_tag '/fav.ico' %>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />  
+  <%= javascript_include_tag "application", "rails.validations" %>
+  <%= stylesheet_link_tag '/stylesheets/standard', :media => "all"  %>
+  <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+  <%= csrf_meta_tags %> 
+</head>
+<body>
+	<script language="javascript">
+	    $(document).ready(function() {
+	        $("#error_message").fadeOut(10000);
+	        $("#warning_message").fadeOut(10000);
+	    });
+	</script>
+    <div class="container">
+		<div id="login" class="span-24 last">
+		    <% unless session[:famille_id].nil? %>
+		       <%= link_to "Déconnexion", 'famillelogout' %>
+		    <% end %>
+		</div>
+
+		<div id="title" class="span-10">
+		    <% if session[:famille_id].nil? %>	
+	           <%= image_tag 'playground.png' %>
+    	       <%= image_tag 'diner.png' %>
+        	   <%= image_tag 'picnic.png' %>
+            <% else %>
+           	   <% f = Famille.find(session[:famille_id]) %>	
+           	   <%= image_tag(f.mairie.logo_url, width:'50') %> 
+            <% end %>
+            <br>
+            <%= link_to 'Portail Parents', "/moncompte/famillelogin" %>
+		</div>
+	
+		<div class="span-24 last">
+		    <hr>
+		    <div id="error_message">  <%= flash[:notice] %></div>
+		    <div id="warning_message"><%= flash[:warning] %></div>
+		</div>
+
+		<div class="span-24 last">
+			<%= yield -%>
+    	</div>
+   </div>
+   <% unless request.host == 'localhost' %>
+	   <%= render "layouts/ga" %>
+   <% end %>
+</body>
+</html>

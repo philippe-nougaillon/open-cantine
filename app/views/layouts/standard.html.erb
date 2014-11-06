@@ -88,6 +88,8 @@
 			<%= yield -%>
     	</div>
    </div>
-   <%= render "layouts/ga" %>
+   <% unless request.host == 'localhost' %>
+	   <%= render "layouts/ga" %>
+   <% end %>
 </body>
 </html>

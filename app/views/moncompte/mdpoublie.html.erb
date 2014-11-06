@@ -1,0 +1,9 @@
+<h3>Mot de passe oublié</h3>
+Veuillez saisir ci-dessous votre adresse email pour qu'un nouveau mot de passe vous soit envoyé.
+<br>
+<br>
+<%= form_tag :action => "mdpoublie_renvoyer"  do %>
+   <label for="username">Votre adresse email:</label><br>
+   <%= text_field_tag("email", params[:email] ,:size => 25) %><br>
+   <%= submit_tag "Envoyer"%>
+<% end %>

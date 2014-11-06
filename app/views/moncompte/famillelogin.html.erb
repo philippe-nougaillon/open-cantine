@@ -1,47 +1,41 @@
 <br>
-<br>
-<br>
 <div id="main" class="span-14">
-  <table>
-    <tr>
-      <td>
-        <b>Application de gestion de service péri-scolaire.</b><br><br><br>
-        <h4><b>Parents</b>, pour consulter votre compte, vos inscriptions ou effectuer un versement, veuillez entrer vos identifiants.</h4>
-        <br>
-        <% if iphone_user_agent? %>
-          <br>
-          Utilisateurs d'iPhone, rendez-vous <%= link_to "ici", :action => 'famillelogin_iphone' %> pour vous connecter"
-       <% end %>
-      </td>
-    </tr>
-  </table>
+  <h3>Gestion et facturation des prestations de cantine et périscolaires</h3>
+
+  <% if iphone_user_agent? %>
+    <br>Utilisateurs d'iPhone, veuillez vous connecter 
+    <%= link_to "ici", action: 'famillelogin_iphone' %>
+  <% end %>
+
+  <h4>
+    <br>
+    Vous souhaitez connaitre la situation de votre compte, voir vos inscriptions ou effectuer un versement ? Veuillez entrer votre email et mot de passe pour vous connecter au portail parents.
+  </h4>
 </div>
 
 <div class="span-2">
 	<br>
 </div>
 
-<div id="main" class="span-6">
-        <% if session[:famille].nil? %>
+<div id="main" class="span-7">
+  <% if session[:famille_id].nil? %>
 	  <fieldset>
-	  <legend>Connexion</legend> 
-          <%= form_tag :action => "famillelogin"  do %>
-             <label for="username">Email</label><br>
-             <%=  text_field_tag("email", params[:email] ,:size => 25) %><br>
-             <label for="password">Mot de passe</label><br>
-             <%=  password_field_tag "password", params[:password], :size => 25 %><br>
-             <%=  submit_tag "Connection"%>
-          <% end %>
+  	  <legend>Connexion</legend> 
+      <%= form_tag :action => "famillelogin"  do %>
+        <label for="username">Adresse email</label><br>
+        <%= text_field_tag("email", params[:email] ,:size => 25) %><br>
+  
+        <label for="password">Mot de passe</label><br>
+        <%= password_field_tag "password", params[:password], :size => 25 %><br>
+        
+        <%= submit_tag "Connexion"%>
+        <%= link_to "Mot de passe oublié?", "mdpoublie" %> 
+      <% end %>
 	  </fieldset>
-        <% else %>
-          <%= link_to "Accéder à mon compte", :action => 'familleshow' %>
-          <%= link_to "Se déconnecter", :action => 'famillelogout' %>
-        <% end %>
-
-	<fieldset>
-	   <legend>Première consultation ?</legend> 
-           Entrez votre email, un mot de passe vous sera envoyé automatiquement.
-        </fieldset>
+  <% else %>
+    <%= link_to "Accéder à mon compte", :action => 'familleshow' %>
+    <%= link_to "Se déconnecter", :action => 'famillelogout' %>
+  <% end %>
 </div>
 
 <div class="span-2 last">

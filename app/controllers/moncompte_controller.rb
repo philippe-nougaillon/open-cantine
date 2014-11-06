@@ -4,46 +4,42 @@ class MoncompteController < ApplicationController
  
   layout :determine_layout
 
-  def determine_layout
-    if iphone_format?
-      return "iphone"
-    else
-      return "standard"
+  def famillelogin
+    if request.post?
+      return if params[:email].blank?
+
+      @famille = Famille.where(email:params[:email]).first
+      if @famille
+        if @famille.password == params[:password]
+          flash[:notice] = "Dernière connection le #{@famille.lastconnection.to_s(:fr)}" if @famille.lastconnection
+          @famille.update_attributes(lastconnection:Time.now)
+          session[:famille_id] = @famille.id
+          redirect_to :action => "familleshow"
+        else
+          flash[:warning] = 'Mot de passe incorrect'
+        end
+      else
+        flash[:warning] = 'Adresse email inconnue, veuillez contacter le service périscolaire'
+      end
     end
   end
 
+  def mdpoublie
 
-  def famillelogin
+  end
 
-    if request.post?
-         @famille = Famille.find_by_email(params[:email])
-         if @famille
-           if params[:password].empty? and not @famille.password
-              password = random_password
-              @famille.password = password
-              @famille.save
-              UserMailer.deliver_send_password(@famille)
-              flash[:notice] = "Votre mot de passe vient d'être envoyé. Vérifiez vos mails..."
-              flash[:warning] = nil
-           else
-              if @famille.password == params[:password]
-                if @famille.lastconnection
-                   flash[:notice] = "Bienvenue! Dernière connection le #{@famille.lastconnection.to_s(:fr)}"
-                end
-                @famille.lastconnection = Time.now
-                @famille.save
-                session[:famille] = @famille.id
-		session[:mairie]  = @famille.mairie_id
-                redirect_to :action => "familleshow"
-              else
-                flash[:warning] = 'Mot de passe incorrect !'
-                flash[:notice] = nil
-              end
-           end
-         else
-           flash[:warning] = 'Email ou mot de passe inconnu !'
-         end
-      end
+  def mdpoublie_renvoyer
+    return if params[:email].blank?
+    @famille = Famille.where(email:params[:email]).first
+    if @famille
+      # envoi le mot de passe 
+      @famille.update_attributes(password:random_password)
+      UserMailer.send_password(@famille).deliver
+      flash[:notice] = "Un nouveau mot de passe vient d'être envoyé à #{@famille.email}"
+    else
+      flash[:warning] = "Adresse email inconnue..."
+    end   
+    redirect_to :action => "famillelogin"
   end
 
   def famillelogin_iphone
@@ -51,13 +47,12 @@ class MoncompteController < ApplicationController
          pass = params[:email]
          @famille = Famille.find_by_email(params[:email])
          if @famille
-           if params[:password].empty? and not @famille.password
+           if params[:password].blank? and @famille.password.blank?
               password = random_password
               @famille.password = password
               @famille.save
               UserMailer.deliver_send_password(@famille)
-              flash[:notice] = "Votre mot de passe vient d'être envoyé. Vérifiez vos mails..."
-              flash[:warning] = nil
+              flash[:notice] = "Un nouveau mot de passe vient d'être envoyé à #{@famille.email}"
            else
               if @famille.password == params[:password]
                 if @famille.lastconnection
@@ -78,46 +73,68 @@ class MoncompteController < ApplicationController
       end
   end
 
-
   def familleindex_iphone
     @famille = Famille.find(session[:famille])
   end
 
   def familleshow
-    @famille = Famille.find(session[:famille])
-    @factures = Facture.find_all_by_famille_id(@famille.id)
-    @paiements = Paiement.find_all_by_famille_id(@famille.id)
+    @images = ["","yes.png","no.jpeg","orange.jpeg","cancel.jpeg","yes.png","yes.png","yes.png"]
+    @famille = Famille.find(session[:famille_id])
+    releve = []
 
-    @releve = []
+    for f in @famille.factures
+      releve << { date:f.date.to_date, type:"Facture", ref:f.ref, mnt:f.montant, solde:0 }
+    end
+    for p in @famille.paiements
+      releve << { date:p.date.to_date, type:"Paiement", ref:p.ref, mnt:p.montant, solde:0 }
+    end
+
+    @releve = releve.sort { |a,b| a[:date] <=> b[:date] }
     @solde = 0.00
     @debit = 0.00
     @credit = 0.00
 
-    for f in @factures
-      balance = { :date => f.date.to_date, :type => "Facture", :ref => f.ref, :mnt => f.montant }
-      @releve << balance
+    for l in @releve
+      mnt = l[:mnt]
+      if l[:type] == "Facture"
+        @debit += mnt
+        @solde -= mnt
+      else
+        @credit += mnt
+        @solde += mnt
+      end
+      l[:solde] = @solde
+    end 
+
+    unless params[:all] == '1'
+      @releve = @releve[-5,5]
     end
 
-    for p in @paiements
-      balance = { :date => p.date.to_date, :type => "Paiement", :ref => p.ref, :mnt => p.montant }
-      @releve << balance
-    end
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @releve }
-    end
   end
 
   def famillelogout
-    session[:famille] = nil
+    session[:famille_id] = nil
     redirect_to :action => "famillelogin"
   end
 
-  def random_password(size = 8)
-      chars = (('a'..'z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
-      (1..size).collect{|a| chars[rand(chars.size)] }.join
+  def famillefacture
+    require 'factures.rb'
+    facture = Facture.find_by_ref(params[:ref])
+    return if facture.famille_id != session[:famille_id]
+
+    pdf = FacturePdf.new(facture, facture.ville, view_context)
+    send_data pdf.render, :type => "application/pdf", 
+          :filename => "Facture_#{facture.ref}_#{facture.created_at.strftime("%d/%m/%Y")}.pdf"
   end
 
+ private
+  def determine_layout
+    return iphone_format? ? "iphone" : "moncompte"
+  end
+
+  def random_password(size = 5)
+    chars = (('A'..'Z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
+    (1..size).collect{|a| chars[rand(chars.size)] }.join
+  end
  
 end
