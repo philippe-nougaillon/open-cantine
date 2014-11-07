@@ -3,6 +3,8 @@
 class PrestationsController < ApplicationController
 
   before_filter :check, :only => ['edit', 'edit_from_enfants']
+  skip_before_filter :check_authentification, :only => [:new_manual, :new_manual_calc]
+
   layout :determine_layout, :except => ['create', 'refresh', 'ajaxupdate', 'new_manual_calc']
 
   def check
@@ -19,7 +21,11 @@ class PrestationsController < ApplicationController
     if params[:action] == 'print'
       "printer"
     else
-      "standard"
+      if session[:famille_id]
+        "moncompte"
+      else
+        "standard"
+      end
     end
   end
 
@@ -297,14 +303,23 @@ class PrestationsController < ApplicationController
       date = date + 1.day
     }
     if params[:famille_id]
-       @famille_id = params[:famille_id]
-       @enfants = Enfant.find_by_famille_id(@famille_id)
+       @famille = Famille.find(params[:famille_id]) 
+       @enfants = @famille.enfants
        @enfant = @enfants[0]	
-       @famille = Famille.find(@famille_id) 
     else
        @enfant = Enfant.find(params[:id])
        @famille = Famille.find(@enfant.famille_id) 
     end
+
+    if session[:famille_id] # portail parent, TEST SI ENFANT DDANS LA FAMILLE CONNECTEE
+      famille = Famille.find(session[:famille_id])
+      logger.debug "[DEBUG] Check: #{session[:famille_id]} #{famille.enfants.include?(@enfant)}"
+      unless famille.enfants.include?(@enfant)
+        flash[:warning] = "Enfant non autorisé..."
+        redirect_to "/moncompte"
+        return
+      end
+    end  
 
     @mairie = Ville.find(@famille.mairie_id)
 
@@ -332,22 +347,17 @@ class PrestationsController < ApplicationController
     # test si l'utilisateur a décoché ?
     if session[:lastparams]
       supprimees = session[:lastparams] - params.keys
-      #logger.debug "[DEBUG] suppr: #{supprimees}"
+      logger.debug "[DEBUG] suppr: #{supprimees}"
     end
     session[:lastparams] = params.keys
-    #logger.debug "[DEBUG] last params: #{session[:lastparams]}"
+    logger.debug "[DEBUG] last params: #{session[:lastparams]}"
 
     if params[:famille_id]
        @famille_id = params[:famille_id]
        @enfants = Enfant.find_all_by_famille_id(@famille_id)
     else
-       @enfants = Enfant.find(:all, :conditions => ["id = ? ", params[:enfant_id]])
+       @enfants = Enfant.find(params[:enfant_id]).to_a
     end
-    #@famille = Famille.find(@enfants[0].famille_id)
-    #@mairie = Ville.find(@famille.mairie_id)
-
-    #charge le module Facturation de cette mairie
-    #load "facturation_modules/#{@mairie.FacturationModuleName}"
 
     @enfants.count.times { |i|
         @enfant = @enfants[i]
@@ -362,7 +372,7 @@ class PrestationsController < ApplicationController
            d = Date.new(@year.to_i, @mois.to_i, keys.first.to_i)
            @p = Prestation.where(enfant_id:@enfant.id, date:d).first
            @p.update_attributes(keys.last => '0')
-           #logger.debug "[DEBUG] presta à suppr: #{@p.inspect}"  
+           logger.debug "[DEBUG] presta à suppr: #{@p.inspect}"  
            supprimees = []            
         end
            

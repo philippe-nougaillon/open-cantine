@@ -1,24 +1,18 @@
-<br>
-<div id="main" class="span-14">
-  <h3>Gestion et facturation des prestations de cantine et périscolaires</h3>
+<h3>Gestion et facturation des prestations de cantine et périscolaires</h3>
 
-  <% if iphone_user_agent? %>
-    <br>Utilisateurs d'iPhone, veuillez vous connecter 
-    <%= link_to "ici", action: 'famillelogin_iphone' %>
-  <% end %>
+<% if iphone_user_agent? %>
+  <br>Utilisateurs d'iPhone, veuillez vous connecter 
+  <%= link_to "ici", action: 'famillelogin_iphone' %>
+<% end %>
 
-  <h4>
-    <br>
-    Vous souhaitez connaitre la situation de votre compte, voir vos inscriptions ou effectuer un versement ? Veuillez entrer votre email et mot de passe pour vous connecter au portail parents.
-  </h4>
-</div>
+<h4>
+Vous souhaitez connaitre la situation de votre compte, voir vos inscriptions ou effectuer un versement ? <br>
+Vous êtes au bon endroit.<br><br>
+Veuillez entrer votre email et mot de passe pour vous connecter.<br>
+</h4>
 
-<div class="span-2">
-	<br>
-</div>
-
-<div id="main" class="span-7">
-  <% if session[:famille_id].nil? %>
+<% if session[:famille_id].nil? %>
+  <div class="span-9 last">
 	  <fieldset>
   	  <legend>Connexion</legend> 
       <%= form_tag :action => "famillelogin"  do %>
@@ -32,14 +26,11 @@
         <%= link_to "Mot de passe oublié?", "mdpoublie" %> 
       <% end %>
 	  </fieldset>
-  <% else %>
-    <%= link_to "Accéder à mon compte", :action => 'familleshow' %>
-    <%= link_to "Se déconnecter", :action => 'famillelogout' %>
-  <% end %>
-</div>
+  </div>
+<% else %>
+  <%= link_to "Accéder à mon compte", :action => 'familleshow' %>
+  <%= link_to "Se déconnecter", :action => 'famillelogout' %>
+<% end %>
 
-<div class="span-2 last">
-	<br>
-</div>
 
 

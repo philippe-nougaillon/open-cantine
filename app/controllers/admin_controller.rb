@@ -2,6 +2,8 @@
 
 class AdminController < ApplicationController
 
+  skip_before_filter :check_authentification
+
   layout "standard"
 
   def stats

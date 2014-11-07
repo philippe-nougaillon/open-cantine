@@ -1,8 +1,14 @@
 # encoding: utf-8
 
 class MoncompteController < ApplicationController
+
+  skip_before_filter :check_authentification, :except => [:famillefacture]
  
   layout :determine_layout
+
+  def index
+    redirect_to :action => "famillelogin"
+  end
 
   def famillelogin
     if request.post?
@@ -21,6 +27,8 @@ class MoncompteController < ApplicationController
       else
         flash[:warning] = 'Adresse email inconnue, veuillez contacter le service périscolaire'
       end
+    else
+      redirect_to :action => "familleshow" if session[:famille_id]
     end
   end
 
@@ -114,6 +122,7 @@ class MoncompteController < ApplicationController
 
   def famillelogout
     session[:famille_id] = nil
+    flash[:notice] = "Vous avez bien été déconnecté"
     redirect_to :action => "famillelogin"
   end
 

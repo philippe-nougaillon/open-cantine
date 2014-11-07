@@ -1,5 +1,5 @@
 <h2>Famille <%= @famille.nom %></h2> 
-<h3>Relevé de compte</h3>
+<h3>Relevé de situation</h3>
 <% unless params[:all] %>
   Liste des 5 derniers mouvements. <%= link_to "Afficher tout", action:"familleshow", all:1 %>
 <% else %>
@@ -17,7 +17,7 @@
       <td><%= l[:type] %></td>
       <td><%= l[:ref] %></td>
       <% if l[:type] == "Facture" %>
-        <td>
+        <td class="center">
           <%= link_to image_tag("pdf-logo.png", size:'20x20'), action:"famillefacture", ref:l[:ref] %>
         </td>
         <td id="euros"><%= number_to_currency(l[:mnt], unit:'€') %></td>
@@ -69,6 +69,7 @@ Liste des inscriptions en cours et non facturées
         </tr>
 	    <% end %>
 	</table>
+  <%= link_to "Modifier les inscriptions", controller:'prestations', action:'new_manual', id:e.id, mois:Date.today.month, year:Date.today.year %>
 <% end %>
 <br>
 <br>

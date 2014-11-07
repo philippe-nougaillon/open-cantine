@@ -2,6 +2,8 @@
 
 class VillesController < ApplicationController
 
+  skip_before_filter :check_authentification, only => [:nouveau_compte, :nouveau_compte_create]
+
   layout "standard"
 
   def nouveau_compte

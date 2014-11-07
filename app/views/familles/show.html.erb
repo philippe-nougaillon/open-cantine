@@ -40,18 +40,18 @@
         <td><b><%= mail_to @famille.email %></b></td>
       </tr>
       <tr>
-          <td>N°Allocataire</td>
-          <td><b><%=h @famille.allocataire %> </b></td>
+        <td>N°Allocataire</td>
+        <td><b><%=h @famille.allocataire %> </b></td>
       </tr>          
       <tr>
-          <td>Tarif ou QF</td>
-          <td>
-            <% if @famille.tarif_id %>
-               <%= Tarif.find(@famille.tarif_id).memo %> 
-            <% else %>
-               Automatique
-            <% end %>
-          </td>
+        <td>Tarif ou QF</td>
+        <td>
+          <% if @famille.tarif_id %>
+             <%= Tarif.find(@famille.tarif_id).memo %> 
+          <% else %>
+             Automatique
+          <% end %>
+        </td>
       </tr>
     </table>
     <% if session[:user_readwrite] %>
@@ -91,11 +91,8 @@
 		    <%= link_to 'Relevé de compte', :action => 'balance', :id => @famille.id  %>
       	| <br><br>
 		    <% if @facture %>
-          	Dernière facture : 
+          	Dernière facture: 
 		        <%= link_to @facture.ref, :controller => 'factures', :action => 'show', :id => @facture  %>
-        <% end %>
-        <% unless @famille.lastconnection.nil? %>
-           <%= time_ago_in_words(@famille.lastconnection) %>
         <% end %>
 		    <br>
       </td>
@@ -103,9 +100,12 @@
   </table>
      <br>
      <fieldset style="width: 92%">
-	<legend>Mémo</legend>
-     	<%= @famille.memo %>
-     </fieldset>	
+	       <legend>Mémo</legend>
+     	   <%= @famille.memo %>
+     </fieldset>
+     <% unless @famille.lastconnection.nil? %>
+        Dernière connexion: il y a <%= time_ago_in_words(@famille.lastconnection) %>
+     <% end %>
 </div>
 
 <div class="span-24 last">

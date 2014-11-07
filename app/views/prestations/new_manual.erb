@@ -12,8 +12,12 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
    <%= link_to "Mois +", :controller => 'prestations', :action => 'new_manual', 
 	:mois => @mois_up   , :year => @year_up, :famille_id => @famille_id, :id => 0 %>
 <%  else %>
-    <h3><%=  link_to @enfant.prenom + " "+ Famille.find(@enfant.famille_id).nom, 
-	:controller => "enfants", :action => "show", :id => @enfant.id %></h3>
+	<% unless session[:famille_id] %>
+    	<h3><%= link_to @enfant.prenom + " "+ @enfant.famille.nom, @enfant %></h3>
+    <% else %>
+    	<h3><%= @enfant.prenom + " "+ @enfant.famille.nom %>
+		<small> - <%= link_to "Retour au relevé de situation", "/moncompte/familleshow" %></small></h3>
+    <% end %>
     <%= format_mois(@mois.to_i).upcase %> <%= @year.upcase %>
     <%= link_to "[ - ]", :controller => 'prestations', :action => 'new_manual', :mois => @mois_down , :year => @year_down, :id => @enfant.id %>
     <%= link_to "[ + ]", :controller => 'prestations', :action => 'new_manual', :mois => @mois_up   , :year => @year_up, :id => @enfant.id %>
@@ -22,7 +26,8 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
   
 <div id="ajaxzone"></div>
 
-	<%= form_for(Prestation.new, :remote => true, :url => { :controller => "prestations", :action => "new_manual_calc"}) do |f| %>
+<%= form_for(Prestation.new, :remote => true, :url => { :controller => "prestations", :action => "new_manual_calc"}) do |f| %>
+
 	  <p style="display:none">
 	     <%= text_field_tag "enfant_id", @enfant.id if @enfant %>
 	     <%= text_field_tag "famille_id", @famille_id if @famille_id %>
@@ -43,14 +48,17 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
 
 	    <% @week = 1 %>
 	<% for d in @days %>
-		<%  @vacances = Vacance.find(:all, :conditions => ["debut <= ? AND fin >= ? AND mairie_id = ?", d.to_s(:en), d.to_s(:en), session[:mairie]]) %>
-			
+		<% @vacances = @mairie.vacances.where("debut <= ? AND fin >= ?", d.to_s(:en), d.to_s(:en)) %>
 		<% if @famille_id %>
 			<% @presta = Prestation.new %>
 		<% else %>
-		    <% @presta = Prestation.find(:first, :conditions => ["enfant_id = ? and date = ?", @enfant.id, d]) %>
+		    <% @presta = @enfant.prestations.where(date:d).first %>
 		<% end %>
-        <% @locked = (@presta && @presta.facture_id)  %>
+		<% unless session[:famille_id] %>
+        	<% @locked = (@presta && @presta.facture_id) %>
+        <% else %>	
+        	<% @locked = (d <= Date.today + 1.day) %>
+        <% end %>	
 		<tr>
 		  <td><% if @current_week != @week %><%= @week %><% @current_week = @week %><% end %></td>
 		  <td><b><%= format_date(d) %></b></td>
@@ -97,7 +105,8 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
 		  </td>
 		</tr>
 
-		<% if d.wday == 5 %><% @week = @week + 1 %>
+		<% if d.wday == 5 && (d.end_of_month().day - d.day >2 ) %>
+		   <% @week = @week + 1 %>
 		   </table>
 		   <table class="sample">
 			<tr>
@@ -112,12 +121,16 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
         <% end %>
 	<% end %>
 	</table>
-	<%= check_box_tag("etude", params[:etude]) %> Etude pour tout le mois ?
+	<% if 1 == 0 %>
+		<%= check_box_tag("etude", params[:etude]) %> Etude pour tout le mois ?
+	<% end %>
 	<div style="display:none"> 
 		<%= f.submit "Enregistrer" %>
-    </div>   
-    <a href="#top">Haut de la page</a>
-  <% end %>
+    </div>
+    <% if session[:famille_id] %>   
+		<%= link_to "Retour au relevé de situation", "/moncompte/familleshow" %>
+  	<% end %>
+<% end %>
 <br>
 <br>
 
