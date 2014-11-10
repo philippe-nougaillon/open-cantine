@@ -1,4 +1,6 @@
+<br>
 <h3>Liste des évolutions proposées par les utilisateurs</h3>
+<hr>
 <ul>
 	<% for todo in @todos %>
 		<li>
@@ -6,7 +8,7 @@
 			<b><%= todo.mairie.nom if todo.mairie %>: <%= todo.description %></b>
 		</li>
 		<% if todo.note %>
-			<%= image_tag "reply.png" %>: <%= h todo.note %></i>
+			<%= image_tag "reply.png" %> <%= h todo.note %></i>
 			<br>
 		<% end %>
 		<br>
