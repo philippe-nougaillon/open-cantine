@@ -7,6 +7,7 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.xml
   def index
+    @todo = Todo.new
     @todos = Todo.find(:all, :order => "done, id DESC")
 
     respond_to do |format|
@@ -25,16 +26,16 @@ class TodosController < ApplicationController
      	
     unless session[:votants].include?(ip)
      	session[:votants].push(ip)
-		@todo.counter += 1
-		@todo.save	
-		flash[:notice] = 'Merci pour votre vote'
+		  @todo.counter += 1
+		  @todo.save	
+		  flash[:notice] = 'Merci pour votre vote'
     else
-		flash[:warning] = 'Vous avez déjà voté.'
+		  flash[:warning] = 'Vous avez déjà voté.'
     end	
 
     respond_to do |format|
-	format.html { redirect_to(todos_url) }
-	format.xml  { render :xml => @todo, :status => :created, :location => @todo }
+	     format.html { redirect_to(todos_url) }
+	     format.xml  { render :xml => @todo, :status => :created, :location => @todo }
     end
 
   end
@@ -71,9 +72,9 @@ class TodosController < ApplicationController
   end
  	
   def destroy
-    @todo = Todo.find(params[:id])
-	@todo.destroy
-	redirect_to(todos_url) 
+     @todo = Todo.find(params[:id])
+	   @todo.destroy
+	   redirect_to(todos_url) 
   end
 
   # POST /todos
@@ -81,11 +82,11 @@ class TodosController < ApplicationController
   def create
     @todo = Todo.new(params[:todo])
     @todo.counter = 1	
-	@todo.mairie_id = session[:mairie]
+	  @todo.mairie_id = session[:mairie]
 
     respond_to do |format|
       if @todo.save
-        flash[:notice] = 'Souhait ajouté.'
+        flash[:notice] = 'Proposition ajoutée.'
         format.html { redirect_to(todos_url) }
         format.xml  { render :xml => @todo, :status => :created, :location => @todo }
       else

@@ -1,9 +1,6 @@
-<br><br>
-
-<h3>Votre remarque ou fonctionnalité souhaitée</h3>
-<h4>Décrivez-la en quelques mots et nous la développerons, si possible, pour en faire profiter toute la communauté openCantine.</h4>
+<h3>Décrivez votre proposition</h3>
 <%= simple_form_for(@todo) do |f| %>
-    <%= f.input :description, :as => :text %>
-    <%= f.submit '' %>
+    <%= f.input :description, :as => :text, label:"" %>
+    <%= f.submit 'Valider' %>
 <% end %>
 
