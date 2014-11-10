@@ -13,12 +13,11 @@
 
 		<%= submit_tag 'Afficher' %>
 		<%= check_box_tag "totaux", params[:totaux], params[:totaux] %> Que les totaux?
-		<%= submit_tag 'Saisie pointage', name: "pointage" %>
+		|<%= submit_tag 'Saisie', name: "pointage" %>|
 
 	    <span id="adroite">
-		    <%= link_to "Editions", :action => 'editions', :search => params[:prestation_date], 
-			:classe => params[:classe], :periode => params[:periode], :id => 0 %>
-	
+		    <%= link_to "Editions", action:'editions', search:params[:prestation_date], 
+			classe:params[:classe], periode:params[:periode], id:0 %>
 	    </span>
 	<% end %>
 </div>

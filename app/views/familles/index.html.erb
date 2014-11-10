@@ -35,8 +35,8 @@
         <td><%=h famille.cp %></td>
         <td><%=h famille.ville.upcase %></td>
         <td><%=h famille.readable_phone if famille.phone %></td>
-        <td><%= famille.email %></td>
-        <td><%= link_to famille.factures.last.ref, famille.factures.last  if famille.factures.any? %></td>
+        <td><small><%= mail_to famille.email %></small></td>
+        <td><%= link_to famille.factures.last.ref, factures_path(search:famille.factures.last.ref)  if famille.factures.any? %></td>
       </tr>
     <% end %>
   </table>
