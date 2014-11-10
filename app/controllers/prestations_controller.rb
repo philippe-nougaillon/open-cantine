@@ -302,22 +302,24 @@ class PrestationsController < ApplicationController
       @days.push(date) if is_weekday?(date)
       date = date + 1.day
     }
-    if params[:famille_id]
-       @famille = Famille.find(params[:famille_id]) 
-       @enfants = @famille.enfants
-       @enfant = @enfants[0]	
-    else
-       @enfant = Enfant.find(params[:id])
-       @famille = Famille.find(@enfant.famille_id) 
-    end
 
-    if session[:famille_id] # portail parent, TEST SI ENFANT DDANS LA FAMILLE CONNECTEE
+    if session[:famille_id] # portail parent, TEST SI ENFANT DANS LA FAMILLE CONNECTEE
       famille = Famille.find(session[:famille_id])
       logger.debug "[DEBUG] Check: #{session[:famille_id]} #{famille.enfants.include?(@enfant)}"
       unless famille.enfants.include?(@enfant)
         flash[:warning] = "Enfant non autorisé..."
         redirect_to "/moncompte"
         return
+      end
+    else
+      if params[:famille_id]
+         @famille_id = params[:famille_id]
+         @famille = Famille.find(@famille_id) 
+         @enfants = @famille.enfants
+         @enfant = @enfants[0]	
+      else
+         @enfant = Enfant.find(params[:id])
+         @famille = Famille.find(@enfant.famille_id) 
       end
     end  
 
@@ -356,7 +358,7 @@ class PrestationsController < ApplicationController
        @famille_id = params[:famille_id]
        @enfants = Enfant.find_all_by_famille_id(@famille_id)
     else
-       @enfants = Enfant.find(params[:enfant_id]).to_a
+       @enfants = Enfant.where(id:params[:enfant_id])
     end
 
     @enfants.count.times { |i|

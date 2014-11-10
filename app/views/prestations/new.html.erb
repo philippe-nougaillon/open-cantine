@@ -10,8 +10,9 @@
 <br>
 - Pour une année: idem semaine plus cochez 'Répéter jusqu'à la fin de l'année scolaire ?'
 <br>
-Si 'Inscrire en période de scolaire est coché', les incriptions seront faites que sur les jours scolaires, aucune prestations ne sera ajoutée sur une période de vacances. (<%= link_to "Voir dates de vacances", "/admin/setup#vacances" %> )
-<hr/>
+Si l'option "Inscrire en période scolaire" est coché, les incriptions seront faites sur les jours scolaires, aucune prestation ne sera donc ajoutée sur une période de vacances. 
+(<%= link_to "Voir dates de vacances", "/admin/setup#vacances" %> )
+<hr>
 
 Enfant(s) :
 <% for enfant in @enfants %>
