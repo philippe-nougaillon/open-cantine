@@ -5,7 +5,7 @@
 	<% for todo in @todos %>
 		<li>
 			<%= image_tag "yes.png" if todo.done %>
-			<b><%= todo.mairie.nom if todo.mairie %>: <%= todo.description %></b>
+			<b><%= todo.description %></b>
 		</li>
 		<% if todo.note %>
 			<%= image_tag "reply.png" %> <%= h todo.note %></i>
