@@ -3,7 +3,6 @@ class Enfant < ActiveRecord::Base
   attr_protected :id
 
   belongs_to :famille
-  has_one 	 :classroom
   has_many   :prestations, :dependent => :destroy
 
   validates_presence_of :prenom,        :message => " manquant !"

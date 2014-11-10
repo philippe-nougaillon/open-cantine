@@ -1,54 +1,73 @@
 <h3>Paramètres</h3>
 <div class="span-17 last">	
-		| <%= link_to "Coordonnées", "#coordonnees" %> |
-		<%= link_to "Classes", "#classes" %> |
+		| <%= link_to "Classes", "#classes" %> |
 		<%= link_to "Tarifs", "#tarifs" %> |
 		<%= link_to "Formules", "#formules" %> |
 		<%= link_to "Vacances", "#vacances" %> |
 		<%= link_to "Utilisateurs", "#utilisateurs" %> |
-		<%= link_to "Importer/Exporter les données", "#export" %> |
+		<%= link_to "Import/Export", "#export" %> |
 </div>
 <br><br><br>
 <div>
-   <div class="span-17 last">	
+   <div class="span-12">	
 	    <a name="coordonnees"></a>
 	    <h3>Coordonnées
 	    	<%= link_to image_tag('modif.png', size:"15x15"), edit_ville_path(@mairie.id) if session[:user_readwrite] %>
 	    </h3>
 		<hr>
-
 	    <table class="sample">
 	      <tr>
-		<td>Nom</td>
-		<td><b><%=h @mairie.nom %></b></td>
+			<td>Nom</td>
+			<td><b><%=h @mairie.nom %></b></td>
 	      </tr>
 	      <tr>
-		<td>Adresse</td>
-		<td><b><%=h @mairie.adr %></b></td>
+			<td>Adresse</td>
+			<td><b><%=h @mairie.adr %></b></td>
 	      </tr>
 	      <tr>
-		<td>Cp</td>
-		<td><b><%=h @mairie.cp %></b></td>
+			<td>Cp</td>
+			<td><b><%=h @mairie.cp %></b></td>
 	      </tr>
 	      <tr>
-		<td>Ville</td>
-		<td><b><%=h @mairie.ville %></b></td>
+			<td>Ville</td>
+			<td><b><%=h @mairie.ville %></b></td>
 	      </tr>
 	      <tr>
-		<td>Tél</td>
-		<td><b><%=h @mairie.tel %></b></td>
+			<td>Tél</td>
+			<td><b><%=h @mairie.tel %></b></td>
 	      </tr>
 	      <tr>
-		<td>Email</td>
-		<td><%= @mairie.email %></td>
+			<td>Email</td>
+			<td><%= @mairie.email %></td>
 	      </tr>
 		  <tr>
 			<td>Logo</td>
-			<td><%= @mairie.logo_url %></td>
 			<td><%= image_tag(@mairie.logo_url, size:'50x50') %></td>
+	     </tr>
+	     <tr>
+	     	<td></td>
+			<td><%= @mairie.logo_url %></td>
 	     </tr>
 	    </table>
     </div>
+
+ 	<div class="span-1"><br></div>	
+
+    <div class="span-11 last">	
+	    <a name="portail"></a>
+        <h3>Portail parents</h3>
+		<hr>
+		Le <%= link_to "portail", "/moncompte", target:"_blank" %>
+		permet aux parents, selon le mode d'accès choisi, de consulter ses factures et prestations, et de saisir les inscriptions.<br><br>   
+		<%= form_for @mairie, url:"change_acces_portail" do |f| %>
+			<%= f.radio_button :portail, 0 %> Pas d'accès <br><br>
+			<%= f.radio_button :portail, 1 %> Accès en lecture (vue factures et prestations en cours) <br><br>
+			<%= f.radio_button :portail, 2 %> Accès en écriture (inscriptions aux prestations à J+1) <br><br>
+			<%= f.submit "Modifier" %>
+		<% end %>
+		<br><br><br><br><br>
+	</div>	
+
     <div class="span-12 last">	
 	    <br>
 	    <a name="classes"></a>
@@ -70,6 +89,33 @@
 		 <% end %>
 	    </table>
     </div>
+
+	<div class="span-1"><br></div>	
+
+    <div class="span-11 last ">	
+    	<br>	
+		<a name="vacances"></a>
+		<h3>Vacances
+		    <%= link_to image_tag('modif.png', size:"15x15"), vacances_url  if session[:user_readwrite] %>
+		</h3>
+		<hr>
+	    <table class="sample">
+	      <tr>
+			<th>Nom</th>
+			<th>Débutent le</th>
+			<th>Se terminent le</th>
+	      </tr>
+	      <% for vacance in @vacances %>
+			<tr class="<%= cycle('list-line-even','list-line-odd')%>">
+			  <td><%=h vacance.nom %></td>
+			  <td><%=h vacance.debut.to_s(:fr) %></td>
+			  <td><%=h vacance.fin.to_s(:fr) %></td>
+			</tr>
+	      <% end -%>
+	    </table>
+    </div>
+
+
     <div class="span-24 last">
     	<br>	
 	    <a name="tarifs"></a>
@@ -103,6 +149,7 @@
 	      <% end %>
 	    </table>
     </div>
+
 	<div class="span-24 last">
     	<br>	
       	<a name="formules"></a>
@@ -126,29 +173,8 @@
          	<% end %>
       	</table>
     </div>
-    <div class="span-16 last">	
-    	<br>	
-		<a name="vacances"></a>
-		<h3>Vacances
-		    <%= link_to image_tag('modif.png', size:"15x15"), vacances_url  if session[:user_readwrite] %>
-		</h3>
-		<hr>
-	    <table class="sample">
-	      <tr>
-			<th>Nom</th>
-			<th>Débutent le</th>
-			<th>Se terminent le</th>
-	      </tr>
-	      <% for vacance in @vacances %>
-			<tr class="<%= cycle('list-line-even','list-line-odd')%>">
-			  <td><%=h vacance.nom %></td>
-			  <td><%=h vacance.debut.to_s(:fr) %></td>
-			  <td><%=h vacance.fin.to_s(:fr) %></td>
-			</tr>
-	      <% end -%>
-	    </table>
-    </div>
-    <div class="span-16 last">	
+
+    <div class="span-12">	
     	<br>	
 		<a name="utilisateurs"></a>
 		<h3>Utilisateurs
@@ -157,44 +183,30 @@
 		<hr>
 		<small>Plusieurs utilisateurs peuvent travailler simultanément sur un compte openCantine et lire et/ou modifier les données.</small>
 		<table class="sample">
-	      <tr>
-			<th />
-			<th>Nom</th>
-			<th>Droits</th>
-			<th>Dernière connexion le</th>
-		   </tr>
-		   <% for u in @users %>
-			  <tr class="<%= cycle('list-line-even','list-line-odd')%>">
-				<td><%= image_tag("icon_user.png" ) %></td>
-				<td><b><%= u.username[0..30] %></b></td>
-				<td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
-				<td><%= u.lastconnection.to_s(:fr) %> </td>
-			</tr>
+	      	<tr>
+				<th />
+				<th>Nom</th>
+				<th>Droits</th>
+				<th>Dernière connexion</th>
+		   	</tr>
+		   	<% for u in @users %>
+			  	<tr class="<%= cycle('list-line-even','list-line-odd')%>">
+					<td><%= image_tag("icon_user.png" ) %></td>
+					<td><b><%= u.username[0..30] %></b></td>
+					<td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
+					<td><%= u.lastconnection.to_s(:fr) %> </td>
+				</tr>
        	   <% end -%>
 	    </table>
 	</div>
+
+	<div class="span-1"><br></div>	
+
 	<% if session[:user_readwrite] %>
-		<div class="span-18 last">	
-	    	<br>	
+		<div class="span-12 last">	
 		    <a name="export"></a>
-		    <h3>Import/Exporter des données</h3>
+		    <h3>Import/Export</h3>
 			<hr>
-	  		<table class="sample">
-				<tr>
-					<th style="color:black">Données associées à ce compte</th>
-					<th>Familles</th>
-					<th>Enfants</th>
-					<th>Factures</th>
-					<th>Paiements</th>
-				</tr>
-				<tr>
-					<td></td>
-					<td><b><%= Famille.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
-					<td><b><%= @enfants.count %></b></td>
-					<td><b><%= Facture.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td>
-					<td><b><%= Paiement.find(:all, :conditions => "mairie_id = #{@mairie.id}").size %></b></td> 
-				</tr>	 
-			</table>
 		  	<%= link_to "Importer données Familles et Enfants", :action => "import" %><br>
 		  	<% if session[:user_readwrite] %>	
 				 <%= link_to "Importer pointages", :controller => 'upload' %><br>

@@ -104,12 +104,11 @@
      	   <%= @famille.memo %>
      </fieldset>
      <% unless @famille.lastconnection.nil? %>
-        Dernière connexion: il y a <%= time_ago_in_words(@famille.lastconnection) %>
+        Dernière connexion au portail: il y a <%= time_ago_in_words(@famille.lastconnection) %>
      <% end %>
 </div>
 
 <div class="span-24 last">
-
 	  <b>Enfants & Prestations non facturées</b>
 	  <table class="sample">
 	    <tr>
@@ -128,22 +127,22 @@
 
 	    <% for enfant in @famille.enfants %>
 	      <tr class="<%= cycle('list-line-even','list-line-odd') %>">
-		<td><b><%=link_to enfant.prenom, enfant  %></b></td>
-		<td style="text-align:right"><%=h enfant.age %></td>
-		<td><%=h Classroom.find_by_id(enfant.classe).nom %></td>
-		<td><%=h Classroom.find_by_id(enfant.classe).referant %></td>
-		<% @prestas = enfant.prestations %>
+        		<td><b><%=link_to enfant.prenom, enfant  %></b></td>
+        		<td style="text-align:right"><%=h enfant.age %></td>
+        		<td><%=h Classroom.find_by_id(enfant.classe).nom %></td>
+        		<td><%=h Classroom.find_by_id(enfant.classe).referant %></td>
+        		<% @prestas = enfant.prestations %>
 
-		<td style="text-align:right"><%=h @prestas._repas.afacturer.count('id') %>       </td>
-		<td style="text-align:right"><%=h @prestas._garderieAM.afacturer.count('id') %>  </td>
-		<td style="text-align:right"><%=h @prestas._garderiePM.afacturer.count('id') %>  </td>
-		<td style="text-align:right"><%=h @prestas._centrePM.afacturer.count('id')   %>  </td>
-		<td style="text-align:right"><%=h @prestas._garderiePM.afacturer.count('id') %>  </td>
-		<td style="text-align:right"><%=h @prestas._etude.afacturer.count('id') %>       </td>
-		<% if session[:user_readwrite] %>
-		  <td><%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :id  => enfant.id, :year => Date.today.year %></td>
-		  <td><%= link_to "Automatique", :controller => 'prestations', :action => 'new', :enfant_id  => enfant.id %></td>
-		<% end %>
+        		<td style="text-align:right"><%=h @prestas._repas.afacturer.count('id') %>       </td>
+        		<td style="text-align:right"><%=h @prestas._garderieAM.afacturer.count('id') %>  </td>
+        		<td style="text-align:right"><%=h @prestas._garderiePM.afacturer.count('id') %>  </td>
+        		<td style="text-align:right"><%=h @prestas._centrePM.afacturer.count('id')   %>  </td>
+        		<td style="text-align:right"><%=h @prestas._garderiePM.afacturer.count('id') %>  </td>
+        		<td style="text-align:right"><%=h @prestas._etude.afacturer.count('id') %>       </td>
+        		<% if session[:user_readwrite] %>
+        		    <td><%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :id  => enfant.id, :year => Date.today.year %></td>
+        		    <td><%= link_to "Automatique", :controller => 'prestations', :action => 'new', :enfant_id  => enfant.id %></td>
+        		<% end %>
 	      </tr>
 	    <% end %>
 	  </table>

@@ -130,10 +130,19 @@ class AdminController < ApplicationController
     @users = @mairie.users.order('username')
     @classrooms = @mairie.classrooms.order('nom')
     @tarifs = @mairie.tarifs.order('memo')
-    @facture_chrono = @mairie.factureChronos
     @vacances = @mairie.vacances.order('debut')
-    @enfants = @mairie.enfants
   end
+
+  def change_acces_portail
+    logger.debug "[DEBUG] @portail = #{params[:ville][:portail]}" 
+    p = params[:ville][:portail]
+    v = Ville.find(session[:mairie])
+    if v.portail.to_s != p
+      v.update_attributes(portail:p)
+      flash[:notice] = "Accès modifié"
+    end  
+    redirect_to action:"setup"
+  end  
 
   def users_admin
 	  @users = User.find_all_by_mairie_id(session[:mairie], :order => "username")
