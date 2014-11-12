@@ -29,7 +29,7 @@
 				 <% @presta = Prestation.new %>
 			<% end %>	
 			<tr>
-			  <td><%= enfant.famille.nom %>
+			  <td><%= enfant.nomfamille %>
 			  <td><%= link_to enfant.prenom, enfant_path(enfant.id) %>
 
 			  <td><%= check_box_tag(:"#{enfant.id}RepasAM", params[:"#{enfant.id}RepasAM"], @presta ? (@presta.repas !="0") : false) %></td>

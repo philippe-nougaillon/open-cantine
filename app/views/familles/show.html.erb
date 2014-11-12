@@ -112,8 +112,8 @@
 	  <b>Enfants & Prestations non facturées</b>
 	  <table class="sample">
 	    <tr>
-	      <th>Prénom</th>
         <th>Nom</th>
+        <th>Prénom</th>
 	      <th>Age</th>
 	      <th>Classe</th>
 	      <th>Référant</th>
@@ -128,8 +128,8 @@
 
 	    <% for enfant in @famille.enfants %>
 	      <tr class="<%= cycle('list-line-even','list-line-odd') %>">
-        		<td><b><%=link_to enfant.prenom, enfant  %></b></td>
             <td><%= enfant.nomfamille %></td>
+            <td><b><%=link_to enfant.prenom, enfant  %></b></td>
         		<td style="text-align:right"><%=h enfant.age %></td>
         		<td><%=h Classroom.find_by_id(enfant.classe).nom %></td>
         		<td><%=h Classroom.find_by_id(enfant.classe).referant %></td>
