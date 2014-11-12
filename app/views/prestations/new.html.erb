@@ -16,7 +16,7 @@ Si l'option "Inscrire en période scolaire" est coché, les incriptions seront f
 
 Enfant(s) :
 <% for enfant in @enfants %>
-    <%= link_to "#{enfant.prenom} #{enfant.famille.nom}", enfant %>
+    <%= link_to "#{enfant.prenom} #{enfant.nomfamille} (#{enfant.famille.nom})", enfant %>
 <% end %>
 <br><br>
 

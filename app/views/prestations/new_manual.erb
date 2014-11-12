@@ -13,7 +13,7 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
 	:mois => @mois_up   , :year => @year_up, :famille_id => @famille_id, :id => 0 %>
 <%  else %>
 	<% unless session[:famille_id] %>
-    	<h3><%= link_to @enfant.prenom + " "+ @enfant.famille.nom, @enfant %></h3>
+    	<h3><%= link_to "#{@enfant.prenom} #{@enfant.nomfamille} (#{@enfant.famille.nom})", @enfant %></h3>
     <% else %>
     	<h3><%= @enfant.prenom + " "+ @enfant.famille.nom %>
 		<small> - <%= link_to "Retour au relevé de situation", "/moncompte/familleshow" %></small></h3>

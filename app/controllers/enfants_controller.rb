@@ -2,14 +2,22 @@
 
 class EnfantsController < ApplicationController
 
-  layout 'standard', :except => 'liste'
+  layout :determine_layout
 
   before_filter :check, :except => ['index', 'new', 'create', 'liste']
 
+  def determine_layout
+    if params[:action] == 'liste'
+      "printer"
+    else
+      "standard"
+    end
+  end
+
   def check
     enfant_id = Enfant.find(params[:id]).famille_id
-    unless Famille.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", enfant_id, session[:mairie]])
-       redirect_to :action => 'index'
+    unless Famille.find(:first, :conditions => [" id = ? AND mairie_id = ?", enfant_id, session[:mairie]])
+      redirect_to :action => 'index'
     end
   rescue
     redirect_to :action => 'index'
@@ -64,7 +72,7 @@ class EnfantsController < ApplicationController
   def new
     @enfant = Enfant.new
     @enfant.famille_id = params[:famille_id]
-
+    @enfant.nomfamille = Famille.find(params[:famille_id]).nom.upcase
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @enfant }
@@ -87,7 +95,7 @@ class EnfantsController < ApplicationController
             @enfant.age = Date.today.year - birthday.year
          end
         @enfant.save
-        flash[:notice] = 'Enfant ajouté'
+        flash[:notice] = 'Fiche enfant ajoutée'
         format.html { redirect_to :controller => 'familles', :id => @enfant.famille_id, :action => 'show' }
         format.xml  { render :xml => @enfant, :status => :created, :location => @enfant }
       else
@@ -109,7 +117,7 @@ class EnfantsController < ApplicationController
             @enfant.age = Date.today.year - birthday.year
         end
         @enfant.save
-        flash[:notice] = 'Enfant modifié'
+        flash[:notice] = 'Fiche enfant modifiée'
         format.html { redirect_to(@enfant) }
         format.xml  { head :ok }
       else

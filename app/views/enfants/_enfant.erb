@@ -6,7 +6,14 @@
   <tr>
     <td id="label"><%= f.label :famille_id %></td>
     <td><b><%= Famille.find(@enfant.famille_id).nom.upcase %></b></td>
-	<%= f.hidden_field :famille_id %>
+	  <%= f.hidden_field :famille_id %>
+  </tr>
+   <tr>
+    <td id="label">
+      <%= f.label 'nom de famille' %>
+    </td><td>
+      <%= f.text_field :nomfamille %>
+    </td>
   </tr>
   <tr>
     <td id="label">
@@ -44,7 +51,7 @@
   <tr>
     <td id="label"><%= f.label :tarif_id %> </td>
     <td><%= select("enfant", "tarif_id", Tarif.find(:all, :conditions => ["mairie_id = ?",session[:mairie]], :order => 'memo').collect {|p| ["#{p.memo}", p.id ] }, { :include_blank => true }) %>
-      <small>Si aucun tarif n'est choisi ici, c'est celui choisi pour la famille qui sera pris en compte.</small>
+      <small>Si aucun tarif n'est choisi, c'est celui de la famille qui sera pris en compte</small>
     </td>
   </tr>
   <tr>

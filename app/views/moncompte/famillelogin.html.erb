@@ -1,4 +1,4 @@
-<h3>Gestion et facturation des prestations de cantine et périscolaires</h3>
+<h3>Gestion des prestations de cantine et périscolaires</h3>
 
 <% if iphone_user_agent? %>
   <br>Utilisateurs d'iPhone, veuillez vous connecter 
@@ -7,14 +7,12 @@
 
 <h4>
 Vous souhaitez connaitre la situation de votre compte, voir vos inscriptions ou effectuer un versement ? <br>
-Vous êtes au bon endroit.<br><br>
-Veuillez entrer votre email et mot de passe pour vous connecter.<br>
+Vous êtes au bon endroit. Entrez votre email et mot de passe pour continuer.<br>
 </h4>
 
 <% if session[:famille_id].nil? %>
   <div class="span-9 last">
 	  <fieldset>
-  	  <legend>Connexion</legend> 
       <%= form_tag :action => "famillelogin"  do %>
         <label for="username">Adresse email</label><br>
         <%= text_field_tag("email", params[:email] ,:size => 25) %><br>

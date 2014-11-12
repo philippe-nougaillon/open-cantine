@@ -1,12 +1,22 @@
 <table> 
+  <thead>
+  	<th>Classe</th>
+  	<th>Nom</th>
+  	<th>Prénom</th>
+  	<th>Famille</th>
+  	<th>Date naissance</th>
+  	<th>Code-barres</th>
+  </thead>	
   <% for e in @enfants %>  
     <tr>
       <td><small><%= Classroom.find(e.classe).nom %></small></td>
-      <td><b><%= e.famille.nom %></b> <%= e.prenom %></td>	
+      <td><b><%= e.nomfamille %></b></td>
+      <td><b><%= e.prenom %></b></td>
+      <td><%= e.famille.nom %></td>
+      <td><%= e.dateNaissance %></td>
       <td>			
           <%=image_tag ("http://www.barcodesinc.com/generator/image.php?code=#{e.id}&style=197&type=C39&width=150&height=50&xres=1&font=3") %>
       </td>
     </tr>
-
   <% end %>
 </table>
