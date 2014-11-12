@@ -15,7 +15,8 @@ class MoncompteController < ApplicationController
       return if params[:email].blank?
 
       @famille = Famille.where(email:params[:email]).first
-      if @famille
+      @ville = @famille.mairie
+      if @famille and @ville.portail > 0
         if @famille.password == params[:password]
           flash[:notice] = "Dernière connection le #{@famille.lastconnection.to_s(:fr)}" if @famille.lastconnection
           @famille.update_attributes(lastconnection:Time.now)
@@ -25,7 +26,7 @@ class MoncompteController < ApplicationController
           flash[:warning] = 'Mot de passe incorrect'
         end
       else
-        flash[:warning] = 'Adresse email inconnue, veuillez contacter le service périscolaire'
+        flash[:warning] = 'Accès non autorisé, veuillez contacter le service périscolaire'
       end
     else
       redirect_to :action => "familleshow" if session[:famille_id]
@@ -88,6 +89,7 @@ class MoncompteController < ApplicationController
   def familleshow
     @images = ["","yes.png","no.jpeg","orange.jpeg","cancel.jpeg","yes.png","yes.png","yes.png"]
     @famille = Famille.find(session[:famille_id])
+    @ville = @famille.mairie
     releve = []
 
     for f in @famille.factures
