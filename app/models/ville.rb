@@ -4,8 +4,8 @@ class Ville < ActiveRecord::Base
 
   	attr_protected :id
 
-	validates_presence_of :nom, :email, :message => " requis !"
-	validates_uniqueness_of :email, :message => " déjà utilisée par un compte openCantine..."
+	validates_presence_of :nom, :email, :message => "est requis..."
+	validates_uniqueness_of :email, :message => "est déjà utilisé..."
 	validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i , :message => " non valide..."
 
 	has_many :users, 	:foreign_key => "mairie_id",  :dependent => :destroy

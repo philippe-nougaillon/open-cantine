@@ -1,11 +1,22 @@
-Bonjour,
-<br>
-<br>
-Un compte <b><%= @email %></b> a bien été créé.
-<br><br>
-Utilisez votre <b>email comme identifiant ET mot de passe</b>, vous pourrez ensuite modifier votre mot de passe à tout moment.
-<br><br>
-Cordialement,
-<br><br>
-philippe.nougaillon@gmail.com
+# encoding: utf-8
+
+<!DOCTYPE html>
+<html>
+  	<head>
+    	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  	</head>
+  	<body>
+
+		<br>
+		<h1>Bienvenue sur opencantine.net</h1>
+		Bonjour,
+		<br>
+		Votre compte est ouvert.
+		<br>
+		Votre nom d'utilisateur est <b><%= @user.username %></b> et le mot de passe est '<b><%= @password %></b>', mais vous pourrez le modifier plus tard.
+		<br><br>
+		Pour vous connecter, rendez-vous sur <%= link_to "openCantine.net", "http://demonstration.opencantine.net" %>	
+		<br><br>
+	</body>
+</html>
 

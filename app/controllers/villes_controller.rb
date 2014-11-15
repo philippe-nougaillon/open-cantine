@@ -29,7 +29,8 @@ class VillesController < ApplicationController
 		u = User.new
 		u.mairie_id = @ville.id
 		u.username = @ville.email
-		u.password = @ville.email
+		password = random_password()
+		u.password = password
 		u.lastconnection = Time.now
 		u.lastchange = Time.now
 		u.readwrite = true
@@ -91,7 +92,7 @@ class VillesController < ApplicationController
 		pr.save
 
 		# envoyer un mail au nouvel utilisateur
-		UserMailer.send_info(@ville.email).deliver
+		UserMailer.send_info(u, password).deliver
 
 		#ouverture de la session
 		session[:user] = u.id
@@ -130,5 +131,13 @@ class VillesController < ApplicationController
       end
     end
   end
+
+  private
+ 
+	  def random_password(size = 5)
+	    chars = (('A'..'Z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
+	    (1..size).collect{|a| chars[rand(chars.size)] }.join
+	  end
+	 
 
 end

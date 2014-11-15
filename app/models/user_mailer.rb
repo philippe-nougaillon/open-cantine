@@ -24,9 +24,10 @@ class UserMailer < ActionMailer::Base
 	   mail(subject:"#{username} s'est connecté depuis : #{ip}", to:"philippe.nougaillon@gmail.com" )
   end
 
-  def send_info(email)
-	   @email = email
-	   mail(subject:"Vos identifiants de connexion", to:@email) 
+  def send_info(user, password)
+	   @user = user
+     @password = password
+	   mail(subject:"Vos identifiants openCantine", to:@user.username) 
   end
 
 end
