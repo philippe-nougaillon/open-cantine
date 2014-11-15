@@ -13,16 +13,18 @@ class VillesController < ApplicationController
 
   # POST /villes
   def nouveau_compte_create
-    @ville = Ville.new(params[:ville])
+
+  	@ville = Ville.new(params[:ville])
     @ville.FacturationModuleName = "01-Standard.rb"
-    @ville.newsletter = true
-	
+    @ville.newsletter = false
+
 	if params[:antispam] != "26"
-		flash[:warning] = 'Mauvaise réponse à la question anti-spam. Veuillez entrer une autre réponse'
+		flash[:warning] = 'Oups !?! Un peu de concentration, svp...'
 		render :action => "nouveau_compte"
 		return
 	end
 
+  
     if @ville.save
 		u = User.new
 		u.mairie_id = @ville.id
@@ -54,19 +56,19 @@ class VillesController < ApplicationController
 		vacance = Vacance.new
 		vacance.mairie_id = @ville.id
 		vacance.nom = "NOEL"
-		vacance.debut = "20.12.2012"
-		vacance.fin = "03.01.2013"
+		vacance.debut = "20.12.2014"
+		vacance.fin = "03.01.2015"
 		vacance.save
 
 		classe = Classroom.new
 		classe.mairie_id = @ville.id
 		classe.nom = "CP"
-		classe.referant = "La maîtresse"
+		classe.referant = "La maîtresse du CP"
 		classe.save
 
 		famille = Famille.new
 		famille.mairie_id = @ville.id
-		famille.nom = "Famille TEST"
+		famille.nom = "Famille de TEST"
 		famille.adresse = "1, rue des petits champs"
 		famille.cp = "93220"
 		famille.ville = "GAGNY"
@@ -75,6 +77,7 @@ class VillesController < ApplicationController
 
 		e = Enfant.new
 		e.famille_id = famille.id
+		e.nomfamille = famille.nom
 		e.prenom = "Nicolas"
 		e.dateNaissance = "01/01/2003"
 		e.age = 7
