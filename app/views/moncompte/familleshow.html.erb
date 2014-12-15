@@ -1,5 +1,4 @@
-<h2>Famille <%= @famille.nom %></h2> 
-<h3>Relevé de situation</h3>
+<h2>Relevé de situation: <%= @famille.nom %></h2> 
 <% unless params[:all] %>
   Liste des 5 derniers mouvements. <%= link_to "Afficher tout", action:"familleshow", all:1 %>
 <% else %>
@@ -40,11 +39,11 @@
   </tr>
 </table>
 <br />
-<h3>Inscriptions</h3>
+<h2>Inscriptions</h2>
 Liste des inscriptions en cours et non facturées
 <hr>
 <% for e in @famille.enfants %>
-   <h3><%= e.prenom %></h3> 
+   <h3>Enfant: <%= e.prenom %></h3> 
 	 <table class="sample">
       <tr>
         <th>Date</th>
@@ -58,7 +57,7 @@ Liste des inscriptions en cours et non facturées
       </tr>
    	  <% for p in e.prestations.afacturer %>
         <tr>
-          <td><%=h format_date(p.date) %></td>
+          <td><%= h format_date(p.date) %></td>
           <td><%= p.enfant.prenom %></td>
           <td class="center"><%= image_tag @images[p.repas.to_i] if p.repas != '0' %></td>
           <td class="center"><%= image_tag @images[p.garderieAM.to_i] if p.garderieAM != '0' %></td>
@@ -70,8 +69,9 @@ Liste des inscriptions en cours et non facturées
 	    <% end %>
 	</table>
   <% if @ville.portail == 2 %>
-      <%= link_to "Modifier les inscriptions", controller:'prestations', action:'new_manual', id:e.id, mois:Date.today.month, year:Date.today.year %>
+      <%= link_to "Modifier les inscriptions de #{e.prenom}", controller:'prestations', action:'new_manual', id:e.id, mois:Date.today.month, year:Date.today.year %>
   <% end %>
+  <br><br>
 <% end %>
 <br>
 <br>

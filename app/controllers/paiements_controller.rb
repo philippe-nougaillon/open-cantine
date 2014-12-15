@@ -127,6 +127,7 @@ class PaiementsController < ApplicationController
     end		
 
     respond_to do |format|
+      @paiement.log_changes(0, session[:user])
       if @paiement.save
         flash[:notice] = 'Paiement ajouté.'
         format.html { redirect_to :controller => 'familles', :action => 'show', :id => @paiement.famille_id }
@@ -143,9 +144,11 @@ class PaiementsController < ApplicationController
   def update
     @paiement = Paiement.find(params[:id])
     @factures = Facture.find(:all, :conditions =>  ["mairie_id = ?", session[:mairie]])
+    @paiement.attributes = params[:paiement]
+    @paiement.log_changes(1, session[:user])
 
     respond_to do |format|
-      if @paiement.update_attributes(params[:paiement])
+      if @paiement.save(validate:false)
         flash[:notice] = 'Paiement modifié.'
         format.html { redirect_to :action => 'index' }
         format.xml  { head :ok }
@@ -160,6 +163,7 @@ class PaiementsController < ApplicationController
   # DELETE /paiements/1.xml
   def destroy
     @paiement = Paiement.find(params[:id])
+    @paiement.log_changes(2, session[:user])
     @paiement.destroy
 
     respond_to do |format|

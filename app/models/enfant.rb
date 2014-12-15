@@ -1,5 +1,8 @@
-class Enfant < ActiveRecord::Base
+require 'concerns/logmodule.rb'
 
+class Enfant < ActiveRecord::Base
+  include LogModule
+  
   attr_protected :id
 
   belongs_to :famille

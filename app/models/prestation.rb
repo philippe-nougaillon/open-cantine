@@ -1,4 +1,8 @@
+# encoding: utf-8
+require 'concerns/logmodule.rb'
+
 class Prestation < ActiveRecord::Base
+  include LogModule
 
   attr_protected :id
 
@@ -10,7 +14,6 @@ class Prestation < ActiveRecord::Base
 
   scope :afacturer,   :conditions => "facture_id is null", :order => 'date'
   scope :facturees,   :conditions => "facture_id is not null", :order => 'date'
-
   scope :_repas,       :conditions => "repas = '1'"
   scope :_garderieAM,  :conditions => "garderieAM = '1'"
   scope :_garderiePM,  :conditions => "garderiePM = '1'"

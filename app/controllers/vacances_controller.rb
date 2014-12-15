@@ -56,7 +56,7 @@ class VacancesController < ApplicationController
   def create
     @vacance = Vacance.new(params[:vacance])
     @vacance.mairie_id = session[:mairie]
-
+    @vacance.log_changes(0, session[:user])
 
     respond_to do |format|
       if @vacance.save
@@ -74,9 +74,11 @@ class VacancesController < ApplicationController
   # PUT /vacances/1.xml
   def update
     @vacance = Vacance.find(params[:id])
+    @vacance.attributes = params[:vacance]
+    @vacance.log_changes(1, session[:user])
 
     respond_to do |format|
-      if @vacance.update_attributes(params[:vacance])
+      if @vacance.save(validate:false)
         #flash[:notice] = 'Vacance was successfully updated.'
         format.html { redirect_to(vacances_url) }
         format.xml  { head :ok }
@@ -91,6 +93,7 @@ class VacancesController < ApplicationController
   # DELETE /vacances/1.xml
   def destroy
     @vacance = Vacance.find(params[:id])
+    @vacance.log_changes(3, session[:user])
     @vacance.destroy
 
     respond_to do |format|

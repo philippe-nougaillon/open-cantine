@@ -1,6 +1,9 @@
 # encoding: utf-8
 
+require 'concerns/logmodule.rb'
+
 class Ville < ActiveRecord::Base
+ 	include LogModule
 
   	attr_protected :id
 
@@ -17,6 +20,7 @@ class Ville < ActiveRecord::Base
 	has_many :factureChronos, :foreign_key => "mairie_id",  :dependent => :destroy
 	has_many :paiements, 	:foreign_key => "mairie_id",  :dependent => :destroy
 	has_many :enfants, :foreign_key => "mairie_id", through: :familles
+	has_many :logs, through: :users
 
 	def readable_tel
     	tel.gsub /\d\d(?=\d)/, '\\0 '

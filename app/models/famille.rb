@@ -1,4 +1,7 @@
+require 'concerns/logmodule.rb'
+
 class Famille < ActiveRecord::Base
+  include LogModule
 
   attr_protected :id
 

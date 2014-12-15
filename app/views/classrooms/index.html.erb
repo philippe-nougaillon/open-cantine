@@ -7,8 +7,6 @@
     <th>Nom</th>
     <th>Référant</th>
     <th>Elèves</th>
-    <th></th>
-    <th></th>
   </tr>
 
   <% for classroom in @classrooms %>
@@ -16,7 +14,7 @@
       <td><b><%=h classroom.nom %></b></td>
       <td><%=h classroom.referant %></td>
       <td><%= Enfant.count(:conditions => ["classe = ?", classroom.id]) %> </td>
-      <td><%= link_to 'Modifier', edit_classroom_path(classroom) %></td>
+      <td><%= link_to image_tag('modif.png', size:"15x15"), edit_classroom_path(classroom) %></td>
     </tr>
   <% end %>
 </table>

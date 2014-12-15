@@ -13,7 +13,6 @@ class VillesController < ApplicationController
 
   # POST /villes
   def nouveau_compte_create
-
   	@ville = Ville.new(params[:ville])
     @ville.FacturationModuleName = "01-Standard.rb"
     @ville.newsletter = false
@@ -23,7 +22,6 @@ class VillesController < ApplicationController
 		render :action => "nouveau_compte"
 		return
 	end
-
   
     if @ville.save
 		u = User.new
@@ -119,9 +117,11 @@ class VillesController < ApplicationController
   # PUT /villes/1.xml
   def update
     @ville = Ville.find(session[:mairie])
+    @ville.attributes = params[:ville]
+    @ville.log_changes(1, session[:user])
 
     respond_to do |format|
-      if @ville.update_attributes(params[:ville])
+      if @ville.save(validate:false)
         flash[:notice] = 'Modifications validées'
         format.html { redirect_to(:controller => 'admin', :action => 'setup') }
         format.xml  { head :ok }
@@ -133,11 +133,8 @@ class VillesController < ApplicationController
   end
 
   private
- 
-	  def random_password(size = 5)
-	    chars = (('A'..'Z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
-	    (1..size).collect{|a| chars[rand(chars.size)] }.join
-	  end
-	 
-
+ 	def random_password(size = 5)
+    	chars = (('A'..'Z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
+    	(1..size).collect{|a| chars[rand(chars.size)] }.join
+  	end
 end

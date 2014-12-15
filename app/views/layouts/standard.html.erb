@@ -34,19 +34,20 @@
 		<div id="login" class="span-24 last">
 		    <% unless user_id.nil? %>
 		         <%= link_to user.username, :controller => 'admin', :action => 'user_edit' %>
+		        | <%= link_to "Journal", :controller => 'logs' %>
 				| <%= link_to "Paramètres", :controller => 'admin', :action => 'setup' %>
 		        | <%= link_to "Aide", :controller => 'admin', :action => 'bienvenue' %>
-		        | <%= link_to "Participer", :controller => 'todos' %>
 		        | <%= link_to "Déconnexion", {:controller => 'admin', :action => 'signout', :id => 0 } %>
 		    <% end %>
 		</div>
 
 		<div id="title" class="span-10">
-	           <%= image_tag 'playground.png' %>
-	           <%= image_tag 'diner.png' %>
-	           <%= image_tag 'picnic.png' %><br>
-	           <%= link_to 'openCantine', familles_path %>
+           <%= image_tag 'playground.png' %>
+           <%= image_tag 'diner.png' %>
+           <%= image_tag 'picnic.png' %><br>
+           <%= link_to 'openCantine', familles_path %>
 		</div>
+
 		<div>
 			<br><br>
 			<h3><%= link_to Ville.find(session[:mairie]).nom, familles_path unless user_id.nil? %></h3>	

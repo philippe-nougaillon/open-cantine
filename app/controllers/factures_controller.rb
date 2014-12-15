@@ -78,6 +78,7 @@ class FacturesController < ApplicationController
       
   	UserMailer.send_invoice(@mairie, @famille, @facture).deliver
     @facture.envoyee = Time.now
+    @facture.log_changes(1, session[:user])
   	@facture.save
   	flash[:notice] = "Facture #{@facture.ref} #{@famille.nom} envoyée."
   	redirect_to factures_path
@@ -86,8 +87,7 @@ class FacturesController < ApplicationController
   # GET /factures/1/edit
   def edit
     @facture = Facture.find(params[:id])
-    @paiements = Paiement.find(:all, :order => 'id DESC', 
-	:conditions =>  ["famille_id = ? AND mairie_id = ?", @facture.famille_id, session[:mairie]])
+    @paiements = Paiement.find(:all, order:'id DESC', conditions:["famille_id = ? AND mairie_id = ?", @facture.famille_id, session[:mairie]])
   end
 
   # GET /factures/new
@@ -162,9 +162,11 @@ class FacturesController < ApplicationController
   # PUT /factures/1.xml
   def update
     @facture = Facture.find(params[:id])
+    @facture.attributes = params[:facture] 
+    @facture.log_changes(1, session[:user])
 
     respond_to do |format|
-      if @facture.update_attributes(params[:facture])
+      if @facture.save(validate:false)
         flash[:notice] = 'Facture modifée...'
         format.html { redirect_to(factures_url) }
         format.xml  { head :ok }
@@ -179,6 +181,7 @@ class FacturesController < ApplicationController
   # DELETE /factures/1.xml
   def destroy
     @facture = Facture.find(params[:id])
+    @enfant.log_changes(2, session[:user])
     @facture.facture_lignes.delete_all
     result = Prestation.update_all("facture_id = null", ["facture_id = ?", @facture.id])
     @facture.destroy   
@@ -439,17 +442,18 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
 	    @facture.total_garderie = total_garderie
 	    @facture.total_centre = total_centre
 	    @facture.total_etude = total_etude 
+      @facture.log_changes(0, session[:user])
       @facture.save
 
-       # incrémente le N° de facture
-       @prochain = FactureChrono.find(:first, :conditions => ["mairie_id = ?", mairie_id])
-       @prochain.prochain = @prochain.prochain + 1
-       @prochain.save
+      # incrémente le N° de facture
+      @prochain = FactureChrono.find(:first, :conditions => ["mairie_id = ?", mairie_id])
+      @prochain.prochain = @prochain.prochain + 1
+      @prochain.save
 
-       return @facture.id
+      return @facture.id
     else
-       @facture.destroy
-       return nil
+      @facture.destroy
+      return nil
     end
 
 end

@@ -86,6 +86,7 @@ class FamillesController < ApplicationController
   def create
     @famille = Famille.new(params[:famille])
     @famille.mairie_id = session[:mairie]
+    @famille.log_changes(0, session[:user])
 
     respond_to do |format|
       if @famille.save
@@ -103,9 +104,11 @@ class FamillesController < ApplicationController
   # PUT /familles/1.xml
   def update
     @famille = Famille.find(params[:id])
+    @famille.attributes = params[:famille]
+    @famille.log_changes(1, session[:user])
 
     respond_to do |format|
-      if @famille.update_attributes(params[:famille])
+      if @famille.save(validate:false)
         flash[:notice] = 'Famille modifiée'
 
         format.html { redirect_to(@famille) }
@@ -121,6 +124,7 @@ class FamillesController < ApplicationController
   # DELETE /familles/1.xml
   def destroy
     @famille = Famille.find(params[:id])
+    @famille.log_changes(2, session[:user])
     @famille.destroy
 
     respond_to do |format|
@@ -151,19 +155,19 @@ class FamillesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @releve }
-	  format.pdf do
- 		pdf = RelevePdf.new(session[:mairie], @famille, @releve, view_context)
-        send_data pdf.render, :type => "application/pdf", 
-				:filename => "Relevé famille '#{@famille.nom}' au #{Date.today.strftime("%d/%m/%Y")}.pdf"
+  	  format.pdf do
+   		    pdf = RelevePdf.new(session[:mairie], @famille, @releve, view_context)
+          send_data pdf.render, :type => "application/pdf", 
+  				  :filename => "Relevé famille '#{@famille.nom}' au #{Date.today.strftime("%d/%m/%Y")}.pdf"
       end   
     end
   end
 
   def listing
-	@familles = Famille.find_all_by_mairie_id(session[:mairie], :order => "nom")
-	respond_to do |format|
+	  @familles = Famille.find_all_by_mairie_id(session[:mairie], :order => "nom")
+	  respond_to do |format|
 	      format.html 
-      	  format.xml  { render :xml => @familles }
+      	format.xml  { render :xml => @familles }
     end
   end
 

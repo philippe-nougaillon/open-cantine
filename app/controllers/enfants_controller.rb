@@ -88,13 +88,16 @@ class EnfantsController < ApplicationController
   # POST /enfants.xml
   def create
     @enfant = Enfant.new(params[:enfant])
+    @enfant.log_changes(0, session[:user])
+
     respond_to do |format|
       if @enfant.save
-         if @enfant.dateNaissance
+        if @enfant.dateNaissance
             birthday = @enfant.dateNaissance.to_date
             @enfant.age = Date.today.year - birthday.year
-         end
-        @enfant.save
+            @enfant.log_changes(1, session[:user])
+            @enfant.save
+        end
         flash[:notice] = 'Fiche enfant ajoutée'
         format.html { redirect_to :controller => 'familles', :id => @enfant.famille_id, :action => 'show' }
         format.xml  { render :xml => @enfant, :status => :created, :location => @enfant }
@@ -109,14 +112,17 @@ class EnfantsController < ApplicationController
   # PUT /enfants/1.xml
   def update
     @enfant = Enfant.find(params[:id])
-
+    @enfant.attributes = params[:enfant]
+    @enfant.log_changes(1, session[:user])
+    
     respond_to do |format|
-      if @enfant.update_attributes(params[:enfant])
+      if @enfant.save(validate:false)
         if @enfant.dateNaissance
             birthday = @enfant.dateNaissance.to_date
             @enfant.age = Date.today.year - birthday.year
+            @enfant.log_changes(1, session[:user])
+            @enfant.save
         end
-        @enfant.save
         flash[:notice] = 'Fiche enfant modifiée'
         format.html { redirect_to(@enfant) }
         format.xml  { head :ok }
@@ -132,6 +138,7 @@ class EnfantsController < ApplicationController
   def destroy
     @enfant = Enfant.find(params[:id])
     famille_id = @enfant.famille_id
+    @enfant.log_changes(2, session[:user])
     @enfant.destroy
 
     respond_to do |format|

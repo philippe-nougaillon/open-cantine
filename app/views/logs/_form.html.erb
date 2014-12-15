@@ -1,0 +1,15 @@
+<%= simple_form_for(@log) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :date %>
+    <%= f.input :qui %>
+    <%= f.input :action %>
+    <%= f.input :quoi %>
+    <%= f.input :msg %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

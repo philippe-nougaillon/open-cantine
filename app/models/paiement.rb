@@ -1,5 +1,8 @@
-class Paiement < ActiveRecord::Base
+require 'concerns/logmodule.rb'
 
+class Paiement < ActiveRecord::Base
+  include LogModule
+  
   attr_protected :id
 
   belongs_to :famille

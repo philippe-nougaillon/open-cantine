@@ -1,8 +1,10 @@
 <h3>Paramètres</h3>
 <div class="span-17 last">	
-		| <%= link_to "Classes", "#classes" %> |
+		| 
+		<%= link_to image_tag("school.png", size:"15x15"), "/familles" %> |
+		<%= link_to "Classes", "#classes" %> |
 		<%= link_to "Tarifs", "#tarifs" %> |
-		<%= link_to "Formules", "#formules" %> |
+		<%= link_to "Formules de facturation", "#formules" %> |
 		<%= link_to "Vacances", "#vacances" %> |
 		<%= link_to "Utilisateurs", "#utilisateurs" %> |
 		<%= link_to "Import/Export", "#export" %> |
@@ -42,7 +44,7 @@
 	      </tr>
 		  <tr>
 			<td>Logo</td>
-			<td><%= image_tag(@mairie.logo_url, size:'50x50') %></td>
+			<td><%= link_to image_tag(@mairie.logo_url,  width:'100', alt:'Pas de logo'), @mairie.logo_url, target:"_blank" unless @mairie.logo_url.blank? %></td>
 	     </tr>
 	    </table>
     </div>
@@ -61,7 +63,7 @@
 			<%= f.radio_button :portail, 2 %> Accès en écriture (inscriptions aux prestations à J+1) <br><br>
 			<%= f.submit "Modifier" %>
 		<% end %>
-		<br><br><br><br><br>
+		<br><br><br><br><br><br><br>
 	</div>	
 
     <div class="span-12 last">	
@@ -119,7 +121,6 @@
 	    	<%= link_to image_tag('modif.png', size:"15x15"), tarifs_path if session[:user_readwrite] %> 
 	    </h3>
 		<hr>
-		<small>Ces tarifs pourront être attribués aux familles ou aux enfants pour leur appliquer un tarif particulier.</small>
 	    <table class="sample">
 	     <tr>
 			<th>Nom</th>
@@ -144,30 +145,33 @@
 			</tr>
 	      <% end %>
 	    </table>
+		<small>Ces tarifs doivent être attribués aux familles ou à chaque enfant d'une famille si vous souhaitez appliquer un tarif différent par enfant.</small>
+		<br><br>
     </div>
 
 	<div class="span-24 last">
     	<br>	
       	<a name="formules"></a>
-      	<h3>Facturation
+      	<h3>Formules de facturation
 		 	<%= link_to image_tag('modif.png', size:"15x15"), edit_ville_path(@mairie.id) if session[:user_readwrite] %>
       	</h3>
 	  	<hr>
-      	<small>Choisissez comment seront calculées vos factures. Si vous souhaitez un mode de facturation plus personnalisé, <a href="mailto:philippe.nougaillon@gmail.com">contactez-moi</a>. </small>
       	<table class="sample">
          	<tr>
-	    		<th>Nom</th>
-            	<th>Description du mode de facturation</th>
+	    		<th>Nom de la formule</th>
+            	<th>Description</th>
             	<th>Actif?</th>
          	</tr>
          	<% for f in Formule.all %>
 	  	   		<tr  class="<%= cycle('list-line-even','list-line-odd')%>">
 		         	<td><%= f.nom  %></td>
 		         	<td><%= f.memo %></td>
-			 		<td><%= image_tag "ok.jpeg" if (@mairie.FacturationModuleName == f.module_name) %></td>
+			 		<td style="text-align:center;"><%= image_tag "yes.png" if (@mairie.FacturationModuleName == f.module_name) %></td>
            		</tr>	 
          	<% end %>
       	</table>
+      	<small>Choisissez comment seront calculées vos factures. Si vous souhaitez le développement d'un mode de facturation personnalisé, <a href="mailto:philippe.nougaillon@gmail.com">contactez-moi</a>. </small>
+      	<br><br>
     </div>
 
     <div class="span-12">	
@@ -177,7 +181,6 @@
 			<%= link_to image_tag('modif.png', size:"15x15"), :action => "users_admin" if session[:user_readwrite] %>
 		</h3>
 		<hr>
-		<small>Plusieurs utilisateurs peuvent travailler simultanément sur un compte openCantine et lire et/ou modifier les données.</small>
 		<table class="sample">
 	      	<tr>
 				<th />
@@ -194,6 +197,8 @@
 				</tr>
        	   <% end -%>
 	    </table>
+		<small>Plusieurs utilisateurs peuvent travailler simultanément sur un compte openCantine et lire et/ou modifier les données.</small>
+
 	</div>
 
 	<div class="span-1"><br></div>	

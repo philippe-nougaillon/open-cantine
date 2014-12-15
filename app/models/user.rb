@@ -1,10 +1,14 @@
 #require "digest/sha2"
+require 'concerns/logmodule.rb'
 
 class User < ActiveRecord::Base
-
+  include LogModule
+  
   attr_protected :id
 
-  belongs_to :ville
+  belongs_to :ville, :foreign_key => "mairie_id"
+  has_many :logs
+
   validates_presence_of :username
   validates_uniqueness_of :username
 
@@ -23,13 +27,12 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate2(username, password)
-    user = User.find_by_username(username)
-	hash = Digest::SHA256.hexdigest(password + user.password_salt)
-    if user.blank? || hash != user.password_hash
+     user = User.find_by_username(username)
+	   hash = Digest::SHA256.hexdigest(password + user.password_salt)
+     if user.blank? || hash != user.password_hash
        return nil
-	end
-
-    user
+	   end
+     user
   end
 
 end

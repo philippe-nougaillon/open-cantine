@@ -54,6 +54,7 @@ class TarifsController < ApplicationController
   def create
     @tarif = Tarif.new(params[:tarif])
     @tarif.mairie_id = session[:mairie]
+    @tarif.log_changes(0, session[:user])
 
     respond_to do |format|
       if @tarif.save
@@ -71,9 +72,11 @@ class TarifsController < ApplicationController
   # PUT /tarifs/1.xml
   def update
     @tarif = Tarif.find(params[:id])
+    @tarif.attributes = params[:tarif]
+    @tarif.log_changes(1, session[:user])
 
     respond_to do |format|
-      if @tarif.update_attributes(params[:tarif])
+      if @tarif.save(validate:false)
         flash[:notice] = 'Tarifs modifiés.'
         format.html { redirect_to(tarifs_url) }
         format.xml  { head :ok }
@@ -88,6 +91,7 @@ class TarifsController < ApplicationController
   # DELETE /tarifs/1.xml
   def destroy
     @tarif = Tarif.find(params[:id])
+    @tarif.log_changes(2, session[:user])
     @tarif.destroy
 
     respond_to do |format|

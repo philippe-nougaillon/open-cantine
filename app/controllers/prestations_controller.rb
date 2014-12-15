@@ -161,11 +161,11 @@ class PrestationsController < ApplicationController
        mairie = Ville.find(session[:mairie])
        vacances = mairie.vacances 
 
-       logger.debug "[ DEBUG ] #{@enfants.count}"
+       #logger.debug "[ DEBUG ] #{@enfants.count}"
 
        @enfants.each do |enfant|
           start_date = @prestation_date.to_date
-          logger.debug "[ DEBUG ] #{enfant.prenom} : #{start_date}"
+          #logger.debug "[ DEBUG ] #{enfant.prenom} : #{start_date}"
 
           if (params[:toutlemois] or params[:toutelannee]) and (params[:lundi] or params[:mardi] or params[:mercredi] or params[:jeudi] or params[:vendredi])
       			  ndays = 5
@@ -175,12 +175,12 @@ class PrestationsController < ApplicationController
               date = start_date
               ndays.times do
                  wday = date.wday  
-                 logger.debug "[ DEBUG ] #{date} ndays = #{ndays}"
+                 #logger.debug "[ DEBUG ] #{date} ndays = #{ndays}"
                  if is_weekday?(date)
                     # passe au jour suivant si vacances mais "appliquer si vacances" pas coché
                     en_vacances = vacances.where("debut <= ? AND fin >= ?", date.to_s(:en), date.to_s(:en)).any?
                     if (params[:en_vacances] == 'non' and en_vacances) or (params[:en_vacances] == 'oui' and !en_vacances)
-                       logger.debug "[ DEBUG ] #{date} Vacances #{params[:en_vacances]} NEXT !"
+                       #logger.debug "[ DEBUG ] #{date} Vacances #{params[:en_vacances]} NEXT !"
                        date = date + 1.day
                        next
                     end
@@ -191,6 +191,7 @@ class PrestationsController < ApplicationController
                       @prestation.date = date
                       @prestation.totalP = 0.00
                       @prestation.totalA = 0.00
+                      @prestation.log_changes(0, session[:user])
         						  if @prestation.save
                          ajouts += 1
                       else 
@@ -224,9 +225,11 @@ class PrestationsController < ApplicationController
   # PUT /prestations/1.xml
   def update
     @prestation = Prestation.find(params[:id])
+    @prestation.attributes = params[:prestation]
+    @prestation.log_changes(1, session[:user])
 
     respond_to do |format|
-      if @prestation.update_attributes(params[:prestation])
+      if @prestation.save(validate:false)
         flash[:notice] = 'Prestation modifiée.'
         format.html { redirect_to :action => 'index'  }
         format.xml  { head :ok }
@@ -253,9 +256,11 @@ class PrestationsController < ApplicationController
   # PUT /prestations/1.xml
   def update_from_enfants
     @prestation = Prestation.find(params[:id])
+    @prestation.attributes = params[:prestation]
+    @prestation.log_changes(1, session[:user])
 
     respond_to do |format|
-      if @prestation.update_attributes(params[:prestation])
+      if @prestation.save(validate:false)
         flash[:notice] = 'Prestation modifiée.'
         format.html { redirect_to :controller => 'enfants', :id => @prestation.enfant_id, :action => "show" }
         format.xml  { head :ok }
@@ -270,6 +275,7 @@ class PrestationsController < ApplicationController
   # DELETE /prestations/1.xml
   def destroy
     @prestation = Prestation.find(params[:id])
+    @prestation.log_changes(2, session[:user])
     @prestation.destroy
 
     respond_to do |format|
@@ -304,9 +310,12 @@ class PrestationsController < ApplicationController
     }
 
     if session[:famille_id] # portail parent, TEST SI ENFANT DANS LA FAMILLE CONNECTEE
-      famille = Famille.find(session[:famille_id])
-      logger.debug "[DEBUG] Check: #{session[:famille_id]} #{famille.enfants.include?(@enfant)}"
-      unless famille.enfants.include?(@enfant)
+      @famille = Famille.find(session[:famille_id])
+      @enfant = Enfant.find(params[:id])
+
+      logger.debug "[DEBUG] Check: #{session[:famille_id]} #{@famille.enfants.include?(@enfant)}"
+
+      unless @famille.enfants.include?(@enfant)
         flash[:warning] = "Enfant non autorisé..."
         redirect_to "/moncompte"
         return
@@ -349,10 +358,10 @@ class PrestationsController < ApplicationController
     # test si l'utilisateur a décoché ?
     if session[:lastparams]
       supprimees = session[:lastparams] - params.keys
-      logger.debug "[DEBUG] suppr: #{supprimees}"
+      #logger.debug "[DEBUG] suppr: #{supprimees}"
     end
     session[:lastparams] = params.keys
-    logger.debug "[DEBUG] last params: #{session[:lastparams]}"
+    #logger.debug "[DEBUG] last params: #{session[:lastparams]}"
 
     if params[:famille_id]
        @famille_id = params[:famille_id]
@@ -372,9 +381,12 @@ class PrestationsController < ApplicationController
         if supprimees.any? 
            keys = supprimees.first.split(".")  
            d = Date.new(@year.to_i, @mois.to_i, keys.first.to_i)
+
            @p = Prestation.where(enfant_id:@enfant.id, date:d).first
-           @p.update_attributes(keys.last => '0')
-           logger.debug "[DEBUG] presta à suppr: #{@p.inspect}"  
+           @p[keys.last] = '0'
+           @p.log_changes(1, session[:user])
+           @p.save
+
            supprimees = []            
         end
            
@@ -403,6 +415,8 @@ class PrestationsController < ApplicationController
             @prestation.centrePM = '1' if params[:"#{day}.centrePM"]
             @prestation.etude = '1' if params[:etude] and ( date.wday != 3 and date.wday != 6 and date.wday != 0 and @vacances.empty?)
             @prestation.totalA = 0.00
+            @prestation.log_changes(0, session[:user])
+            #logger.info "[DEBUG] #{@prestation.changes}"  
             @prestation.save
 
             # calcul prestations type 1 ' Normale
@@ -413,7 +427,8 @@ class PrestationsController < ApplicationController
             total_prestations = nbr_prestation['MntRepas'] + nbr_prestation['MntGarderieAM'] + nbr_prestation['MntGarderiePM'] + nbr_prestation['MntCentreAM'] + nbr_prestation['MntCentrePM'] + nbr_prestation['MntCentreAMPM'] + nbr_prestation['Etude']
             @total = @total + total_prestations
             @prestation.totalP = total_prestations
-	          #@tarif = @prestation.tarif
+            #@tarif = @prestation.tarif
+
 
       		  @prestation.save
   	      end
@@ -458,9 +473,9 @@ class PrestationsController < ApplicationController
         d = key.split(".").first
         type = key.split(".").last
         date = Date.new(year.to_i, mois.to_i, d.to_i)
-        logger.debug "!!! DATE : #{date} Type: #{type}"
+        #logger.debug "!!! DATE : #{date} Type: #{type}"
         presta = Prestation.first_or_create(enfant_id:params[:enfant_id], date:date)
-        logger.debug "!!! Presta : #{presta.inspect}"
+        #logger.debug "!!! Presta : #{presta.inspect}"
       end  
     end
         
@@ -503,6 +518,7 @@ class PrestationsController < ApplicationController
   		  @prestation.garderiePM = params[:"#{e.id}GarderiePM"] ? '1' : '0'
   		  @prestation.centreAM = params[:"#{e.id}CentreAM"] ? '1' : '0'
   		  @prestation.centrePM = params[:"#{e.id}CentrePM"] ? '1' : '0'
+        @prestation.log_changes(0, session[:user])
   			@prestation.save
   		end
   	end

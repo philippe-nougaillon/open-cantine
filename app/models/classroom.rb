@@ -1,4 +1,8 @@
+# encoding: utf-8
+require 'concerns/logmodule.rb'
+
 class Classroom < ActiveRecord::Base
+	include LogModule
 
 	attr_protected :id
 

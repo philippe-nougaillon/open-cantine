@@ -54,6 +54,7 @@ class ClassroomsController < ApplicationController
   def create
     @classroom = Classroom.new(params[:classroom])
     @classroom.mairie_id = session[:mairie]
+    @classroom.log_changes(0, session[:user])
 
     respond_to do |format|
       if @classroom.save
@@ -71,9 +72,11 @@ class ClassroomsController < ApplicationController
   # PUT /classrooms/1.xml
   def update
     @classroom = Classroom.find(params[:id])
+    @classroom.attributes = params[:classroom]
+    @classroom.log_changes(1, session[:user])
 
     respond_to do |format|
-      if @classroom.update_attributes(params[:classroom])
+      if @classroom.save(validate:false)
         flash[:notice] = 'Classe modifiée.'
         format.html { redirect_to(classrooms_url) }
         format.xml  { head :ok }
@@ -88,6 +91,7 @@ class ClassroomsController < ApplicationController
   # DELETE /classrooms/1.xml
   def destroy
     @classroom = Classroom.find(params[:id])
+    @classroom.log_changes(2, session[:user])
     @classroom.destroy
 
     respond_to do |format|

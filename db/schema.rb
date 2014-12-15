@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141112103002) do
+ActiveRecord::Schema.define(:version => 20141215172311) do
 
   create_table "blogs", :force => true do |t|
     t.string   "titre"
@@ -140,6 +140,18 @@ ActiveRecord::Schema.define(:version => 20141112103002) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "logs", :force => true do |t|
+    t.string   "qui"
+    t.string   "quoi"
+    t.string   "msg"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.integer  "action_id"
+  end
+
+  add_index "logs", ["user_id"], :name => "index_logs_on_user_id"
 
   create_table "mairies", :force => true do |t|
     t.string   "nom"

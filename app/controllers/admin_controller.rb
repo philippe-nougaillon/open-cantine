@@ -55,18 +55,20 @@ class AdminController < ApplicationController
   
   def user_update
     @user = User.find(session[:user])
+    @user.attributes = params[:user]
+    @user.log_changes(1, session[:user])
     respond_to do |format|
-     if @user.update_attributes(params[:user]) and @user.mairie_id != 2
-        @user.lastchange = Time.now
-        @user.save
-        flash[:notice] = "Utilisateur modifié..."
-        format.html { redirect_to :action => "setup", :controller => "admin" }
-        format.xml  { head :ok }
-      else
-        flash[:warning] = 'Modification annulée. Peut être essayez-vous de changer le mot de passe du compte de démonstration ?'
-        format.html { render :action => "user_edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
+       if @user.save(validate:false) and @user.mairie_id != 2
+          @user.lastchange = Time.now
+          @user.save
+          flash[:notice] = "Utilisateur modifié..."
+          format.html { redirect_to :action => "setup", :controller => "admin" }
+          format.xml  { head :ok }
+        else
+          flash[:warning] = 'Modification annulée. Peut être essayez-vous de changer le mot de passe du compte de démonstration ?'
+          format.html { render :action => "user_edit" }
+          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        end
     end
   end
 
@@ -134,12 +136,14 @@ class AdminController < ApplicationController
   end
 
   def change_acces_portail
-    logger.debug "[DEBUG] @portail = #{params[:ville][:portail]}" 
+    #logger.debug "[DEBUG] @portail = #{params[:ville][:portail]}" 
     p = params[:ville][:portail]
     v = Ville.find(session[:mairie])
     if v.portail.to_s != p
-      v.update_attributes(portail:p)
-      flash[:notice] = "Accès modifié"
+      v.portail = p
+      v.log_changes(1, session[:user])
+      v.save(validate:false)
+      flash[:notice] = "Mode d'accès au portail parents modifié avec succès..."
     end  
     redirect_to action:"setup"
   end  
@@ -153,8 +157,9 @@ class AdminController < ApplicationController
 	  @user.username = params[:user][:username]
 	  @user.password = params[:user][:password]
     @user.mairie_id = session[:mairie]
-	  @user.lastconnection = Date.today
-	  @user.lastchange = Date.today
+	  @user.lastconnection = DateTime.now
+	  @user.lastchange = DateTime.now
+    @user.log_changes(0, session[:user])
 
     if @user.save
       flash[:notice] = "Utilisateur ajouté."
