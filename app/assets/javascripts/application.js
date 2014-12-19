@@ -13,11 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require autocomplete-rails
 //= require_tree .
 
-
-$.datepicker.regional['fr'] = {clearText: 'Effacer', clearStatus: '',
+$.datepicker.regional['fr'] = {
+    clearText: 'Effacer', clearStatus: '',
     closeText: 'Fermer', closeStatus: 'Fermer sans modifier',
     prevText: '< Précédent ', prevStatus: 'Voir le mois précédent',
     nextText: 'Suivant >', nextStatus: 'Voir le mois suivant',
@@ -34,13 +33,8 @@ $.datepicker.regional['fr'] = {clearText: 'Effacer', clearStatus: '',
     dayStatus: 'Utiliser DD comme premier jour de la semaine', dateStatus: 'Choisir le DD, MM d',
     dateFormat: 'dd.mm.yy', firstDay: 1, 
     initStatus: 'Choisir la date', isRTL: false};
+
  $.datepicker.setDefaults($.datepicker.regional['fr']);
 
 
-jQuery(function(){
-
-    jQuery('#prestation_date').datepicker();
-	jQuery('input.date_picker').datepicker();
-
-});
 

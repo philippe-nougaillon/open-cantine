@@ -1,7 +1,7 @@
-<div id="form_actions">
+  <div id="form_actions">
   <%= form_tag request.path, :method => 'get' do %>
     Nom :
-    <%= text_field_tag :search, params[:search] %>
+    <%= text_field_tag :search, params[:search], id: "navbar-search-input", class: 'form-control' %>
     Classe :
     <%= select_tag 'classe', options_for_select(@classes, params[:classe]) %>
     <%= submit_tag 'Rechercher' %>

@@ -2,16 +2,21 @@
 
 class FamillesController < ApplicationController
 
-  autocomplete :famille, :nom, :extra_data => [:cp, :ville]
+  #autocomplete :famille, :nom, :extra_data => [:cp, :ville]
   
   layout :determine_layout
 
-  before_filter :check, :except => ['index', 'new', 'create', 'balance', 'listing', 'autocomplete_famille_nom']
+  before_filter :check, :except => ['index', 'new', 'create', 'balance', 'listing', 'autocomplete']
 
-  def get_autocomplete_items(parameters)
-    super(parameters).where(:mairie_id => session[:mairie])
+  skip_before_filter :check_authentification, only: :autocomplete
+
+  def autocomplete
+    familles = Famille.order(:nom).where("nom LIKE ? and  mairie_id = ?", "%#{params[:term]}%", session[:mairie])
+    respond_to do |format|
+      format.html
+      format.json { render json: familles.map(&:nom) }
+    end
   end
-
 
   def determine_layout
     if params[:action] == 'listing'

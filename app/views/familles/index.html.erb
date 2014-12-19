@@ -2,7 +2,8 @@
 <div id="form_actions">
   <%= form_tag request.path, :method => 'get' do %>
       Nom :
-      <%= autocomplete_field_tag 'nom', '', autocomplete_famille_nom_familles_path, :size => 25, :id_element => '#famille_id' %>
+      <%= text_field_tag :nom, params[:nom], id: "navbar-search-input", class: 'form-control' %>
+
       <%= hidden_field_tag 'famille_id','' %>
       <%= submit_tag 'Rechercher'   %>
   

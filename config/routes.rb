@@ -58,6 +58,12 @@ OpenCantine3::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
+  controller :familles do
+    #get :autocomplete_famille_nom, :on => :collection
+    get 'familles/autocomplete'=> :autocomplete 
+  end
+
+  resources :familles
   resources :todos
   resources :blogs
   resources :vacances
@@ -73,10 +79,6 @@ OpenCantine3::Application.routes.draw do
   resources :users
   resources :upload
   
-  resources :familles  do
-     get :autocomplete_famille_nom, :on => :collection
-  end
-
   match 'admin' => 'admin#signin'
   match 'nouveau' => 'villes#nouveau_compte', :as => :nouveau
   match 'presence' => 'prestations#new_manual_classroom', :as => 'new_manual_classroom'

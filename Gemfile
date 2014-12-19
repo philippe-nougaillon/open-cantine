@@ -3,17 +3,23 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.7'
 
 gem 'will_paginate', '~> 3.0.0'
-gem 'jquery-rails'
-gem 'rails3-jquery-autocomplete'
 gem 'thin'
 gem 'simple_form'
-gem 'wicked_pdf'
-gem 'jquery_datepicker'
 gem 'mysql2'
 gem 'therubyracer'
 gem 'prawn'
 gem 'client_side_validations'
 gem "dynamic_sitemaps"
+
+gem 'wicked_pdf'
+
+#gem 'jquery-rails'
+#gem 'jquery_datepicker'
+#gem 'rails3-jquery-autocomplete'
+
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
