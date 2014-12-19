@@ -1,7 +1,7 @@
 <div id="form_actions">
 	<%= form_tag request.path, :method => 'get' do %>
 		Du:
-	  	<%= text_field_tag('prestation_date', params[:prestation_date], :size => 5) %>
+	  	<%= text_field_tag('prestation_date', params[:prestation_date], :size => 9, class: "date") %>
 
 		Période:
 		<%= radio_button_tag "periode", 'jour', (params[:periode] == 'jour') %> Jour

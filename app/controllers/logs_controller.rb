@@ -18,6 +18,12 @@ class LogsController < ApplicationController
       @logs = @logs.where("quoi like ? OR msg like ?", "%#{params[:search]}%", "%#{params[:search]}%")          
     end
 
+    unless params[:date].blank?
+      date = Date.parse(params[:date], "dd.mm.YYYY")
+
+      @logs = @logs.where("created_at like ?", "%#{date.to_s(:en)}%")
+    end
+
     @logs = @logs.paginate(page:params[:page]).order('created_at DESC')
 
     respond_to do |format|

@@ -2,17 +2,20 @@
 
 <div id="form_actions">
   <%= form_tag request.path, :method => 'get' do %>
-    Recherche:
+    Date:
+    <%= text_field_tag('date', params[:date], :size => 9, class: "date") %>
+    Quoi:
     <%= text_field_tag "search", params[:search] %>
+    Qui:
     <%= select_tag "user_id", options_from_collection_for_select(User.find(session[:user]).ville.users, 'id', 'username', params[:user_id]), :include_blank => true %>
-    <%= submit_tag 'Ok' %>
+    <%= submit_tag 'Rechercher' %>
   <% end %>
 </div>
 
 <div id="form_body">
     <table class="sample">
         <tr>
-            <th>Date</th>
+            <th>Le</th>
             <th>Il y a</th>
             <th>Qui</th>
             <th>Action</th>
@@ -20,14 +23,14 @@
             <th>Modifications (champ: valeur avant => valeur après)</th>
         </tr>
         <% @logs.each do |log| %>
-          <tr>
-            <td><%= log.created_at.to_s(:fr) %></td>
-            <td><%= time_ago_in_words(log.created_at) %></td>
-            <td><%= log.user.username %></td>
-            <td><%= log.action_name %></td>
-            <td><%= log.quoi %></td>
-            <td><%= log.msg %></td>
-          </tr>
+            <tr>
+                <td><%= log.created_at.to_s(:fr) %></td>
+                <td><%= time_ago_in_words(log.created_at) %></td>
+                <td><%= log.user.username %></td>
+                <td><%= log.action_name %></td>
+                <td><%= log.quoi %></td>
+                <td><%= log.msg %></td>
+            </tr>
         <% end %>
     </table>
     <%= page_entries_info @logs %>
