@@ -18,9 +18,11 @@ class MoncompteController < ApplicationController
       @ville = @famille.mairie
       if @famille and @ville.portail > 0
         if @famille.password == params[:password]
-          flash[:notice] = "Dernière connection le #{@famille.lastconnection.to_s(:fr)}" if @famille.lastconnection
-          @famille.update_attributes(lastconnection:Time.now)
+          @famille.lastconnection = Time.now
+          @famille.log_changes(1, nil)
+          @famille.save
           session[:famille_id] = @famille.id
+          flash[:notice] = "Dernière connection le #{@famille.lastconnection.to_s(:fr)}" if @famille.lastconnection
           redirect_to :action => "familleshow"
         else
           flash[:warning] = 'Mot de passe incorrect'

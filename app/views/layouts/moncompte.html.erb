@@ -33,9 +33,9 @@
         	   <%= image_tag 'picnic.png' %>
             <% else %>
            	   <% f = Famille.find(session[:famille_id]) %>	
-           	   <%= image_tag(f.mairie.logo_url, width:'150') %> 
+           	   <%= image_tag(f.mairie.logo_url, width:'60') %> 
 	            <br>
-    	        <h2><%= link_to f.mairie.nom, "/moncompte/famillelogin" %></h2>
+    	        <h3><%= link_to f.mairie.nom, "/moncompte/famillelogin" %></h3>
             <% end %>
 		</div>
 	

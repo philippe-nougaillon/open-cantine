@@ -1,9 +1,7 @@
 # encoding: utf-8
 
 class FamillesController < ApplicationController
-
-  #autocomplete :famille, :nom, :extra_data => [:cp, :ville]
-  
+ 
   layout :determine_layout
 
   before_filter :check, :except => ['index', 'new', 'create', 'balance', 'listing', 'autocomplete']

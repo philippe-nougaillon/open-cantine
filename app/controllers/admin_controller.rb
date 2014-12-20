@@ -30,6 +30,7 @@ class AdminController < ApplicationController
       session[:user_readwrite] = @u.readwrite
       session[:mairie] = @u.mairie_id
       @u.lastconnection = Time.now
+      @u.log_changes(1, @u.id)
       @u.save
       flash[:notice] = "B i e n v e n u e  :)"
 	  else

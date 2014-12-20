@@ -10,7 +10,15 @@ module LogModule
       username = User.find(user_id).username
     else
       # si connexion via le portail famille
-      username = "Famille:" + self.enfant.famille.nom    
+      if self.class.name == 'Prestation'
+        username = "Famille:" + self.enfant.famille.nom 
+        user_id = self.enfant.famille.mairie.users.first.id   
+      elsif self.class.name == 'Famille'
+        username = "Famille:" + self.nom
+        user_id = self.mairie.users.first.id
+      else
+        username = ''
+      end            
     end
 
     changes = if action_id == 2 
