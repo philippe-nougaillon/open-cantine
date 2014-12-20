@@ -35,8 +35,8 @@ module LogModule
     end
 
     quoi = case self.class.name
-      when 'Famille' then "Famille:#{Famille.find(self.id).nom}"
-      when 'Enfant' then "Enfant:#{Famille.find(self.famille_id).nom} #{Enfant.find(self.id).prenom}"
+      when 'Famille' then "Famille:#{self.nom}"
+      when 'Enfant' then "Enfant:#{Famille.find(self.famille_id).nom} #{self.prenom}"
       when 'Prestation' then "Prestation:#{self.date} Enfant:#{Enfant.find(self.enfant_id).famille.nom} #{Enfant.find(self.enfant_id).prenom}"
       when 'Facture' then "Facture:#{self.ref} Famille:#{Famille.find(self.famille_id).nom}"
       when 'Paiement' then "Paiement:#{self.ref} Famille:#{Famille.find(self.famille_id).nom}"
