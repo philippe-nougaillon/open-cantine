@@ -59,8 +59,8 @@
 		permet aux parents, selon le mode d'accès choisi, de consulter ses factures et prestations, et de saisir les inscriptions.<br><br>   
 		<%= form_for @mairie, url:"change_acces_portail" do |f| %>
 			<%= f.radio_button :portail, 0 %> Pas d'accès <br><br>
-			<%= f.radio_button :portail, 1 %> Accès en lecture (vue factures et prestations en cours) <br><br>
-			<%= f.radio_button :portail, 2 %> Accès en écriture (inscriptions aux prestations à J+1) <br><br>
+			<%= f.radio_button :portail, 1 %> Accès en lecture (Vue des factures et prestations en cours) <br><br>
+			<%= f.radio_button :portail, 2 %> Accès en écriture (Inscription aux prestations à J-1) <br><br>
 			<%= f.submit "Modifier" %>
 		<% end %>
 		<br><br><br><br><br><br><br>
