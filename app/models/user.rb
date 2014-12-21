@@ -17,15 +17,6 @@ class User < ActiveRecord::Base
     self.password_salt, self.password_hash = salt, Digest::SHA256.hexdigest(pass + salt)
   end
 
-  def self.authenticate(username, password)
-    user = User.find_by_username(username)
-    if user.blank? || password  != user.password_hash
-       return nil
-    else
-       return user
-    end
-  end
-
   def self.authenticate2(username, password)
      user = User.find_by_username(username)
 	   hash = Digest::SHA256.hexdigest(password + user.password_salt)
