@@ -181,7 +181,7 @@ class FacturesController < ApplicationController
   # DELETE /factures/1.xml
   def destroy
     @facture = Facture.find(params[:id])
-    @enfant.log_changes(2, session[:user])
+    @facture.log_changes(2, session[:user])
     @facture.facture_lignes.delete_all
     result = Prestation.update_all("facture_id = null", ["facture_id = ?", @facture.id])
     @facture.destroy   

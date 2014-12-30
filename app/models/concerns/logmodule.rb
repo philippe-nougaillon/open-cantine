@@ -22,7 +22,7 @@ module LogModule
     end
 
     changes = if action_id == 2 
-      then self.inspect 
+      then Hash.new 
       else self.changes 
     end
 
@@ -61,7 +61,7 @@ module LogModule
       end
     end
 
-    unless txt.blank?
+    unless txt.blank? and action_id != 2
       Log.create(user_id:user_id, qui:username, action_id:action_id, quoi:quoi, msg:txt)	
     end
   end
