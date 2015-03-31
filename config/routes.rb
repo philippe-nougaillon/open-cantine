@@ -1,5 +1,4 @@
 OpenCantine3::Application.routes.draw do
-  resources :logs
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -78,6 +77,7 @@ OpenCantine3::Application.routes.draw do
   resources :enfants
   resources :users
   resources :upload
+  resources :logs
   
   match 'admin' => 'admin#signin'
   match 'nouveau' => 'villes#nouveau_compte', :as => :nouveau
@@ -85,5 +85,7 @@ OpenCantine3::Application.routes.draw do
   
   match '/' => 'familles#index'
   match '/:controller(/:action(/:id))'
+
+  post "admin/import_do", to: 'admin#import_do'
 
 end

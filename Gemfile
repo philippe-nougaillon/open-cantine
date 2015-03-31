@@ -12,10 +12,7 @@ gem 'client_side_validations'
 gem "dynamic_sitemaps"
 
 gem 'wicked_pdf'
-
-#gem 'jquery-rails'
-#gem 'jquery_datepicker'
-#gem 'rails3-jquery-autocomplete'
+gem 'capture_stdout'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

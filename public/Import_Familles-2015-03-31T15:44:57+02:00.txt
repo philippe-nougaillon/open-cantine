@@ -1,0 +1,17 @@
+MARTIN => Tarif inconnu (Normal) !
+MARTIN => AJOUT : {"mairie_id"=>[nil, 2], "nom"=>[nil, "MARTIN"], "civilité"=>[nil, "MR/MME"], "adresse"=>[nil, "20, rue des quiconces"], "adresse2"=>[nil, "2 ème étage"], "cp"=>[nil, "77100"], "ville"=>[nil, "MEAUX"], "email"=>[nil, "test@orange.fr"], "phone"=>[nil, "01.42.21.22.33"], "mobile1"=>[nil, "06.12.12.21.12"], "mobile2"=>[nil, "06.12.12.21.33"], "allocataire"=>[nil, "1234567890"], "memo"=>[nil, "RAS"]}
+MARTIN Loic => ERREUR AJOUT : ["Famille manquante"] {"prenom"=>[nil, "Loic"], "nomfamille"=>[nil, "MARTIN"], "dateNaissance"=>[nil, "10/12/2010"], "classe"=>[nil, 29]}
+
+ROBERT => AJOUT : {"mairie_id"=>[nil, 2], "nom"=>[nil, "ROBERT"], "civilité"=>[nil, "MME"], "adresse"=>[nil, "12, rue du parc"], "cp"=>[nil, "93100"], "ville"=>[nil, "MONTREUIL"], "email"=>[nil, "monemail@free.fr"], "phone"=>[nil, "01.42.11.33.00"], "mobile1"=>[nil, "06.12.12.30.30"], "mobile2"=>[nil, "06.12.12.40.40"], "allocataire"=>[nil, "8901234567"], "memo"=>[nil, "RAZ"]}
+ROBERT Louisa => ERREUR AJOUT : ["Famille manquante"] {"prenom"=>[nil, "Louisa"], "nomfamille"=>[nil, "ROBERT"], "dateNaissance"=>[nil, "24/07/2009"], "classe"=>[nil, 29]}
+
+ROBERT => AJOUT : {"mairie_id"=>[nil, 2], "nom"=>[nil, "ROBERT"], "civilité"=>[nil, "MME"], "adresse"=>[nil, "12, rue du parc"], "cp"=>[nil, "93100"], "ville"=>[nil, "MONTREUIL"], "email"=>[nil, "monemail@free.fr"], "phone"=>[nil, "01.42.11.33.00"], "mobile1"=>[nil, "06.12.12.30.30"], "mobile2"=>[nil, "06.12.12.40.40"], "allocataire"=>[nil, "8901234567"], "memo"=>[nil, "RAZ"]}
+ROBERT Paul => ERREUR AJOUT : ["Famille manquante"] {"prenom"=>[nil, "Paul"], "nomfamille"=>[nil, "ROBERT"], "dateNaissance"=>[nil, "13/01/2009"], "tarif_id"=>[nil, 2], "classe"=>[nil, 30]}
+
+ROBERT => AJOUT : {"mairie_id"=>[nil, 2], "nom"=>[nil, "ROBERT"], "civilité"=>[nil, "MME"], "adresse"=>[nil, "12, rue du parc"], "cp"=>[nil, "93100"], "ville"=>[nil, "MONTREUIL"], "email"=>[nil, "monemail@free.fr"], "phone"=>[nil, "01.42.11.33.00"], "mobile1"=>[nil, "06.12.12.30.30"], "mobile2"=>[nil, "06.12.12.40.40"], "allocataire"=>[nil, "8901234567"], "memo"=>[nil, "RAZ"]}
+HAIK Sebastien => ERREUR AJOUT : ["Famille manquante"] {"prenom"=>[nil, "Sebastien"], "nomfamille"=>[nil, "HAIK"], "dateNaissance"=>[nil, "31/01/2008"], "tarif_id"=>[nil, 2], "classe"=>[nil, 30]}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Nbre de lignes:4 / Nbre de nouvelles familles:4 / Nbre de mise à jour:0 / Nbre d'inchangés:0 / Nbre d'enfants ajoutés:0 / Nbre d'enfants modifies:0
+----------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,6 @@
+<br>
+<h2>Import des Familles terminé</h2>
+<h3>Liste des modifications détectées:</h3>
+<%= simple_format(@out) %>
+<%= link_to "Télécharger le compte-rendu 'Import_Familles-#{DateTime.now.to_s}.txt'", action: 'download', file_name: "Import_Familles-#{DateTime.now.to_s}.txt" %>
+

@@ -205,7 +205,7 @@ class PrestationsController < ApplicationController
             end
         end
         
-        flash[:notice] = "#{ajouts} prestations ajoutées sur #{jours} jours ouvrés, #{erreurs} doublon  (s)."
+        flash[:notice] = "#{ajouts} prestations ajoutées sur #{jours} jours ouvrés, #{erreurs} doublon(s)."
     
         if @famille_id
           redirect_to :controller => 'familles', :action => 'show', :id => @famille_id

@@ -32,7 +32,7 @@ class AdminController < ApplicationController
       @u.lastconnection = Time.now
       @u.log_changes(1, @u.id)
       @u.save
-      flash[:notice] = "B i e n v e n u e  :)"
+      flash[:notice] = "B i e n v e n u e"
 	  else
 	    flash[:notice] = "Compte inconnu..."
     end
@@ -184,8 +184,38 @@ class AdminController < ApplicationController
 
   end
 
+  def import_do
+    if params[:upload]
+      require 'rake'
+      Rake::Task.clear # necessary to avoid tasks being loaded several times in dev mode
+      OpenCantine3::Application.load_tasks 
+
+      #Save file to local dir
+      filename = params[:upload].original_filename
+      file_with_path = Rails.root.join('public', filename)
+      File.open(file_with_path, 'wb') do |file|
+          file.write(params[:upload].read)
+      end
+
+      # execute rake and capture output  
+      @out = capture_stdout do
+          Rake::Task['familles:import'].invoke(file_with_path, params[:save], session[:user])
+      end
+
+      # save output            
+      File.open("public/Import_Familles-#{DateTime.now.to_s}.txt", "w") { |file| file.write @out }
+    else
+      flash[:notice] = "Manque le fichier source pour la mise à jour"
+      redirect_to action: 'import'
+    end
+  end
+
   def points_forts
 
   end
+
+  def download
+    send_file "#{Rails.root}/public/#{params[:file_name]}", :type=>"application/text"
+  end 
 
 end

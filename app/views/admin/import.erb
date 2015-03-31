@@ -1,41 +1,36 @@
-<div id="form_actions">
-	Importer données Familles et Enfants
-</div>
 <br>
-<div>
-	<b>Fonction non implémentée...</b>	
-</div>
 
-<br>
-Pour importer vos données, vous devez fournir un fichier au format CSV avec ";" comme séparateur de champs.<br><br>
-Les champs doivent être dans l'ordre ci-dessous :<br>
-<br>
-<div class="span-8">
-	<h3>Familles</h3>
-	<ul>
-		<li>Civilité</li>
-		<li>Nom</li>
-		<li>Adresse</li>
-		<li>Adresse2</li>
-		<li>Code postal</li>
-		<li>Ville</li>
-		<li>Email</li>
-		<li>Phone</li>
-		<li>Mobile Maman</li>
-		<li>Mobile Papa</li>
-		<li>Mémo</li>
-		<li>Tarif (id)</li>
-	</ul>
-</div>
-<div class="span-8 last">
-	<h3>Enfants</h3>
-	<ul>
-		<li>Nom</li>
-		<li>Prénom</li>
-		<li>Classe (id)</li>
-		<li>Date de naissance</li>
-		<li>Sans porc? (o/n)</li>
-		<li>Allergie? (o/n)</li>
-		<li>Tarif (id)</li>
-	</ul>
-</div>
+<h2><%= image_tag "familles.jpeg", size:"20x20" %> Importer les données des Familles et Enfants</h2>
+
+<%= form_tag({action: "import_do", method: :post}, multipart: true) do %>
+  <div>
+    <h3>Cette fonction permet l'importation ou la mise à jour des coordonnées Familles/Enfants depuis un fichier CSV</h3>
+    <br>
+    <ul>
+        <li>Le fichier source peut avoir les colonnes suivantes: 
+        	"Civilité", "Nom", "Adresse", "Adresse2", "CP", "Ville", "Email", "Téléphone", "Portable1", "Portable2", "N°Allocataire", "Mémo", "Nom du Tarif", "Enfant_Nom", "Enfant_Prénom", "Enfant_Date_de_naissance", "Enfant_Classe", "Enfant_Nom_du_Tarif"
+        </li>
+        <li>Ce fichier doit être au format CSV, Encodage=iso-8859-1, Séparateur=Point-virgule, Noms colonnes=Première ligne.</li>
+        <li>Exemple de fichier conforme: <%= link_to "famille.csv", "/familles.csv" %></li>
+    </ul>
+  </div>
+  <hr><br>
+  <div class="field">
+    <%= label :filename, "Fichier source: " %>
+    <%= file_field_tag 'upload', accept: 'text/csv' %>
+  </div>
+
+  <br>
+  <div class="field">
+    Enregistrer les changements ? <br>
+    <%= label :save, "Oui", :value => "true" %>
+    <%= radio_button_tag :save, true %>
+    <%= label :save, "Non", :value => "false" %>
+    <%= radio_button_tag :save, false, :checked => true %>
+    <br><i>Choisissez 'Non' pour tester votre mise à jour car <b>elle est irréversible !</b></i><br />
+  </div>
+  <br>
+  <div class="actions">
+    <%= submit_tag "Importer", class: "btn-custom" %>
+  </div>
+<% end %>

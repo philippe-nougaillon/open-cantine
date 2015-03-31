@@ -1,0 +1,5 @@
+"Civilité";"Nom";"Adresse";"Adresse2";"CP";"Ville";"Email";"Téléphone";"Portable1";"Portable2";"N°Allocataire";"Mémo";"Nom du Tarif";"Enfant_Nom";"Enfant_Prénom";"Enfant_Date_de_naissance";"Enfant_Classe";"Enfant_Nom_du_Tarif"
+"MR/MME";"MARTIN";"20, rue des quiconces";"2 ème étage";77100;"MEAUX";"test@orange.fr";"01.42.21.22.33";"06.12.12.21.12";"06.12.12.21.33";1234567890;"RAS";"Normal";"MARTIN";"Loic";"10/12/2010";"CE1";
+"MME";"ROBERT";"12, rue du parc";;93100;"MONTREUIL";"monemail@free.fr";"01.42.11.33.00";"06.12.12.30.30";"06.12.12.40.40";8901234567;"RAZ";;"ROBERT";"Louisa";"24/07/2009";"CE1";
+"MME";"ROBERT";"12, rue du parc";;93100;"MONTREUIL";"monemail@free.fr";"01.42.11.33.00";"06.12.12.30.30";"06.12.12.40.40";8901234567;"RAZ";;"ROBERT";"Paul";"13/01/2009";"CE2";"Général"
+"MME";"ROBERT";"12, rue du parc";;93100;"MONTREUIL";"monemail@free.fr";"01.42.11.33.00";"06.12.12.30.30";"06.12.12.40.40";8901234567;"RAZ";;"HAIK";"Sebastien";"31/03/2008";"CE2";"Général"

@@ -8,10 +8,10 @@ class Enfant < ActiveRecord::Base
   belongs_to :famille
   has_many   :prestations, :dependent => :destroy
 
-  validates_presence_of :prenom,        :message => " manquant"
-  validates_presence_of :famille_id,    :message => "Famille manquante"
-  validates_presence_of :nomfamille,    :message => "Nom de famille manquant"
-  validates_presence_of :classe,        :message => " manquante "
+  validates_presence_of :prenom,        :message => "manquant"
+  validates_presence_of :famille_id,    :message => "manquante"
+  validates_presence_of :nomfamille,    :message => "manquant"
+  validates_presence_of :classe,        :message => "manquante"
   validates_length_of   :dateNaissance, :is => 10 , :message => " > Entrez une date comme 01/01/1999"
  
   before_save :uppercase_fields

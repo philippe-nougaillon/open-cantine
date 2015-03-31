@@ -1,0 +1,15 @@
+MARTIN => Tarif inconnu (Normal) !
+MARTIN => AJOUT : {"mairie_id"=>[nil, 2], "nom"=>[nil, "MARTIN"], "civilité"=>[nil, "MR/MME"], "adresse"=>[nil, "20, rue des quiconces"], "adresse2"=>[nil, "2 ème étage"], "cp"=>[nil, "77100"], "ville"=>[nil, "MEAUX"], "email"=>[nil, "test@orange.fr"], "phone"=>[nil, "01.42.21.22.33"], "mobile1"=>[nil, "06.12.12.21.12"], "mobile2"=>[nil, "06.12.12.21.33"], "allocataire"=>[nil, "1234567890"], "memo"=>[nil, "RAS"]}
+MARTIN Loic => AJOUT : {"prenom"=>[nil, "Loic"], "famille_id"=>[nil, 1421], "nomfamille"=>[nil, "MARTIN"], "dateNaissance"=>[nil, "10/12/2010"], "classe"=>[nil, 29]}
+
+ROBERT => AJOUT : {"mairie_id"=>[nil, 2], "nom"=>[nil, "ROBERT"], "civilité"=>[nil, "MME"], "adresse"=>[nil, "12, rue du parc"], "cp"=>[nil, "93100"], "ville"=>[nil, "MONTREUIL"], "email"=>[nil, "monemail@free.fr"], "phone"=>[nil, "01.42.11.33.00"], "mobile1"=>[nil, "06.12.12.30.30"], "mobile2"=>[nil, "06.12.12.40.40"], "allocataire"=>[nil, "8901234567"], "memo"=>[nil, "RAZ"]}
+ROBERT Louisa => AJOUT : {"prenom"=>[nil, "Louisa"], "famille_id"=>[nil, 1422], "nomfamille"=>[nil, "ROBERT"], "dateNaissance"=>[nil, "24/07/2009"], "classe"=>[nil, 29]}
+
+ROBERT Paul => AJOUT : {"prenom"=>[nil, "Paul"], "famille_id"=>[nil, 1422], "nomfamille"=>[nil, "ROBERT"], "dateNaissance"=>[nil, "13/01/2009"], "tarif_id"=>[nil, 2], "classe"=>[nil, 30]}
+
+HAIK Sebastien => AJOUT : {"prenom"=>[nil, "Sebastien"], "famille_id"=>[nil, 1422], "nomfamille"=>[nil, "HAIK"], "dateNaissance"=>[nil, "31/01/2008"], "tarif_id"=>[nil, 2], "classe"=>[nil, 30]}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Nbre de lignes:4 / Nbre de nouvelles familles:2 / Nbre de mise à jour:0 / Nbre d'inchangés:2 / Nbre d'enfants ajoutés:4 / Nbre d'enfants modifiés:0
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
