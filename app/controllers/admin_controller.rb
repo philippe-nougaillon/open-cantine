@@ -154,9 +154,7 @@ class AdminController < ApplicationController
   end
 
   def user_add
-	  @user = User.new
-	  @user.username = params[:user][:username]
-	  @user.password = params[:user][:password]
+	  @user = User.new(username:params[:user][:username], password:params[:user][:password], readwrite:params[:user][:readwrite])
     @user.mairie_id = session[:mairie]
 	  @user.lastconnection = DateTime.now
 	  @user.lastchange = DateTime.now

@@ -1,5 +1,5 @@
 <br>
-<div class="span-16 last">	
+<div class="span-18 last">	
 	<h3>Utilisateurs</h3>
 	<table class="sample">
       <tr>
@@ -23,7 +23,7 @@
 <hr>
 	<h3>Ajout d'un utilisateur</h3>
 	<%= simple_form_for(User.new, :url => 'user_add') do |f| %>
-		<%= f.input :username , :label => "Utilisateur", :hint => "Généralement son adresse email." %>
+		<%= f.input :username , :label => "Identifiant", :hint => "Généralement son adresse email" %>
 		<%= f.input :password, :label => "Mot de passe", :required => true %>
 		<%= f.input :readwrite, :label => "Cet utilisateur pourra modifier les données ?" %>
 		<br>

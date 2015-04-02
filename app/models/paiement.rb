@@ -8,7 +8,7 @@ class Paiement < ActiveRecord::Base
   belongs_to :famille
   belongs_to :ville
 
-  validates_presence_of :date,:montant, :montantGarderie, :montantCantine, :famille_id
+  validates_presence_of :date, :montant, :montantGarderie, :montantCantine, :famille_id
   
   def self.search(search, page, mairie_id, famille_id, sort)
 
@@ -18,13 +18,9 @@ class Paiement < ActiveRecord::Base
         conditions = ['ref like ? AND familles.mairie_id = ? ', "%#{search}%", mairie_id]
      end
 	
-	 @order_by = (sort.blank?) ? "id DESC" : sort	
+	   @order_by = (sort.blank?) ? "id DESC" : sort	
+	   paginate :per_page => 18, :page => page, :conditions => conditions, :joins => :famille, :order => @order_by
 
-	 paginate :per_page => 18,
-              :page => page,
-              :conditions => conditions,
-              :joins => :famille,
-              :order => @order_by
   end
 
 end

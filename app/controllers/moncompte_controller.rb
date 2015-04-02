@@ -11,12 +11,10 @@ class MoncompteController < ApplicationController
   end
 
   def famillelogin
-    if request.post?
-      return if params[:email].blank?
+    unless params[:email].blank? and params[:password].blank?
 
       @famille = Famille.where(email:params[:email]).first
-      @ville = @famille.mairie
-      if @famille and @ville.portail > 0
+      if @famille and @famille.mairie.portail > 0
         if @famille.password == params[:password]
           @famille.lastconnection = Time.now
           @famille.log_changes(1, nil)
@@ -28,10 +26,8 @@ class MoncompteController < ApplicationController
           flash[:warning] = 'Mot de passe incorrect'
         end
       else
-        flash[:warning] = 'Accès non autorisé, veuillez contacter le service périscolaire'
+        flash[:warning] = 'Identifiant ou mot de passe inconnu'
       end
-    else
-      redirect_to :action => "familleshow" if session[:famille_id]
     end
   end
 
@@ -89,44 +85,48 @@ class MoncompteController < ApplicationController
   end
 
   def familleshow
-    @images = ["","yes.png","no.jpeg","orange.jpeg","cancel.jpeg","yes.png","yes.png","yes.png"]
-    @famille = Famille.find(session[:famille_id])
-    @ville = @famille.mairie
-    releve = []
+    if session[:famille_id]
+      @images = ["","yes.png","no.jpeg","orange.jpeg","cancel.jpeg","yes.png","yes.png","yes.png"]
+      @famille = Famille.find(session[:famille_id])
+      @ville = @famille.mairie
+      releve = []
 
-    for f in @famille.factures
-      releve << { date:f.date.to_date, type:"Facture", ref:f.ref, mnt:f.montant, solde:0 }
-    end
-    for p in @famille.paiements
-      releve << { date:p.date.to_date, type:"Paiement", ref:p.ref, mnt:p.montant, solde:0 }
-    end
-
-    @releve = releve.sort { |a,b| a[:date] <=> b[:date] }
-    @solde = 0.00
-    @debit = 0.00
-    @credit = 0.00
-
-    for l in @releve
-      mnt = l[:mnt]
-      if l[:type] == "Facture"
-        @debit += mnt
-        @solde -= mnt
-      else
-        @credit += mnt
-        @solde += mnt
+      for f in @famille.factures
+        releve << { date:f.date.to_date, type:"Facture", ref:f.ref, mnt:f.montant, solde:0 }
       end
-      l[:solde] = @solde
-    end 
+      for p in @famille.paiements
+        releve << { date:p.date.to_date, type:"Paiement", ref:p.ref, mnt:p.montant, solde:0 }
+      end
 
-    unless params[:all] == '1'
-      @releve = @releve[-5,5]
+      @releve = releve.sort { |a,b| a[:date] <=> b[:date] }
+      @solde = 0.00
+      @debit = 0.00
+      @credit = 0.00
+
+      for l in @releve
+        mnt = l[:mnt]
+        if l[:type] == "Facture"
+          @debit += mnt
+          @solde -= mnt
+        else
+          @credit += mnt
+          @solde += mnt
+        end
+        l[:solde] = @solde
+      end 
+
+      unless params[:all] == '1'
+        @releve = @releve[-5,5]
+      end
+    else
+      redirect_to action:"famillelogin" 
     end
 
   end
 
   def famillelogout
     session[:famille_id] = nil
-    flash[:notice] = "Vous avez bien été déconnecté"
+    flash[:notice] = "Vous avez bien été déconnecté(e)"
     redirect_to :action => "famillelogin"
   end
 
