@@ -10,23 +10,25 @@
     <th>Date</th><th>Type</th><th>Référence</th><th>Facture</th><th>Débit</th><th>Crédit</th><th>Solde</th>
   </thead>
 
-  <% for l in @releve %>
-    <tr>
-      <td><%= l[:date].to_s(:fr) %></td>
-      <td><%= l[:type] %></td>
-      <td><%= l[:ref] %></td>
-      <% if l[:type] == "Facture" %>
-        <td class="center">
-          <%= link_to image_tag("pdf-logo.png", size:'20x20'), action:"famillefacture", ref:l[:ref] %>
-        </td>
-        <td id="euros"><%= number_to_currency(l[:mnt], unit:'€') %></td>
-        <td />
-      <% else %>
-        <td />
-        <td id="euros"><%= number_to_currency(l[:mnt], unit:'€') %></td>
-      <% end %>
-      <td id="euros"><%= number_to_currency(l[:solde], unit:'€') %></td>
-    </tr>
+  <% if @releve %>
+    <% for l in @releve %>
+      <tr>
+        <td><%= l[:date].to_s(:fr) %></td>
+        <td><%= l[:type] %></td>
+        <td><%= l[:ref] %></td>
+        <% if l[:type] == "Facture" %>
+          <td class="center">
+            <%= link_to image_tag("pdf-logo.png", size:'20x20'), action:"famillefacture", ref:l[:ref] %>
+          </td>
+          <td id="euros"><%= number_to_currency(l[:mnt], unit:'€') %></td>
+          <td />
+        <% else %>
+          <td />
+          <td id="euros"><%= number_to_currency(l[:mnt], unit:'€') %></td>
+        <% end %>
+        <td id="euros"><%= number_to_currency(l[:solde], unit:'€') %></td>
+      </tr>
+    <% end %>
   <% end %>
   <tr style="background-color:#FFFFA0;">
     <td><%= Date.today.to_s(:fr) %></td>
