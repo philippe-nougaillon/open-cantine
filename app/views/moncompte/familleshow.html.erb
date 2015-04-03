@@ -24,12 +24,14 @@
           <td />
         <% else %>
           <td />
+          <td />
           <td id="euros"><%= number_to_currency(l[:mnt], unit:'€') %></td>
         <% end %>
         <td id="euros"><%= number_to_currency(l[:solde], unit:'€') %></td>
       </tr>
     <% end %>
   <% end %>
+
   <tr style="background-color:#FFFFA0;">
     <td><%= Date.today.to_s(:fr) %></td>
     <td>SOLDE A CE JOUR</td>

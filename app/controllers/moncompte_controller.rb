@@ -91,19 +91,19 @@ class MoncompteController < ApplicationController
       @ville = @famille.mairie
       releve = []
 
-      for f in @famille.factures
+      @famille.factures.each do |f|
         releve << { date:f.date.to_date, type:"Facture", ref:f.ref, mnt:f.montant, solde:0 }
       end
-      for p in @famille.paiements
+      @famille.paiements.each do |p|
         releve << { date:p.date.to_date, type:"Paiement", ref:p.ref, mnt:p.montant, solde:0 }
       end
 
       @releve = releve.sort { |a,b| a[:date] <=> b[:date] }
-      @solde = 0.00
-      @debit = 0.00
+      @solde = 0.00 
+      @debit = 0.00 
       @credit = 0.00
 
-      for l in @releve
+      @releve.each do |l|
         mnt = l[:mnt]
         if l[:type] == "Facture"
           @debit += mnt
@@ -115,9 +115,8 @@ class MoncompteController < ApplicationController
         l[:solde] = @solde
       end 
 
-      unless params[:all] == '1'
-        @releve = @releve[-5,5]
-      end
+      @releve = @releve.last(5) unless params[:all] == '1'
+
     else
       redirect_to action:"famillelogin" 
     end
