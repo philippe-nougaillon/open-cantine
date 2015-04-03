@@ -1,0 +1,44 @@
+<h2>Facturation spéciale</h2>
+<i>Besoin de facturer une ou toutes les familles d'une charge exceptionnelle, comme des frais d'adhésion ? <br>
+	Saisissez les informations ci-dessous pour créer la(es) facture(s).</i>
+<br><br>
+
+
+<%= simple_form_for(@facture, :url => {:action => "facturation_speciale_do"}) do |f| %>
+	
+	<% if @facture.errors.any? %>
+		<b><%= @facture.errors.full_messages.join(", ") %></b>
+		<br><br>
+	<% end %>
+
+	<div style="display:none">
+	    <%= f.text_field :mairie_id %>
+	</div>
+
+	<%= f.label :famille_id, "Famille" %> 
+	<%= f.select :famille_id, options_for_select(@familles.collect{|i| ["#{i.nom.upcase} - #{i.ville.upcase}", i.id]}, @facture.famille_id), include_blank: true  %>
+	<small><i>Choisissez une famille ou aucune pour les facturer toutes !</i></small>
+
+	<br>
+	<%= f.label :date, "Date" %>
+	<%= f.text_field :date, size: 9, class: "date" %>
+
+	<br>
+	<%= f.label :checked, "Vérifiée ?" %>
+	<%= f.check_box :checked %> 
+
+	<br><br>
+	<%= f.label :designation, "Désignation" %>
+	<%= f.text_field :ref,  size:50 %><br>
+
+	<%= f.label :montant, "Montant à facturer" %>
+	<%= f.text_field :montant, size:10 %>
+
+	<br><br>
+	<%= f.label "Commentaires de bas de page" %>
+	<%= f.text_field :footer, size:50  %>
+
+	<br><br>
+	<%= f.submit "Créer la(es) facture(s)" %> 
+<% end %>
+

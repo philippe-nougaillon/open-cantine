@@ -10,6 +10,8 @@ class Facture < ActiveRecord::Base
 
   has_many :facture_lignes, :dependent => :destroy
 
+  validates_presence_of :famille_id, :mairie_id, :date, :montant, :ref
+
   def self.search(search, page, mairie_id, sort, famille_id)
     if famille_id
       conditions = ['ref like ? AND factures.mairie_id = ? AND famille_id = ?', "%#{search}%", mairie_id, famille_id]

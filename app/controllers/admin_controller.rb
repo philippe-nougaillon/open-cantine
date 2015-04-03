@@ -216,4 +216,52 @@ class AdminController < ApplicationController
     send_file "#{Rails.root}/public/#{params[:file_name]}", :type=>"application/text"
   end 
 
+  def facturation_speciale
+    @user = User.find(session[:user])
+    @familles = @user.ville.familles.order(:nom)
+    @facture = Facture.new(mairie_id:@user.mairie_id) 
+  end
+
+  def facturation_speciale_do
+    @user = User.find(session[:user]) 
+    @familles = @user.ville.familles.order(:nom)
+    @facture = Facture.new(params[:facture])
+    prochain = FactureChrono.where(mairie_id:@facture.mairie_id).first.prochain
+    texte = @facture.ref
+    @facture.ref = "#{Date.today.month.to_s}-#{Date.today.year}/#{prochain}"
+    @facture.echeance = Date.today.at_end_of_month
+    unless params[:facture][:famille_id].blank?
+      unless @facture.valid?
+        flash[:warning] = "Données insuffisantes pour continuer"
+        render action: "facturation_speciale" 
+      else
+        @facture.log_changes(0, @user.id)
+        @facture.save
+        FactureLigne.create(facture_id:@facture.id, texte:texte, qte:1, montant:@facture.montant, prix:@facture.montant) 
+        FactureChrono.where(mairie_id:@facture.mairie_id).update_all(prochain:prochain + 1)
+        flash[:notice] = "1 facture créée avec succès..."
+        redirect_to factures_path
+      end
+    else
+      @facture.famille_id = @familles.first.id
+      unless @facture.valid?
+        flash[:warning] = "Données insuffisantes pour continuer"
+        render action: "facturation_speciale" 
+      else
+        @familles.each do |famille|
+            prochain = FactureChrono.where(mairie_id:@facture.mairie_id).first.prochain
+            f = @facture.dup
+            f.famille_id = famille.id
+            f.ref = "#{Date.today.month.to_s}-#{Date.today.year}/#{prochain}" 
+            f.log_changes(0, @user.id)
+            f.save
+            FactureLigne.create(facture_id:f.id, texte:texte, qte:1, montant:f.montant, prix:f.montant)
+            FactureChrono.where(mairie_id:@facture.mairie_id).update_all(prochain:prochain + 1)  
+        end    
+        flash[:notice] = "#{@familles.count} factures créées avec succès..."
+        redirect_to factures_path
+      end
+    end  
+  end
+
 end
