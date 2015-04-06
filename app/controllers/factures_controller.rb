@@ -237,6 +237,7 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
     @facture.SoldeFamille = @solde
     @facture.checked = false
 	  @facture.footer = commentaire
+    @facture.montant = 0
     @facture.save
     facture_id = @facture.id
 

@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"famille",
+				"familles"
+			],
+			[
+				"famill",
+				"familles"
+			],
+			[
+				"u",
+				"user"
+			],
+			[
+				"fa",
+				"famillelogin"
+			],
+			[
+				"read",
+				"readwrite"
+			],
+			[
 				"fam",
 				"famille"
 			],
@@ -40,20 +60,12 @@
 				"password"
 			],
 			[
-				"u",
-				"unless	unless … end"
-			],
-			[
 				"lo",
 				"logs"
 			],
 			[
 				"link",
 				"link_to"
-			],
-			[
-				"famille",
-				"familles"
 			],
 			[
 				"par",
@@ -68,16 +80,8 @@
 				"th	Tag"
 			],
 			[
-				"fa",
-				"famille"
-			],
-			[
 				"day",
 				"days"
-			],
-			[
-				"famill",
-				"famillelogin"
 			],
 			[
 				"re",
@@ -510,76 +514,32 @@
 			[
 				"mess",
 				"messages_last"
-			],
-			[
-				"pr",
-				"priorite_id"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "app/controllers/villes_controller.rb",
+			"file": "app/controllers/factures_controller.rb",
 			"settings":
 			{
-				"buffer_size": 3367,
+				"buffer_size": 24796,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/controllers/enfants_controller.rb",
+			"file": "app/models/facture.rb",
 			"settings":
 			{
-				"buffer_size": 4504,
+				"buffer_size": 778,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "config/routes.rb",
+			"file": "app/views/admin/facturation_speciale_do.html.erb",
 			"settings":
 			{
-				"buffer_size": 2587,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lib/tasks/familles.rake",
-			"settings":
-			{
-				"buffer_size": 4082,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/admin/import.erb",
-			"settings":
-			{
-				"buffer_size": 1528,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/admin/import_do.erb",
-			"settings":
-			{
-				"buffer_size": 277,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/models/enfant.rb",
-			"settings":
-			{
-				"buffer_size": 1237,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/familles.csv",
-			"settings":
-			{
-				"buffer_size": 978,
+				"buffer_size": 64,
 				"line_ending": "Unix"
 			}
 		},
@@ -587,15 +547,15 @@
 			"file": "app/controllers/admin_controller.rb",
 			"settings":
 			{
-				"buffer_size": 7628,
+				"buffer_size": 9689,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/views/layouts/standard.html.erb",
+			"file": "app/views/admin/facturation_speciale.html.erb",
 			"settings":
 			{
-				"buffer_size": 3859,
+				"buffer_size": 1293,
 				"line_ending": "Unix"
 			}
 		}
@@ -628,7 +588,37 @@
 	},
 	"file_history":
 	[
+		"/home/phil/RailsProjects/opencantine/app/views/enfants/_enfant.erb",
+		"/home/phil/RailsProjects/opencantine/app/views/classrooms/_classroom.erb",
+		"/home/phil/RailsProjects/opencantine/app/views/factures/edit.html.erb",
+		"/home/phil/RailsProjects/opencantine/app/controllers/blogs_controller.rb",
+		"/home/phil/RailsProjects/opencantine/app/models/facture.rb",
+		"/home/phil/RailsProjects/opencantine/app/models/paiement.rb",
+		"/home/phil/RailsProjects/opencantine/app/controllers/enfants_controller.rb",
+		"/home/phil/RailsProjects/opencantine/app/views/admin/users_admin.erb",
+		"/home/phil/RailsProjects/opencantine/app/views/logs/index.html.erb",
+		"/home/phil/RailsProjects/opencantine/app/views/admin/facturation_speciale.erb.html",
+		"/home/phil/RailsProjects/opencantine/app/controllers/villes_controller.rb",
+		"/home/phil/RailsProjects/opencantine/config/routes.rb",
+		"/home/phil/RailsProjects/opencantine/lib/tasks/familles.rake",
+		"/home/phil/RailsProjects/opencantine/app/views/admin/import.erb",
+		"/home/phil/RailsProjects/opencantine/app/views/admin/import_do.erb",
+		"/home/phil/RailsProjects/opencantine/app/models/enfant.rb",
+		"/home/phil/RailsProjects/opencantine/app/views/admin/user_edit.erb",
+		"/home/phil/RailsProjects/opencantine/app/views/moncompte/famillelogin.html.erb",
+		"/home/phil/RailsProjects/opencantine/app/views/layouts/moncompte.html.erb",
+		"/home/phil/RailsProjects/opencantine/app/assets/stylesheets/application.css",
+		"/home/phil/RailsProjects/opencantine/app/assets/stylesheets/scaffolds.css.scss",
+		"/home/phil/RailsProjects/opencantine/public/stylesheets/standard.css",
+		"/home/phil/RailsProjects/opencantine/app/controllers/application_controller.rb",
+		"/home/phil/RailsProjects/opencantine/app/controllers/familles_controller.rb",
 		"/home/phil/RailsProjects/opencantine/public/familles.csv",
+		"/home/phil/RailsProjects/opencantine/app/controllers/moncompte_controller.rb",
+		"/home/phil/RailsProjects/opencantine/app/views/moncompte/familleshow.html.erb",
+		"/home/phil/RailsProjects/opencantine/config/environment.rb",
+		"/home/phil/RailsProjects/opencantine/config/environments/development.rb",
+		"/home/phil/RailsProjects/opencantine/config/environments/production.rb",
+		"/home/phil/RailsProjects/opencantine/app/views/layouts/standard.html.erb",
 		"/home/phil/RailsProjects/opencantine/Gemfile",
 		"/home/phil/RailsProjects/opencantine/lib/tasks/hash_password.rake",
 		"/home/phil/RailsProjects/opencantine/app/controllers/prestations_controller.rb",
@@ -639,38 +629,24 @@
 		"/home/phil/RailsProjects/opencantine/app/controllers/factures_controller.rb",
 		"/home/phil/RailsProjects/opencantine/app/models/prestation.rb",
 		"/home/phil/RailsProjects/opencantine/app/views/admin/setup.erb",
-		"/home/phil/RailsProjects/opencantine/app/controllers/moncompte_controller.rb",
 		"/home/phil/RailsProjects/opencantine/db/migrate/20141215172311_change_log_action_name_to_action_id.rb",
-		"/home/phil/RailsProjects/opencantine/app/models/facture.rb",
 		"/home/phil/RailsProjects/opencantine/app/models/ville.rb",
-		"/home/phil/RailsProjects/opencantine/app/views/logs/index.html.erb",
-		"/home/phil/RailsProjects/opencantine/app/views/admin/user_edit.erb",
 		"/home/phil/RailsProjects/opencantine/app/controllers/logs_controller.rb",
-		"/home/phil/RailsProjects/opencantine/app/controllers/enfants_controller.rb",
 		"/home/phil/RailsProjects/opencantine/db/migrate/20141215162305_add_log_user_id.rb",
 		"/home/phil/RailsProjects/opencantine/db/migrate/20141215150131_create_logs.rb",
 		"/home/phil/RailsProjects/opencantine/db/migrate/20141215145650_create_log_table.rb",
-		"/home/phil/RailsProjects/opencantine/app/views/moncompte/famillelogin.html.erb",
-		"/home/phil/RailsProjects/opencantine/app/views/moncompte/familleshow.html.erb",
-		"/home/phil/RailsProjects/opencantine/app/views/layouts/moncompte.html.erb",
-		"/home/phil/RailsProjects/opencantine/config/routes.rb",
 		"/home/phil/RailsProjects/opencantine/app/assets/javascripts/application.js",
 		"/home/phil/RailsProjects/opencantine/app/assets/javascripts/logs.js.coffee",
-		"/home/phil/RailsProjects/opencantine/app/assets/stylesheets/application.css",
-		"/home/phil/RailsProjects/opencantine/app/controllers/familles_controller.rb",
 		"/home/phil/RailsProjects/opencantine/app/views/familles/index.html.erb",
 		"/home/phil/RailsProjects/opencantine/app/views/prestations/index.html.erb",
 		"/home/phil/RailsProjects/opencantine/app/views/prestations/new_manual_classroom.erb",
 		"/home/phil/RailsProjects/opencantine/app/assets/javascripts/prestations.js.coffee",
 		"/home/phil/RailsProjects/opencantine/app/views/enfants/index.html.erb",
-		"/home/phil/RailsProjects/opencantine/app/views/layouts/standard.html.erb",
 		"/home/phil/RailsProjects/opencantine/app/assets/javascripts/familles.js.coffee",
-		"/home/phil/RailsProjects/opencantine/app/controllers/application_controller.rb",
 		"/home/phil/RailsProjects/opencantine/app/views/admin/signin.erb",
 		"/home/phil/RailsProjects/opencantine/app/views/paiements/index.html.erb",
 		"/home/phil/RailsProjects/opencantine/app/models/log.rb",
 		"/home/phil/RailsProjects/opencantine/db/migrate/20141215161308_add_log_date_default_value.rb",
-		"/home/phil/RailsProjects/opencantine/app/controllers/villes_controller.rb",
 		"/home/phil/RailsProjects/opencantine/app/models/tarif.rb",
 		"/home/phil/RailsProjects/opencantine/app/models/classroom.rb",
 		"/home/phil/RailsProjects/opencantine/app/models/vacance.rb",
@@ -679,9 +655,6 @@
 		"/home/phil/RailsProjects/opencantine/app/controllers/classrooms_controller.rb",
 		"/home/phil/RailsProjects/opencantine/app/views/classrooms/index.html.erb",
 		"/home/phil/RailsProjects/opencantine/app/controllers/paiements_controller.rb",
-		"/home/phil/RailsProjects/opencantine/app/models/paiement.rb",
-		"/home/phil/RailsProjects/opencantine/app/models/enfant.rb",
-		"/home/phil/RailsProjects/opencantine/config/environments/development.rb",
 		"/home/phil/RailsProjects/opencantine/app/models/famille.rb",
 		"/home/phil/RailsProjects/opencantine/app/models/concerns/myconcernmodule.rb",
 		"/home/phil/RailsProjects/opencantine/app/views/prestations/new_manual.erb",
@@ -693,7 +666,6 @@
 		"/home/phil/RailsProjects/opencantine/app/views/familles/show.html.erb",
 		"/home/phil/RailsProjects/opencantine/app/views/layouts/printer.html.erb",
 		"/home/phil/RailsProjects/opencantine/app/views/enfants/liste.html.erb",
-		"/home/phil/RailsProjects/opencantine/app/views/enfants/_enfant.erb",
 		"/home/phil/RailsProjects/opencantine/app/views/prestations/stats_mensuelle.erb",
 		"/home/phil/RailsProjects/opencantine/app/views/enfants/show.html.erb",
 		"/home/phil/RailsProjects/opencantine/db/migrate/20141112103002_add_nomfamille_to_enfant.rb",
@@ -743,19 +715,7 @@
 		"/home/philippe/RailsProjects/openCantine3/app/assets/javascripts/application.js",
 		"/home/philippe/RailsProjects/openCantine3/Gemfile",
 		"/home/philippe/RailsProjects/openCantine3/config/sitemap.rb",
-		"/home/philippe/RailsProjects/openCantine3/app/models/blog.rb",
-		"/home/philippe/RailsProjects/openCantine3/app/views/admin/points_forts.erb",
-		"/home/philippe/RailsProjects/openCantine3/app/views/admin/guide.erb",
-		"/home/philippe/RailsProjects/openCantine3/app/views/villes/edit.html.erb",
-		"/home/philippe/RailsProjects/openCantine3/app/views/prestations/new_manual.erb",
-		"/home/philippe/RailsProjects/scopelec/app/controllers/dossiers_controller.rb",
-		"/home/philippe/RailsProjects/openCantine3/db/migrate/20141031104152_add_index.rb",
-		"/home/philippe/RailsProjects/openCantine3/app/models/facturation_modules/01-Standard.rb",
-		"/home/philippe/RailsProjects/openCantine3/config/environments/development.rb",
-		"/home/philippe/RailsProjects/openCantine3/app/views/factures/stats_mensuelle_params.erb",
-		"/home/philippe/RailsProjects/openCantine3/app/views/factures/stats_mensuelle.erb",
-		"/home/philippe/RailsProjects/openCantine3/app/views/factures/show.html.erb",
-		"/home/philippe/RailsProjects/openCantine3/app/views/factures/edit.html.erb"
+		"/home/philippe/RailsProjects/openCantine3/app/models/blog.rb"
 	],
 	"find":
 	{
@@ -775,6 +735,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ref",
 			"args.user_id",
 			"args.mairie_id",
 			"@syndic",
@@ -943,49 +904,51 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/controllers/villes_controller.rb",
+					"file": "app/controllers/factures_controller.rb",
 					"settings":
 					{
-						"buffer_size": 3367,
+						"buffer_size": 24796,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								6987,
+								6987
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 816.0,
+						"translation.y": 7197.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/controllers/enfants_controller.rb",
+					"file": "app/models/facture.rb",
 					"settings":
 					{
-						"buffer_size": 4504,
+						"buffer_size": 778,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2647,
-								2647
+								279,
+								279
 							]
 						],
 						"settings":
@@ -995,32 +958,30 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1428.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "config/routes.rb",
+					"file": "app/views/admin/facturation_speciale_do.html.erb",
 					"settings":
 					{
-						"buffer_size": 2587,
+						"buffer_size": 64,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2577,
-								2577
+								53,
+								53
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1030,44 +991,46 @@
 				},
 				{
 					"buffer": 3,
-					"file": "lib/tasks/familles.rake",
+					"file": "app/controllers/admin_controller.rb",
 					"settings":
 					{
-						"buffer_size": 4082,
+						"buffer_size": 9689,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4069,
-								4069
+								9204,
+								9204
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1377.0,
+						"translation.y": 3780.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "app/views/admin/import.erb",
+					"file": "app/views/admin/facturation_speciale.html.erb",
 					"settings":
 					{
-						"buffer_size": 1528,
+						"buffer_size": 1293,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								320,
-								320
+								874,
+								874
 							]
 						],
 						"settings":
@@ -1077,140 +1040,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/views/admin/import_do.erb",
-					"settings":
-					{
-						"buffer_size": 277,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								207,
-								207
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/models/enfant.rb",
-					"settings":
-					{
-						"buffer_size": 1237,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								541,
-								541
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "public/familles.csv",
-					"settings":
-					{
-						"buffer_size": 978,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								955,
-								955
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "app/controllers/admin_controller.rb",
-					"settings":
-					{
-						"buffer_size": 7628,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7387,
-								7387
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3095.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "app/views/layouts/standard.html.erb",
-					"settings":
-					{
-						"buffer_size": 3859,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 51.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1286,6 +1115,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 318.0,
+	"side_bar_width": 216.0,
 	"status_bar_visible": false
 }
