@@ -17,6 +17,7 @@ gem 'capture_stdout'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+gem 'open_uri_redirections'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -15,7 +15,7 @@ class FacturePdf < Prawn::Document
 	       image logo_url, :height => 40
 		else
 		   logo_url =  @mairie.logo_url 
-	       image open(logo_url), :height => 40
+	       image open(logo_url, :allow_redirections => :safe), :height => 40
 		end
 		move_down 10
 	else

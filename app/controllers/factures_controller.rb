@@ -1,10 +1,10 @@
 # encoding: utf-8
+
 require "open-uri"
 
 class FacturesController < ApplicationController
 
   layout :determine_layout
-
   before_filter :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle']
 
   def check

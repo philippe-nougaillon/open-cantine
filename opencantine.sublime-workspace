@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"fac",
+				"facture_id"
+			],
+			[
 				"famille",
 				"familles"
 			],
@@ -106,10 +110,6 @@
 			[
 				"t",
 				"table	Tag"
-			],
-			[
-				"fac",
-				"facture"
 			],
 			[
 				"factures_",
@@ -523,7 +523,7 @@
 			"file": "app/controllers/factures_controller.rb",
 			"settings":
 			{
-				"buffer_size": 24796,
+				"buffer_size": 24821,
 				"line_ending": "Unix"
 			}
 		},
@@ -540,6 +540,22 @@
 			"settings":
 			{
 				"buffer_size": 64,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/environments/development.rb",
+			"settings":
+			{
+				"buffer_size": 1408,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/database.yml",
+			"settings":
+			{
+				"buffer_size": 786,
 				"line_ending": "Unix"
 			}
 		},
@@ -904,7 +920,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -912,15 +928,15 @@
 					"file": "app/controllers/factures_controller.rb",
 					"settings":
 					{
-						"buffer_size": 24796,
+						"buffer_size": 24821,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6987,
-								6987
+								7894,
+								7894
 							]
 						],
 						"settings":
@@ -930,7 +946,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7197.0,
+						"translation.y": 3831.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -991,6 +1007,62 @@
 				},
 				{
 					"buffer": 3,
+					"file": "config/environments/development.rb",
+					"settings":
+					{
+						"buffer_size": 1408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								631,
+								631
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "config/database.yml",
+					"settings":
+					{
+						"buffer_size": 786,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								101,
+								101
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "app/controllers/admin_controller.rb",
 					"settings":
 					{
@@ -1018,7 +1090,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
 					"file": "app/views/admin/facturation_speciale.html.erb",
 					"settings":
 					{
