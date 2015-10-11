@@ -10,7 +10,7 @@ class PrestationsController < ApplicationController
   def check
     @presta = Prestation.find(params[:id])
     @enfant = Enfant.find(@presta.enfant_id)
-    unless Famille.find(:first, :conditions => [" id = ? AND mairie_id = ?", @enfant.famille_id, session[:mairie]])
+    unless Famille.where("id = ? AND mairie_id = ?", @enfant.famille_id, session[:mairie]).any?
        redirect_to :action => 'index'
     end
   rescue
@@ -34,19 +34,8 @@ class PrestationsController < ApplicationController
   def index
     @images = get_etat_images
 
-    if params[:pointage] and session[:user_readwrite]
-      unless params[:classe].blank?
-        session[:date]   = params[:prestation_date]
-        session[:classe] = params[:classe]
-        redirect_to '/presence'
-      else
-        flash[:notice] = "Veuillez choisir une classe"
-        redirect_to prestations_path(prestation_date:params[:prestation_date])  
-      end
-    else
-      params[:sort] ||= 'date,enfants.classe,familles.nom,enfants.prenom'
-		  refresh 	 
-	 end
+    params[:sort] ||= 'date,enfants.classe,familles.nom,enfants.prenom'
+	  refresh 	 
   end
 
   def refresh
@@ -77,7 +66,7 @@ class PrestationsController < ApplicationController
     @totaux = params[:totaux] unless params[:totaux].blank?
     case @periode
     when "jour" 
-      @titre = "Liste des prestations au #{@date}"
+      @titre = "Liste des prestations du #{@date}"
     when "semaine" 
       @titre = "Liste des prestations du #{@date} au #{@date.to_date + 1.week}"
     when "mois" 
@@ -147,7 +136,7 @@ class PrestationsController < ApplicationController
   # POST /prestations
   # POST /prestations.xml
   def create
-    @prestation_foo = Prestation.new(params[:prestation])
+    @prestation_foo = Prestation.new(prestation_params)
 	  @prestation_date = params[:prestation_date]
     ajouts = jours = erreurs = 0
 
@@ -186,7 +175,7 @@ class PrestationsController < ApplicationController
                     end
                       
                     if (params[:lundi] and wday == 1) or (params[:mardi] and wday == 2) or (params[:mercredi] and wday == 3) or (params[:jeudi] and wday == 4) or (params[:vendredi] and wday == 5)
-                      @prestation = Prestation.new(params[:prestation])
+                      @prestation = Prestation.new(prestation_params)
                       @prestation.enfant_id = enfant.id
                       @prestation.date = date
                       @prestation.totalP = 0.00
@@ -225,7 +214,7 @@ class PrestationsController < ApplicationController
   # PUT /prestations/1.xml
   def update
     @prestation = Prestation.find(params[:id])
-    @prestation.attributes = params[:prestation]
+    @prestation.attributes = prestation_params
     @prestation.log_changes(1, session[:user])
 
     respond_to do |format|
@@ -256,7 +245,7 @@ class PrestationsController < ApplicationController
   # PUT /prestations/1.xml
   def update_from_enfants
     @prestation = Prestation.find(params[:id])
-    @prestation.attributes = params[:prestation]
+    @prestation.attributes = prestation_params
     @prestation.log_changes(1, session[:user])
 
     respond_to do |format|
@@ -365,7 +354,7 @@ class PrestationsController < ApplicationController
 
     if params[:famille_id]
        @famille_id = params[:famille_id]
-       @enfants = Enfant.find_all_by_famille_id(@famille_id)
+       @enfants = Enfant.where(famille_id:@famille_id)
     else
        @enfants = Enfant.where(id:params[:enfant_id])
     end
@@ -446,7 +435,7 @@ class PrestationsController < ApplicationController
   def new_manual_calc_test
     if params[:famille_id]
        @famille_id = params[:famille_id]
-       @enfants = Enfant.find_all_by_famille_id(@famille_id)
+       @enfants = Enfant.where(famille_id:@famille_id)
     else
        @enfants = Enfant.find(:all, :conditions => ["id = ? ", params[:enfant_id]])
     end
@@ -486,13 +475,14 @@ class PrestationsController < ApplicationController
   end
 
   def new_manual_classroom
-	  @date = session[:date]
-	  @classe = session[:classe]
-
+    @classrooms = Ville.find(session[:mairie]).classrooms
+    @date = params[:date]
+    @classe = params[:classe]
+   
     @kids_to_show=[]
 	  @kids_to_show_presta=[]
 
-	  @enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')
+	  @enfants = Enfant.where(classe:@classe).joins(:famille).order('familles.nom')
 	  @enfants.each do |e|
 		  @kids_to_show.push(e)
 		  @presta = e.prestations.where("date = ? and facture_id is null", @date.to_date.to_s(:en)).last
@@ -505,25 +495,28 @@ class PrestationsController < ApplicationController
   end
   
   def new_manual_classroom_check
-  	@date   = session[:date] 
-  	@classe = session[:classe] 
+    if params[:date] and params[:classe] and params[:check]
+    	@date   = params[:date] 
+    	@classe = params[:classe] 
+      @ajouts = 0
+      params[:check].keys.each do | param |
+        enfant_id = param.split('.').first.to_i
+        presta = param.split('.').last
 
-  	@enfants = Enfant.find_all_by_classe(@classe, :joins =>:famille, :order => 'nom')
+        @prestation = Prestation.find_or_create_by(date:@date.to_date.to_s(:en), enfant_id:enfant_id)
+        @prestation.repas = '1' if presta == 'repas' and @prestation.repas != '1'
+        @prestation.garderieAM = '1' if presta == 'garderieAM' and @prestation.garderieAM != '1'
+        @prestation.garderiePM = '1' if presta == 'garderiePM' and @prestation.garderiePM != '1'
+        @prestation.centreAM = '1' if presta == 'centreAM' and @prestation.centreAM != '1'
+        @prestation.centrePM = '1' if presta == 'centrePM' and @prestation.centrePM != '1'
 
-  	@enfants.each do |e|
-  		if params[:"#{e.id}RepasAM"] or params[:"#{e.id}GarderieAM"] or params[:"#{e.id}GarderiePM"] or params[:"#{e.id}CentreAM"] or params[:"#{e.id}CentrePM"] then
-  			@prestation = Prestation.find_or_create_by_date_and_enfant_id(@date.to_date.to_s(:en), e.id)
-  		  @prestation.repas = params[:"#{e.id}RepasAM"] ? '1' : '0'
-  		  @prestation.garderieAM = params[:"#{e.id}GarderieAM"] ? '1' : '0'
-  		  @prestation.garderiePM = params[:"#{e.id}GarderiePM"] ? '1' : '0'
-  		  @prestation.centreAM = params[:"#{e.id}CentreAM"] ? '1' : '0'
-  		  @prestation.centrePM = params[:"#{e.id}CentrePM"] ? '1' : '0'
+        @ajouts += 1 if @prestation.changes.any?
         @prestation.log_changes(0, session[:user])
-  			@prestation.save
-  		end
-  	end
-    flash[:notice]="Prestations enregistrées..."
-    redirect_to prestations_path
+        @prestation.save
+      end
+      flash[:notice] = "#{@ajouts} prestation(s) enregistrée(s)..."
+    end
+    redirect_to new_manual_classroom_path(date:params[:date], classe:params[:classe])
   end 
 
   def stats_mensuelle_params
@@ -546,5 +539,11 @@ class PrestationsController < ApplicationController
   		redirect_to "/prestations/stats_mensuelle_params/0"
   	end
   end	
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def prestation_params
+      params.require(:prestation).permit(:enfant_id,:facture_id,:etude,:date,:totalA,:totalP,:garderieAM,:garderiePM,:centreAM,:centrePM,:repas)
+    end
 
 end

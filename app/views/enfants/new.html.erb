@@ -1,10 +1,8 @@
-<div id="form_body">
-	<br>
-	<h3>Ajout d'un nouvel enfant</h3>
+<div id="form_actions"></div>
 
-	<%= form_for(@enfant) do |f| %>
+<br>
+<h3>Ajout d'un enfant</h3>
 
-	  <%= render :partial => 'enfant', :locals => { :f => f } %>
-
-	<% end %>
-</div>
+<%= simple_form_for(@enfant) do |f| %>
+  <%= render :partial => 'enfant', :locals => { :f => f } %>
+<% end %>

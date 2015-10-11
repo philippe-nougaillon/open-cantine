@@ -41,7 +41,7 @@ class MoncompteController < ApplicationController
     if @famille
       # envoi le mot de passe 
       @famille.update_attributes(password:random_password)
-      UserMailer.send_password(@famille).deliver
+      UserMailer.send_password(@famille).deliver_now
       flash[:notice] = "Un nouveau mot de passe vient d'être envoyé à #{@famille.email}"
     else
       flash[:warning] = "Adresse email inconnue..."

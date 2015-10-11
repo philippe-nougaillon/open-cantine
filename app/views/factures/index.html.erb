@@ -1,13 +1,14 @@
 <div id="form_actions">
   <%= form_tag request.path, :method => 'get' do %>
-      Référence :
-      <%= text_field_tag "search", params[:search] %>
+      Référence/Nom :
+      <%= text_field_tag "search", params[:search], size:15 %>
       <%= submit_tag 'Rechercher' %>
       <span id="adroite">
         <% if session[:user_readwrite] %>
-          <%= link_to "Facturer le mois", :action => "new_all", :id => 0 %>
+          <%= link_to "Facturer", factures_new_all_path %>
+          <%= link_to "Facture spéciale", factures_facturation_speciale_path %>
         <% end %>
-        <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %>
+        <%= link_to "Etat mensuel", :action => 'stats_mensuelle_params' %>
         <%= link_to "Export Excel", factures_path(format: "xls") %>
     </span>
   <% end %>
@@ -15,38 +16,38 @@
 
 <div id="form_body">
   <% if @factures.any? %>
-    <table class="sample">
+    <table>
       <tr>
-        <th><%= link_to "Référence", :sort => "ref" %></th>
-        <th><%= link_to "Date", 	   :sort => "date" %></th>
-        <th><%= link_to "Echéance",  :sort => "echeance" %></th>
-        <th><%= link_to "Famille",   :sort => "familles.nom" %></th>
-        <th><%= link_to "Montant",   :sort => "montant" %></th>
-        <th><%= link_to "Vérifiée?", :sort => "checked" %></th>
-        <th><%= link_to "Mémo", :sort => "footer" %></th>
+        <th><%= link_to "Référence", sort:"ref" %></th>
+        <th><%= link_to "Date", 	   sort:"date" %></th>
+        <th><%= link_to "Echéance",  sort:"echeance" %></th>
+        <th><%= link_to "Famille",   sort:"familles.nom" %></th>
+        <th><%= link_to "Montant",   sort:"montant" %></th>
+        <th><%= link_to "Vérifiée?", sort:"checked" %></th>
+        <th><%= link_to "Mémo",      sort:"footer" %></th>
         <th>PDF</th>
-        <th><%= link_to "Envoyée le", :sort => "envoyee" %></th>
+        <th><%= link_to "Envoyée le", sort:"envoyee" %></th>
   	    <th/>	
         <th/>
       </tr>
 
       <% for facture in @factures %>
         <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
-          <td><%= link_to facture.ref, :action => 'print', :id => facture.id %></td>
-          <td><%= I18n.l(facture.date) %></td>
+          <td><%= link_to facture.ref, factures_print_path(id:facture.id) %></td>
+          <td><%= I18n.l(facture.date, format: :short) %></td>
           <td><%=h facture.echeance.to_s(:fr) %></td>
           <td><%= link_to facture.famille.nom, facture.famille  %> </td>
           <td style="text-align:right"><%=h number_to_currency(facture.montant, :locale => :fr) %></td>
-  		    <td style="text-align:center"><%= image_tag "ok.jpeg", :size => '15x15' if facture.checked %></td>
+  		    <td style="text-align:center"><%= image_tag "ok.jpeg", size: '15x15' if facture.checked %></td>
   		    <td><%= facture.footer[0..15] if facture.footer %></td>
   		    <td>
-            <%= link_to image_tag("pdf-logo.png", :size => "15x15"), facture_path(facture, :format => :pdf)  %>
+            <%= link_to image_tag("pdf-logo.png", size: "15x15"), facture_path(facture, :format => :pdf)  %>
           </td>
   		    <td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
   		    <td>
             <% if facture.famille %> 
     	        <% unless facture.famille.email.blank? %>
-                <%= link_to "Envoyer", :action => 'send_invoice', :id => facture.id %> 
+                <%= link_to "Envoyer", factures_send_invoice_path(id:facture.id) %> 
               <% end %>
             <% end %>
           </td>
@@ -54,7 +55,6 @@
         </tr>
       <% end %>
     </table>
-    <br>
     <%= page_entries_info @factures %>
     <%= will_paginate @factures %>
   <% else %>

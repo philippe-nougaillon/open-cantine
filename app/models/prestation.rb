@@ -4,22 +4,20 @@ require 'concerns/logmodule.rb'
 class Prestation < ActiveRecord::Base
   include LogModule
 
-  attr_protected :id
-
   belongs_to :enfant
   has_many :familles, :through => :enfant
  
   validates_presence_of :date, :message => "Date manquante !"
   validates_uniqueness_of :enfant_id, :scope => [:date], :message => "&Prestation en doublon de date"
 
-  scope :afacturer,   :conditions => "facture_id is null", :order => 'date'
-  scope :facturees,   :conditions => "facture_id is not null", :order => 'date'
-  scope :_repas,       :conditions => "repas = '1'"
-  scope :_garderieAM,  :conditions => "garderieAM = '1'"
-  scope :_garderiePM,  :conditions => "garderiePM = '1'"
-  scope :_centreAM,    :conditions => "centreAM = '1'"
-  scope :_centrePM,    :conditions => "centrePM = '1'"
-  scope :_etude,	   :conditions => "etude = '1'"
+  scope :afacturer,   -> { where("facture_id is null").order(:date) }
+  scope :facturees,   -> { where("facture_id is not null").order(:date) }
+  scope :_repas,      -> { where(repas:'1') }
+  scope :_garderieAM, -> { where(garderieAM:'1') }
+  scope :_garderiePM, -> { where(garderiePM:'1') }
+  scope :_centreAM,   -> { where(centreAM:'1') }
+  scope :_centrePM,   -> { where(centrePM:'1') }
+  scope :_etude,	    -> { where(etude:'1') }
 
   def self.search(search, classe, mairie, sort, periode)
     @prestations = Prestation.joins(:enfant).joins(:familles).where("familles.mairie_id = ?", mairie)

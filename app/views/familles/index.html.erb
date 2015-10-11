@@ -1,6 +1,6 @@
 
 <div id="form_actions">
-  <%= form_tag request.path, :method => 'get' do %>
+  <%= form_tag request.path, method: 'get' do %>
       Nom :
       <%= text_field_tag :nom, params[:nom], id: "navbar-search-input", class: 'form-control' %>
 
@@ -11,20 +11,21 @@
   	<% if session[:user_readwrite] %>
          <%= link_to 'Ajouter une famille', new_famille_path %>
   	<% end %>
-  	<%= link_to 'Listing Familles', :action => "listing", :id => 0 %>
+  	<%= link_to 'Listing Familles', familles_listing_path %>
   </span> 	
   <% end %>
 </div>
+
 <div id="form_body">
-  <table class="sample">
+  <table>
     <tr>
-      <th><%= link_to "Nom", :sort => "nom" %></th>
+      <th><%= link_to "Nom", url_for(params.merge(sort:'nom')) %></th>
       <th>Enfant(s)</th>
       <th>Adresse</th>
-      <th><%= link_to "Cp", :sort => "cp" %></th>
-      <th><%= link_to "Ville", :sort => "ville" %></th>
-      <th><%= link_to "Tél.", :sort => "phone" %></th>
-      <th><%= link_to "Email", :sort => "email" %></th>  
+      <th><%= link_to "Cp", url_for(params.merge(sort:"cp")) %></th>
+      <th><%= link_to "Ville", url_for(params.merge(sort:"ville")) %></th>
+      <th><%= link_to "Tél.", url_for(params.merge(sort:"phone")) %></th>
+      <th><%= link_to "Email", url_for(params.merge(sort:"email")) %></th>  
       <th>Dernière facture</th>
      </tr>
 

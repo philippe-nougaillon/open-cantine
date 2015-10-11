@@ -26,7 +26,7 @@ class EnfantsController < ApplicationController
 
   def check
     enfant_id = Enfant.find(params[:id]).famille_id
-    unless Famille.find(:first, :conditions => [" id = ? AND mairie_id = ?", enfant_id, session[:mairie]])
+    unless Famille.where("id = ? AND mairie_id = ?", enfant_id, session[:mairie]).any?
       redirect_to :action => 'index'
     end
   rescue
@@ -43,11 +43,22 @@ class EnfantsController < ApplicationController
       end  
       session[:order_by] = sort
     end
+    order_by = (sort.blank?) ? "id DESC" : sort 
 
     mairie = Ville.find(session[:mairie])
-    @enfants = Enfant.search(params[:search], params[:page], params[:classe], session[:mairie], sort)
     @classes = mairie.classrooms.order('nom').collect {|p| [ "#{p.nom} - #{p.referant}", p.id ] }
-    @classes.insert(0, '')
+
+    @enfants = Enfant.where("familles.mairie_id = ?", session[:mairie]).joins(:famille).order('classe,familles.nom,prenom')
+
+    unless params[:classe].blank?
+      @enfants = @enfants.where(classe:params[:classe])
+    end
+
+    unless params[:search].blank?
+      @enfants = @enfants.where("prenom like ? OR familles.nom like ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+
+    @enfants = @enfants.paginate(page:params[:page], per_page:18).order(order_by)    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -57,7 +68,16 @@ class EnfantsController < ApplicationController
 
   def liste
     mairie = Ville.find(session[:mairie])
-    @enfants = mairie.enfants.joins(:famille).order('classe,familles.nom,prenom')
+    @enfants = Enfant.where("familles.mairie_id = ?", session[:mairie]).joins(:famille)
+
+    unless params[:classe].blank?
+      @enfants = @enfants.where(classe:params[:classe])
+    end
+
+    unless params[:search].blank?
+      @enfants = @enfants.where("prenom like ? OR familles.nom like ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+    @enfants = @enfants.order('classe,familles.nom,prenom')
   end
 
   # GET /enfants/1
@@ -97,7 +117,7 @@ class EnfantsController < ApplicationController
   # POST /enfants
   # POST /enfants.xml
   def create
-    @enfant = Enfant.new(params[:enfant])
+    @enfant = Enfant.new(enfant_params)
     @enfant.log_changes(0, session[:user])
 
     respond_to do |format|
@@ -122,7 +142,7 @@ class EnfantsController < ApplicationController
   # PUT /enfants/1.xml
   def update
     @enfant = Enfant.find(params[:id])
-    @enfant.attributes = params[:enfant]
+    @enfant.attributes = enfant_params
     @enfant.log_changes(1, session[:user])
     
     respond_to do |format|
@@ -156,5 +176,11 @@ class EnfantsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def enfant_params
+      params.require(:enfant).permit(:famille_id,:prenom,:age,:classe,:referant,:sansPorc,:allergies,:dateNaissance,:tarif_id,:habitudeGarderieAM,:habitudeGarderiePM,:nomfamille)
+    end
 
 end

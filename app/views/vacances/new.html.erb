@@ -9,11 +9,12 @@
        <p><%= msg %></p>
      <% end %>
 
-	 <%= f.input :nom %>
-	 <%= f.input :debut, :as => :string, :input_html => { :class => 'date_picker' } %>
-	 <%= f.input :fin,   :as => :string, :input_html => { :class => 'date_picker' } %>
+	 <%= f.input :nom, :input_html => { size: 20 } %>
+	 <%= f.input :debut, :as => :string, :input_html => { :class => 'date_picker', size: 10 } %>
+	 <%= f.input :fin,   :as => :string, :input_html => { :class => 'date_picker', size: 10 } %>
+	 <br>
 
-     <div style="margin-top:10px;">
+     <div style="margin-left:120px;">
 		 <%= image_submit_tag "valider.gif" %>
 	 </div>
 	<% end %>

@@ -1,3 +1,7 @@
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+</head>
+
 <table border="0">
   <tr>
     <th>ID</th>
@@ -21,13 +25,16 @@
 		<td><%= f.ref %></td>
 		<td><%= f.date %></td>
 		<td><%= f.echeance %></td>
-		<% famille = Famille.find_or_create_by_id(f.famille_id) %>
-	    <td><%= famille.nom.upcase if famille.nom %></td>
+		<% if Famille.where(id:f.famille_id).any? %>
+		    <td><%= Famille.find(f.famille_id).nom.upcase %></td>
+		<% else %>
+			<td />
+		<% end %>
 	 	<td><%= f.total_cantine %></td>
 		<td><%= f.total_garderie %></td>
 		<td><%= f.total_centre %></td>
 		<td><%= f.montant %></td>
-		<td><%= f.checked %></td>
+		<td><%= f.checked ? "O" : "N" %></td>
 		<td><%= f.footer %></td>
 		<td><%= f.envoyee %></td>
 		<td><%= f.created_at %></td>

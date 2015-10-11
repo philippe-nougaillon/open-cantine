@@ -1,29 +1,28 @@
 <div id="form_actions">
 	<%= form_tag request.path, :method => 'get' do %>
 		Du:
-	  	<%= text_field_tag('prestation_date', params[:prestation_date], :size => 9, class: "date") %>
+	  	<%= text_field_tag('prestation_date', params[:prestation_date], size:9, class: "date", onchange:'this.form.submit()') %>
 
 		Période:
-		<%= radio_button_tag "periode", 'jour', (params[:periode] == 'jour') %> Jour
-		<%= radio_button_tag "periode", 'semaine', (params[:periode] == 'semaine') %> Semaine
-		<%= radio_button_tag "periode", 'mois', (params[:periode] == 'mois') %> Mois
+		<%= radio_button_tag "periode", 'jour', (params[:periode] == 'jour'), onchange:'this.form.submit()' %> Jour
+		<%= radio_button_tag "periode", 'semaine', (params[:periode] == 'semaine'), onchange:'this.form.submit()' %> Semaine
+		<%= radio_button_tag "periode", 'mois', (params[:periode] == 'mois'), onchange:'this.form.submit()' %> Mois
 
 		| Classe:
-		<%= select_tag "classe", options_from_collection_for_select(@classrooms, "id", "nom", params[:classe]), :include_blank => true %>
+		<%= select_tag "classe", options_from_collection_for_select(@classrooms, "id", "nom", params[:classe]), include_blank:true, onchange:'this.form.submit()' %>
 
-		<%= submit_tag 'Afficher' %>
-		<%= check_box_tag "totaux", params[:totaux], params[:totaux] %> Que les totaux?
-		|<%= submit_tag 'Saisie', name: "pointage" %>|
+		<%= submit_tag 'Voir' %>
+		<%= check_box_tag "totaux", params[:totaux], params[:totaux], onchange:'this.form.submit()' %> Que les totaux?
 
 	    <span id="adroite">
+	    	<%= link_to "Pointage", new_manual_classroom_path(date:Date.today) %>
 		    <%= link_to "Editions", action:'editions', search:params[:prestation_date], 
 			classe:params[:classe], periode:params[:periode], id:0 %>
 	    </span>
 	<% end %>
 </div>
+<br>
 
-<div class="span-24 last">
-    <%= render :partial => "list", :locals => { :prestations => @prestations } %>
-</div>
+<%= render partial:'list', :locals => { :prestations => @prestations } %>
   
 

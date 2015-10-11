@@ -1,10 +1,14 @@
+<div id="form_actions"></div>
+
+<br>
+
 <h3>
   <%=h @enfant.prenom %>
   <%=h @famille.nom  %>
 </h3>
 
 <div>
-  <%= form_for(@prestation, :url =>  { :action => :update_from_enfants, :id => @prestation }) do |form| %>
+  <%= form_for(@prestation) do |form| %>
       <p style="display:none">
         <%= form.label :enfant_id %>
         <%= form.text_field :enfant_id %>

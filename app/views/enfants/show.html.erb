@@ -1,12 +1,10 @@
-<div id="form_actions">
-  
-</div>
+<div id="form_actions"></div>
 
 <br>
 <br>
 
-<div class="span-10">
-  <table class=sample>
+<div class="span-9">
+  <table>
     <tr>
       <td>
         <td>Prénom</td>
@@ -55,7 +53,6 @@
 		<%= link_to("[X]", @enfant, data: { confirm:'Certain(e) de vouloir supprimer cette fiche enfant ?'}, method: :delete) %> | Inscriptions 
     <%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :id  => @enfant.id, :year => Date.today.year %> | 
     <%= link_to "Automatique", :controller => 'prestations', :action => 'new', :enfant_id  => @enfant.id %>
-    |
 	<% end %>
 </div>
 <div class="span-1">
@@ -63,7 +60,7 @@
 </div>
 
 <div class="span-10 last ">
-  <table class=sample>
+  <table>
      <tr>
       <% if @enfant.sansPorc or @enfant.allergies %>
           <td>Menu spécial </td>
@@ -72,46 +69,46 @@
               <%= "Sans Porc" if @enfant.sansPorc %>
               <%= "Allergies" if @enfant.allergies %>
             </b>
-	</td>
-	<% end %>
+	        </td>
+	    <% end %>
      </tr>
      <tr>
-      <% if @enfant.tarif_id %>
-  	 <td>Tarif</td>
-	 <td><b><%= Tarif.find(@enfant.tarif_id).memo %></b></td>
-      <% end %>
+        <% if @enfant.tarif_id %>
+    	     <td>Tarif</td>
+  	       <td><b><%= Tarif.find(@enfant.tarif_id).memo %></b></td>
+        <% end %>
       </tr>
-	<% if @enfant.habitudeGarderieAM %>		
-	 <tr>	
-	  	<td id="label">Habitude garderie Matin</td>
-		<td>
-			<%= select("enfant","habitudeGarderieAM", {"1h" => 5, "1h30" => 6, "2h" => 7, "Aucune" => nil }, :disabled => true) %>
-	 	</td>
-	</tr>
+	    <% if @enfant.habitudeGarderieAM %>		
+    	 <tr>	
+    	  	<td id="label">Habitude garderie Matin</td>
+    		  <td>
+    			 <%= select("enfant","habitudeGarderieAM", {"1h" => 5, "1h30" => 6, "2h" => 7, "Aucune" => nil }, :disabled => true) %>
+	 	      </td>
+	     </tr>
 	<% end %>
 	
-       <% if @enfant.habitudeGarderiePM %>		
-	<tr>
-	  	<td id="label">Habitude garderie Soir</td>
-	 	<td>
-			<%= select("enfant","habitudeGarderiePM", {"1h" => 5, "1h30" => 6, "2h" => 7, "Aucune" => nil }) %>
-		</td>
-	</tr>
+  <% if @enfant.habitudeGarderiePM %>		
+  	<tr>
+  	  	<td id="label">Habitude garderie Soir</td>
+  	 	  <td>
+  			   <%= select("enfant","habitudeGarderiePM", {"1h" => 5, "1h30" => 6, "2h" => 7, "Aucune" => nil }) %>
+  		  </td>
+  	</tr>
 	<% end %>
   </table>
 </div>
 
 <div class="span-24 last">
-   <br>
-   <br>
+  <br>
+  <br><h3>Liste des Prestations</h3>
+  Afficher: 
+  <% if params[:facturees] %>
+    <b>Prestations facturées</b> | <%= link_to "Prestations non facturées", @enfant %>
+  <% else %>
+    <%= link_to "Prestations facturées", enfant_path(facturees:'on') %> | <b>Prestations non facturées</b>
+  <% end %>
+  <br>
 
-    Liste des Prestations :
-    <% if params[:facturees] %>
-      <b>Facturées</b> ou <%= link_to "Non facturées", :action => 'show', :id => @enfant.id %>
-    <% else %>
-      <%= link_to "Facturées", :action => 'show', :id => @enfant.id, :facturees => 'on' %> ou <b>Non facturées</b>
-    <% end %>
- 
   <% if @prestations %>
       <% if @prestations.size > 0 %>
 
@@ -141,7 +138,7 @@
         <% @totalA = 0 %>
 
         <br>
-        <table class="sample">
+        <table>
           <tr>
             <th>Date</th>
             <th>Repas</th>

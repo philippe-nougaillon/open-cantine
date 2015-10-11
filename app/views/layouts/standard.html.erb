@@ -12,14 +12,13 @@
     <% user = User.find(user_id) %>
 	<title>openCantine - <%= user.username %></title>
   <% else %>
-	 <title>openCantine</title>
+	<title>openCantine</title>
   <% end %>
 
-  <%= javascript_include_tag "application" %>
-  <%= stylesheet_link_tag '/stylesheets/standard', :media => "all"  %>
-  <%= stylesheet_link_tag "jquery/smoothness/jquery-ui-1.10.4.custom" %>
+  <%= stylesheet_link_tag 'application', media:"all", "data-turbolinks-track" => true   %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true  %>
+
   <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
-  <link rel="stylesheet" href="/stylesheets/blueprint/print.css" type="text/css" media="print">	
 
   <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
   <%= csrf_meta_tags %> 
@@ -28,37 +27,38 @@
 <body>
 	<script language="javascript">
 	    $(document).ready(function() {
-	        $("#error_message").fadeOut(10000);
-	        $("#warning_message").fadeOut(10000);
+	        $("#error_message").fadeOut(20000);
+	        $("#warning_message").fadeOut(20000);
 	    });
 	</script>
     <div class="container">
-		<div id="login" class="span-24 last">
+		<div style="float:right">
 		    <% unless user_id.nil? %>
-			    <%= link_to link_to image_tag('school.png', size:"15x15"), familles_path %> 
+			    <%= link_to link_to image_tag('school.png', size:'15x15'), familles_path %> 
 			    | <%= image_tag('icon_user.png', size:'15x15') %>
-			      <%= link_to user.username, :controller => 'admin', :action => 'user_edit' %>
-		        | <%= link_to "Journal", :controller => 'logs' %>
-				| <%= link_to "Paramètres", :controller => 'admin', :action => 'setup' %>
-		        | <%= link_to "Aide", :controller => 'admin', :action => 'bienvenue' %>
-		        | <%= link_to "Déconnexion", {:controller => 'admin', :action => 'signout', :id => 0 } %>
+			      <%= link_to user.username, admin_user_edit_path %>
+		        | <%= link_to "Journal", logs_path %>
+				| <%= link_to "Paramètres", admin_setup_path %>
+		        | <%= link_to "Aide", admin_bienvenue_path %>
+		        | <%= link_to "Déconnexion", admin_signout_path %>
 		    <% end %>
 		</div>
+		<br><br>
 
-		<div id="title" class="span-10">
-           <%= image_tag 'playground.png' %>
-           <%= image_tag 'diner.png' %>
-           <%= image_tag 'picnic.png' %><br>
-           <%= link_to 'openCantine', familles_path %>
+		<div>
+           <%= link_to image_tag('playground.png', width:30), familles_path %>
+           <%= link_to image_tag('diner.png', width:30), familles_path %>
+           <%= link_to image_tag('picnic.png', width:30),familles_path %>
+           <br>
+           <h3>
+           		<%= link_to 'openCantine', familles_path %>
+           		<% if user_id %>
+	           		/ <%= link_to Ville.find(session[:mairie]).nom, familles_path %>
+	           	<% end %>	
+       		</h3>
 		</div>
 
 		<div>
-			<br><br>
-			<h3><%= link_to Ville.find(session[:mairie]).nom, familles_path unless user_id.nil? %></h3>	
-		</div>
-
-		<div class="span-24 last">
-		    <hr>
 		    <div id="error_message">  <%= flash[:notice]  %></div>
 		    <div id="warning_message"><%= flash[:warning] %></div>
 		</div>
@@ -66,29 +66,28 @@
 		<div id="menubar" class="span-24 last">
 		   <% if ['familles','enfants','prestations','factures','paiements'].include?(controller) %>
 				<div class="span-4" id="menu<%= 'Current' if controller == 'familles' %>">
-	       			<%= image_tag "school.png"  %>
+	       			<%= image_tag("school.png", width:30) %>
 	       			<%= link_to "Familles", familles_path %>
 				</div>
 		    	<div class="span-4" id="menu<%= 'Current' if controller == 'enfants' %>">
-			       <%= image_tag "kid.png"  %>
+			       <%= image_tag("kid.png", width:30)  %>
 			       <%= link_to "Enfants", enfants_path %>
 				</div>
 				<div class="span-4" id="menu<%= 'Current' if controller == 'prestations' %>">
-		      		<%= image_tag "diner.png"  %>
+		      		<%= image_tag("diner.png", width:30)  %>
 		      		<%= link_to "Prestations", prestations_path %>
 				</div>
 				<div class="span-4" id="menu<%= 'Current' if controller == 'factures' %>">
-			       <%= image_tag "factures.png"   %>
+			       <%= image_tag("factures.png", width:30)   %>
 			       <%= link_to "Factures", factures_path %>  
 				</div>
 				<div class="span-4 last" id="menu<%= 'Current' if controller == 'paiements' %>">
-			       <%= image_tag "euro.png"   %>
+			       <%= image_tag("euro.png", width:30)   %>
 			       <%= link_to "Paiements", paiements_path %>
 				</div>
 				<div class="span-24 last" style="background-color: #eee;"></div>
 		    <% end %>
 		</div>
-
 		<div class="span-24 last">
 			<%= yield -%>
     	</div>

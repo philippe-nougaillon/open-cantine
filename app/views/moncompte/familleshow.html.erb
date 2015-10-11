@@ -1,10 +1,5 @@
 <h2>Relevé de situation: <%= @famille.nom %></h2> 
-<% unless params[:all] %>
-  Liste des 5 derniers mouvements. <%= link_to "Afficher tout", action:"familleshow", all:1 %>
-<% else %>
-  Liste de tous les mouvements. <%= link_to "Afficher que les 5 derniers mouvements.", action:"familleshow" %>
-<% end %>
-<hr>
+
 <table class="sample">
   <thead>
     <th>Date</th><th>Type</th><th>Référence</th><th>Facture</th><th>Débit</th><th>Crédit</th><th>Solde</th>
@@ -31,7 +26,6 @@
       </tr>
     <% end %>
   <% end %>
-
   <tr style="background-color:#FFFFA0;">
     <td><%= Date.today.to_s(:fr) %></td>
     <td>SOLDE A CE JOUR</td>
@@ -42,16 +36,25 @@
     <td id="sum"> <%= number_to_currency(@solde, unit:'€') %></td>
   </tr>
 </table>
-<br />
+<% unless params[:all] %>
+  Liste des 5 derniers mouvements. <%= link_to "Afficher tout", action:"familleshow", all:1 %>
+<% else %>
+  Liste de tous les mouvements. <%= link_to "Afficher que les 5 derniers mouvements.", action:"familleshow" %>
+<% end %>
+<br><br><br>
+
+
+
+
+
 <h2>Inscriptions</h2>
 Liste des inscriptions en cours et non facturées
 <hr>
 <% for e in @famille.enfants %>
-   <h3>Enfant: <%= e.prenom %></h3> 
+   <h3><%= e.prenom %></h3> 
 	 <table class="sample">
       <tr>
         <th>Date</th>
-        <th>Enfant</th>
         <th>Repas</th>
         <th>Garderie matin</th>
         <th>Garderie soir</th>
@@ -62,7 +65,6 @@ Liste des inscriptions en cours et non facturées
    	  <% for p in e.prestations.afacturer %>
         <tr>
           <td><%= h format_date(p.date) %></td>
-          <td><%= p.enfant.prenom %></td>
           <td class="center"><%= image_tag @images[p.repas.to_i] if p.repas != '0' %></td>
           <td class="center"><%= image_tag @images[p.garderieAM.to_i] if p.garderieAM != '0' %></td>
           <td class="center"><%= image_tag @images[p.garderiePM.to_i] if p.garderiePM != '0' %></td>
@@ -71,11 +73,11 @@ Liste des inscriptions en cours et non facturées
           <td class="center"><%= image_tag @images[p.etude.to_i] if p.etude != '0' %></td>
         </tr>
 	    <% end %>
-	</table>
+  </table>
   <% if @ville.portail == 2 %>
-      <%= link_to "Modifier les inscriptions de #{e.prenom}", controller:'prestations', action:'new_manual', id:e.id, mois:Date.today.month, year:Date.today.year %>
+      <%= link_to "Ajouter des inscriptions",prestations_new_manual_path(id:e.id, mois:Date.today.month, year:Date.today.year) %>
   <% end %>
-  <br><br>
+  <br><br><br>
 <% end %>
 <br>
 <br>

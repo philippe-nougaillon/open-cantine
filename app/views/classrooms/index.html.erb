@@ -2,7 +2,7 @@
 
 <h3>Liste des Classes</h3>
 
-<table class="sample">
+<table>
   <tr>
     <th>Nom</th>
     <th>Référant</th>
@@ -13,7 +13,7 @@
     <tr class="<%= cycle('list-line-even','list-line-odd') %>" >
       <td><b><%=h classroom.nom %></b></td>
       <td><%=h classroom.referant %></td>
-      <td><%= Enfant.count(:conditions => ["classe = ?", classroom.id]) %> </td>
+      <td><%= Enfant.where(classe:classroom.id).count %> </td>
       <td><%= link_to image_tag('modif.png', size:"15x15"), edit_classroom_path(classroom) %></td>
     </tr>
   <% end %>

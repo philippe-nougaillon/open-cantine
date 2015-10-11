@@ -1,11 +1,12 @@
+<div id="form_actions"></div>
+
 <br>
-<h3>Editions des prestations</h3>
+<h3>Editions</h3>
 <ul>
 	<li>
-		<%= link_to "#{@titre}", :action => 'print', :search => @date, :classe => @classe, 
-			:periode => @periode, :totaux => @totaux, :id => 0 %> 
+		<%= link_to "#{@titre}", prestations_print_path(search:@date, classe:@classe, periode:@periode, totaux:@totaux) %> 
 	</li>
 	<li>
-		<%= link_to "Etat mensuel", :action => 'stats_mensuelle_params', :id => 0 %>
+		<%= link_to "Etat mensuel", factures_stats_mensuelle_params_path %>
 	</li>
 </ul>

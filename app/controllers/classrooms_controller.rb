@@ -7,7 +7,7 @@ class ClassroomsController < ApplicationController
   before_filter :check, :except => ['index', 'new', 'create']
 
   def check
-    unless Classroom.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", params[:id], session[:mairie]])
+    unless Classroom.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?
        redirect_to :action => 'index'
     end
   end
@@ -15,7 +15,7 @@ class ClassroomsController < ApplicationController
   # GET /classrooms
   # GET /classrooms.xml
   def index
-    @classrooms = Classroom.find_all_by_mairie_id(session[:mairie], :order => 'nom')
+    @classrooms = Classroom.where(mairie_id:session[:mairie]).order(:nom)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @classrooms }
@@ -52,7 +52,7 @@ class ClassroomsController < ApplicationController
   # POST /classrooms
   # POST /classrooms.xml
   def create
-    @classroom = Classroom.new(params[:classroom])
+    @classroom = Classroom.new(classroom_params)
     @classroom.mairie_id = session[:mairie]
     @classroom.log_changes(0, session[:user])
 
@@ -72,7 +72,7 @@ class ClassroomsController < ApplicationController
   # PUT /classrooms/1.xml
   def update
     @classroom = Classroom.find(params[:id])
-    @classroom.attributes = params[:classroom]
+    @classroom.attributes = classroom_params
     @classroom.log_changes(1, session[:user])
 
     respond_to do |format|
@@ -99,4 +99,11 @@ class ClassroomsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def classroom_params
+      params.require(:classroom).permit(:nom,:referant,:mairie_id)
+    end
+
 end

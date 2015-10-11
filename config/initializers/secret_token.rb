@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-OpenCantine3::Application.config.secret_token = '9ac0929d2a7b69d2e7e364d7ea603867e4974a921cf5fd0fd7717acedf3ecdba8692134b169715e687af20f4fa808eb56b91054371897a94543c8fc1af4fade3'
+OpenCantine3::Application.config.secret_key_base = '552fc975b79560856b4b42ff5ec29a46b4110d35767c9d53c38248fde5ed1242092902c985dcd0c1e382d6a1725f4f6183f283aacb3da16f2ff642ca25bcde8b'

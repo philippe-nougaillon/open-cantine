@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'prawn/table'
+
 class FacturePdf < Prawn::Document
 
   include ActionView::Helpers::NumberHelper

@@ -5,12 +5,10 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
 <hr/>
 
 <% if @famille_id %>
-   <h3><%= link_to Famille.find(@famille_id).nom, :controller => 'familles', :action => 'show', :id => @famille_id %></h3>
+   <h3><%= link_to Famille.find(@famille_id).nom, famille_path(id:@famille_id) %></h3>
    <h3><%= format_mois(@mois.to_i).upcase %> <%= @year.upcase %></h3>
-   <%= link_to "- Mois", :controller => 'prestations', :action => 'new_manual', 
-	:mois => @mois_down , :year => @year_down, :famille_id => @famille_id, :id => 0 %>
-   <%= link_to "Mois +", :controller => 'prestations', :action => 'new_manual', 
-	:mois => @mois_up   , :year => @year_up, :famille_id => @famille_id, :id => 0 %>
+   <%= link_to "- Mois", prestations_new_manual(mois:@mois_down, year:@year_down, famille_id:@famille_id) %>
+   <%= link_to "Mois +", prestations_new_manual(mois:@mois_up, year:@year_up, famille_id:@famille_id) %>
 <%  else %>
 	<% unless session[:famille_id] %>
     	<h3><%= link_to "#{@enfant.prenom} #{@enfant.nomfamille} (#{@enfant.famille.nom})", @enfant %></h3>
@@ -19,14 +17,14 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
 		<small> - <%= link_to "Retour au relevé de situation", "/moncompte/familleshow" %></small></h3>
     <% end %>
     <%= format_mois(@mois.to_i).upcase %> <%= @year.upcase %>
-    <%= link_to "[ - ]", :controller => 'prestations', :action => 'new_manual', :mois => @mois_down , :year => @year_down, :id => @enfant.id %>
-    <%= link_to "[ + ]", :controller => 'prestations', :action => 'new_manual', :mois => @mois_up   , :year => @year_up, :id => @enfant.id %>
+    <%= link_to "[ - ]", prestations_new_manual_path(mois:@mois_down, year:@year_down, id:@enfant.id) %>
+    <%= link_to "[ + ]", prestations_new_manual_path(mois:@mois_up, year:@year_up, id:@enfant.id) %>
 <% end %>
-<br>
+<br><br>
   
 <div id="ajaxzone"></div>
 
-<%= form_for(Prestation.new, :remote => true, :url => { :controller => "prestations", :action => "new_manual_calc"}) do |f| %>
+<%= form_for(Prestation.new, remote:true, url: prestations_new_manual_calc_path ) do |f| %>
 
 	  <p style="display:none">
 	     <%= text_field_tag "enfant_id", @enfant.id if @enfant %>
@@ -35,7 +33,7 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
 	     <%= text_field_tag "year", @year %>
 	     <%= text_field_tag "solde", @solde %>
 	  </p>
-	  <table class="sample">
+	  <table>
 	    <tr>
 	      <th>Semaine</th>
 	      <th>Date</th>
@@ -108,7 +106,7 @@ Les inscriptions existantes sont pré-cochées et les prestations déjà factur�
 		<% if d.wday == 5 && (d.end_of_month().day - d.day >2 ) %>
 		   <% @week = @week + 1 %>
 		   </table>
-		   <table class="sample">
+		   <table>
 			<tr>
 		      <th>Semaine</th>
 		      <th>Date</th>

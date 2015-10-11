@@ -13,7 +13,7 @@ class VillesController < ApplicationController
 
   # POST /villes
   def nouveau_compte_create
-  	@ville = Ville.new(params[:ville])
+  	@ville = Ville.new(ville_params)
     @ville.FacturationModuleName = "01-Standard.rb"
     @ville.newsletter = false
 
@@ -117,7 +117,7 @@ class VillesController < ApplicationController
   # PUT /villes/1.xml
   def update
     @ville = Ville.find(session[:mairie])
-    @ville.attributes = params[:ville]
+    @ville.attributes = ville_params
     @ville.log_changes(1, session[:user])
 
     respond_to do |format|
@@ -132,7 +132,12 @@ class VillesController < ApplicationController
     end
   end
 
-  private
+ private
+  	# Never trust parameters from the scary internet, only allow the white list through.
+    def ville_params
+      params.require(:ville).permit(:nom,:adr,:cp,:ville,:tel,:tarif2,:tarif3,:FacturationModuleName,:email,:newsletter,:logo_url,:portail)
+    end  	
+
  	def random_password(size = 5)
     	chars = (('A'..'Z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
     	(1..size).collect{|a| chars[rand(chars.size)] }.join

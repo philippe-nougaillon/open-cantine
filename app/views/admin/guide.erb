@@ -418,44 +418,10 @@ OpenCantine se présente sous la forme de 5 onglets, Familles, Enfants, Prestati
 <p>
 	Suivre ensuite les instructions présentes à l'écran.</p>
 <br>
-<hr>
-<h2>
-	Installation d'openCantine sur un serveur linux debian</h2>
-<p><strong>1/ Installation des dépendances au framework Ruby on Rails</strong></p>
-<p>sudo apt-get install ruby1.9.1-full<br />
-	sudo apt-get install ruby1.9.1.dev<br />
-	sudo apt-get install build-essential libopenssl-ruby1.9.1 libssl-dev zlib1g-dev<br />
-	sudo apt-get install mysql-server<br />
-	sudo apt-get install mysql-devel<br />
-	sudo apt-get install mysql-dev<br />
-	sudo apt-get install mysql-client libmysqlclient-dev<br />
-	sudo apt-get install git<br />
-	sudo apt-get install curl</p>
-<p><strong>2/ Installation du framework Ruby on Rails</strong></p>
-<p>sudo gem install rails<br />
-	sudo gem install therubyracer</p>
-<p><strong>3/ Récupération du convertiseur html to PDF</strong></p>
-<p>curl -C - -O http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2<br />
-	tar xvjf wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2<br />
-	sudo cp wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf</p>
-<p><strong>4/ Récupération des sources depuis la forge Adullact</strong></p>
-<p>git clone https://adullact.net/anonscm/git/opencantine/opencantine.git<br />
-	cd opencantine<br />
-	bundle<br />
-	rake db:migrate</p>
-<p><strong>5/ Lance le serveur web </strong></p>
-<p>rails s</p>
-<p><strong>6/ Et voilà !</strong></p>
-<p>rendez-vous sur localhost:3000</p>
-<p><strong>Veuillez ensuite à maintenir votre version d'openCantine à jour. </strong></p>
-<p><strong>Pour récupérer les mises à jour depuis la forge adullact</strong> :</p>
-<p>git pull<br />
-
+<hr><h2>Et ensuite ?</h2>
 <br>
-<h4 style="color:#df2599">Vos commentaires et propositions sont les bienvenus et m'aident à améliorer l'application...</h4>
+<h4>Vos commentaires et propositions sont les bienvenus et m'aident à améliorer l'application...</h4>
 <%= link_to "philippe.nougaillon@gmail.com", "mailto:philippe.nougaillon@gmail.com" %>
-<br><br>
-<%= link_to "Retour à l'accueil", "/" %>
 <br>
 <br>
 

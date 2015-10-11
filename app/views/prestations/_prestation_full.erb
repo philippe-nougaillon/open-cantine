@@ -9,42 +9,35 @@
     <td><%=h format_date(prestation.date) %></td>
     <td><%=h Classroom.find(@classe).nom %> </td>
     <td><b><%=h enfant.nomfamille[0..20]  %></b></td>
-    <td><%= link_to enfant.prenom[0..16], :controller => 'enfants', :action => 'show', :id => prestation.enfant_id %></td>
+    <td><%= link_to enfant.prenom[0..16], enfant_path(prestation.enfant_id) %></td>
     <td class="center">
 		<% if prestation.repas != "0" %>
-           <%= image_tag @images[prestation.repas.to_i], :size => '15x15' %>
+           <%= image_tag @images[prestation.repas.to_i], size: '15x15' %>
 		<% end %>
     </td>
     <td class="center">
         <% if prestation.garderieAM != "0" %>
-           <%= image_tag @images[prestation.garderieAM.to_i], :size => '15x15' %>
-           <%= '1h' if (prestation.garderieAM == '1' or prestation.garderieAM == '5') %>
-           <%= '1h30' if prestation.garderieAM == '6' %>
-           <%= '2h' if prestation.garderieAM == '7' %>
+           <%= image_tag @images[prestation.garderieAM.to_i], size: '15x15' %>
         <% end %> 
     </td>
     <td class="center">
         <% if prestation.garderiePM != "0" %>
-           <%= image_tag @images[prestation.garderiePM.to_i], :size => '15x15'  %>
-           <%= '1h'   if (prestation.garderiePM == '1' or prestation.garderiePM == '5') %>
-           <%= '1h30' if prestation.garderiePM == '6' %>
-           <%= '2h'   if prestation.garderiePM == '7' %>
+           <%= image_tag @images[prestation.garderiePM.to_i], size: '15x15'  %>
         <% end %>
     </td>
-    <td class="center"><%= image_tag @images[prestation.centreAM.to_i], :size => '15x15'   if prestation.centreAM != "0" %> </td>
-    <td class="center"><%= image_tag @images[prestation.centrePM.to_i], :size => '15x15'   if prestation.centrePM != "0" %> </td>
-    <td class="center"><%= image_tag @images[prestation.etude.to_i], :size => '15x15'      if prestation.etude != "0" %> </td>
+    <td class="center"><%= image_tag @images[prestation.centreAM.to_i], size: '15x15'   if prestation.centreAM != "0" %> </td>
+    <td class="center"><%= image_tag @images[prestation.centrePM.to_i], size: '15x15'   if prestation.centrePM != "0" %> </td>
+    <td class="center"><%= image_tag @images[prestation.etude.to_i], size: '15x15'      if prestation.etude != "0" %> </td>
 
     <td>
-         <% if enfant.age %>
+        <% if enfant.age %>
            <%= 'A' if enfant.age > 15 -%>
         <% end %>
         <%= 'SP' if enfant.sansPorc -%>
         <%= 'ALG!' if enfant.allergies -%>
-
     </td>
 
     <% if session[:user_readwrite] and params[:action] != 'print' %>
-       <td><%= link_to image_tag('modif.png', size:"15x15"), :controller => 'prestations', :action => 'edit', :id => prestation %></td>
+       <td><%= link_to image_tag('modif.png', size:"15x15"), edit_prestation_path(id:prestation) %></td>
     <% end %>
 </tr>

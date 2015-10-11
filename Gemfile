@@ -1,36 +1,38 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.7'
+gem 'rails', '4.2.1'
 
-gem 'will_paginate', '~> 3.0.0'
+gem 'mysql2', '~> 0.3.18'
+gem 'will_paginate'
 gem 'thin'
 gem 'simple_form'
-gem 'mysql2'
-gem 'therubyracer'
-gem 'prawn'
-gem 'client_side_validations'
 gem "dynamic_sitemaps"
 
-gem 'wicked_pdf'
+gem 'prawn', '1.3'
+gem 'prawn-table', '~> 0.2.0'
 gem 'capture_stdout'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 
 gem 'open_uri_redirections'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+gem 'execjs'
+gem 'therubyracer'
 
-  gem 'uglifier', '>= 1.0.3'
-end
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
 
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
+ 
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

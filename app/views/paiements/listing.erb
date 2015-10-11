@@ -23,7 +23,7 @@ Le : <%= link_to "#{Date.today.to_s(:fr)}", :action => 'majdateremise', :id => 0
   <% for paiement in @paiements %>
     <tr class="<%= cycle('list-line-even','list-line-odd') %>">
         <td><%=h paiement.date.to_s(:fr) %></td>
-        <td><%=h Famille.find(paiement.famille_id).nom.upcase %></td>
+        <td><%=h paiement.famille.nom.upcase if paiement.famille %></td>
         <td><%=h paiement.ref %></td>
         <td><%=h paiement.banque.upcase %></td>
         <td><%=h paiement.chequenum %></td>

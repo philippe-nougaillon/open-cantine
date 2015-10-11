@@ -1,7 +1,11 @@
 <div id="form_actions">
   <%= form_tag request.path, :method => 'get' do %>
-    Référence :
-    <%= text_field_tag "search", params[:search] %>
+    Nom / Réf / N°Chèque :
+    <% if params[:famille_id] %> 
+        <%= text_field_tag :search, Famille.find(params[:famille_id]).nom %>
+    <% else %>
+        <%= text_field_tag :search, params[:search] %>
+    <% end %>    
     <%= submit_tag 'Rechercher' %>
     <span id="adroite">
       <%= link_to("Imprimer", :action => 'listing',:id => 0) %>
@@ -12,29 +16,26 @@
 
 <div id="form_body">
   <% if @paiements.any? %>
-    <table class="sample">
+    <table>
       <tr>
-        <th><%= link_to "Date", :sort => "date" %></th>
-        <th><%= link_to "Famille", :sort => "familles.nom" %></th>
-        <th><%= link_to "Réf", :sort => "ref" %></th>
-        <th><%= link_to "Type", :sort => "typepaiement" %></th>
-        <th><%= link_to "Banque", :sort => "banque" %></th>
-        <th><%= link_to "N°", :sort => "chequenum" %></th>
-        <th><%= link_to "Cantine", :sort => "montantCantine" %></th>
-        <th><%= link_to "Garderie", :sort => "montantGarderie" %></th>
-        <th><%= link_to "Total", :sort => "montant" %></th>
-        <th><%= link_to "Date Remise", :sort => "remise" %></th>
-        <th></th>
-        <th></th>
+        <th><%= link_to "Date", url_for(params.merge(sort:'date')) %></th>
+        <th><%= link_to "Famille", url_for(params.merge(sort:'familles.nom')) %></th>
+        <th><%= link_to "Réf", url_for(params.merge(sort:'ref')) %></th>
+        <th><%= link_to "Type", url_for(params.merge(sort:'typepaiement')) %></th>
+        <th><%= link_to "N°", url_for(params.merge(sort:'chequenum')) %></th>
+        <th><%= link_to "Cantine", url_for(params.merge(sort:'montantCantine')) %></th>
+        <th><%= link_to "Garderie", url_for(params.merge(sort:'montantGarderie')) %></th>
+        <th><%= link_to "Total", url_for(params.merge(sort:'montant')) %></th>
+        <th><%= link_to "Date Remise", url_for(params.merge(sort:'remise')) %></th>
+        <th />
+        <th />
       </tr>
-
-        <% for paiement in @paiements %>
+      <% for paiement in @paiements %>
             <tr class="<%= cycle('list-line-even','list-line-odd') %>">
-                <td><%= I18n.l(paiement.updated_at) %></td>
-                <td><%= link_to Famille.find(paiement.famille_id).nom.upcase, paiement.famille  %></td>
+                <td><%= I18n.l(paiement.updated_at, format: :short) %></td>
+                <td><%= link_to truncate(paiement.famille.nom.upcase, lenght:20), paiement.famille  %></td>
                 <td><%=h paiement.ref %></td>
                 <td><%=h paiement.typepaiement %></td>
-                <td><%=h paiement.banque %></td>
                 <td><%=h paiement.chequenum %></td>
                 <td style="text-align:right"><%=h number_to_currency(paiement.montantCantine, :locale => "fr") %></td>
                 <td style="text-align:right"><%=h number_to_currency(paiement.montantGarderie, :locale => "fr") %></td>
@@ -43,11 +44,10 @@
                 <% if session[:user_readwrite] %> 
                     <td><%= link_to image_tag('modif.png', size:"15x15"), edit_paiement_path(paiement) %></td>
                 <% end %>
-                <td><%= link_to 'Imprimer', :action => 'print', :id => paiement.id %></td>
+                <td><%= link_to 'Imprimer', paiements_print_path(id:paiement.id) %></td>
             </tr>
-        <% end %>
+      <% end %>   
     </table>
-    <br />
     <%= page_entries_info @paiements %>
     <%= will_paginate @paiements %>
   <% else %>

@@ -1,16 +1,24 @@
-<%= f.input :nom %>
-<%= f.input :civilité, :collection => ["M","Mme","M et Mme"] %>
-<%= f.input :adresse %>
-<%= f.input :adresse2 %>
-<%= f.input :cp, :input_html => {:size => 5} %>
-<%= f.input :ville %>
-<%= f.input :allocataire, :input_html => {:size => 20} %>
-<%= f.hint "Indiquez ici le tarif spécial ou QF à appliquer à toute la famille" %>
-<%= f.input :tarif_id, :label => 'Tarif', :collection => (Tarif.find(:all, :conditions => ["mairie_id = ?", session[:mairie]], :order => 'memo').collect {|p| [ "#{p.memo}", p.id ] }) %>
-<%= f.input :phone, :label => 'Téléphone', :input_html => {:size => 15} %>
-<%= f.input :mobile1, :label => 'Mobile maman', :input_html => {:size => 15}  %>
-<%= f.input :mobile2, :label => 'Mobile papa', :input_html => {:size => 15} %>
-<%= f.input :email %>
-<%= f.input :memo, :label => "Mémo" %>
-<%= f.button :submit, "Enregistrer" %>
+<div class="span-11">
+	<%= f.input :nom, :input_html => {size: 25}  %>
+	<%= f.input :civilité, :collection => ["M","Mme","M et Mme"] %>
+	<%= f.input :adresse, :input_html => {size: 25}  %>
+	<%= f.input :adresse2, :input_html => {size: 25}  %>
+	<%= f.input :cp, label:'Code postal', :input_html => {size: 5} %>
+	<%= f.input :ville, :input_html => {size: 25}  %>
+</div>
+<div class="span-12 last">
+	<%= f.input :allocataire, :label => 'N°Allocataire', :input_html => {size: 15} %>
+	<%= f.input :tarif_id, :label => 'Tarif', :collection => (Tarif.where("mairie_id = ?", session[:mairie]).order(:memo).collect {|p| [ "#{p.memo}", p.id ] }) %>
+	<%= f.hint "Indiquez le tarif spécial ou le QF à appliquer à toute la famille. Pour appliquer un tarif par enfant, indiquez chaque tarif dans le formulaire de chaque enfant." %>
+	<br>
+	<%= f.input :phone, :label => 'Téléphone', :input_html => {size: 15} %>
+	<%= f.input :mobile1, :label => 'Mobile maman', :input_html => {size: 15}  %>
+	<%= f.input :mobile2, :label => 'Mobile papa', :input_html => {size: 15} %>
+</div>
+<%= f.input :email, :input_html => {size: 25}  %>
+<%= f.input :memo, :label => "Mémo", :input_html => {size: 20} %>
+<div style="margin-left:170px;">
+	<%= f.submit "Enregistrer" %>
+</div>
+<br>
 

@@ -1,3 +1,8 @@
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+</head>
+
+
 <table border="0">
   <tr>
     <th>ID</th>
@@ -20,8 +25,7 @@
 	  <tr>
 		<td><%= p.id %></td>
 		<td><%= p.date %></td>
-		<% famille = Famille.find_or_create_by_id(p.famille_id) %>
-	    <td><%= famille.nom.upcase if famille.nom %></td>
+	    <td><%= p.famille.nom.upcase if p.famille %></td>
 		<td><%= p.ref %></td>
 		<td><%= p.typepaiement %></td>
 		<td><%= p.banque %></td>

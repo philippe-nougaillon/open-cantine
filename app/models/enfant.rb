@@ -2,16 +2,17 @@ require 'concerns/logmodule.rb'
 
 class Enfant < ActiveRecord::Base
   include LogModule
-  
-  attr_protected :id
 
   belongs_to :famille
+  belongs_to :tarif
+  belongs_to :classroom, foreign_key:'classe'
   has_many   :prestations, :dependent => :destroy
 
   validates_presence_of :prenom,        :message => "manquant"
   validates_presence_of :famille_id,    :message => "manquante"
   validates_presence_of :nomfamille,    :message => "manquant"
   validates_presence_of :classe,        :message => "manquante"
+  validates_presence_of :dateNaissance, :message => "manquante"
   validates_length_of   :dateNaissance, :is => 10 , :message => " > Entrez une date comme 01/01/1999"
  
   before_save :uppercase_fields
@@ -27,7 +28,7 @@ class Enfant < ActiveRecord::Base
   	else
   		conditions	= ['nomfamille like ? AND mairie_id = ?', "%#{search}%", mairie]
   	end
-  	paginate :per_page => 10, :page => page, :conditions => conditions, :joins => :famille, :order => @order_by
+  	paginate(per_page:20, page:page).where(conditions).joins(:famille).order(@order_by)
   end
 
   def r

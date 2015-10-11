@@ -45,7 +45,7 @@ class BlogsController < ApplicationController
   # POST /blogs
   # POST /blogs.xml
   def create
-    @blog = Blog.new(params[:blog])
+    @blog = Blog.new(blog_params)
 
     respond_to do |format|
       if @blog.save
@@ -65,7 +65,7 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
 
     respond_to do |format|
-      if @blog.update_attributes(params[:blog])
+      if @blog.update_attributes(blog_params)
         flash[:notice] = 'Blog was successfully updated.'
         format.html { redirect_to(@blog) }
         format.xml  { head :ok }
@@ -87,4 +87,11 @@ class BlogsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def blog_params
+      params.require(:blog).permit(:titre,:texte)
+    end
+
 end

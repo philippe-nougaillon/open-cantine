@@ -36,7 +36,7 @@
 
     <% total_etude = 0 %>
 
-    <table class="sample">
+    <table>
       <tr>
         <th><%= link_to "Date", :sort => "date", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
         <th><%= link_to "Classe", :sort => "enfants.classe", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
@@ -149,18 +149,19 @@
 	  </tr>		
 
       <tr>
-        <td><b>Total Repas Enfants</b></td>
+        <td><b>Total Repas Enfants</b>
+            <% if total_repasEnfantSP > 0 %>
+               <br>Dont <%= sprintf("%2d", (total_repasEnfantSP)) %> ss porc
+            <% end%>
+            <% if total_repasEnfantALG > 0 %>
+               <br>Dont <%= sprintf("%2d", (total_repasEnfantALG)) %> allergie
+            <% end%>
+        </td>
         <td></td>
         <td></td>
         <td></td>
         <td class="center">
             <b><%= sprintf("%3d", (total_repasEnfant)) %></b>
-            <% if total_repasEnfantSP > 0 %>
-               (dont <%= sprintf("%2d", (total_repasEnfantSP)) %> ss porc)
-            <% end%>
-            <% if total_repasEnfantALG > 0 %>
-               (dont <%= sprintf("%2d", (total_repasEnfantALG)) %> ALLERGIES)
-            <% end%>
         </td>
         <td></td>
         <td></td>
@@ -218,6 +219,5 @@
       </tr>
     </table>
   <% else %>
-    <b>Aucune prestation enregistrée pour ce jour.</b><br>
-    Pour une saisie rapide de prestations, veuillez choisir une date et une classe puis appuyer sur 'Saisir pointage'. Vous pourrez aussi enregistrer les pré-inscriptions à partir de la fiche famille ou d'un enfant.   
+    <b>Aucune prestation enregistrée pour ce jour</b><br>
   <% end  %>

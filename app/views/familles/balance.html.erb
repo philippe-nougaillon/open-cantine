@@ -1,9 +1,11 @@
+<div id="form_actions"></div>
 <br>
+
 <h3>Relevé de compte</h3>
 Famille: <%= link_to @famille.nom, :action => 'show', :id => @famille.id %>
 <br><br>
 
-<table class="sample">
+<table>
   <tr>
     <th>Date</th><th>Type</th><th>Référence</th><th>Débit</th><th>Crédit</th><th>Solde</th><th />
   </tr>
@@ -36,7 +38,12 @@ Famille: <%= link_to @famille.nom, :action => 'show', :id => @famille.id %>
     <td id="number"><%= number_to_currency(@debit, :locale => "fr") %> </td>
     <td id="number"><%= number_to_currency(@credit, :locale => "fr") %> </td>
     <td id="sum">   <%= number_to_currency(@solde, :locale => "fr") %> </td>
+    <td />
   </tr>
 </table>
-<%= link_to image_tag("pdf-logo.png", :size => "35x35"), :controller => 'familles', :action => 'balance', :id => @famille.id, :format => :pdf %>
+<br>
+<%= link_to "Télécharger ce relevé au format PDF", familles_balance_path(id:@famille.id, format: :pdf) %>
+<%= link_to image_tag("pdf-logo.png", size:'15x15'), familles_balance_path(id:@famille.id, format: :pdf) %>
+<br><br>
+<br><br>
 

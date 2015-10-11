@@ -1,41 +1,42 @@
   <div id="form_actions">
   <%= form_tag request.path, :method => 'get' do %>
-    Nom :
+    Nom/Prénom :
     <%= text_field_tag :search, params[:search], id: "navbar-search-input", class: 'form-control' %>
     Classe :
-    <%= select_tag 'classe', options_for_select(@classes, params[:classe]) %>
+    <%= select_tag 'classe', options_for_select(@classes, params[:classe]), include_blank:true %>
     <%= submit_tag 'Rechercher' %>
     <span id="adroite">  
-      <%= link_to("Imprimer", action:'liste', id:1, :target => "_blank") %>
+      <%= link_to "Imprimer", enfants_liste_path(params), :target => "_blank" %>
     </span>
   <% end %>
 </div>
 <div id="form_body">
-  <table class="sample">
+  <table>
     <tr>
-      <th><%= link_to "Nom", :sort => "nomfamille" %></th>
-      <th><%= link_to "Prénom", :sort => "prenom" %></th>
-      <th><%= link_to "Classe", :sort => "classe" %></th>
+      <th><%= link_to "Nom", url_for(params.merge(sort:"nomfamille")) %></th>
+      <th><%= link_to "Prénom", url_for(params.merge(sort:"prenom")) %></th>
+      <th><%= link_to "Classe", url_for(params.merge(sort:"classe")) %></th>
       <th>Enseignant</th>
-      <th><%= link_to "Date Naissance", :sort => "dateNaissance" %></th>
-      <th><%= link_to "Age", :sort => "age" %></th>
-      <th><%= link_to "Menu", :sort => "sansPorc, allergies" %></th>
+      <th><%= link_to "Date Naissance", url_for(params.merge(sort:"dateNaissance")) %></th>
+      <th><%= link_to "Age", url_for(params.merge(sort:"age")) %></th>
+      <th><%= link_to "Menu", url_for(params.merge(sort:"sansPorc, allergies")) %></th>
       <% if session[:user_readwrite]%><th>Inscription</th><% end %>
     </tr>
 
     <% for enfant in @enfants %>
       <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
-        <% classroom = Classroom.find_by_id(enfant.classe) %>
         <td><b><%=link_to enfant.nomfamille.upcase, enfant.famille %></b></td>
         <td><b><%=link_to enfant.prenom, enfant %></b></td>
-        <td><%=h classroom.nom if classroom %></td>
-        <td><%=h classroom.referant if classroom %></td>
+        <td><%=h enfant.classroom.nom if enfant.classroom %></td>
+        <td><%=h enfant.classroom.referant if enfant.classroom %></td>
         <td><%=h enfant.dateNaissance %></td>
         <td style="text-align:right"><%=h enfant.age %></td>
         <td><% if enfant.sansPorc %>Sans Porc. <% end %> <% if enfant.allergies %>Allergies.<% end %></td>
         <% if session[:user_readwrite] %>
-          <td><%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :year => Date.today.year, :id  => enfant.id %>
-            <%= link_to "Automatique", :controller => 'prestations', :action => 'new', :enfant_id  => enfant.id %></td>
+          <td>
+            <%= link_to "Manuelle", prestations_new_manual_path(mois:Date.today.month, year:Date.today.year, id:enfant.id) %>
+            | <%= link_to "Automatique", new_prestation_path(enfant_id:enfant.id) %>
+          </td>
         <% end %>
       </tr>
     <% end %>

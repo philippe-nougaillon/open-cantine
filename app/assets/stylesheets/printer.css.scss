@@ -24,7 +24,7 @@ h4 {
 a { color: #000;text-decoration:none }
 a:visited { color: #000;text-decoration:none  }
 
-table.sample {
+table.sample_print {
 	border-width: 1px 1px 1px 1px;
 	border-spacing: 2px;
 	border-style: none none none none;
@@ -32,7 +32,7 @@ table.sample {
 	border-collapse: separate;
     color:  black;
 }
-table.sample th {
+table.sample th_print {
 	border-width: 1px 1px 1px 1px;
 	padding: 5px 5px 5px 5px;
 	border-style: groove groove groove groove;
@@ -41,29 +41,30 @@ table.sample th {
 	-moz-border-radius: 3px 3px 3px 3px;
     color: 	green;
 }
-table.sample .center {
+table.sample_print .center {
     text-align:center;
 }
 
-table.sample .list-line-even {
+table.sample_print .list-line-even {
 	background-color: rgb(255, 255, 255);
 }
-table.sample .list-line-odd {
+table.sample_print .list-line-odd {
 	background-color: rgb(240, 240, 240);
 }
 
-table.sample td {
+table.sample_print td {
 	border-width: 1px 1px 1px 1px;
 	padding: 3px 3px 3px 3px;
 	border-style: groove groove groove groove;
 	border-color: gray gray gray gray;
 }
-table.sample .center {
+
+table.sample_print .center {
     text-align:center;
 }
-table.sample #sum {
+table.sample_print #sum {
 	color: 	#b80000;
 }
-table.sample a {
+table.sample_print a {
      color: black;
 }

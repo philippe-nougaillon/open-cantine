@@ -23,7 +23,7 @@ class FactureChronosController < ApplicationController
     @facture_chrono = FactureChrono.find(params[:id])
 
     respond_to do |format|
-      if @facture_chrono.update_attributes(params[:facture_chrono])
+      if @facture_chrono.update_attributes(facture_chrono_params)
         flash[:notice] = 'Prochain N° de facture modifié.'
         format.html { redirect_to(:controller => 'admin', :action => 'setup') }
         format.xml  { head :ok }
@@ -33,5 +33,11 @@ class FactureChronosController < ApplicationController
       end
     end
   end
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def facture_chrono_params
+      params.require(:facture_chrono).permit(:mairie_id,:prochain)
+    end
 
 end

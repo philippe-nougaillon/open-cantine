@@ -1,11 +1,8 @@
+<div id="form_actions"></div>
 <br>
-<br>
 
-<h3>Modifier un paiement</h3>
-<hr/>
+<h3>Modification d'un paiement</h3>
 
-<%= form_for(@paiement) do |f| %>
-
+<%= simple_form_for(@paiement) do |f| %>
   <%= render :partial => 'paiement', :locals => { :f => f } %>
-
 <% end %>

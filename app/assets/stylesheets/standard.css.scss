@@ -2,9 +2,13 @@ body {
   font-size:   14px;
 }
 
-p, ol, ul, td {
+p, ol, ul {
   background-color: #F8F8F8;
 }
+
+a { color: #000;text-decoration: underline; }
+a:visited { color: #000;text-decoration:none  }
+
 
 pre {
   padding: 10px;
@@ -57,13 +61,11 @@ fieldset {
 }
 
 #form_body {
-  background-color: #eef;
-  padding-top:15px;
+  #background-color: #eef;
+  padding-top:10px;
   padding-bottom:5px;
-  padding-left: 10px;
-  padding-bottom: 20px;
-  width: 99%;
-
+  padding-bottom: 15px;
+  #width: 99%;
 }
 
 #msgzone {
@@ -152,7 +154,7 @@ table.sample {
 	border-spacing: 1px;
 	border-color: light-gray;
 	border-collapse: separate;
-        color:  black;
+  color:  black;
 }
 
 table.sample th {
@@ -208,17 +210,25 @@ table.sample a:hover {
 
 #error_message {
   position:absolute;
-  left: 35%;
-  top: 15px;
+  top: 20px;
+  font-weight: bold;
+  margin-right: auto;
+  margin-left: auto;
+  width:1024px; 
+  text-align: center;
   background-color: lightyellow;
   color: green;
-  font-weight: bold;
+
 }
 
 #warning_message {
-  position: absolute;
-  left: 35%;
-  top: 80px;
+  position:absolute;
+  top: 20px;
+  font-weight: bold;
+  margin-right: auto;
+  margin-left: auto;
+  width:1024px; 
+  text-align: center;
   background-color: orange;
   color: white;
 }
@@ -314,7 +324,7 @@ table.bienvenue #help {
 
 .simple_form label {
   float: left;
-  width: 100px;
+  width: 150px;
   text-align: right;
   margin: 2px 10px;
 }
@@ -327,17 +337,28 @@ table.bienvenue #help {
 }
 
 div.boolean {
-  margin-left: 120px;
+  margin-left: 170px;
 }
 
 .simple_form input[type="submit"] {
-  margin-left: 120px;
-  font: 14px Arial;
-  text-decoration: none;
-  background-color: green;
+  position: relative;
+  vertical-align: top;
+  width: 160px;
+  height: 30px;
+  padding: 0;
+  font-size: 17px;
   color: white;
-  border-radius: 4px;
-  padding: 0px 1.5rem;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: #19AB58;
+  border: 0;
+  cursor: pointer;
+}
+.simple_form input[type="submit"]:active {
+  top: 1px;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 
@@ -371,7 +392,7 @@ label.collection_radio_buttons {
 
 .simple_form .hint {
   clear: left;
-  margin-left: 120px;
+  margin-left: 170px;
   color: #555;
   display: block;
   font-style: italic;
@@ -393,4 +414,3 @@ label.collection_check_boxes {
   vertical-align: -2px;
   margin-left: 2px;
 }
-

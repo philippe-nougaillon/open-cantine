@@ -6,7 +6,7 @@ class TarifsController < ApplicationController
   before_filter :check, :except => ['index', 'new', 'create']
 
   def check
-    unless Tarif.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", params[:id], session[:mairie]])
+    unless Tarif.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?
        redirect_to :action => 'index'
     end
   end
@@ -14,7 +14,7 @@ class TarifsController < ApplicationController
   # GET /tarifs
   # GET /tarifs.xml
   def index
-    @tarifs = Tarif.find_all_by_mairie_id(session[:mairie], :order => "memo")
+    @tarifs = Tarif.where(mairie_id:session[:mairie]).order(:memo)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -52,7 +52,7 @@ class TarifsController < ApplicationController
   # POST /tarifs
   # POST /tarifs.xml
   def create
-    @tarif = Tarif.new(params[:tarif])
+    @tarif = Tarif.new(tarif_params)
     @tarif.mairie_id = session[:mairie]
     @tarif.log_changes(0, session[:user])
 
@@ -72,7 +72,7 @@ class TarifsController < ApplicationController
   # PUT /tarifs/1.xml
   def update
     @tarif = Tarif.find(params[:id])
-    @tarif.attributes = params[:tarif]
+    @tarif.attributes = tarif_params
     @tarif.log_changes(1, session[:user])
 
     respond_to do |format|
@@ -99,5 +99,11 @@ class TarifsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def tarif_params
+      params.require(:tarif).permit(:RepasP,:GarderieAMP,:GarderiePMP,:CentreAMP,:CentrePMP,:Etude,:CentreAMPMP,:mairie_id,:type_id,:memo)
+    end
   
 end

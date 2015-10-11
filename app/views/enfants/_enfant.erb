@@ -1,75 +1,21 @@
-<br>
-<table class="form">
   <% @enfant.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>
   <% end %>
-  <tr>
-    <td id="label"><%= f.label :famille_id %></td>
-    <td><b><%= Famille.find(@enfant.famille_id).nom.upcase %></b></td>
-	  <%= f.hidden_field :famille_id %>
-  </tr>
-   <tr>
-    <td id="label">
-      <%= f.label 'nom de famille' %>
-    </td><td>
-      <%= f.text_field :nomfamille %>
-    </td>
-  </tr>
-  <tr>
-    <td id="label">
-      <%= f.label 'prénom' %>
-    </td><td>
-      <%= f.text_field :prenom %>
-    </td>
-  </tr>
-  <tr>
-    <td id="label">
-      <%= f.label 'Date de naissance' %>
-    </td><td>
-      <%= f.text_field :dateNaissance, :size => 10 %> <small>Au format 06/01/1999</small>
-    </td>
-  </tr>
-  <tr>
-    <td id="label">
-      <%= f.label "Classe" %>
-    </td><td>
-      <%= select("enfant", "classe", Classroom.find(:all,:conditions => ["mairie_id = ?",session[:mairie]], :order => 'nom').collect {|p| [ "#{p.nom} - #{p.referant}", p.id ] }, { :include_blank => false}) %>
-    </td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>
-      <%= f.check_box :sansPorc %> <%= f.label 'Repas sans porc ?' %>
-    </td>
-  </tr>
-  <tr>
-   <td></td>
-   <td>
-      <%= f.check_box :allergies %> <%= f.label :allergies %> ?
-    </td>
-  </tr>
-  <tr>
-    <td id="label"><%= f.label :tarif_id %> </td>
-    <td><%= select("enfant", "tarif_id", Tarif.find(:all, :conditions => ["mairie_id = ?",session[:mairie]], :order => 'memo').collect {|p| ["#{p.memo}", p.id ] }, { :include_blank => true }) %>
-      <small>Si aucun tarif n'est choisi, c'est celui de la famille qui sera pris en compte</small>
-    </td>
-  </tr>
-  <tr>
-  	<td id="label">Habitude garderie Matin</td>
-	<td>
-		<%= select("enfant","habitudeGarderieAM", {"1h" => 5, "1h30" => 6, "2h" => 7, "Aucune" => nil }) %>
- 	</td>
-  </tr>
-  <tr>
-  	<td id="label">Habitude garderie Soir</td>
-	<td>
-	    <%= select("enfant","habitudeGarderiePM", {"1h" => 5, "1h30" => 6, "2h" => 7, "Aucune" => nil }) %>
-	</td>
-  </tr>
-  <tr>
-     <td></td>
-     <td>
-          <%= submit_tag "Enregistrer" %>
-     </td>
-   </tr>
-</table>
+
+  <%= f.hidden_field :famille_id %>
+
+  <%= f.label 'Famille' %><%= Famille.find(@enfant.famille_id).nom.upcase %>
+  <br><br>
+  <%= f.input :prenom, label:'Prénom', :input_html => {size: 25} %>
+  <%= f.input :nomfamille, label:'Nom de famille', :input_html => {size: 25} %>
+  <%= f.input :dateNaissance, label:'Date de naissance', :input_html => {size:8}, hint:'Au format 06.01.1999' %>
+  <%= f.input :classe, collection: Classroom.where("mairie_id = ?",session[:mairie]).order(:nom), value_method: :id, label_method: :nom %>
+  <%= f.input :tarif_id, collection:Tarif.where("mairie_id = ?",session[:mairie]).order(:memo), value_method: :id, label_method: :memo, hint:"Si aucun tarif n'est choisi, c'est celui de la famille qui sera pris en compte" %>
+
+  <%= f.input :sansPorc, label:'Repas sans porc ?' %> 
+  <%= f.input :allergies, label:'Allergies' %>
+
+  <br>
+  <div style="margin-left:170px;">
+    <%= f.submit "Enregistrer" %>
+  </div>

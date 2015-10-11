@@ -1,4 +1,4 @@
-# encoding: utf-8
+  # encoding: utf-8
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_etat_images
-    @images = ["","ok.jpeg","no.jpeg","orange.jpeg","cancel.jpeg","ok.jpeg","ok.jpeg","ok.jpeg"]
+    @images = ["","yes.png","no.jpeg","orange.jpeg","cancel.jpeg","ok.jpeg","ok.jpeg","ok.jpeg"]
   end
 
 end

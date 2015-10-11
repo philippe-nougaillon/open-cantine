@@ -1,8 +1,10 @@
-<div id="form_actions">
-  <h3><%=h @famille.nom.upcase %></h3>
-</div>
+<div id="form_actions"></div>
+<br>
+<h3><%=h @famille.nom.upcase %></h3>
+
 <div class="span-10">
-    <table class="sample">
+    <table>
+      <tr />
       <tr>
         <td>Nom</td>
         <td><b><%=h @famille.nom.upcase %></b></td>
@@ -63,9 +65,7 @@
 
 <div class="span-2"> <br>	</div>
     <div class="span-10 last">
-        <table class="sample">
-    		</table>
-        <table class="sample">
+        <table>
             <tr>
               <th>Total Factures</th>
               <th>Total Paiements</th>
@@ -98,19 +98,20 @@
       </td>
     </tr>
   </table>
-     <br>
-     <fieldset style="width: 92%">
-	       <legend>Mémo</legend>
-     	   <%= @famille.memo %>
-     </fieldset>
-     <% unless @famille.lastconnection.nil? %>
-        Dernière connexion au portail: il y a <%= time_ago_in_words(@famille.lastconnection) %>
-     <% end %>
+   <br>
+   <fieldset style="width: 92%;height:115px;">
+       <legend>Mémo</legend>
+   	   <%= @famille.memo %>
+   </fieldset>
+   <% unless @famille.lastconnection.nil? %>
+      Dernière connexion au portail: il y a <%= time_ago_in_words(@famille.lastconnection) %>
+   <% end %>
 </div>
 
 <div class="span-24 last">
-	  <b>Enfants & Prestations non facturées</b>
-	  <table class="sample">
+  <br>
+	  <h3>Enfants & Prestations non facturées</h3>
+	  <table>
 	    <tr>
         <th>Nom</th>
         <th>Prénom</th>

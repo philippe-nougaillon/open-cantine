@@ -1,6 +1,4 @@
 class Log < ActiveRecord::Base
-  attr_accessible :user_id, :action_id, :date, :msg, :qui, :quoi
-
   belongs_to :user
 
   self.per_page = 20

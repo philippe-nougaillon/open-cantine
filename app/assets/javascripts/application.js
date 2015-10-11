@@ -11,8 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ujs
-//= require jquery-ui
+//= require jquery-ui/datepicker
+//= require jquery-ui/autocomplete
+//= require jquery.turbolinks
+//= require_self
 //= require_tree .
 
 $.datepicker.regional['fr'] = {

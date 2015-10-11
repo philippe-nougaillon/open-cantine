@@ -1,3 +1,5 @@
+<div id="form_actions"></div>
+
 <br>
 <h3>
   <%=h @enfant.prenom %>
@@ -7,7 +9,7 @@
 <%= form_for(@prestation, :url => { :action => :update, :id => @prestation }) do |form| %>
       
       <p style="display: none">
-        <%= form.label :enfant_id %><br />
+        <%= form.label :enfant_id %>
         <%= form.text_field :enfant_id %>
       </p>
       Modification des prestations du<b> <%=h format_date(@prestation.date) %></b>
@@ -15,8 +17,8 @@
       <br>
       <%= render :partial => 'prestation_edit', :locals => { :prestation => @prestation, :f => form } %>
       <br>
-      <div style="margin-top:10px;">
-          <%= image_submit_tag "valider.gif" %>
+      <div class="simple_form">
+          <%= form.submit "Enregistrer" %>
       </div>
 <% end %>
 

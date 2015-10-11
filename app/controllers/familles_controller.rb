@@ -4,12 +4,12 @@ class FamillesController < ApplicationController
  
   layout :determine_layout
 
-  before_filter :check, :except => ['index', 'new', 'create', 'balance', 'listing', 'autocomplete']
+  #before_filter :check, :except => ['index', 'new', 'create', 'balance', 'listing', 'autocomplete']
 
   skip_before_filter :check_authentification, only: :autocomplete
 
   def autocomplete
-    familles = Famille.order(:nom).where("nom LIKE ? and  mairie_id = ?", "%#{params[:term]}%", session[:mairie])
+    familles = Famille.where("nom LIKE ? and  mairie_id = ?", "%#{params[:term]}%", session[:mairie]).order(:nom)
     respond_to do |format|
       format.html
       format.json { render json: familles.map(&:nom) }
@@ -25,7 +25,7 @@ class FamillesController < ApplicationController
   end
   
   def check
-    unless Famille.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", params[:id], session[:mairie]])
+    unless Famille.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?
        redirect_to :action => 'index'
     end
   end
@@ -48,7 +48,7 @@ class FamillesController < ApplicationController
     @familles = Famille.search(params[:nom], params[:page], session[:mairie], sort)
     respond_to do |format|
       format.html # index.html.erb
-      format.xml { render :xml => Famille.find_all_by_mairie_id(session[:mairie]).to_xml( :include => [:enfants,:prestations]) }
+      format.xml { render :xml => Famille.where(mairie_id:session[:mairie]).to_xml( :include => [:enfants,:prestations]) }
       format.js
     end
   end
@@ -87,7 +87,7 @@ class FamillesController < ApplicationController
   # POST /familles
   # POST /familles.xml
   def create
-    @famille = Famille.new(params[:famille])
+    @famille = Famille.new(famille_params)
     @famille.mairie_id = session[:mairie]
     @famille.log_changes(0, session[:user])
 
@@ -107,7 +107,7 @@ class FamillesController < ApplicationController
   # PUT /familles/1.xml
   def update
     @famille = Famille.find(params[:id])
-    @famille.attributes = params[:famille]
+    @famille.attributes = famille_params
     @famille.log_changes(1, session[:user])
 
     respond_to do |format|
@@ -142,8 +142,8 @@ class FamillesController < ApplicationController
     @debit = 0.00
     @credit = 0.00
     @famille = Famille.find(params[:id])
-    @factures = Facture.find_all_by_famille_id(@famille.id)
-    @paiements = Paiement.find_all_by_famille_id(@famille.id)
+    @factures = Facture.where(famille_id:@famille.id)
+    @paiements = Paiement.where(famille_id:@famille.id)
 
     for f in @factures
       balance = { :date => f.date.to_date, :type => "Facture", :ref => f.ref, :mnt => f.montant, :id => f.id }
@@ -167,12 +167,18 @@ class FamillesController < ApplicationController
   end
 
   def listing
-	  @familles = Famille.find_all_by_mairie_id(session[:mairie], :order => "nom")
+	  @familles = Famille.where(mairie_id:session[:mairie]).order(:nom)
 	  respond_to do |format|
 	      format.html 
       	format.xml  { render :xml => @familles }
     end
   end
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def famille_params
+      params.require(:famille).permit(:nom,:adresse,:adresse2,:cp,:ville,:email,:phone,:mobile1,:mobile2,:mairie_id,:civilité,:password,:lastconnection,:tarif_id,:memo,:allocataire)
+    end
 
 end
 

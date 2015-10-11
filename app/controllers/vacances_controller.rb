@@ -7,16 +7,15 @@ class VacancesController < ApplicationController
   before_filter :check, :except => ['index', 'new', 'create']
 
   def check
-    unless Vacance.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", params[:id], session[:mairie]])
+    unless Vacance.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?
        redirect_to :action => 'index'
     end
   end
 
-
   # GET /vacances
   # GET /vacances.xml
   def index
-    @vacances = Vacance.find(:all, :conditions => ["mairie_id = ?",session[:mairie]], :order => 'debut')
+    @vacances = Vacance.where("mairie_id = ?",session[:mairie]).order(:debut)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -54,7 +53,7 @@ class VacancesController < ApplicationController
   # POST /vacances
   # POST /vacances.xml
   def create
-    @vacance = Vacance.new(params[:vacance])
+    @vacance = Vacance.new(vacance_params)
     @vacance.mairie_id = session[:mairie]
     @vacance.log_changes(0, session[:user])
 
@@ -74,7 +73,7 @@ class VacancesController < ApplicationController
   # PUT /vacances/1.xml
   def update
     @vacance = Vacance.find(params[:id])
-    @vacance.attributes = params[:vacance]
+    @vacance.attributes = vacance_params
     @vacance.log_changes(1, session[:user])
 
     respond_to do |format|
@@ -101,4 +100,11 @@ class VacancesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def vacance_params
+      params.require(:vacance).permit(:nom,:debut,:fin,:mairie_id)
+    end
+
 end

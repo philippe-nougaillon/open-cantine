@@ -11,10 +11,10 @@
  <br>
  <b>Quoi de neuf ?</b>
  <hr>
- <% for b in @blogs %>
-   <div style="color:darkblue;font-size:120%"><%= b.titre %></div>
+ <% @blogs.each do |b| %>
+   <div style="color:darkblue;font-size:120%"><%= b.titre.force_encoding("utf-8") %></div>
    <small>il y a <%= time_ago_in_words(b.updated_at) %></small><br>
-   <%= b.texte.html_safe %>
+   <%= b.texte.force_encoding("utf-8").html_safe %>
    <br><br>
  <% end %>
  <%= will_paginate @blogs %>

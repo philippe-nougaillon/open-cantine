@@ -5,10 +5,10 @@ require "open-uri"
 class FacturesController < ApplicationController
 
   layout :determine_layout
-  before_filter :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle']
+  before_filter :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle', 'facturation_speciale', 'facturation_speciale_do']
 
   def check
-    unless Facture.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", params[:id], session[:mairie]])
+    unless Facture.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?
        redirect_to :action => 'index'
     end
   end
@@ -36,19 +36,20 @@ class FacturesController < ApplicationController
     @factures = Facture.search(params[:search],params[:page], session[:mairie], sort, params[:famille_id])
     respond_to do |format|
       format.html # index.html.erb
-      format.xml { render :xml => Facture.find_all_by_mairie_id(session[:mairie]).to_xml( :include => [:facture_lignes]) }
-	    format.xls { @factures = Facture.find_all_by_mairie_id(session[:mairie]) }	
+      format.xml { render :xml => Facture.where(mairie_id:session[:mairie]).to_xml( :include => [:facture_lignes]) }
+	    format.xls { @factures = Facture.where(mairie_id:session[:mairie]) }	
     end
   end
 
   # GET /factures/1
   # GET /factures/1.xml
   def show
+    require 'factures.rb'
 	  @images = get_etat_images
     @facture = Facture.find(params[:id])
     @famille = Famille.find(@facture.famille_id)
     @mairie  = Ville.find(session[:mairie])
-    @prestations = Prestation.find_all_by_facture_id(@facture.id, :order => 'date, enfant_id')
+    @prestations = Prestation.where(facture_id:@facture.id).order(:date, :enfant_id)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @facture }
@@ -87,7 +88,7 @@ class FacturesController < ApplicationController
   # GET /factures/1/edit
   def edit
     @facture = Facture.find(params[:id])
-    @paiements = Paiement.find(:all, order:'id DESC', conditions:["famille_id = ? AND mairie_id = ?", @facture.famille_id, session[:mairie]])
+    @paiements = Paiement.where("famille_id = ? AND mairie_id = ?", @facture.famille_id, session[:mairie]).order('id DESC')
   end
 
   # GET /factures/new
@@ -162,7 +163,7 @@ class FacturesController < ApplicationController
   # PUT /factures/1.xml
   def update
     @facture = Facture.find(params[:id])
-    @facture.attributes = params[:facture] 
+    @facture.attributes = facture_params 
     @facture.log_changes(1, session[:user])
 
     respond_to do |format|
@@ -183,16 +184,71 @@ class FacturesController < ApplicationController
     @facture = Facture.find(params[:id])
     @facture.log_changes(2, session[:user])
     @facture.facture_lignes.delete_all
-    result = Prestation.update_all("facture_id = null", ["facture_id = ?", @facture.id])
+    result = Prestation.where(facture_id:@facture.id).update_all(facture_id:nil)
     @facture.destroy   
 
-    flash[:notice] = 'Facture supprimée, les prestations associées ont été mises à jour !' 
+    flash[:notice] = 'Facture supprimée. Les prestations associées ont été mises à jour.' 
 
     respond_to do |format|
       format.html { redirect_to(factures_url) }
       format.xml  { head :ok }
     end
   end
+
+    def facturation_speciale
+    @user = User.find(session[:user])
+    @familles = @user.ville.familles.order(:nom)
+    @facture = Facture.new(mairie_id:@user.mairie_id) 
+  end
+
+  def facturation_speciale_do
+    @user = User.find(session[:user]) 
+    @familles = @user.ville.familles.order(:nom)
+    @facture = Facture.new(facture_params)
+    prochain = FactureChrono.where(mairie_id:@user.mairie_id).first.prochain
+    texte = @facture.ref
+    @facture.ref = "#{Date.today.month.to_s}-#{Date.today.year}/#{prochain}"
+    @facture.echeance = Date.today.at_end_of_month
+    unless params[:facture][:famille_id].blank?
+      unless @facture.valid?
+        flash[:warning] = "Données insuffisantes pour continuer"
+        render action: "facturation_speciale" 
+      else
+        @facture.log_changes(0, @user.id)
+        @facture.save
+        FactureLigne.create(facture_id:@facture.id, texte:texte, qte:1, montant:@facture.montant, prix:@facture.montant) 
+        FactureChrono.where(mairie_id:@facture.mairie_id).update_all(prochain:prochain + 1)
+        flash[:notice] = "1 facture créée avec succès..."
+        redirect_to factures_path
+      end
+    else
+      @facture.famille_id = @familles.first.id
+      unless @facture.valid?
+        flash[:warning] = "Données insuffisantes pour continuer"
+        render action: "facturation_speciale" 
+      else
+        @familles.each do |famille|
+            prochain = FactureChrono.where(mairie_id:@facture.mairie_id).first.prochain
+            f = @facture.dup
+            f.famille_id = famille.id
+            f.ref = "#{Date.today.month.to_s}-#{Date.today.year}/#{prochain}" 
+            f.log_changes(0, @user.id)
+            f.save
+            FactureLigne.create(facture_id:f.id, texte:texte, qte:1, montant:f.montant, prix:f.montant)
+            FactureChrono.where(mairie_id:@facture.mairie_id).update_all(prochain:prochain + 1)  
+        end    
+        flash[:notice] = "#{@familles.count} factures créées avec succès..."
+        redirect_to factures_path
+      end
+    end  
+  end
+
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def facture_params
+      params.require(:facture).permit(:famille_id,:reglement_id,:ref,:date,:montant,:echeance,:mairie_id,:SoldeFamille,:checked,:footer,:total_cantine,:total_garderie,:total_centre,:total_etude,:envoyee)
+    end
 
 end
 
@@ -227,7 +283,7 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
     @mairie = Ville.find(@famille.mairie_id)
     load "facturation_modules/#{Ville.find(@mairie).FacturationModuleName}"       
 
-    @prochain = FactureChrono.find(:first, :conditions => ["mairie_id = ?", mairie_id])
+    @prochain = FactureChrono.find_by(mairie_id:mairie_id)
     @facture = Facture.new
     @facture.famille_id = famille_id
     @facture.mairie_id  = mairie_id
@@ -242,13 +298,13 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
     facture_id = @facture.id
 
     # pour chaque enfant de la famille
-    enfants = Enfant.find_all_by_famille_id(famille_id)
+    enfants = Enfant.where(famille_id:famille_id)
     for enfant in enfants
       tarif = Facturation.best_tarif(enfant)
       tarif_majoration = Tarif.where(mairie_id:@mairie.id, type_id:tarif.id).first
       total = 0.00
 
-      @prestations = Prestation.find(:all, :conditions => ['enfant_id = ? AND facture_id is null AND (date between ? AND ?)', enfant.id, date_debut, date_fin], :order => "date")      
+      @prestations = Prestation.where('enfant_id = ? AND facture_id is null AND (date between ? AND ?)', enfant.id, date_debut, date_fin).order(:date)
       if @prestations.size > 0
           # calcul prestations type 1 ' Normale
           prestations_normales = hash_prestations.clone
@@ -447,7 +503,7 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
       @facture.save
 
       # incrémente le N° de facture
-      @prochain = FactureChrono.find(:first, :conditions => ["mairie_id = ?", mairie_id])
+      @prochain = FactureChrono.find_by(mairie_id:mairie_id)
       @prochain.prochain = @prochain.prochain + 1
       @prochain.save
 

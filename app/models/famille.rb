@@ -3,8 +3,6 @@ require 'concerns/logmodule.rb'
 class Famille < ActiveRecord::Base
   include LogModule
 
-  attr_protected :id
-
   has_many :enfants, :dependent => :destroy
   has_many :prestations, :through => :enfants
   has_many :paiements
@@ -39,10 +37,7 @@ class Famille < ActiveRecord::Base
  
   def self.search(nom, page, mairie_id, sort)
 	  order_by = (sort.blank?) ? "nom" : sort	
- 	  paginate :per_page => 18,
-          :page => page,
-          :conditions => ['nom like ? AND mairie_id = ?', "%#{nom}%", mairie_id],
-          :order => order_by
+ 	  where('nom like ? AND mairie_id = ?', "%#{nom}%", mairie_id).paginate(per_page:20, page:page).order(order_by)
   end
 
   def nbrenfants

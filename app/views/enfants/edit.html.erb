@@ -1,5 +1,7 @@
-<%= form_for(@enfant) do |f| %>
+<div id="form_actions"></div>
+<br>
+<h3>Modification d'un enfant</h3>
 
+<%= simple_form_for(@enfant) do |f| %>
   <%= render :partial => 'enfant', :locals => { :f => f } %>
-
 <% end %>

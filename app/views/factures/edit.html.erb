@@ -1,43 +1,22 @@
+<div id="form_actions"></div>
+
 <br>
-<h3>Modification facture</h3>
+<h3>Modification de facture</h3>
 
-<%= form_for(@facture) do |f| %>
+<%= simple_form_for(@facture) do |f| %>
+    <%= f.hidden_field :famille_id %>
+    <%= f.hidden_field :reglement_id %>
+    <%= f.hidden_field :montant %>
+	<%= f.input :ref, label:'Référence', input_html: {size: 25} %>
+	<%= f.input :date, as: :string, input_html: {class: 'date'} %>
+	<%= f.input :echeance, label: 'Echéance', as: :string, input_html: {class: 'date'} %>
+	<%= f.input :checked, label:'Vérifiée ?' %>
+	<%= f.input :footer, label: 'Commentaire' %>
 
-    <div style="display:none">
-	  <p>
-	    <%= f.label :famille_id %><br />
-	    <%= f.text_field :famille_id %>
-	  </p>
-	  <p>
-	    <%= f.label :reglement_id %><br />
-	    <%= f.select :reglement_id, @paiements.collect {|p| [ "#{p.date} - #{p.typepaiement} - #{p.ref} : #{p.montant} €", p.id ] }, { :include_blank => true } %>
-	  </p>
-	  <p>
-	    <%= f.label :montant %><br />
-	    <%= f.text_field :montant %>
-	  </p>
-    </div>
-	<p>
-		<%= f.label :ref %><br />
-		<%= f.text_field :ref %>
-	</p>
-	<p>
-		<%= f.label :date %><br />
-		<%= f.datetime_select :date %>
-	</p>
-	<p>
-		<%= f.label :echeance %><br />
-		<%= f.date_select :echeance %>
-	</p>
-	<p>
-		<%= f.check_box :checked %> <b>Vérifiée ?</b>
-	</p>
-	<p>
-		<%= f.label "Commentaires (bas de page)" %><br>
-		<%= f.text_area :footer %>
-	</p>
-	<p>
-		<%= f.submit "Sauvegarder" %> | 
-		<%= link_to "[Supprimer cette facture]", @facture, data: {confirm:"Etes-vous certain(e) de vouloir supprimer la facture ? Notez que les prestations associées seront mises à jour comme 'non facturées' et devront donc être à nouveau facturer."}, method: :delete %>
-	</p>
+	<div style="margin-left:170px;">
+		<%= f.submit "Sauvegarder" %>
+		
+		| <%= link_to "Supprimer cette facture", @facture, data: {confirm:"Etes-vous certain(e) de vouloir supprimer la facture ? Notez que les prestations associées seront mises à jour comme 'non facturées' et devront donc être à nouveau facturer."}, method: :delete %>
+	</div>
 <% end %>
+<br><br>

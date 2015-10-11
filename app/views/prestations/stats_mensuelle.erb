@@ -1,3 +1,5 @@
+<div id="form_actions"></div>
+
 <br>
 <h3>Prestations du <%= @datedebut.to_s(:fr) %> au <%= @datefin.to_s(:fr) %></h3>
 <i>Classe: <%= Classroom.find(@classe).nom %></i>
@@ -12,7 +14,7 @@
 <% @sum[:centrePM] = 0 %>
 <% @sum[:etude] = 0 %>
 
-<table class="sample">
+<table>
 	<tr>
 		<th>Nom prénom</th><th>Total repas</th><th>Total Garderie Matin</th>
 	    <th>Total Garderie Soir</th><th>Total Centre Matin</th><th>Total Centre Soir</th><th>Total Etude</th>

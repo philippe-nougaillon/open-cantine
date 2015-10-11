@@ -7,7 +7,7 @@ class PaiementsController < ApplicationController
   layout :determine_layout
 
   def check
-    unless Paiement.find(:first, :conditions =>  [" id = ? AND mairie_id = ?", params[:id], session[:mairie]])
+    unless Paiement.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?
        redirect_to :action => 'index'
     end
   end
@@ -31,16 +31,28 @@ class PaiementsController < ApplicationController
       session[:order_by] = sort
     end
 
-    @paiements = Paiement.search(params[:search], params[:page], session[:mairie], params[:famille_id], sort)
+    @paiements = Paiement.where(mairie_id:session[:mairie]).joins(:famille)
+
+    if params[:famille_id]
+        @paiements = @paiements.where(famille_id:params[:famille_id])
+    end  
+
+    unless params[:search].blank?
+        @paiements = @paiements.where("ref like ? or familles.nom like ? OR chequenum = ? ", "%#{params[:search]}%", "%#{params[:search]}%", params[:search])
+    end
+        
+    order_by = (sort.blank?) ? "id DESC" : sort 
+    @paiements = @paiements.paginate(per_page:18, page:params[:page]).order(order_by)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @paiements }
-	  format.xls  { @paiements  = Paiement.find_all_by_mairie_id(session[:mairie]) }
+	    format.xls  { @paiements = Paiement.where(mairie_id:session[:mairie]) }
     end
   end
 
   def listing
-    @paiements = Paiement.find(:all, :conditions => ["remise is null AND typepaiement = 'CHEQUE' AND typepaiement = 'CHEQUE' AND mairie_id = ?", session[:mairie]])
+    @paiements = Paiement.where("remise is null AND typepaiement = 'CHEQUE' AND typepaiement = 'CHEQUE' AND mairie_id = ?", session[:mairie])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -49,7 +61,7 @@ class PaiementsController < ApplicationController
   end
 
   def majdateremise
-    @paiements = Paiement.find(:all, :conditions => ["remise is null AND typepaiement = 'CHEQUE' AND mairie_id = ?",session[:mairie]])
+    @paiements = Paiement.where("remise is null AND typepaiement = 'CHEQUE' AND mairie_id = ?",session[:mairie])
     
     for p in @paiements
       p.remise = Date.today.to_s(:fr)
@@ -66,7 +78,7 @@ class PaiementsController < ApplicationController
   # GET /paiements/1.xml
   def show
     @paiement = Paiement.find(params[:id])
-    @factures = Facture.find(:all, :conditions =>  ["mairie_id = ?", session[:mairie]])
+    @factures = Facture.where(mairie_id:session[:mairie])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -89,7 +101,7 @@ class PaiementsController < ApplicationController
     @paiement = Paiement.new
     @paiement.famille_id = params[:famille_id]
     @paiement.date = Date.today.to_s(:fr)
-    @factures = Facture.find(:all, :order => 'id DESC', :conditions =>  ["famille_id = ? AND mairie_id = ?", @paiement.famille_id, session[:mairie]])
+    @factures = Facture.where("famille_id = ? AND mairie_id = ?", @paiement.famille_id, session[:mairie]).order('id DESC')
 
     respond_to do |format|
       format.html # new.html.erb
@@ -100,13 +112,13 @@ class PaiementsController < ApplicationController
   # GET /paiements/1/edit
   def edit
     @paiement = Paiement.find(params[:id])
-    @factures = Facture.find(:all, :order => 'id DESC', :conditions =>  ["famille_id = ? AND mairie_id = ?", @paiement.famille_id, session[:mairie]])
+    @factures = Facture.where("famille_id = ? AND mairie_id = ?", @paiement.famille_id, session[:mairie]).order('id DESC')
   end
 
   # POST /paiements
   # POST /paiements.xml
   def create
-    @paiement = Paiement.new(params[:paiement])
+    @paiement = Paiement.new(paiement_params)
     @paiement.mairie_id = session[:mairie]
 
     if @paiement.montant.to_f == 0.0	
@@ -143,8 +155,8 @@ class PaiementsController < ApplicationController
   # PUT /paiements/1.xml
   def update
     @paiement = Paiement.find(params[:id])
-    @factures = Facture.find(:all, :conditions =>  ["mairie_id = ?", session[:mairie]])
-    @paiement.attributes = params[:paiement]
+    #@factures = Facture.find(:all, :conditions =>  ["mairie_id = ?", session[:mairie]])
+    @paiement.attributes = paiement_params
     @paiement.log_changes(1, session[:user])
 
     respond_to do |format|
@@ -171,4 +183,11 @@ class PaiementsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def paiement_params
+      params.require(:paiement).permit(:date,:typepaiement,:ref,:banque,:montant,:famille_id,:mairie_id,:montantGarderie,:montantCantine,:remise,:chequenum,:memo,:facture_id)
+    end   
+
 end

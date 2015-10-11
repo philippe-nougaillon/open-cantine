@@ -1,0 +1,31 @@
+<div id="form_actions"></div>
+
+<br>
+<h3>Facturation spéciale</h3>
+<i>Besoin de facturer une ou toutes les familles d'une charge exceptionnelle, comme des frais d'adhésion ? <br>
+	Saisissez les informations ci-dessous pour créer la(es) facture(s).</i>
+<br><br>
+<%= simple_form_for(@facture, :url => {:action => "facturation_speciale_do"}) do |f| %>
+	
+	<% if @facture.errors.any? %>
+		<b><%= @facture.errors.full_messages.join(", ") %></b>
+		<br><br>
+	<% end %>
+
+	<%= f.hidden_field :mairie_id %>
+
+	<%= f.association :famille, collection: @familles, value_method: :id, label_method: :nom, include_blank: true, hint:"Choisissez une famille ou aucune pour les facturer toutes !"  %>
+
+	<%= f.input :date, as: :string, input_html:{size: 9, class: "date"} %>
+	<%= f.input :checked,  label:"Vérifiée ?" %> 
+	<%= f.input :ref, label:"Désignation", input_html:{size:50} %>
+	<%= f.input :montant, input_html:{size:10} %>
+	<%= f.input :footer, as: :text, label: "Commentaires de bas de page", size:50  %>
+
+	<div style="margin-left:170px;">
+		<%= f.submit "Créer facture(s)" %> 
+	</div>
+<% end %>
+<br><br>
+
+

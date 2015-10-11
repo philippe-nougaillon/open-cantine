@@ -26,16 +26,16 @@
 		    <% end %>
 		</div>
 
-		<div  id="title" class="span-10 last">
+		<div id="title" class="span-10 last">
 		    <% if session[:famille_id].nil? %>	
 	           <%= image_tag 'playground.png' %>
     	       <%= image_tag 'diner.png' %>
         	   <%= image_tag 'picnic.png' %>
             <% else %>
-           	   <% f = Famille.find(session[:famille_id]) %>	
-           	   <%= image_tag(f.mairie.logo_url, width:'60') %> 
+	            <% f = Famille.find(session[:famille_id]) %>	
+           	    <%= image_tag(f.mairie.logo_url, width:'100') %> 
 	            <br>
-    	        <h3><%= link_to f.mairie.nom, "/moncompte/famillelogin" %></h3>
+    	        <h4><%= link_to f.mairie.nom, "/moncompte/famillelogin" %></h4>
             <% end %>
 		</div>
 	
