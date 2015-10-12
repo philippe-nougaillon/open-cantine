@@ -98,6 +98,7 @@ OpenCantine3::Application.routes.draw do
   get 'admin/import', to: 'admin#import'
   get 'admin/points_forts', to:'admin#points_forts'
   get 'admin/guide', to:'admin#guide'
+  get 'admin/check_user', to: 'admin#check_user'
 
   patch 'admin/change_acces_portail', to: 'admin#change_acces_portail'
   post 'admin/user_add', to: 'admin#user_add'
@@ -116,6 +117,8 @@ OpenCantine3::Application.routes.draw do
   get 'moncompte/familleshow', to: 'moncompte#familleshow'
   get 'moncompte/famillefacture', to: 'moncompte#famillefacture'
 
+  get 'villes/nouveau_compte_create', to: 'villes#nouveau_compte_create'
+  post 'villes/nouveau_compte_create', to: 'villes#nouveau_compte_create'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

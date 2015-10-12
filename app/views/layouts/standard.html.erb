@@ -10,9 +10,9 @@
   <% unless session[:user].nil? %>
     <% user_id = session[:user] %> 
     <% user = User.find(user_id) %>
-	<title>openCantine - <%= user.username %></title>
+	<title>openCantine 4.2 - <%= user.username %></title>
   <% else %>
-	<title>openCantine</title>
+	<title>openCantine 4.2</title>
   <% end %>
 
   <%= stylesheet_link_tag 'application', media:"all", "data-turbolinks-track" => true   %>

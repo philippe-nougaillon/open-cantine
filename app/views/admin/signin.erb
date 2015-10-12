@@ -27,7 +27,7 @@
     <% if session[:user].nil? %>
 	  <fieldset>
 	  	<legend>Connexion</legend> 
- 	 	<%= form_for(User.new, remote: true, url: { controller:'admin', action:'check_user'}) do |f| %>
+ 	 	<%= form_for(User.new, url: { controller:'admin', action:'check_user'}) do |f| %>
 		
 			Nom d'utilisateur<br>
 			<%=  f.text_field "username", size:20 %><br>
