@@ -1,6 +1,6 @@
 class Todo < ActiveRecord::Base
 
-	attr_protected :id
+	# attr_protected :id
 
 	belongs_to :mairie
 
