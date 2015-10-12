@@ -34,8 +34,9 @@
         <td><% if enfant.sansPorc %>Sans Porc. <% end %> <% if enfant.allergies %>Allergies.<% end %></td>
         <% if session[:user_readwrite] %>
           <td>
-            <%= link_to "Manuelle", prestations_new_manual_path(mois:Date.today.month, year:Date.today.year, id:enfant.id) %>
-            | <%= link_to "Automatique", new_prestation_path(enfant_id:enfant.id) %>
+            <%= link_to "Manuelle", prestations_new_manual_path(mois:Date.today.month, year:Date.today.year, id:enfant.id), data:{ no_turbolink: true } %>
+            | 
+            <%= link_to "Automatique", new_prestation_path(enfant_id:enfant.id) %>
           </td>
         <% end %>
       </tr>
