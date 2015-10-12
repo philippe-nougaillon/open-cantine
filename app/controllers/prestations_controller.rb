@@ -419,17 +419,14 @@ class PrestationsController < ApplicationController
             @prestation.totalP = total_prestations
             #@tarif = @prestation.tarif
 
-
       		  @prestation.save
   	      end
           date = date + 1.day
         }
     }
 
-    respond_to do |format|
-       format.html
-	     format.js
- 	  end
+    flash[:notice] = "Prestations enregistrées. Total: #{@total.round(2)} €"
+    redirect_to :back
   end
 
 

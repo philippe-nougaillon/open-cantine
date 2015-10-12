@@ -3,9 +3,9 @@ openCantine
 
 Application web de facturation de cantine
 
-== Installation d'openCantine sur un serveur linux debian
+== Installation d'openCantine sur un serveur Linux
 
-1/ Installation des dépendances au framework Ruby on Rails
+1/ Installation de Ruby + MySql 
 
 sudo apt-get install ruby1.9.1-full
 sudo apt-get install ruby1.9.1.dev
@@ -19,7 +19,6 @@ sudo apt-get install curl
 
 2/ Installation du framework Ruby on Rails
 sudo gem install rails
-	sudo gem install therubyracer
 
 3/ Récupération du convertiseur html to PDF
 curl -C - -O http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2

@@ -77,10 +77,9 @@ OpenCantine3::Application.routes.draw do
 
   get 'paiements/listing', to: 'paiements#listing'
   get 'paiements/print', to: 'paiements#print'
-
   get 'paiements/majdateremise', to: 'paiements#majdateremise'
 
-  post "/prestations/new_manual_calc"
+  post "prestations/new_manual_calc", to:"prestations#new_manual_calc"
   get 'prestations/new_manual', to: 'prestations#new_manual'
   get 'prestations/edit_from_enfants', to: 'prestations#edit_from_enfants'
   get 'prestations/editions', to: 'prestations#editions'
