@@ -343,6 +343,7 @@ class PrestationsController < ApplicationController
     @year = params[:year]
     @solde = params[:solde].to_f
     @total = 0.00
+    supprimees = []
 
     # test si l'utilisateur a décoché ?
     if session[:lastparams]
