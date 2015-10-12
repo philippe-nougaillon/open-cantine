@@ -1,8 +1,10 @@
+<div id="form_actions"></div>
+<br>
 
-<div id="form_actions"><h3>Inscription manuelle</h3></div>
+<h3>Inscription manuelle</h3>
 Cochez les prestations à ajouter pour ce mois. Une fois l'inscription terminée, cliquez sur le nom de l'enfant pour vérifier les prestations enregistrées.<br>
 Les inscriptions existantes sont pré-cochées et les prestations déjà facturées apparaissent en grisé. 
-<hr/>
+<br><br>
 
 <% if @famille_id %>
    <h3><%= link_to Famille.find(@famille_id).nom, famille_path(id:@famille_id) %></h3>

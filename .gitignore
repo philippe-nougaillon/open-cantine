@@ -14,8 +14,12 @@
 /log/*.log
 /tmp
 
-#ignore pdfs
+# Ignore pdfs
 /pdfs/*.pdf
 
-#ignore dev configuration
+# Ignore dev configuration
 /config/environments/development.rb
+
+# Ignore secret key base
+/config/initializers/app_env_vars.rb
+

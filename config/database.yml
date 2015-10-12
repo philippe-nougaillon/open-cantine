@@ -28,10 +28,10 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: OPENCANTINERAILS
+  database: OPENCANTINE4.2
   pool: 5
   username: root
-  password: AltecLansing2009
+  password: 
   socket: /var/run/mysqld/mysqld.sock
   reconnect: false
 
