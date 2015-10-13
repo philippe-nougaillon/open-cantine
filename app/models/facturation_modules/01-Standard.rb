@@ -1,4 +1,3 @@
-
 module Facturation
 
   # TARIF A APPLIQUER POUR CETTE PRESTATION
