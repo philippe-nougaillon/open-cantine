@@ -11,8 +11,11 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery-ui/datepicker
 //= require jquery-ui/autocomplete
+//= require jquery_ujs
+//= require turbolinks
 //= require_self
 //= require_tree .
 

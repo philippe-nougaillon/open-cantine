@@ -14,12 +14,12 @@ gem 'capture_stdout'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-#gem 'jquery-turbolinks'
+gem 'jquery-turbolinks'
 
 gem 'open_uri_redirections'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-#gem 'turbolinks'
+gem 'turbolinks'
 
 gem 'execjs'
 gem 'therubyracer'
