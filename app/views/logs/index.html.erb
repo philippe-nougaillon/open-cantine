@@ -1,11 +1,14 @@
-<h2>Journal des modifications</h2>
+<div id="form_actions"></div>
+<br>
+
+<h3>Journal des modifications</h3>
     
 <div id="form_actions">
   <%= form_tag request.path, :method => 'get' do %>
     Date:
-    <%= text_field_tag('date', params[:date], :size => 9, class: "date") %>
+    <%= text_field_tag('date', params[:date], :size => 9, class: "date", onchange:'this.form.submit()') %>
     Qui:
-    <%= select_tag "user_id", options_from_collection_for_select(User.find(session[:user]).ville.users, 'id', 'username', params[:user_id]), :include_blank => true %>
+    <%= select_tag "user_id", options_from_collection_for_select(User.find(session[:user]).ville.users, 'id', 'username', params[:user_id]), :include_blank => true, onchange:'this.form.submit()' %>
     Quoi:
     <%= text_field_tag "search", params[:search] %>
     <%= submit_tag 'Rechercher' %>

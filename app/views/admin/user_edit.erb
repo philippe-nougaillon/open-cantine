@@ -1,13 +1,18 @@
-<div class="span-14 last">
-	<br>
-	<br>
-	<h3>Compte: <%= @user.username %></h3>
-	Dernière modification le <%= @user.lastchange.to_s(:fr) %><br>
-	<br><br>
-	<h4>Changer de mot de passe</h4	>
-	<%= simple_form_for(@user, :url => 'user_update') do |f| %>
-		<%= f.input :password, :label => "Mot de passe", :required => true %>
-		<%= f.submit 'Modifier' %>
-	<% end %>
-</div>
+<div id="form_actions"></div>
+<br>
 
+<h3>Modification utilisateur <%= @user.username %></h3>
+
+Dernière modification le <%= @user.lastchange.to_s(:fr) %><br>
+<br><br>
+
+<%= simple_form_for(@user, :url => 'user_update') do |f| %>
+	<%= f.input :username , :label => "Identifiant", :hint => "Généralement son adresse email", :input_html => { size: 25 } %>
+	<%= f.input :password, :label => "Mot de passe", :required => true %>
+	<%= f.input :readwrite, as: :radio_buttons, label:"Droits en écriture", hint:"Cet utilisateur aura-t-il accès aux informations en lecture + écriture, ou juste en lecture ?" %>
+
+	<br>
+	<div style="margin-left:170px;">
+		<%= f.submit 'Modifier' %>
+	</div>
+<% end %>

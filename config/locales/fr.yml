@@ -232,6 +232,11 @@ fr:
   activemodel:
     errors:
       <<: *errors
+
   activerecord:
     errors:
       <<: *errors
+
+  simple_form:
+    "yes": 'Oui'
+    "no": 'Non'

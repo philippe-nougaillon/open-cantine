@@ -5,9 +5,8 @@
 <%= link_to "Classes", "#classes" %> |
 <%= link_to "Vacances", "#vacances" %> |
 <%= link_to "Tarifs", "#tarifs" %> |
-<%= link_to "Formules de facturation", "#formules" %> |
 <%= link_to "Utilisateurs", "#utilisateurs" %> |
-<%= link_to "Import/Export", "#export" %> |
+<%= link_to "Import/Export", "#export" %>
 <br><br><br>
 
 
@@ -135,29 +134,6 @@ permet aux parents, selon le mode d'accès choisi, de consulter ses factures et 
 <br><br>
 
 <br><br>	
-<a name="formules"></a>
-<h3>Formules de facturation
-	<%= link_to image_tag('modif.png', size:"15x15"), edit_ville_path(@mairie.id) if session[:user_readwrite] %>
-</h3>
-<hr>
-<table>
- 	<tr>
-		<th>Nom de la formule</th>
-    	<th>Description</th>
-    	<th>Actif?</th>
- 	</tr>
- 	<% for f in Formule.all %>
-	   		<tr  class="<%= cycle('list-line-even','list-line-odd')%>">
-         	<td><%= f.nom  %></td>
-         	<td><%= f.memo %></td>
-	 		<td style="text-align:center;"><%= image_tag "yes.png" if (@mairie.FacturationModuleName == f.module_name) %></td>
-   		</tr>	 
- 	<% end %>
-</table>
-<small>Choisissez comment seront calculées vos factures. Si vous souhaitez le développement d'un mode de facturation personnalisé, <a href="mailto:philippe.nougaillon@gmail.com">contactez-moi</a>. </small>
-<br><br>
-
-<br><br>	
 <a name="utilisateurs"></a>
 <h3>Utilisateurs
 	<%= link_to image_tag('modif.png', size:"15x15"), :action => "users_admin" if session[:user_readwrite] %>
@@ -180,7 +156,6 @@ permet aux parents, selon le mode d'accès choisi, de consulter ses factures et 
 	   <% end -%>
 </table>
 <small>Plusieurs utilisateurs peuvent travailler simultanément sur un compte openCantine et lire et/ou modifier les données.</small>
-
 
 <% if session[:user_readwrite] %>
     <a name="export"></a>

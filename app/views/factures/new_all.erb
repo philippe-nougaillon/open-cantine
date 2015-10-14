@@ -4,7 +4,7 @@
 <%= simple_form_for :facturer, :url => "/factures/create" do |f| %>
 	<%= f.input :mois, :collection => 1..12,  :selected => Date.today.month %>
 	<%= f.input :an, :collection => 2010..2020, :label => 'Année',  :selected => Date.today.year %>
-	<%= f.input :commentaire, :as => :text, label: "Commentaire commun à toutes les factures", :required => false %>
+	<%= f.input :commentaire, :as => :text, label: "Commentaire", :required => false %>
  	<div style="margin-left:170px;">
 		<b>Attention:</b> Toutes les prestations du mois <b>de toutes les familles</b> vont être facturées !<br><br>
  		<%= f.submit "Facturer"  %>

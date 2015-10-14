@@ -139,7 +139,7 @@ class FacturesController < ApplicationController
   def create
     mairie = Ville.find(session[:mairie])
 
-    unless params[:famille_id] # facturation de toutes les familles
+    unless params[:famille_id] # Facture de toutes les familles
       nbr_facture = 0
       mairie.familles.each do |famille|
 			  facture_id = create_facture(famille.id , 0, famille.mairie_id, false, params[:facturer][:mois], params[:facturer][:an], params[:facturer][:commentaire])
@@ -195,7 +195,7 @@ class FacturesController < ApplicationController
     end
   end
 
-    def facturation_speciale
+  def facturation_speciale
     @user = User.find(session[:user])
     @familles = @user.ville.familles.order(:nom)
     @facture = Facture.new(mairie_id:@user.mairie_id) 
@@ -212,7 +212,7 @@ class FacturesController < ApplicationController
     unless params[:facture][:famille_id].blank?
       unless @facture.valid?
         flash[:warning] = "Données insuffisantes pour continuer"
-        render action: "facturation_speciale" 
+        render action: "Facture_speciale" 
       else
         @facture.log_changes(0, @user.id)
         @facture.save
@@ -225,7 +225,7 @@ class FacturesController < ApplicationController
       @facture.famille_id = @familles.first.id
       unless @facture.valid?
         flash[:warning] = "Données insuffisantes pour continuer"
-        render action: "facturation_speciale" 
+        render action: "Facture_speciale" 
       else
         @familles.each do |famille|
             prochain = FactureChrono.where(mairie_id:@facture.mairie_id).first.prochain
@@ -279,9 +279,9 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
     @solde = @sumP - @sumIn
 
 
-    #charge le module facturation de cette mairie
+    #charge le module Facture de cette mairie
     @mairie = Ville.find(@famille.mairie_id)
-    load "facturation_modules/#{Ville.find(@mairie).FacturationModuleName}"       
+    #load "Facture_modules/#{Ville.find(@mairie).FactureModuleName}"       
 
     @prochain = FactureChrono.find_by(mairie_id:mairie_id)
     @facture = Facture.new
@@ -300,7 +300,7 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
     # pour chaque enfant de la famille
     enfants = Enfant.where(famille_id:famille_id)
     for enfant in enfants
-      tarif = Facturation.best_tarif(enfant)
+      tarif = Facture.best_tarif(enfant)
       tarif_majoration = Tarif.where(mairie_id:@mairie.id, type_id:tarif.id).first
       total = 0.00
 
@@ -310,7 +310,7 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
           prestations_normales = hash_prestations.clone
           for prestation1 in @prestations
               #prestations_normales = prestation1.calc_prestation(prestations_normales)
-              prestations_normales = Facturation.calc_prestation(prestations_normales, prestation1, tarif,  prestation1.date.day.to_s)
+              prestations_normales = Facture.calc_prestation(prestations_normales, prestation1, tarif,  prestation1.date.day.to_s)
               prestation1.facture_id = facture_id # associe la presta à la facture
               prestation1.totalA = 0.00 # TODO : migration default totalA = 0
               prestation1.save
@@ -320,21 +320,21 @@ def create_facture(famille_id, facture_id, mairie_id, draft, mois, an, commentai
           prestations_majorees= hash_prestations.clone
           for prestation3 in @prestations
               #prestations_majorees = prestation3.calc_majoration(prestations_majorees)
-              prestations_majorees = Facturation.calc_majoration(prestations_majorees, prestation3, tarif, tarif_majoration, prestation3.date.day.to_s)
+              prestations_majorees = Facture.calc_majoration(prestations_majorees, prestation3, tarif, tarif_majoration, prestation3.date.day.to_s)
           end
 
           # calcul prestations type 2 ' Annulée par la famille
           prestations_annulees= hash_prestations.clone
           for prestation2 in @prestations
               #prestations_annulees = prestation2.calc_annulation(prestations_annulees)
-              prestations_annulees = Facturation.calc_annulation(prestations_annulees, prestation2, tarif, prestation2.date.day.to_s)
+              prestations_annulees = Facture.calc_annulation(prestations_annulees, prestation2, tarif, prestation2.date.day.to_s)
           end
 
           # calcul prestations type 4 ' Annulée maladie
           prestations_annulees_maladie = hash_prestations.clone
           for prestation4 in @prestations
               #prestations_annulees_maladie = prestation4.calc_annulation_maladie(prestations_annulees_maladie)
-              prestations_annulees_maladie = Facturation.calc_annulation_maladie(prestations_annulees_maladie, prestation4, tarif, prestation4.date.day.to_s)  
+              prestations_annulees_maladie = Facture.calc_annulation_maladie(prestations_annulees_maladie, prestation4, tarif, prestation4.date.day.to_s)  
           end
           
           # ajout des prestations

@@ -1,59 +1,25 @@
-<%= form_for(@ville, :url=>{:action=> :update}) do |f|%>
+<div id="form_actions"></div>
+<br>
+
+<h3>Modification des coordonnées</h3>
+
+<%= simple_form_for(@ville) do |f|%>
 
 	<% @ville.errors.full_messages.each do |msg| %>
       <p><%= msg %></p>
     <% end %>
 
-	<fieldset id="report_form">
-	  <legend>Modification des coordonnées</legend>
-	  <div class="span-12 column last">
+	<%=f.input :nom, :input_html => {size: 25} %>
+	<%=f.input :adr, label:'Adresse', :input_html => {size: 25} %>
+	<%=f.input :cp, label:'Code postal', :input_html => {size: 5} %>
+	<%=f.input :ville, :input_html => {size: 25} %>
+	<%=f.input :tel, label:"Téléphone", :input_html => {size: 25} %>
+	<%=f.input :email, :input_html => {size: 25} %>
+	<%=f.input :logo_url, label:"URL logo", hint:"Chemin vers votre logo (en PNG) qui s'affichera dans l'entête de facture (http://....", 
+				 :input_html => {size: 50}  %>
+	<br>
+	<div style="margin-left:170px;">	
+    	<%= f.submit "Valider" %>
+    </div>
 
-	    <dl>
-	      <dt><%=f.label :nom, "Nom" %></dt>
-	      <dt><%=f.text_field :nom, :class=>"text required", :minlength=>"3" %></dt>
-
-	      <dt><%=f.label :nom, "Adresse" %></dt>
-	      <dt><%=f.text_field :adr, :class=>"text required", :minlength=>"3" %></dt>
-
-	      <dt><%=f.label :nom, "Code postal" %></dt>
-	      <dt><%=f.text_field :cp, :class=>"text required", :minlength=>"5" %></dt>
-
-	      <dt><%=f.label :nom, "Ville" %></dt>
-	      <dt><%=f.text_field :ville, :class=>"text required", :minlength=>"3" %></dt>
-
-	      <dt><%=f.label :nom, "Téléphone" %></dt>
-	      <dt><%=f.text_field :tel, :class=>"text required", :minlength=>"3" %></dt>
-
-	      <dt><%=f.label :nom, "Courriel" %></dt>
-	      <dt><%=f.text_field :email, :class=>"text required", :minlength=>"3" %></dt>
-
-	      <dt><%=f.label :nom, "Chemin vers le logo (PNG) qui s'affichera en entête de vos factures" %></dt>
-	      <dt><%=f.text_field :logo_url, :size => 80 %></dt>
-		  <dt><small>ex : http://upload.wikimedia.org/wikipedia/commons/4/45/Logo-Mairie.png</small></dt>
-		  <br>
-	      <dt><%=f.check_box :newsletter %> <%=f.label "Recevoir la newsletter openCantine ?" %></dt>
-		
-		<br><br>
-		<legend>Mode de facturation</legend>
-
-	 	<div class="span-22">
-		      <table>
-			 <tr>
-			    <th>Mode</th>
-			    <th>Description</th>
-			    <th>Actif?</th>
-			 </tr>
-			 <% for formule in Formule.all %>
-		  	   <tr>
-			     <td><%= formule.nom  %></td>
-			     <td><%= formule.memo %></td>
-			     <td><%= f.radio_button 'FacturationModuleName', formule.module_name %></td>
-			   </tr>	 
-			 <% end %>
-		      </table>
-	    	</div>
-	    </dl>
-  	    <br>
-            <%= f.submit "Valider" %>
-	</fieldset>
 <% end %>

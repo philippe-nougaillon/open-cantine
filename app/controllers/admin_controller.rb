@@ -52,6 +52,10 @@ class AdminController < ApplicationController
 
   def user_edit
     @user = User.find(session[:user])
+    unless @user.readwrite 
+      redirect_to root_url, notice: "Action non autorisée !"
+      return
+    end
   end
   
   def user_update
@@ -70,6 +74,25 @@ class AdminController < ApplicationController
           format.html { render :action => "user_edit" }
           format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
         end
+    end
+  end
+
+  # DELETE 
+  def user_destroy
+    current_user = User.find(session[:user])
+    unless current_user.readwrite 
+      redirect_to root_url, notice: "Action non autorisée !"
+      return
+    end
+    @user = User.find(params[:id])
+    if current_user.ville.users.include?(@user) # fait parti des utilisateurs du même compte
+      @user.destroy 
+      @user.logs.destroy_all
+    end
+
+    respond_to do |format|
+      format.html { redirect_to(admin_users_admin_path) }
+      format.xml  { head :ok }
     end
   end
 

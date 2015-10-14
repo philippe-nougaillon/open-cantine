@@ -91,6 +91,7 @@ OpenCantine3::Application.routes.draw do
 
   get 'admin/user_edit', to: 'admin#user_edit'
   get 'admin/users_admin', to: 'admin#users_admin'
+  delete 'admin/users_admin', to: 'admin#user_destroy'
   get 'admin/setup', to: 'admin#setup'
   get 'admin/bienvenue', to: 'admin#bienvenue'
   get 'admin/signout', to: 'admin#signout'

@@ -1,22 +1,22 @@
-<div class="span-12 last">
-	<br><br>
+<div id="form_actions"></div>
+<br>
 
-	<h4>Ajout d'une période de vacances</h4>
 
-	<%= simple_form_for(@vacance) do |f| %>
-	 
-	 <% @vacance.errors.full_messages.each do |msg| %>
-       <p><%= msg %></p>
-     <% end %>
+<h3>Ajout d'une période de vacances</h3>
+
+<%= simple_form_for(@vacance) do |f| %>
+ 
+ 	<% @vacance.errors.full_messages.each do |msg| %>
+  	 	<p><%= msg %></p>
+ 	<% end %>
 
 	 <%= f.input :nom, :input_html => { size: 20 } %>
 	 <%= f.input :debut, :as => :string, :input_html => { :class => 'date_picker', size: 10 } %>
 	 <%= f.input :fin,   :as => :string, :input_html => { :class => 'date_picker', size: 10 } %>
 	 <br>
 
-     <div style="margin-left:120px;">
-		 <%= image_submit_tag "valider.gif" %>
+	 <div style="margin-left:170px;">
+		 <%= f.submit "Valider" %>
 	 </div>
-	<% end %>
-</div>
+<% end %>
 

@@ -1,26 +1,8 @@
 <br>
 
-<table class="form">
-  <tr>
-    <td id="label">Classe</td>
-    <td>
-      <%= f.text_field :nom, :size => 5 %>
-    </td>
-  </tr>
-  <tr>
-    <td  id="label">
-      <%= f.label 'Référant' %>
-    </td>
-    <td>
-      <%= f.text_field :referant %>
-    </td>
-  </tr>
-  <tr>
-     <td></td>
-     <td>
-       <div style="margin-top:10px;">
-          <%= image_submit_tag "valider.gif" %>
-       </div>
-     </td>
-   </tr>
-</table>
+<%= f.input :nom, :input_html => {size: 25} %>
+<%= f.input :referant, label:"Référent", :input_html => {size: 25} %>
+<br>
+<div style="margin-left:170px;">
+    <%= f.submit "Valider" %>
+</div>
