@@ -8,7 +8,7 @@
 <% end %>
 
 <h4>
-Vous souhaitez connaitre la situation de votre compte, voir vos inscriptions ou effectuer un versement ? Vous êtes au bon endroit !<br>
+Vous souhaitez connaitre la situation de votre compte, voir vos inscriptions ou effectuer un paiement ? Vous êtes au bon endroit !<br>
 <br>
 Entrez votre email et mot de passe pour vous connecter.<br>
 </h4>
@@ -16,7 +16,7 @@ Entrez votre email et mot de passe pour vous connecter.<br>
 <br>
 
 <% if session[:famille_id].nil? %>
-  <div class="span-9 last">
+  <div class="span-8 last">
 	  <fieldset>
       <%= form_tag :action => "famillelogin"  do %>
         <label for="username">Adresse email</label><br>
@@ -24,8 +24,9 @@ Entrez votre email et mot de passe pour vous connecter.<br>
   
         <label for="password">Mot de passe</label><br>
         <%= password_field_tag "password", params[:password], :size => 25 %><br>
-        
-        <%= submit_tag "Connexion"%>
+        <br>
+
+        <%= submit_tag "Connexion"%> | 
         <%= link_to "Mot de passe oublié?", "mdpoublie" %> 
       <% end %>
 	  </fieldset>

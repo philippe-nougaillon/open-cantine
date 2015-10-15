@@ -119,11 +119,9 @@
 	<%= f.submit "Enregistrer" %>
 
     <% if session[:famille_id] %>   
+		<br><br>
 		<%= link_to "Retour au relevé de situation", "/moncompte/familleshow" %>
   	<% end %>
 <% end %>
-<br>
-Cochez les prestations à ajouter pour ce mois. Une fois l'inscription terminée, cliquez sur le nom de l'enfant pour vérifier les prestations enregistrées.<br>
-Les inscriptions existantes sont pré-cochées et les prestations déjà facturées apparaissent en grisé. 
 <br><br>
 

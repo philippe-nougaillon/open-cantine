@@ -66,16 +66,16 @@
 			<% @date = prestation.date %>
 			<tr id="sum">
 				<td><small><i>Sous-total jour</i></small></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td />
+				<td />
+				<td />
 				<td class="center"><small><i><%= sprintf("%03d", (total_repasEnfant  + total_repasAdulte) - total_repas_jour) %></i></small></td>
 				<td class="center"><small><i><%= sprintf("%03d", (total_garderieAMP + total_garderieAMM) - total_garderieAM_jour) %></i></small></td>
 				<td class="center"><small><i><%= sprintf("%03d", (total_garderiePMP + total_garderiePMM) - total_garderiePM_jour) %></i></small></td>
 				<td class="center"><small><i><%= sprintf("%03d", (total_centreAMP + total_centreAMM) - total_centreAM_jour) %></i></small></td>
 				<td class="center"><small><i><%= sprintf("%03d", (total_centrePMP + total_centrePMM) - total_centrePM_jour) %></i></small></td>
 				<td class="center"><small><i><%= sprintf("%03d", total_etude - total_etude_jour) %></i></small></td>
-				<td></td>
+				<td /><td />
 		    </tr>
 
 			<% total_repas_jour = total_repasEnfant  + total_repasAdulte %>
@@ -136,16 +136,16 @@
   	  <% end %>
 	  <tr id="sum">
 		<td><small><i>Sous-total jour</i></small></td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td />
+		<td />
+		<td />
 		<td class="center"><small><i><%= sprintf("%03d", (total_repasEnfant  + total_repasAdulte) - total_repas_jour) %></i></small></td>
 		<td class="center"><small><i><%= sprintf("%03d", (total_garderieAMP + total_garderieAMM) - total_garderieAM_jour) %></i></small></td>
 		<td class="center"><small><i><%= sprintf("%03d", (total_garderiePMP + total_garderiePMM) - total_garderiePM_jour) %></i></small></td>
 		<td class="center"><small><i><%= sprintf("%03d", (total_centreAMP + total_centreAMM) - total_centreAM_jour) %></i></small></td>
 		<td class="center"><small><i><%= sprintf("%03d", (total_centrePMP + total_centrePMM) - total_centrePM_jour) %></i></small></td>
 		<td class="center"><small><i><%= sprintf("%03d", total_etude - total_etude_jour) %></i></small></td>
-		<td></td>
+		<td />
 	  </tr>		
 
       <tr>
@@ -157,24 +157,24 @@
                <br>Dont <%= sprintf("%2d", (total_repasEnfantALG)) %> allergie
             <% end%>
         </td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td />
+        <td />
+        <td />
         <td class="center">
             <b><%= sprintf("%3d", (total_repasEnfant)) %></b>
         </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td />
+        <td />
+        <td />
+        <td />
+        <td />
+        <td /><td />
       </tr>
       <tr>
         <td>Repas Adulte</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td />
+        <td />
+        <td />
         <td class="center">
             <b><%= sprintf("%3d", (total_repasAdulte)) %></b>
             <% if total_repasAdulteSP > 0 %>
@@ -184,38 +184,33 @@
                (dont <%= sprintf("%2d", (total_repasAdulteALG)) %> ALLERGIES)
             <% end%>
         </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td /><td /><td /><td /><td /><td /><td />
       </tr>
       <tr id="sum">
         <td>Annulations</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td />
+        <td />
+        <td />
         <td class="center"><%= sprintf("%03d", total_repasA) %></td>
         <td class="center"><%= sprintf("%03d", total_garderieAMA) %></td>
         <td class="center"><%= sprintf("%03d", total_garderiePMA) %></td>
         <td class="center"><%= sprintf("%03d", total_centreAMA) %></td>
         <td class="center"><%= sprintf("%03d", total_centrePMA) %></td>
         <td class="center"><%= sprintf("%03d", total_etude) %></td>
-        <td></td>
+        <td /><td />
       </tr>
       <tr id="sum">
         <td><b>Total</b></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td />
+        <td />
+        <td />
         <td class="center"><b><%= sprintf("%03d", total_repasEnfant  + total_repasAdulte) %></b></td>
         <td class="center"><b><%= sprintf("%03d", total_garderieAMP + total_garderieAMM) %></b></td>
         <td class="center"><b><%= sprintf("%03d", total_garderiePMP + total_garderiePMM) %></b></td>
         <td class="center"><b><%= sprintf("%03d", total_centreAMP +total_centreAMM) %></b></td>
         <td class="center"><b><%= sprintf("%03d", total_centrePMP + total_centrePMM ) %></b></td>
         <td class="center"><b><%= sprintf("%03d", total_etude) %></b></td>
-        <td></td>
+        <td /><td />
       </tr>
     </table>
   <% else %>

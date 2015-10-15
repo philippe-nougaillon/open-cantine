@@ -1,75 +1,45 @@
+<div id="form_actions"></div>
 <br>
+
+<h3>Aide - Quelques informations utiles</h3>
+<ul>
+  <li>
+    L'onglet <%= link_to "Familles", familles_path %> vous donne accès à la liste des familles.<br>
+    Cliquez simplement sur le nom d'une famille dans la liste pour ouvrir sa fiche de renseignements. Elle contient enfants, factures, réglements et solde.<br>
+    <b>Pour commener</b>, ajoutez une familles puis ces enfants en cliquant <%= link_to "sur ce lien", new_famille_path %>.<br>
+  </li>
+	<br>
+  <li>
+     L'onglet <%= link_to "Enfants", enfants_path %> présente la liste des enfants avec leur classe, âge, référant,etc. <br>
+     Pour rechercher un enfant, entrez son nom et cliquez sur 'Filtrer'.<br>
+     Pour inscrire un enfant à des prestations, cliquez sur "Inscription manuelle ou automatique" en face du prénom de l'enfant.<br>
+     La méthode manuelle permet d'inscrire les prestations en les cochant dans une grille mensuelle. <br>La méthode auto facilite les inscriptions répétitives en remplissant pour vous la grille automatiquement sur la base d'une semaine type.<br>	
+  </li>
+	<br>
+  <li>
+     L'onglet <%= link_to "Prestations", prestations_path %> affiche les inscriptions du jour, par enfant et par classe.<br>
+     Totalise l'ensemble des prestations par type (repas, garderie, centre, etc...).
+  </li>
+	<br>
+  <li>
+      <%= link_to "Factures", factures_path %>
+      Chaque facture totalise l'ensemble des prestations d'une famille pour un mois.<br>
+      Pour facturer, choisissez une famille dans la liste des familles et cliquer sur "Facturer". La facture sera ajoutée à cette liste.<br>
+  </li>
+  <br>
+  <li>
+      <%= link_to "Chèques", paiements_path %>
+      Liste les réglements par ordre d'arrivée.<br>
+      Pour ajouter un réglement, choisissez une famille et cliquez sur "Encaisser"<br>
+  </li>
+  <br>
+  <li>
+     <%= link_to "Paramètres", admin_setup_path %> regroupe les paramètres importants, comme votre adresse, vos tarifs, les utilisateurs autorisés, l'accès au portail parents, etc.
+  </li>
+</ul>
 <br>
-<table>
-  <tr>
-    <td>
-	<b>
-        Aide - Quelques informations utiles<br>
-        </b>
-      <hr /> 
-      <ul>
-        <li>
-          <div>
-             L'onglet <%= link_to "Familles", :controller => 'familles', :action => 'index' %> vous donne accès à la liste des familles.<br>
-             Cliquez simplement sur le nom d'une famille dans la liste pour ouvrir sa fiche de renseignements. Elle contient enfants, factures, réglements et solde.<br>
-             <b>Pour commener</b>, ajoutez une familles puis ces enfants en cliquant <%= link_to "sur ce lien", :controller => 'familles', :action => 'new' %>.<br>
 
-          </div>
-        </li>
-	<br>
-        <li>
-          <div>
-             L'onglet <%= link_to "Enfants", :controller => 'enfants', :action => 'index' %> présente la liste des enfants avec leur classe, âge, référant,etc. <br>
-             Pour rechercher un enfant, entrez son nom et cliquez sur 'Filtrer'.<br>
-	     Pour inscrire un enfant à des prestations, cliquez sur "Inscription manuelle ou automatique" en face du prénom de l'enfant.<br>
- La méthode manuelle permet d'inscrire les prestations en les cochant dans une grille mensuelle. <br>La méthode auto facilite les inscriptions répétitives en remplissant pour vous la grille automatiquement sur la base d'une semaine type.<br>	
-          </div>
-        </li>
-	<br>
-        <li>
-          <div>
-             L'onglet <%= link_to "Prestations", :controller => 'prestations', :action => 'index' %> affiche les inscriptions du jour, par enfant et par classe.<br>
-             Totalise l'ensemble des prestations par type (repas, garderie, centre, etc...).
-          </div>
-        </li>
-	<br>
-        <li>
-          <div>
-             <%= link_to "Factures", :controller => 'factures', :action => 'index' %>
-          </div>
-          <div>
-            Chaque facture totalise l'ensemble des prestations d'une famille pour un mois.<br>
-            Pour facturer, choisissez une famille dans la liste des familles et cliquer sur "Facturer". La facture sera ajoutée à cette liste.<br>
-          </div>
-        </li>
-	<br>
-        <li>
-          <div>
-             <%= link_to "Chèques", :controller => 'paiements', :action => 'index' %>
-          </div>
-          <div>
-             Liste les réglements par ordre d'arrivée.<br>
-             Pour ajouter un réglement, choisissez une famille et cliquez sur "Encaisser"<br>
-          </div>
-        </li>
-	<br>
-        <li>
-          <div>
-             <%= link_to "Paramètres", :action => 'setup' %> regroupe les données importantes, comme l'adresse, les tarifs, la méthode de calcul, etc.
-          </div>
-        </li>
-
-      </ul>
-     
-      <b>Pour plus d'informations</b>
-      <hr/>
-	Veuillez consulter le <%= link_to "guide d'utilisation", :action => "guide" %>.
-      <br><br>
-      <b>N'hésitez pas à nous faire part de vos remarques à cette adresse :  <a href="mailto:philippe.nougaillon@capcod.com">philippe.nougaillon@gmail.com</a></b><br><br>
-     Vous pouvez revenir à cette page à tout moment en cliquant sur "Aide"<br><br>	
-     
-    </td>
-    <td></td>
-  </tr>
-  
-</table>
+<h3>Pour plus d'informations</h3>
+Veuillez consulter le <%= link_to "guide d'utilisation", admin_guide_path %>.
+<br><br>
+<b>N'hésitez pas à me faire part de vos remarques, elles m'aideront à améliorer l'application. <a href="mailto:philippe.nougaillon@gmail.com">philippe.nougaillon@gmail.com</a></b><br><br>

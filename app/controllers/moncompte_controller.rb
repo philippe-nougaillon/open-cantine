@@ -7,6 +7,9 @@ class MoncompteController < ApplicationController
   layout :determine_layout
 
   def index
+    # sign out
+    session[:mairie] = nil if session[:mairie]
+    session[:user] = nil if session[:user]
     redirect_to :action => "famillelogin"
   end
 

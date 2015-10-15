@@ -6,12 +6,15 @@
   <title>Portail parents</title>
   <%= favicon_link_tag '/fav.ico' %>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />  
-  <%= javascript_include_tag "application" %>
-  <%= stylesheet_link_tag '/stylesheets/standard', :media => "all"  %>
+
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag 'application', :media => "all", "data-turbolinks-track" => true  %>
+
   <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
   <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
   <%= csrf_meta_tags %> 
 </head>
+
 <body>
 	<script language="javascript">
 	    $(document).ready(function() {
@@ -19,21 +22,20 @@
 	        $("#warning_message").fadeOut(10000);
 	    });
 	</script>
+
     <div class="container">
 		<div id="login" class="span-24 last">
 		    <% unless session[:famille_id].nil? %>
 		       <%= link_to "Déconnexion", '/moncompte/famillelogout' %>
 		    <% end %>
 		</div>
-
-		<div id="title" class="span-10 last">
-		    <% if session[:famille_id].nil? %>	
-	           <%= image_tag 'playground.png' %>
-    	       <%= image_tag 'diner.png' %>
-        	   <%= image_tag 'picnic.png' %>
-            <% else %>
+		<br>
+		<div class="span-10 last">
+           <%= image_tag 'playground.png', width:30 %>
+	       <%= image_tag 'diner.png', width:30 %>
+    	   <%= image_tag 'picnic.png', width:30 %>
+		    <% if session[:famille_id] %>	
 	            <% f = Famille.find(session[:famille_id]) %>	
-           	    <%= image_tag(f.mairie.logo_url, width:'100') %> 
 	            <br>
     	        <h4><%= link_to f.mairie.nom, "/moncompte/famillelogin" %></h4>
             <% end %>
@@ -41,7 +43,7 @@
 	
 		<div class="span-24 last">
 		    <hr>
-		    <div id="error_message">  <%= flash[:notice] %></div>
+		    <div id="error_message">  <%= flash[:notice] %> </div>
 		    <div id="warning_message"><%= flash[:warning] %></div>
 		</div>
 

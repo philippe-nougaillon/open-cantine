@@ -1,68 +1,66 @@
 <div id="form_actions"></div>
 <br>
-<h3>Saisie / Pointage rapide des présences</h3>
+<h3>Pointage des présences</h3>
 
 <%= form_tag("/prestations/new_manual_classroom", method: "get") do %>
 	Date: <%= text_field_tag :date, params[:date], size:9, class:"date", onchange:'this.form.submit()' %>
 
 	Classe: <%= select_tag :classe, options_for_select(@classrooms.collect{|r| [r.nom, r.id]}, params[:classe]), onchange:'this.form.submit()' %>
 
-    <%= submit_tag "Afficher les enfants" %>
+    <%= submit_tag "Afficher" %>
 <% end %>
-
 <br>
-Cochez les prestations effectuées et n'oubliez pas d'enregistrer.<br>
-Notez que décocher une prestation déjà enregistrée ne la supprimera pas automatiquement. Si vous souhaitez vraiment la supprimer, utilisez le bouton 'modifier' en face de chaque jour/enfant dans 
-la <%= link_to "liste des prestations", prestations_path(prestation_date:@date, classe:@classe) %>.  
 
-<div style="color:green" id="msgzone"></div>
+<% if @kids_to_show.any? %>
+	<%= simple_form_for(Prestation.new, url:prestations_new_manual_classroom_check_path(date:params[:date], classe:params[:classe])) do |f| %>
 
-<%= form_for(Prestation.new, url:prestations_new_manual_classroom_check_path(date:params[:date], classe:params[:classe])) do |f| %>
+		<table>
+		    <tr>
+		      <th>Nom</th>
+		      <th>Prénom</th>
+		      <th><%= check_box_tag "check_all0", false %>Repas</th>
+		      <th><%= check_box_tag "check_all1", false %>Garderie Matin</th>
+		      <th><%= check_box_tag "check_all2", false %>Garderie Soir</th>
+		      <th><%= check_box_tag "check_all3", false %>Centre Matin</th>
+		      <th><%= check_box_tag "check_all4", false %>Centre Soir</th>
+	    	</tr>
 
-	<table>
-	    <tr>
-	      <th>Nom</th>
-	      <th>Prénom</th>
-	      <th><%= check_box_tag "check_all0", false %>Repas</th>
-	      <th><%= check_box_tag "check_all1", false %>Garderie Matin</th>
-	      <th><%= check_box_tag "check_all2", false %>Garderie Soir</th>
-	      <th><%= check_box_tag "check_all3", false %>Centre Matin</th>
-	      <th><%= check_box_tag "check_all4", false %>Centre Soir</th>
-    	</tr>
+		    <% @kids_to_show.each_with_index do |enfant, index| %>
+				<% if @kids_to_show_presta[index] %>
+					 <% @presta = @kids_to_show_presta[index] %>
+				<% else %>
+					 <% @presta = Prestation.new %>
+				<% end %>	
+				<tr>
+				  <td><%= enfant.nomfamille %></td>
+				  <td><%= link_to enfant.prenom, enfant_path(enfant.id) %></td>
+				  <td>
+				  	<%= check_box_tag "[check]#{enfant.id}.repas", params["[check]#{enfant.id}.repas"], 
+				  		@presta ? (@presta.repas !='0') : false, class: 'check_all0' %>
+				  </td>
+				  <td>
+				  	<%= check_box_tag("[check]#{enfant.id}.garderieAM", params["[check]#{enfant.id}.garderieAM"], 
+				  		@presta ? (@presta.garderieAM != '0') : false, class: 'check_all1') %>
+				  </td>
+				  <td>
+				  	<%= check_box_tag("[check]#{enfant.id}.garderiePM", params["[check]#{enfant.id}.garderiePM"], 
+				  		@presta ? (@presta.garderiePM !='0') : false, class: 'check_all2') %>
+				  </td>
+				  <td>
+				  	<%= check_box_tag("[check]#{enfant.id}.centreAM", params["[check]#{enfant.id}.centreAM"], 
+				  		@presta ? (@presta.centreAM !='0') : false, class: 'check_all3') %>
+				  </td>
+				  <td>
+				  	<%= check_box_tag("[check]#{enfant.id}.centrePM", params["[check]#{enfant.id}.centrePM"], 
+				  		@presta ? (@presta.centrePM !='0') : false, class: 'check_all4') %>
+				  </td>
+				</tr>
+			<% end %>
+		</table>
+		<%= f.submit "Enregistrer" %>
+	<% end %>
 
-	    <% @kids_to_show.each_with_index do |enfant, index| %>
-			<% if @kids_to_show_presta[index] %>
-				 <% @presta = @kids_to_show_presta[index] %>
-			<% else %>
-				 <% @presta = Prestation.new %>
-			<% end %>	
-			<tr>
-			  <td><%= enfant.nomfamille %></td>
-			  <td><%= link_to enfant.prenom, enfant_path(enfant.id) %></td>
-			  <td>
-			  	<%= check_box_tag "[check]#{enfant.id}.repas", params["[check]#{enfant.id}.repas"], 
-			  		@presta ? (@presta.repas !='0') : false, class: 'check_all0' %>
-			  </td>
-			  <td>
-			  	<%= check_box_tag("[check]#{enfant.id}.garderieAM", params["[check]#{enfant.id}.garderieAM"], 
-			  		@presta ? (@presta.garderieAM != '0') : false, class: 'check_all1') %>
-			  </td>
-			  <td>
-			  	<%= check_box_tag("[check]#{enfant.id}.garderiePM", params["[check]#{enfant.id}.garderiePM"], 
-			  		@presta ? (@presta.garderiePM !='0') : false, class: 'check_all2') %>
-			  </td>
-			  <td>
-			  	<%= check_box_tag("[check]#{enfant.id}.centreAM", params["[check]#{enfant.id}.centreAM"], 
-			  		@presta ? (@presta.centreAM !='0') : false, class: 'check_all3') %>
-			  </td>
-			  <td>
-			  	<%= check_box_tag("[check]#{enfant.id}.centrePM", params["[check]#{enfant.id}.centrePM"], 
-			  		@presta ? (@presta.centrePM !='0') : false, class: 'check_all4') %>
-			  </td>
-			</tr>
-		<% end %>
-	</table>
-	<%= f.submit "Enregistrer" %>
+<% else %>
+	
+
 <% end %>
-
-

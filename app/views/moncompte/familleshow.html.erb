@@ -1,6 +1,10 @@
-<h2>Relevé de situation: <%= @famille.nom %></h2> 
+<h2>Bienvenue <%= @famille.nom %> !</h2 > 
 
-<table class="sample">
+<b>Votre solde à ce jour est de <%= number_to_currency(@solde, unit:'€') %></b>
+<br><br><br>
+
+<h3>Relevé de compte</h3>
+<table>
   <thead>
     <th>Date</th><th>Type</th><th>Référence</th><th>Facture</th><th>Débit</th><th>Crédit</th><th>Solde</th>
   </thead>
@@ -43,16 +47,12 @@
 <% end %>
 <br><br><br>
 
-
-
-
-
-<h2>Inscriptions</h2>
+<h3>Inscriptions en cours</h3>
 Liste des inscriptions en cours et non facturées
 <hr>
 <% for e in @famille.enfants %>
-   <h3><%= e.prenom %></h3> 
-	 <table class="sample">
+   <h4><%= e.prenom %></h4> 
+	 <table>
       <tr>
         <th>Date</th>
         <th>Repas</th>
