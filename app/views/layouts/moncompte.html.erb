@@ -10,7 +10,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag 'application', :media => "all", "data-turbolinks-track" => true  %>
 
-  <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen">
   <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
   <%= csrf_meta_tags %> 
 </head>
@@ -22,34 +22,28 @@
 	        $("#warning_message").fadeOut(10000);
 	    });
 	</script>
-
+	<br>
     <div class="container">
-		<div id="login" class="span-24 last">
-		    <% unless session[:famille_id].nil? %>
+	    <% unless session[:famille_id].nil? %>
+	    	<div style="float:right">
 		       <%= link_to "Déconnexion", '/moncompte/famillelogout' %>
-		    <% end %>
-		</div>
+		    </div>
+	    <% end %>
 		<br>
-		<div class="span-10 last">
-           <%= image_tag 'playground.png', width:30 %>
-	       <%= image_tag 'diner.png', width:30 %>
-    	   <%= image_tag 'picnic.png', width:30 %>
-		    <% if session[:famille_id] %>	
-	            <% f = Famille.find(session[:famille_id]) %>	
-	            <br>
-    	        <h4><%= link_to f.mairie.nom, "/moncompte/famillelogin" %></h4>
-            <% end %>
-		</div>
+        <%= image_tag 'playground.png', width:30 %>
+        <%= image_tag 'diner.png', width:30 %>
+	    <%= image_tag 'picnic.png', width:30 %>
+	    <% if session[:famille_id] %>	
+            <% f = Famille.find(session[:famille_id]) %>	
+            <br>
+	        <h4><%= link_to f.mairie.nom, "/moncompte/famillelogin" %></h4>
+        <% end %>
 	
-		<div class="span-24 last">
-		    <hr>
-		    <div id="error_message">  <%= flash[:notice] %> </div>
-		    <div id="warning_message"><%= flash[:warning] %></div>
-		</div>
+	    <hr>
+	    <div id="error_message">  <%= flash[:notice] %> </div>
+	    <div id="warning_message"><%= flash[:warning] %></div>
 
-		<div class="span-24 last">
-			<%= yield -%>
-    	</div>
+		<%= yield -%>
    </div>
    <% unless request.host == 'localhost' %>
 	   <%= render "layouts/ga" %>

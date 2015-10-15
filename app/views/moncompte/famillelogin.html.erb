@@ -1,4 +1,4 @@
-<br><br>
+<br>
 <h3>Gestion des prestations de cantine et périscolaires</h3>
 <br>
 
@@ -8,9 +8,7 @@
 <% end %>
 
 <h4>
-Vous souhaitez connaitre la situation de votre compte, voir vos inscriptions ou effectuer un paiement ? Vous êtes au bon endroit !<br>
-<br>
-Entrez votre email et mot de passe pour vous connecter.<br>
+Connectez-vous pour connaitre la situation de votre compte, vos inscriptions en cours ou effectuer un paiement
 </h4>
 
 <br>
@@ -19,7 +17,7 @@ Entrez votre email et mot de passe pour vous connecter.<br>
   <div class="span-8 last">
 	  <fieldset>
       <%= form_tag :action => "famillelogin"  do %>
-        <label for="username">Adresse email</label><br>
+        <label for="username">N° de famille ou Adresse mail</label><br>
         <%= text_field_tag("email", params[:email] ,:size => 25) %><br>
   
         <label for="password">Mot de passe</label><br>

@@ -17,7 +17,7 @@
         <td><%= l[:ref] %></td>
         <% if l[:type] == "Facture" %>
           <td class="center">
-            <%= link_to image_tag("pdf-logo.png", size:'20x20'), action:"famillefacture", ref:l[:ref] %>
+            <%= link_to image_tag("pdf-logo.png", size:'20x20'), moncompte_famillefacture_path(ref:l[:ref]) %>
           </td>
           <td id="euros"><%= number_to_currency(l[:mnt], unit:'€') %></td>
           <td />
@@ -48,7 +48,7 @@
 <br><br><br>
 
 <h3>Inscriptions en cours</h3>
-Liste des inscriptions en cours et non facturées
+Liste des inscriptions en cours et non facturées par enfant
 <hr>
 <% for e in @famille.enfants %>
    <h4><%= e.prenom %></h4> 

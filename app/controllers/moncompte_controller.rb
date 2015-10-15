@@ -2,7 +2,7 @@
 
 class MoncompteController < ApplicationController
 
-  skip_before_filter :check_authentification, :except => [:famillefacture]
+  skip_before_filter :check_authentification
  
   layout :determine_layout
 
@@ -16,7 +16,12 @@ class MoncompteController < ApplicationController
   def famillelogin
     unless params[:email].blank? and params[:password].blank?
 
-      @famille = Famille.where(email:params[:email]).first
+      if params[:email].to_i > 0
+        @famille = Famille.find(params[:email])
+      else
+        @famille = Famille.find_by(email:params[:email])
+      end
+
       if @famille and @famille.mairie.portail > 0
         if @famille.password == params[:password]
           @famille.lastconnection = Time.now
@@ -26,10 +31,10 @@ class MoncompteController < ApplicationController
           flash[:notice] = "Dernière connection le #{@famille.lastconnection.to_s(:fr)}" if @famille.lastconnection
           redirect_to :action => "familleshow"
         else
-          flash[:warning] = 'Mot de passe incorrect'
+          flash[:notice] = 'Mot de passe incorrect'
         end
       else
-        flash[:warning] = 'Identifiant ou mot de passe inconnu'
+        flash[:notice] = 'Identifiant ou mot de passe inconnu'
       end
     end
   end
@@ -47,7 +52,7 @@ class MoncompteController < ApplicationController
       UserMailer.send_password(@famille).deliver_now
       flash[:notice] = "Un nouveau mot de passe vient d'être envoyé à #{@famille.email}"
     else
-      flash[:warning] = "Adresse email inconnue..."
+      flash[:notice] = "Adresse email inconnue..."
     end   
     redirect_to :action => "famillelogin"
   end
