@@ -670,6 +670,14 @@
 				"buffer_size": 4743,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "app/views/enfants/liste.html.erb",
+			"settings":
+			{
+				"buffer_size": 652,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -700,6 +708,7 @@
 	},
 	"file_history":
 	[
+		"/home/phil/RailsProjects/stock/db/migrate/20151015122420_create_articles.rb",
 		"/home/phil/RailsProjects/opencantine_4.2/app/controllers/blogs_controller.rb",
 		"/home/phil/RailsProjects/opencantine_4.2/app/controllers/admin_controller.rb",
 		"/home/phil/RailsProjects/opencantine_4.2/app/controllers/factures_controller.rb",
@@ -826,8 +835,7 @@
 		"/home/phil/RailsProjects/opencantine_4.2/app/models/facture_chrono.rb",
 		"/home/phil/RailsProjects/opencantine_4.2/app/models/tarif.rb",
 		"/home/phil/RailsProjects/opencantine_4.2/app/models/ville.rb",
-		"/home/phil/RailsProjects/opencantine_4.2/app/models/log.rb",
-		"/home/phil/RailsProjects/opencantine_4.2/app/models/facture_ligne.rb"
+		"/home/phil/RailsProjects/opencantine_4.2/app/models/log.rb"
 	],
 	"find":
 	{
@@ -1053,7 +1061,7 @@
 	"groups":
 	[
 		{
-			"selected": 18,
+			"selected": 19,
 			"sheets":
 			[
 				{
@@ -1566,6 +1574,34 @@
 						"settings":
 						{
 							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "app/views/enfants/liste.html.erb",
+					"settings":
+					{
+						"buffer_size": 652,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								437,
+								569
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},

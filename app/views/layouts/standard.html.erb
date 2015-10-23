@@ -7,10 +7,8 @@
 
   <% controller = params[:controller] %> 
 
-  <% unless session[:user].nil? %>
-    <% user_id = session[:user] %> 
-    <% user = User.find(user_id) %>
-	<title>openCantine 4.2 - <%= user.username %></title>
+  <% if current_user %>
+	<title>openCantine 4.2 - <%= current_user.username %></title>
   <% else %>
 	<title>openCantine 4.2</title>
   <% end %>
@@ -33,10 +31,10 @@
 	</script>
     <div class="container">
 		<div style="float:right">
-		    <% unless user_id.nil? %>
+		    <% if current_user %>
 			    <%= link_to link_to image_tag('school.png', size:'15x15'), familles_path %> 
 			    | <%= image_tag('icon_user.png', size:'15x15') %>
-			      <%= link_to user.username, admin_user_edit_path %>
+			      <%= link_to current_user.username, admin_user_edit_path %>
 		        | <%= link_to "Journal", logs_path %>
 				| <%= link_to "Paramètres", admin_setup_path %>
 		        | <%= link_to "Aide", admin_bienvenue_path %>
@@ -52,7 +50,7 @@
            <br>
            <h3>
            		<%= link_to 'openCantine', familles_path %>
-           		<% if user_id %>
+           		<% if current_user %>
 	           		/ <%= link_to Ville.find(session[:mairie]).nom, familles_path %>
 	           	<% end %>	
        		</h3>

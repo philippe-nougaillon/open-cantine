@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   #filter_parameter_logging :password
 
+  def current_user
+    @current_user ||= User.find(session[:user]) if session[:user]
+  end
+  helper_method :current_user
+
   def check_authentification
     unless session[:user]
        redirect_to :action => 'signin', :controller => "admin"
