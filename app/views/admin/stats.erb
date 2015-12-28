@@ -25,7 +25,7 @@
 		      <td><%= ville.cp[0..1] if ville.cp %> </td>
 		      <td><b><%= ville.familles.count %></b> </td>
 	   	      <td><b><%= ville.enfants.count %></b></td>
-		      <td><b><%= Facture.find_all_by_mairie_id(user.mairie_id).count %></b></td>
+		      <td><b><%= Facture.where(mairie_id:user.mairie_id).count %></b></td>
 		      <td><%= time_ago_in_words(ville.created_at) %></td>
 		      <td><%= user.mairie_id %></td>
 		    </tr>

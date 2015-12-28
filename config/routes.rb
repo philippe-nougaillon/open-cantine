@@ -99,6 +99,7 @@ OpenCantine3::Application.routes.draw do
   get 'admin/points_forts', to:'admin#points_forts'
   get 'admin/guide', to:'admin#guide'
   get 'admin/check_user', to: 'admin#check_user'
+  get 'admin/stats'
 
   patch 'admin/change_acces_portail', to: 'admin#change_acces_portail'
   post 'admin/user_add', to: 'admin#user_add'
