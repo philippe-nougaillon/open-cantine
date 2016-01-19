@@ -39,7 +39,7 @@
           <td><%= link_to facture.famille.nom, facture.famille  %> </td>
           <td style="text-align:right"><%=h number_to_currency(facture.montant, :locale => :fr) %></td>
   		    <td style="text-align:center"><%= image_tag "ok.jpeg", size: '15x15' if facture.checked %></td>
-  		    <td><%= facture.footer[0..15] if facture.footer %></td>
+  		    <td><%= truncate(facture.footer, length:10) if facture.footer %></td>
   		    <td>
             <%= link_to image_tag("pdf-logo.png", size: "15x15"), facture_path(facture, :format => :pdf)  %>
           </td>

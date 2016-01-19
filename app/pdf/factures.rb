@@ -68,7 +68,7 @@ class FacturePdf < Prawn::Document
 	items += [["","","",""]]
 	items += [["TOTAL FACTURE","","", number_to_currency(@facture.montant, :locale => "fr") ]]
 
-	table(items, :row_colors => ["F0F0F0", "FFFFCC"],  :width => 550) do
+	table(items, :row_colors => ["F0F0F0", "FFFFFF"],  :width => 550) do
 		self.header = true
 		columns(0).align = :left
 		columns(0).font_style = :bold
@@ -96,7 +96,7 @@ class FacturePdf < Prawn::Document
 	move_down 25
 
 	if @facture.footer
-		text @facture.footer, :size => 16, :style => :bold
+		text @facture.footer, size:10, :style => :bold
 	end
 
   end
