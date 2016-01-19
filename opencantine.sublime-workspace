@@ -539,7 +539,7 @@
 			"file": "config/routes.rb",
 			"settings":
 			{
-				"buffer_size": 5232,
+				"buffer_size": 5252,
 				"line_ending": "Unix"
 			}
 		},
@@ -564,6 +564,14 @@
 			"settings":
 			{
 				"buffer_size": 126,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/user.rb",
+			"settings":
+			{
+				"buffer_size": 743,
 				"line_ending": "Unix"
 			}
 		},
@@ -700,6 +708,14 @@
 			"settings":
 			{
 				"buffer_size": 652,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/admin/stats.erb",
+			"settings":
+			{
+				"buffer_size": 973,
 				"line_ending": "Unix"
 			}
 		}
@@ -1085,7 +1101,7 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -1147,15 +1163,15 @@
 					"file": "config/routes.rb",
 					"settings":
 					{
-						"buffer_size": 5232,
+						"buffer_size": 5252,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3398,
-								3398
+								3756,
+								3756
 							]
 						],
 						"settings":
@@ -1254,6 +1270,34 @@
 				},
 				{
 					"buffer": 6,
+					"file": "app/models/user.rb",
+					"settings":
+					{
+						"buffer_size": 743,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"file": "app/views/layouts/standard.html.erb",
 					"settings":
 					{
@@ -1279,7 +1323,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "app/controllers/prestations_controller.rb",
 					"settings":
 					{
@@ -1307,7 +1351,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 9,
 					"file": "app/controllers/factures_controller.rb",
 					"settings":
 					{
@@ -1318,7 +1362,7 @@
 						"selection":
 						[
 							[
-								632,
+								865,
 								865
 							]
 						],
@@ -1335,7 +1379,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 10,
 					"file": "app/controllers/application_controller.rb",
 					"settings":
 					{
@@ -1363,7 +1407,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 11,
 					"file": "app/controllers/admin_controller.rb",
 					"settings":
 					{
@@ -1385,13 +1429,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2754.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 12,
 					"file": "app/views/prestations/new_manual_classroom.erb",
 					"settings":
 					{
@@ -1418,7 +1462,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "app/views/prestations/_list.erb",
 					"settings":
 					{
@@ -1446,7 +1490,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 14,
 					"file": "app/views/admin/bienvenue.erb",
 					"settings":
 					{
@@ -1474,7 +1518,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 15,
 					"file": "app/assets/stylesheets/standard.css.scss",
 					"settings":
 					{
@@ -1502,7 +1546,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 16,
 					"file": "app/views/admin/setup.erb",
 					"settings":
 					{
@@ -1528,7 +1572,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 17,
 					"file": "app/views/admin/users_admin.erb",
 					"settings":
 					{
@@ -1555,7 +1599,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 18,
 					"file": "app/views/moncompte/famillelogin.html.erb",
 					"settings":
 					{
@@ -1583,7 +1627,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 19,
 					"file": "app/views/layouts/moncompte.html.erb",
 					"settings":
 					{
@@ -1609,7 +1653,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 19,
+					"buffer": 20,
 					"file": "app/views/moncompte/familleshow.html.erb",
 					"settings":
 					{
@@ -1637,7 +1681,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 20,
+					"buffer": 21,
 					"file": "app/views/prestations/new_manual.erb",
 					"settings":
 					{
@@ -1664,7 +1708,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 21,
+					"buffer": 22,
 					"file": "app/controllers/moncompte_controller.rb",
 					"settings":
 					{
@@ -1692,7 +1736,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 22,
+					"buffer": 23,
 					"file": "app/views/enfants/liste.html.erb",
 					"settings":
 					{
@@ -1712,6 +1756,33 @@
 							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "app/views/admin/stats.erb",
+					"settings":
+					{
+						"buffer_size": 973,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								784,
+								784
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

@@ -143,7 +143,7 @@
         		<td style="text-align:right"><%=h @prestas._garderiePM.afacturer.count('id') %>  </td>
         		<td style="text-align:right"><%=h @prestas._etude.afacturer.count('id') %>       </td>
         		<% if session[:user_readwrite] %>
-        		    <td><%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :id  => enfant.id, :year => Date.today.year %>
+        		    <td><%= link_to "Manuelle", :controller => 'prestations', :action => 'new_manual', :mois => Date.today.month , :id  => enfant.id, :year => Date.today.year %> |
         		    <%= link_to "Auto", :controller => 'prestations', :action => 'new', :enfant_id  => enfant.id %></td>
         		<% end %>
 	      </tr>

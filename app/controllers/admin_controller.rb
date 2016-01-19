@@ -60,7 +60,7 @@ class AdminController < ApplicationController
   
   def user_update
     @user = User.find(session[:user])
-    @user.attributes = params[:user]
+    @user.attributes = user_params
     @user.log_changes(1, session[:user])
     respond_to do |format|
        if @user.save(validate:false) and @user.mairie_id != 2
@@ -239,4 +239,9 @@ class AdminController < ApplicationController
     send_file "#{Rails.root}/public/#{params[:file_name]}", :type=>"application/text"
   end 
 
+ private
+  # Never trust parameters from the scary internet, only allow the white list through.
+    def user_params
+      params.require(:user).permit(:username, :mairie_id, :lastconnection, :lastchange, :readwrite, :password)
+    end
 end

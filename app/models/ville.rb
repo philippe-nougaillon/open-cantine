@@ -6,7 +6,7 @@ class Ville < ActiveRecord::Base
  	include LogModule
 
 	validates_presence_of :nom, :email, :message => "est requis..."
-	validates_uniqueness_of :email, :message => "est déjà utilisé..."
+	validates_uniqueness_of :email, :message => "cette adresse mail est déjà utilisée par un autre compte..."
 	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i , :message => " non valide..."
 
 	has_many :users, 	:foreign_key => "mairie_id",  :dependent => :destroy

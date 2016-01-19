@@ -150,16 +150,18 @@ class PrestationsController < ApplicationController
        mairie = Ville.find(session[:mairie])
        vacances = mairie.vacances 
 
-       #logger.debug "[ DEBUG ] #{@enfants.count}"
+       #logger.debug "[ DEBUG ] enfant: #{@enfants.count}"
 
        @enfants.each do |enfant|
           start_date = @prestation_date.to_date
           #logger.debug "[ DEBUG ] #{enfant.prenom} : #{start_date}"
 
           if (params[:toutlemois] or params[:toutelannee]) and (params[:lundi] or params[:mardi] or params[:mercredi] or params[:jeudi] or params[:vendredi])
+              #logger.debug "[ DEBUG ] #{enfant.prenom} : #{start_date} TEST OK"
+
       			  ndays = 5
               ndays = days_in_month(start_date) - (start_date.day - 1) if params[:toutlemois]
-              ndays = (Date.parse("2015-07-04") - start_date).to_i if params[:toutelannee]
+              ndays = (Date.parse("2016-07-04") - start_date).to_i if params[:toutelannee]
 		
               date = start_date
               ndays.times do
@@ -169,9 +171,9 @@ class PrestationsController < ApplicationController
                     # passe au jour suivant si vacances mais "appliquer si vacances" pas coché
                     en_vacances = vacances.where("debut <= ? AND fin >= ?", date.to_s(:en), date.to_s(:en)).any?
                     if (params[:en_vacances] == 'non' and en_vacances) or (params[:en_vacances] == 'oui' and !en_vacances)
-                       #logger.debug "[ DEBUG ] #{date} Vacances #{params[:en_vacances]} NEXT !"
-                       date = date + 1.day
-                       next
+                      #logger.debug "[ DEBUG ] #{date} Vacances #{params[:en_vacances]} NEXT !"
+                      date = date + 1.day
+                      next
                     end
                       
                     if (params[:lundi] and wday == 1) or (params[:mardi] and wday == 2) or (params[:mercredi] and wday == 3) or (params[:jeudi] and wday == 4) or (params[:vendredi] and wday == 5)

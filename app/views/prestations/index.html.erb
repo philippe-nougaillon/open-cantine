@@ -12,7 +12,7 @@
 		<%= select_tag "classe", options_from_collection_for_select(@classrooms, "id", "nom", params[:classe]), include_blank:true, onchange:'this.form.submit()' %>
 
 		<%= submit_tag 'Voir' %>
-		<%= check_box_tag "totaux", params[:totaux], params[:totaux], onchange:'this.form.submit()' %> Que les totaux?
+		<%= check_box_tag "totaux", params[:totaux], params[:totaux], onchange:'this.form.submit()' %> Totaux?
 
 	    <span id="adroite">
 	    	<%= link_to "Pointage", new_manual_classroom_path(date:Date.today) %>
