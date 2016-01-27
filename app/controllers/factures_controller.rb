@@ -5,7 +5,7 @@ require "open-uri"
 class FacturesController < ApplicationController
 
   layout :determine_layout
-  before_filter :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle', 'facturation_speciale', 'facturation_speciale_do']
+  before_filter :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle_do', 'facturation_speciale', 'facturation_speciale_do']
 
   def check
     unless Facture.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?
@@ -106,7 +106,7 @@ class FacturesController < ApplicationController
   end
 
 
-  def stats_mensuelle
+  def stats_mensuelle_do
     mairie = Ville.find(session[:mairie])
   	
     @stats_date = params[:stats][:an] + '-' + params[:stats][:mois] + '-01'
@@ -130,7 +130,6 @@ class FacturesController < ApplicationController
   		end
   	else
   		flash[:notice] = "Pas de factures trouvées pour ce mois là."
-  		redirect_to "/factures/stats_mensuelle_params/0"
   	end
   end	
 
@@ -187,7 +186,7 @@ class FacturesController < ApplicationController
     result = Prestation.where(facture_id:@facture.id).update_all(facture_id:nil)
     @facture.destroy   
 
-    flash[:notice] = 'Facture supprimée. Les prestations associées ont été mises à jour.' 
+    flash[:notice] = 'Facture supprimée. Les prestations associées sont à jour.' 
 
     respond_to do |format|
       format.html { redirect_to(factures_url) }

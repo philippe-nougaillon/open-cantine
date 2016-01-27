@@ -1,0 +1,21 @@
+<div id="form_actions"></div>
+
+<% datefin = @datefin - 1.day %>
+
+<br>
+<h3>Facturation du <%= @datedebut.to_s(:fr) %> au <%= datefin.to_s(:fr) %></h3>
+
+<hr>
+<table>
+	<tr><td>Total Cantine</td><td><%= number_to_currency(@total_cantine, :locale => "fr") %></td></tr>
+	<tr><td>Total Garderie</td><td><%= number_to_currency(@total_garderie, :locale => "fr") %></td></tr>
+	<tr><td>Total Centre</td><td><%= number_to_currency(@total_centre, :locale => "fr") %></td></tr>
+	<tr><td>Total Etude</td><td><%= number_to_currency(@total_etude, :locale => "fr") %></td></tr>
+</table>
+<%= @factures.count %> Factures: 
+
+<% @factures.each do |f| %>
+	<%= link_to f.ref, f %>
+<% end -%>
+
+

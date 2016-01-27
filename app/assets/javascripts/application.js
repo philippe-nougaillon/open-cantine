@@ -16,6 +16,8 @@
 //= require jquery-ui/autocomplete
 //= require jquery_ujs
 //= require turbolinks
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_self
 //= require_tree .
 

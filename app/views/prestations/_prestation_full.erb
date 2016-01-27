@@ -16,13 +16,15 @@
 		<% end %>
     </td>
     <td class="center">
-        <% if prestation.garderieAM != "0" %>
-           <%= image_tag @images[prestation.garderieAM.to_i], size: '15x15' %>
+        <% if prestation.garderieAM.to_i > 0 %>
+           <%= image_tag @images[1], size: '15x15' %>
+           <%= Time.at((prestation.garderieAM.to_i - 4) * 15 * 60).utc.strftime("%H:%M") if prestation.garderieAM != "1" %>
         <% end %> 
     </td>
     <td class="center">
-        <% if prestation.garderiePM != "0" %>
-           <%= image_tag @images[prestation.garderiePM.to_i], size: '15x15'  %>
+        <% if prestation.garderiePM.to_i > 0 %>
+           <%= image_tag @images[1], size: '15x15'  %>
+           <%= Time.at((prestation.garderiePM.to_i - 4) * 15 * 60).utc.strftime("%H:%M") if prestation.garderiePM != "1" %>
         <% end %>
     </td>
     <td class="center"><%= image_tag @images[prestation.centreAM.to_i], size: '15x15'   if prestation.centreAM != "0" %> </td>

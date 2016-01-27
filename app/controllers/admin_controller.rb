@@ -52,8 +52,9 @@ class AdminController < ApplicationController
 
   def user_edit
     @user = User.find(session[:user])
-    unless @user.readwrite 
-      redirect_to root_url, notice: "Action non autorisée !"
+    if !@user.readwrite or @user.mairie_id == 2
+      flash[:warning]= "Action non autorisée !"
+      redirect_to root_url
       return
     end
   end
@@ -61,19 +62,14 @@ class AdminController < ApplicationController
   def user_update
     @user = User.find(session[:user])
     @user.attributes = user_params
-    @user.log_changes(1, session[:user])
-    respond_to do |format|
-       if @user.save(validate:false) and @user.mairie_id != 2
-          @user.lastchange = Time.now
-          @user.save
-          flash[:notice] = "Utilisateur modifié..."
-          format.html { redirect_to :action => "setup", :controller => "admin" }
-          format.xml  { head :ok }
-        else
-          flash[:warning] = 'Modification annulée. Peut être essayez-vous de changer le mot de passe du compte de démonstration ?'
-          format.html { render :action => "user_edit" }
-          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-        end
+    if @user.save(validate:false) 
+      @user.lastchange = Time.now
+      @user.save
+      flash[:notice] = "Utilisateur modifié..."
+      redirect_to :action => "setup", :controller => "admin"
+    else
+      flash[:warning] = 'Modification annulée'
+      render :action => "user_edit"
     end
   end
 

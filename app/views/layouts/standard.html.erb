@@ -5,13 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />  
 
-  <% controller = params[:controller] %> 
-
-  <% if current_user %>
-	<title>openCantine 4.2 - <%= current_user.username %></title>
-  <% else %>
-	<title>openCantine 4.2</title>
-  <% end %>
+  <title>openCantine 4.2a</title>
 
   <%= stylesheet_link_tag 'application', media:"all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -62,7 +56,8 @@
 		</div>
 
 		<div id="menubar" class="span-24 last">
-		   <% if ['familles','enfants','prestations','factures','paiements'].include?(controller) %>
+			<% controller = params[:controller] %> 
+		    <% if ['familles','enfants','prestations','factures','paiements'].include?(controller) %>
 				<div class="span-4" id="menu<%= 'Current' if controller == 'familles' %>">
 	       			<%= image_tag("school.png", width:30) %>
 	       			<%= link_to "Familles", familles_path %>

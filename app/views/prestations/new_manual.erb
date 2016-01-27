@@ -68,6 +68,8 @@
 		  <td>
 		  	<%= check_box_tag(:"#{d.day}.garderieAM", params[:"#{d.day}.garderieAM"],
 			 	@presta ? (@presta.garderieAM != "0") : false, { :disabled => @locked  }) %>
+		  	<%= select_tag "[select]#{d.day}.garderieAM", 
+		  			options_for_select(@duree + @duree_matin, @presta ? @presta.garderieAM: nil), include_blank: true %>
 			<% if @presta %> 
 			   <% session[:lastparams] << "#{d.day}.garderieAM" if @presta.garderieAM !="0" %>
 			<% end %>
@@ -75,6 +77,9 @@
 		  <td>
 		  	<%= check_box_tag(:"#{d.day}.garderiePM", params[:"#{d.day}.garderiePM"], 
 				@presta ? (@presta.garderiePM != "0") : false, { :disabled => @locked  }) %>
+		  	<%= select_tag "[select]#{d.day}.garderiePM", 
+		  			options_for_select(@duree + @duree_soir, @presta ? @presta.garderiePM : nil), include_blank: true %>
+
 			<% if @presta %> 
 			   <% session[:lastparams] << "#{d.day}.garderiePM" if @presta.garderiePM !="0" %>
 			<% end %>	

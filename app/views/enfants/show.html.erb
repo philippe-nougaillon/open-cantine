@@ -147,6 +147,7 @@
             <th>Centre Matin</th>
             <th>Centre Soir</th>
             <th>Etude</th>
+            <th colspan='2' />
           </tr>
           <% for prestation in @prestations %>
 
@@ -156,11 +157,11 @@
             <% @total_repasA += 1 if prestation.repas == '2' %>
             <% @total_repasM += 1 if prestation.repas == '3' %>
 
-            <% @total_garderieAMP +=  1 if (prestation.garderieAM == '1' or prestation.garderieAM == '5' or prestation.garderieAM == '6' or prestation.garderieAM == '7') %>
+            <% @total_garderieAMP +=  1 if (prestation.garderieAM != '0') %>
             <% @total_garderieAMA +=  1 if prestation.garderieAM == '2' %>
             <% @total_garderieAMM +=  1 if prestation.garderieAM == '3' %>
 
-            <% @total_garderiePMP +=  1 if (prestation.garderiePM == '1' or prestation.garderiePM == '5' or prestation.garderiePM == '6' or prestation.garderiePM == '7') %>
+            <% @total_garderiePMP +=  1 if (prestation.garderiePM != '0') %>
             <% @total_garderiePMA +=  1 if prestation.garderiePM == '2' %>
             <% @total_garderiePMM +=  1 if prestation.garderiePM == '3' %>
 
@@ -187,6 +188,7 @@
             <td class="center"><%= sprintf("%03d", @total_centreAMP +@total_centreAMM) %></td>
             <td class="center"><%= sprintf("%03d", @total_centrePMP + @total_centrePMM ) %></td>
             <td class="center"><%= sprintf("%03d", @total_etude) %></td>
+            <td /><td />
           </tr>
           <tr id="sum">
             <td>Annulations</td>
@@ -196,6 +198,7 @@
             <td class="center"><%= sprintf("%03d", @total_centreAMA) %></td>
             <td class="center"><%= sprintf("%03d", @total_centrePMA) %></td>
             <td class="center"><%= sprintf("%03d", @total_etudeA) %></td>
+            <td /><td />
           </tr>
           <tr id="sum">
             <td><b>Total : <%= @prestations.size %> jour(s)</b></td>
@@ -205,6 +208,7 @@
             <td class="center"><%= sprintf("%03d", @total_centreAMP +@total_centreAMM) %></td>
             <td class="center"><%= sprintf("%03d", @total_centrePMP + @total_centrePMM ) %></td>
             <td class="center"><%= sprintf("%03d", @total_etude) %></td>
+            <td /><td />
           </tr>
         </table>
     <% end  %>

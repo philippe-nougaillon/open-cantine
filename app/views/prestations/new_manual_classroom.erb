@@ -18,11 +18,11 @@
 		    <tr>
 		      <th>Nom</th>
 		      <th>Prénom</th>
-		      <th><%= check_box_tag "check_all0", false %>Repas</th>
-		      <th><%= check_box_tag "check_all1", false %>Garderie Matin</th>
-		      <th><%= check_box_tag "check_all2", false %>Garderie Soir</th>
-		      <th><%= check_box_tag "check_all3", false %>Centre Matin</th>
-		      <th><%= check_box_tag "check_all4", false %>Centre Soir</th>
+		      <th><%= check_box_tag "check_all0", false %> Repas</th>
+		      <th><%= check_box_tag "check_all1", false %> Garderie-Matin</th>
+		      <th><%= check_box_tag "check_all2", false %> Garderie-Soir</th>
+		      <th><%= check_box_tag "check_all3", false %> Centre-Matin</th>
+		      <th><%= check_box_tag "check_all4", false %> Centre-Soir</th>
 	    	</tr>
 
 		    <% @kids_to_show.each_with_index do |enfant, index| %>
@@ -41,10 +41,12 @@
 				  <td>
 				  	<%= check_box_tag("[check]#{enfant.id}.garderieAM", params["[check]#{enfant.id}.garderieAM"], 
 				  		@presta ? (@presta.garderieAM != '0') : false, class: 'check_all1') %>
+				  	<%= select_tag "[select]#{enfant.id}.garderieAM", options_for_select(@duree + @duree_matin, @presta.garderieAM), include_blank: true %>
 				  </td>
 				  <td>
 				  	<%= check_box_tag("[check]#{enfant.id}.garderiePM", params["[check]#{enfant.id}.garderiePM"], 
 				  		@presta ? (@presta.garderiePM !='0') : false, class: 'check_all2') %>
+				  	<%= select_tag "[select]#{enfant.id}.garderiePM", options_for_select(@duree + @duree_soir, @presta.garderiePM), include_blank: true %>
 				  </td>
 				  <td>
 				  	<%= check_box_tag("[check]#{enfant.id}.centreAM", params["[check]#{enfant.id}.centreAM"], 

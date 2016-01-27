@@ -276,6 +276,10 @@ class PrestationsController < ApplicationController
   end
 
   def new_manual
+    @duree = Prestation.duree_garderie
+    @duree_matin = Prestation.duree_garderie_matin
+    @duree_soir = Prestation.duree_garderie_soir
+
     session[:lastparams] =[]
     @mois = params[:mois]
     @year = params[:year]
@@ -401,8 +405,19 @@ class PrestationsController < ApplicationController
                @prestation.date = date
             end
             @prestation.repas = '1' if params[:"#{day}.repas"]
-            @prestation.garderieAM = '1' if params[:"#{day}.garderieAM"]
-            @prestation.garderiePM = '1' if params[:"#{day}.garderiePM"]
+
+            if params[:select][:"#{day}.garderieAM"] and params[:select][:"#{day}.garderieAM"] != "" 
+              @prestation.garderieAM = params[:select][:"#{day}.garderieAM"]
+            else
+              @prestation.garderieAM = '1' if params[:"#{day}.garderieAM"]
+            end 
+
+           if params[:select][:"#{day}.garderiePM"] and params[:select][:"#{day}.garderiePM"] != "" 
+              @prestation.garderiePM = params[:select][:"#{day}.garderiePM"]
+            else
+              @prestation.garderiePM = '1' if params[:"#{day}.garderiePM"]
+            end 
+
             @prestation.centreAM = '1' if params[:"#{day}.centreAM"]
             @prestation.centrePM = '1' if params[:"#{day}.centrePM"]
             @prestation.etude = '1' if params[:etude] and ( date.wday != 3 and date.wday != 6 and date.wday != 0 and @vacances.empty?)
@@ -478,7 +493,10 @@ class PrestationsController < ApplicationController
     @classrooms = Ville.find(session[:mairie]).classrooms
     @date = params[:date]
     @classe = params[:classe]
-   
+    @duree = Prestation.duree_garderie
+    @duree_matin = Prestation.duree_garderie_matin
+    @duree_soir = Prestation.duree_garderie_soir
+
     @kids_to_show=[]
 	  @kids_to_show_presta=[]
 
@@ -505,8 +523,22 @@ class PrestationsController < ApplicationController
 
         @prestation = Prestation.find_or_create_by(date:@date.to_date.to_s(:en), enfant_id:enfant_id)
         @prestation.repas = '1' if presta == 'repas' and @prestation.repas != '1'
-        @prestation.garderieAM = '1' if presta == 'garderieAM' and @prestation.garderieAM != '1'
-        @prestation.garderiePM = '1' if presta == 'garderiePM' and @prestation.garderiePM != '1'
+
+        if presta == 'garderieAM'
+          if params[:select].include?(param) and params[:select][param] != "" 
+            @prestation.garderieAM = params[:select][param]
+          else
+            @prestation.garderieAM = '1'
+          end 
+        end  
+        if presta == 'garderiePM' 
+          if params[:select].include?(param) and params[:select][param] != "" 
+            @prestation.garderiePM = params[:select][param]
+          else
+            @prestation.garderiePM = '1'
+          end
+        end 
+
         @prestation.centreAM = '1' if presta == 'centreAM' and @prestation.centreAM != '1'
         @prestation.centrePM = '1' if presta == 'centrePM' and @prestation.centrePM != '1'
 

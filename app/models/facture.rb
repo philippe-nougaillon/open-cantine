@@ -58,24 +58,43 @@ class Facture < ActiveRecord::Base
          prestations_normales['JoursRepas'] += "#{jour}, "
       end
 
-      #Garderie
+      # Garderie
       if prestation.garderieAM == '1' or prestation.garderieAM == '2' or prestation.garderieAM == '4'
          prestations_normales['MntGarderieAM'] += tarif.GarderieAMP
          prestations_normales['PrixGarderieAM'] = tarif.GarderieAMP
          prestations_normales['GarderieAM'] += 1
          prestations_normales['JoursGarderieAM'] += "#{jour}, "
       end
-      if prestation.garderiePM == '1' or prestation.garderiePM == '2' or prestation.garderiePM == '4'
+
+      # facturation garderie matin au 1/4h
+      if prestation.garderieAM.to_i >= 5 and prestation.garderieAM.to_i <= 14 
+         prestations_normales['MntGarderieAM'] += (tarif.GarderieAMP / 4.00) * (prestation.garderieAM.to_i - 4)
+         prestations_normales['PrixGarderieAM'] = tarif.GarderieAMP 
+         prestations_normales['GarderieAM'] += (prestation.garderieAM.to_i - 4) / 4.00
+         duree = Time.at((prestation.garderieAM.to_i - 4) * 15 * 60).utc.strftime("%H:%M")
+         prestations_normales['JoursGarderieAM'] += "#{jour}(#{duree}), "
+      end  
+
+      # facturation garderie soir au 1/4h
+      if prestation.garderiePM.to_i >= 5 and prestation.garderiePM.to_i <= 14 
+         prestations_normales['MntGarderiePM'] += (tarif.GarderiePMP / 4) * (prestation.garderiePM.to_i - 4)
          prestations_normales['PrixGarderiePM'] = tarif.GarderiePMP
+         prestations_normales['GarderiePM'] += (prestation.garderiePM.to_i - 4) / 4.00
+         duree = Time.at((prestation.garderiePM.to_i - 4) * 15 * 60).utc.strftime("%H:%M")
+         prestations_normales['JoursGarderiePM'] += "#{jour}(#{duree}), "
+      end  
+
+      if prestation.garderiePM == '1' or prestation.garderiePM == '2' or prestation.garderiePM == '4'
          prestations_normales['MntGarderiePM'] += tarif.GarderiePMP
+         prestations_normales['PrixGarderiePM'] = tarif.GarderiePMP
          prestations_normales['GarderiePM'] += 1
          prestations_normales['JoursGarderiePM'] += "#{jour}, "
       end
 
       # Tarif unique matin et/ou soir
-      if (prestation.garderieAM == '1' or prestation.garderieAM == '2' or prestation.garderieAM == '4') or (prestation.garderiePM == '1' or prestation.garderiePM == '2' or prestation.garderiePM == '4')
-         prestations_normales['MntGarderieAM'] += tarif.GarderieAMP
-      end 
+      #if (prestation.garderieAM == '1' or prestation.garderieAM == '2' or prestation.garderieAM == '4') or (prestation.garderiePM == '1' or prestation.garderiePM == '2' or prestation.garderiePM == '4')
+      #   prestations_normales['MntGarderieAM'] += tarif.GarderieAMP
+      #end 
 
 
       #Centre

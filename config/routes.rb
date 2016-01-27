@@ -68,10 +68,11 @@ OpenCantine3::Application.routes.draw do
 
   get 'factures/new_all', to: 'factures#new_all'
   get 'factures/stats_mensuelle_params', to: 'factures#stats_mensuelle_params'
+  post 'factures/stats_mensuelle_do', to: 'factures#stats_mensuelle_do'
+  
   get 'factures/print', to: 'factures#print'
   get 'factures/send_invoice', to: 'factures#send_invoice'
   post 'factures/create', to: 'factures#create'
-  post 'factures/stats_mensuelle', to: 'factures#stats_mensuelle'
   get 'factures/facturation_speciale', to:'factures#facturation_speciale'
   post 'factures/facturation_speciale_do', to:'factures#facturation_speciale_do'
 

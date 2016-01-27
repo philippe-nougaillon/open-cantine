@@ -55,4 +55,22 @@ class Prestation < ActiveRecord::Base
       return 0
    end
 
+   def self.duree_garderie
+      [
+        ['15min', 5], ['30min', 6], ['45min', 7], ['1h', 8], ['1h15min', 9], ['1h30min', 10], ['1h45min', 11], ['2h', 12], ['2h15', 13], ['2h30', 14]
+      ]
+   end  
+
+   def self.duree_garderie_matin
+      [
+        ['Arrivée 6h30', 12],['Arrivée 6h45', 11], ['Arrivée 7h', 10],['Arrivée 7h15', 9],['Arrivée 7h30', 8], ['Arrivée 7h45', 7],['Arrivée 8h', 6],['Arrivée 8h15', 5]
+      ]
+   end 
+
+   def self.duree_garderie_soir
+      [
+        ['Départ 16h15', 5],['Départ 16h30', 6],['Départ 16h45', 7],['Départ 17h', 8],['Départ 17h15', 9],['Départ 17h30', 10],['Départ 17h45', 11],['Départ 18h', 12],['Départ 18h15', 13],['Départ 18h30', 14]
+      ]
+   end
+        
 end
