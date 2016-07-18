@@ -1,42 +1,101 @@
-openCantine
-===========
+# openCantine
 
-Application web de facturation de cantine
+## Application web de facturation de cantine
 
-== Installation d'openCantine sur un serveur Linux
+### Installation sur un serveur Linux 
+_(Merci à David.G pour ce tuto)
 
-1/ Installation de Ruby + MySql 
+####Pack de base
+sudo apt-get update
+sudo apt-get install build-essential libssl-dev libyaml-dev libreadline-dev openssl curl git-core zlib1g-dev bison libxml2-dev libxslt1-dev libcurl4-openssl-dev libsqlite3-dev sqlite3
 
-sudo apt-get install ruby1.9.1-full
-sudo apt-get install ruby1.9.1.dev
-sudo apt-get install build-essential libopenssl-ruby1.9.1 libssl-dev zlib1g-dev
+####Installation ruby
+mkdir ~/ruby
+cd ~/ruby
+wget https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.4.tar.gz
+tar -xzf ruby-2.2.4.tar.gz
+cd ruby-2.2.4
+./configure
+make
+sudo make install
+
+verifier la version installée
+ruby -v
+
+####Installation Apache
+sudo apt-get install apache2
+
+####Installation Passenger
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
+sudo nano /etc/apt/sources.list.d/passenger.list
+
+ajouter cette ligne:
+deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main
+CTRL+X puis O puis Enter pour sauvegarder
+
+sudo chown root: /etc/apt/sources.list.d/passenger.list
+sudo chmod 600 /etc/apt/sources.list.d/passenger.list
+sudo apt-get update
+sudo apt-get install libapache2-mod-passenger
+sudo a2enmod passenger
+sudo service apache2 restart
+sudo rm /usr/bin/ruby
+sudo ln -s /usr/local/bin/ruby /usr/bin/ruby
+
+####Installation Mysql
 sudo apt-get install mysql-server
-sudo apt-get install mysql-devel
-sudo apt-get install mysql-dev
-sudo apt-get install mysql-client libmysqlclient-dev
-sudo apt-get install git
-sudo apt-get install curl
+sudo apt-get install libmysqlclient-dev
+(vous devrez specifier le mot de passe root de mysql)
 
-2/ Installation du framework Ruby on Rails
-sudo gem install rails
+####Installation Rails
+sudo gem install --no-rdoc --no-ri rails
+sudo bundle install
 
-3/ Récupération du convertiseur html to PDF
-curl -C - -O http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2
-	tar xvjf wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2
-	sudo cp wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf
-
-4/ Récupération des sources depuis la forge Adullact
+####Récupération sources
+cd ~
 git clone https://adullact.net/anonscm/git/opencantine/opencantine.git
-	cd opencantine
-	bundle
-	rake db:migrate
 
-5/ Lance le serveur web 
-rails s
+####Configurer de l'accès à Mysql
+cd opencantine
+cd config
+sudo nano database.yml
+(modifier utilisateur root et mot de passe mysql)
+CTRL+X puis O puis Enter pour sauvegarder
+sudo bundle exec rake db:create db:migrate
+A ce stage de l'installation vous pouvez vérifier que Rails est correctement configuré en appelant la console:
+rails c
+_Si un message d'erreur apparaît, vous avez un problème... passez en revue toutes les étapes précédentes pour identifier le problème avant d'aller plus loin._
 
-6/ Et voilà !
-rendez-vous sur localhost:3000
-Veuillez ensuite à maintenir votre version d'openCantine à jour. 
-Pour récupérer les mises à jour depuis la forge adullact :
-git pull
+####Configurer Virtual host (où myapp est votre app)
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/myapp.conf
+sudo nano /etc/apache2/sites-available/myapp.conf
 
+Exemple:
+
+<VirtualHost *:80>
+    ServerName example.com
+    ServerAlias www.example.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /home/opencantine/public
+    RailsEnv development
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    <Directory "/home/opencantine/public">
+        Options FollowSymLinks
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+**(pour utiliser le mode production remplacer development à la ligne RailsEnv)
+CTRL+X puis O puis Enter pour sauvegarder**
+
+sudo a2dissite 000-default
+sudo a2ensite testapp
+sudo service apache2 restart
+
+#### Lancement
+Lancez votre navigateur à l'adresse localhost
+
+Cliquer sur s'inscrire pour configurer votre openCantine.
+
+EnJoY

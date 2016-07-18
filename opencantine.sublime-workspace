@@ -624,6 +624,22 @@
 			}
 		},
 		{
+			"file": "app/controllers/application_controller.rb",
+			"settings":
+			{
+				"buffer_size": 1660,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/admin_controller.rb",
+			"settings":
+			{
+				"buffer_size": 8145,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "app/controllers/factures_controller.rb",
 			"settings":
 			{
@@ -1093,7 +1109,7 @@
 	"groups":
 	[
 		{
-			"selected": 10,
+			"selected": 14,
 			"sheets":
 			[
 				{
@@ -1392,7 +1408,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 654.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1453,6 +1469,62 @@
 				},
 				{
 					"buffer": 13,
+					"file": "app/controllers/application_controller.rb",
+					"settings":
+					{
+						"buffer_size": 1660,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 306.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "app/controllers/admin_controller.rb",
+					"settings":
+					{
+						"buffer_size": 8145,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1327,
+								1327
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 663.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
 					"file": "app/controllers/factures_controller.rb",
 					"settings":
 					{
@@ -1480,7 +1552,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 16,
 					"file": "app/views/prestations/new_manual.erb",
 					"settings":
 					{
@@ -1507,7 +1579,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 17,
 					"file": "app/views/prestations/new_manual_classroom.erb",
 					"settings":
 					{
@@ -1534,7 +1606,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 18,
 					"file": "app/views/prestations/_prestation_full.erb",
 					"settings":
 					{
@@ -1562,7 +1634,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 19,
 					"file": "app/views/prestations/_prestation.erb",
 					"settings":
 					{
@@ -1590,7 +1662,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 20,
 					"file": "app/views/prestations/_prestation_edit.erb",
 					"settings":
 					{
@@ -1618,7 +1690,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 19,
+					"buffer": 21,
 					"file": "app/views/prestations/_list.erb",
 					"settings":
 					{
@@ -1646,7 +1718,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 20,
+					"buffer": 22,
 					"file": "app/views/admin/bienvenue.erb",
 					"settings":
 					{
@@ -1674,7 +1746,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 21,
+					"buffer": 23,
 					"file": "app/views/factures/facturation_speciale.html.erb",
 					"settings":
 					{
@@ -1701,7 +1773,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 22,
+					"buffer": 24,
 					"file": "app/views/factures/stats_mensuelle_params.erb",
 					"settings":
 					{
@@ -1727,7 +1799,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 23,
+					"buffer": 25,
 					"file": "app/views/factures/stats_mensuelle.erb",
 					"settings":
 					{
@@ -1744,7 +1816,8 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
