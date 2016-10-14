@@ -5,7 +5,15 @@
 		[
 			[
 				"fact",
-				"facture_content"
+				"facture_id"
+			],
+			[
+				"facure_",
+				"facture_id"
+			],
+			[
+				"fac",
+				"factures_url"
 			],
 			[
 				"reu",
@@ -14,10 +22,6 @@
 			[
 				"facu",
 				"facture"
-			],
-			[
-				"fac",
-				"facture_ids"
 			],
 			[
 				"b",
@@ -510,10 +514,6 @@
 			[
 				"Code",
 				"Code_postal_contact"
-			],
-			[
-				"origi",
-				"original_value"
 			]
 		]
 	},
@@ -700,7 +700,7 @@
 			"file": "app/controllers/factures_controller.rb",
 			"settings":
 			{
-				"buffer_size": 27302,
+				"buffer_size": 27966,
 				"line_ending": "Unix"
 			}
 		},
@@ -708,7 +708,7 @@
 			"file": "app/views/factures/index.html.erb",
 			"settings":
 			{
-				"buffer_size": 3181,
+				"buffer_size": 3166,
 				"line_ending": "Unix"
 			}
 		},
@@ -1809,15 +1809,15 @@
 					"file": "app/controllers/factures_controller.rb",
 					"settings":
 					{
-						"buffer_size": 27302,
+						"buffer_size": 27966,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1753,
-								1753
+								2605,
+								2605
 							]
 						],
 						"settings":
@@ -1827,7 +1827,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 540.0,
+						"translation.y": 810.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1837,15 +1837,15 @@
 					"file": "app/views/factures/index.html.erb",
 					"settings":
 					{
-						"buffer_size": 3181,
+						"buffer_size": 3166,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								776,
-								776
+								2220,
+								2220
 							]
 						],
 						"settings":
@@ -1855,7 +1855,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 405.0,
+						"translation.y": 345.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

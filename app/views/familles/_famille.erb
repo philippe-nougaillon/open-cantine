@@ -20,7 +20,7 @@
 
 <%= f.input :email, :input_html => {size: 25}  %>
 <%= f.input :memo, :label => "Mémo", :input_html => {size: 20} %>
-<%= f.input :archive %>
+<%= f.input :archive, as: :boolean %>
 
 <div style="margin-left:170px;">
 	<%= f.submit "Enregistrer" %>
