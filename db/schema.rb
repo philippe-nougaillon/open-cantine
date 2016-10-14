@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831193354) do
+ActiveRecord::Schema.define(version: 20160908100521) do
 
   create_table "blogs", force: :cascade do |t|
     t.string   "titre",      limit: 255
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20160831193354) do
     t.integer  "tarif_id",       limit: 4
     t.text     "memo",           limit: 65535
     t.string   "allocataire",    limit: 255
+    t.boolean  "archive",        limit: 1
   end
 
   add_index "familles", ["id"], name: "index_familles_on_id", using: :btree

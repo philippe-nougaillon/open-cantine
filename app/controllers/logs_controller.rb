@@ -26,9 +26,6 @@ class LogsController < ApplicationController
 
     @logs = @logs.paginate(page:params[:page]).order('created_at DESC')
 
-    respond_to do |format|
-      format.html # index.html.erb
-    end
   end
 
 end

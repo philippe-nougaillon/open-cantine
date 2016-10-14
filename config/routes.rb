@@ -75,6 +75,7 @@ OpenCantine3::Application.routes.draw do
   post 'factures/create', to: 'factures#create'
   get 'factures/facturation_speciale', to:'factures#facturation_speciale'
   post 'factures/facturation_speciale_do', to:'factures#facturation_speciale_do'
+  post 'factures/action'
 
   get 'paiements/listing', to: 'paiements#listing'
   get 'paiements/print', to: 'paiements#print'

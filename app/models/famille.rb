@@ -14,6 +14,9 @@ class Famille < ActiveRecord::Base
 
   before_save :uppercase_fields
 
+  scope :actives, ->  { where("(archive is null OR archive is false)") }
+  scope :archives, -> { where(archive:true) } 
+
   def uppercase_fields
     self.ville.upcase!
     self[:nom].upcase!
@@ -35,9 +38,13 @@ class Famille < ActiveRecord::Base
   	Famille_find_all_by_mairie_id(mairie_id)
   end
  
-  def self.search(nom, page, mairie_id, sort)
+  def self.search(nom, archive, page, mairie_id, sort)
 	  order_by = (sort.blank?) ? "nom" : sort	
- 	  where('nom like ? AND mairie_id = ?', "%#{nom}%", mairie_id).paginate(per_page:20, page:page).order(order_by)
+    if archive == '1'
+      archives.where('nom like ? AND mairie_id = ?', "%#{nom}%", mairie_id).paginate(per_page:20, page:page).order(order_by)
+    else
+      actives.where('nom like ? AND mairie_id = ?', "%#{nom}%", mairie_id).paginate(per_page:20, page:page).order(order_by)
+    end
   end
 
   def nbrenfants

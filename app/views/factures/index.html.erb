@@ -14,50 +14,60 @@
   <% end %>
 </div>
 
-<div id="form_body">
-  <% if @factures.any? %>
-    <table>
-      <tr>
-        <th><%= link_to "Référence", sort:"ref" %></th>
-        <th><%= link_to "Date", 	   sort:"date" %></th>
-        <th><%= link_to "Echéance",  sort:"echeance" %></th>
-        <th><%= link_to "Famille",   sort:"familles.nom" %></th>
-        <th><%= link_to "Montant",   sort:"montant" %></th>
-        <th><%= link_to "Vérifiée?", sort:"checked" %></th>
-        <th><%= link_to "Mémo",      sort:"footer" %></th>
-        <th>PDF</th>
-        <th><%= link_to "Envoyée le", sort:"envoyee" %></th>
-  	    <th/>	
-        <th/>
-      </tr>
+<%= form_tag factures_action_path, name:'action' do %>
+  <span style="float:right;">
+    <small>Action:</small>
+    <%= select_tag "action_name", options_for_select(["Générer PDF","Envoyer par mail"]), include_blank:true %>
+    <%= submit_tag 'Go' %>
+  </span>
 
-      <% for facture in @factures %>
-        <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
-          <td><%= link_to facture.ref, factures_print_path(id:facture.id) %></td>
-          <td><%= I18n.l(facture.date, format: :short) %></td>
-          <td><%=h facture.echeance.to_s(:fr) %></td>
-          <td><%= link_to facture.famille.nom, facture.famille  %> </td>
-          <td style="text-align:right"><%=h number_to_currency(facture.montant, :locale => :fr) %></td>
-  		    <td style="text-align:center"><%= image_tag "ok.jpeg", size: '15x15' if facture.checked %></td>
-  		    <td><%= truncate(facture.footer, length:10) if facture.footer %></td>
-  		    <td>
-            <%= link_to image_tag("pdf-logo.png", size: "15x15"), facture_path(facture, :format => :pdf)  %>
-          </td>
-  		    <td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
-  		    <td>
-            <% if facture.famille %> 
-    	        <% unless facture.famille.email.blank? %>
-                <%= link_to "Envoyer", factures_send_invoice_path(id:facture.id) %> 
-              <% end %>
-            <% end %>
-          </td>
-  		    <td><%= link_to image_tag('modif.png', size:"15x15"), edit_facture_path(facture) %></td>
+  <div id="form_body">
+    <% if @factures.any? %>
+      <table>
+        <tr>
+          <th><%= check_box_tag "check_all", false %></th>
+          <th><%= link_to "Référence", sort:"ref" %></th>
+          <th><%= link_to "Date", 	   sort:"date" %></th>
+          <th><%= link_to "Echéance",  sort:"echeance" %></th>
+          <th><%= link_to "Famille",   sort:"familles.nom" %></th>
+          <th><%= link_to "Montant",   sort:"montant" %></th>
+          <th><%= link_to "Vérifiée?", sort:"checked" %></th>
+          <th><%= link_to "Mémo",      sort:"footer" %></th>
+          <th>PDF</th>
+          <th><%= link_to "Envoyée le", sort:"envoyee" %></th>
+    	    <th/>	
+          <th/>
         </tr>
-      <% end %>
-    </table>
-    <%= page_entries_info @factures %>
-    <%= will_paginate @factures %>
-  <% else %>
-    Aucune facture à afficher. Veuillez réduire le filtre et recommencer.
-  <% end %>
-</div>
+
+        <% for facture in @factures %>
+          <tr class="<%= cycle('list-line-even','list-line-odd') %> ">
+            <td><%= check_box_tag "[facture_ids][#{facture.id}]",nil ,false, class:'check_all' %></td>
+            <td><%= link_to facture.ref, factures_print_path(id:facture.id) %></td>
+            <td><%= I18n.l(facture.date, format: :short) %></td>
+            <td><%=h facture.echeance.to_s(:fr) %></td>
+            <td><%= link_to facture.famille.nom, facture.famille  %> </td>
+            <td style="text-align:right"><%=h number_to_currency(facture.montant, locale: :fr) %></td>
+    		    <td style="text-align:center"><%= image_tag "yes.png" if facture.checked %></td>
+    		    <td><%= truncate(facture.footer, length:10) if facture.footer %></td>
+    		    <td>
+              <%= link_to image_tag("pdf-logo.png", size: "15x15"), facture_path(facture, format: :pdf)  %>
+            </td>
+    		    <td><%= facture.envoyee.getlocal.to_s(:fr) if facture.envoyee %></td>
+    		    <td>
+              <% if facture.famille %> 
+      	        <% unless facture.famille.email.blank? %>
+                  <%= link_to "Envoyer", factures_send_invoice_path(id:facture.id) %> 
+                <% end %>
+              <% end %>
+            </td>
+    		    <td><%= link_to image_tag('modif.png', size:"15x15"), edit_facture_path(facture) %></td>
+          </tr>
+        <% end %>
+      </table>
+      <%= page_entries_info @factures %>
+      <%= will_paginate @factures %>
+    <% else %>
+      Aucune facture à afficher. Veuillez réduire le filtre et recommencer.
+    <% end %>
+  </div>
+<% end %>

@@ -21,6 +21,7 @@
 //= require_self
 //= require_tree .
 
+
 $.datepicker.regional['fr'] = {
     clearText: 'Effacer', clearStatus: '',
     closeText: 'Fermer', closeStatus: 'Fermer sans modifier',

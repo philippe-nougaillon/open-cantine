@@ -33,10 +33,6 @@ class FamillesController < ApplicationController
   # GET /familles
   # GET /familles.xml
   def index
-  		# if params.has_key?('famille_id') and !params[:famille_id].empty?
-  		#    @famille = Famille.find(params[:famille_id])
-  		#    format.html { redirect_to(@famille) }
-
     unless params[:sort].blank?
       sort = params[:sort]
       if session[:order_by] == sort
@@ -45,7 +41,7 @@ class FamillesController < ApplicationController
       session[:order_by] = sort
     end
 
-    @familles = Famille.search(params[:nom], params[:page], session[:mairie], sort)
+    @familles = Famille.search(params[:nom], params[:archive], params[:page], session[:mairie], sort)
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => Famille.where(mairie_id:session[:mairie]).to_xml( :include => [:enfants,:prestations]) }
@@ -167,7 +163,7 @@ class FamillesController < ApplicationController
   end
 
   def listing
-	  @familles = Famille.where(mairie_id:session[:mairie]).order(:nom)
+	  @familles = Famille.actives.where(mairie_id:session[:mairie]).order(:nom)
 	  respond_to do |format|
 	      format.html 
       	format.xml  { render :xml => @familles }
@@ -177,7 +173,7 @@ class FamillesController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
     def famille_params
-      params.require(:famille).permit(:nom,:adresse,:adresse2,:cp,:ville,:email,:phone,:mobile1,:mobile2,:mairie_id,:civilité,:password,:lastconnection,:tarif_id,:memo,:allocataire)
+      params.require(:famille).permit(:nom,:adresse,:adresse2,:cp,:ville,:email,:phone,:mobile1,:mobile2,:mairie_id,:civilité,:password,:lastconnection,:tarif_id,:memo,:allocataire, :archive)
     end
 
 end

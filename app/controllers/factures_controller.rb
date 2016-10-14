@@ -5,7 +5,7 @@ require "open-uri"
 class FacturesController < ApplicationController
 
   layout :determine_layout
-  before_filter :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle_do', 'facturation_speciale', 'facturation_speciale_do']
+  before_filter :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle_do', 'facturation_speciale', 'facturation_speciale_do', 'action']
 
   def check
     unless Facture.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?
@@ -54,7 +54,7 @@ class FacturesController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @facture }
       format.pdf do
- 		    pdf = FacturePdf.new(@facture, @mairie, view_context)
+ 		    pdf = FacturePdf.new([@facture.id])
         send_data pdf.render, :type => "application/pdf", 
 				:filename => "Facture_#{@facture.ref}_#{@facture.created_at.strftime("%d/%m/%Y")}.pdf"
       end   
@@ -69,19 +69,18 @@ class FacturesController < ApplicationController
 
   def send_invoice
     @facture = Facture.find(params[:id])
-    @famille = Famille.find(@facture.famille_id)
     @mairie  = Ville.find(session[:mairie])
 	
-  	pdf = FacturePdf.new(@facture, @mairie, view_context)
+  	pdf = FacturePdf.new([@facture.id])
   	filename = @facture.id.to_s
     save_path = Rails.root.join('pdfs',"#{filename}.pdf")
   	pdf.render_file(save_path) # then save to a file
       
-  	UserMailer.send_invoice(@mairie, @famille, @facture).deliver
+  	UserMailer.send_invoice(@mairie, @facture.famille, @facture).deliver_now
     @facture.envoyee = Time.now
     @facture.log_changes(1, session[:user])
   	@facture.save
-  	flash[:notice] = "Facture #{@facture.ref} #{@famille.nom} envoyée."
+  	flash[:notice] = "Facture #{@facture.ref} #{@facture.famille.nom} envoyée."
   	redirect_to factures_path
   end
 
@@ -192,6 +191,33 @@ class FacturesController < ApplicationController
       format.html { redirect_to(factures_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def action
+    require 'factures.rb'
+    if params[:action_name] == "Générer PDF" and params[:facture_ids]
+      pdf = FacturePdf.new(params[:facture_ids].keys)
+      send_data pdf.render, type: "application/pdf", filename: "Factures.pdf"
+    elsif params[:action_name] == "Envoyer par mail" and params[:facture_ids]
+      params[:facture_ids].keys.each do | facture_id |
+        @facture = Facture.find(facture_id)
+        @mairie  = Ville.find(session[:mairie])
+      
+        pdf = FacturePdf.new([@facture.id])
+        filename = @facture.id.to_s
+        save_path = Rails.root.join('pdfs',"#{filename}.pdf")
+        pdf.render_file(save_path) # then save to a file
+          
+        UserMailer.send_invoice(@mairie, @facture.famille, @facture).deliver_now
+        @facture.envoyee = Time.now
+        @facture.log_changes(1, session[:user])
+        @facture.save
+      end
+      flash[:notice] = "Facture(s) envoyée(s)"
+      redirect_to factures_path
+    else 
+      redirect_to factures_path
+    end  
   end
 
   def facturation_speciale

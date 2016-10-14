@@ -5,6 +5,7 @@
       <%= text_field_tag :nom, params[:nom], id: "navbar-search-input", class: 'form-control' %>
 
       <%= hidden_field_tag 'famille_id','' %>
+      <%= check_box_tag :archive, 1 , params[:archive] == '1' %> Archivées ?
       <%= submit_tag 'Rechercher'   %>
   
   <span id="adroite"> 	

@@ -5,12 +5,21 @@ require 'prawn/table'
 class FacturePdf < Prawn::Document
 
   include ActionView::Helpers::NumberHelper
-     
-  def initialize(facture, mairie, view)
-    super()
-	@mairie = mairie
-	@facture = facture
+   
 
+  def initialize(ids)
+      super(:page_size => "A4", :top_margin => 5, :bottom_margin => 5)
+
+      ids.each_with_index do | id,index |
+        @facture = Facture.find(id)
+        @mairie = @facture.ville
+
+        facture_content
+        start_new_page if (index < ids.count - 1)
+      end
+  end
+
+  def facture_content
 	if @mairie.logo_url	
 		if @mairie.logo_url.empty?
 		   logo_url =  "#{Rails.root}/public/images/school.png" 

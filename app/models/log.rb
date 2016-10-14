@@ -1,4 +1,5 @@
 class Log < ActiveRecord::Base
+  
   belongs_to :user
 
   self.per_page = 20

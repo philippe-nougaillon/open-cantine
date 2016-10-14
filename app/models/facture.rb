@@ -28,7 +28,7 @@ class Facture < ActiveRecord::Base
     else
         if Famille.find(kid.famille_id).tarif_id
            @tarif = Tarif.find(kid.famille.tarif_id) 
-    else
+        else
            @tarif = Tarif.find(:first, :conditions => ["mairie_id = ?", kid.famille.mairie_id]) 
         end
     end
