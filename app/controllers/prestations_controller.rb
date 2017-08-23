@@ -161,7 +161,9 @@ class PrestationsController < ApplicationController
 
       			  ndays = 5
               ndays = days_in_month(start_date) - (start_date.day - 1) if params[:toutlemois]
-              ndays = (Date.parse("2016-07-04") - start_date).to_i if params[:toutelannee]
+
+              # TODO: prendre le dernier de cours dans une table (vacances ???)
+              ndays = (Date.parse("2018-07-07") - start_date).to_i if params[:toutelannee]
 		
               date = start_date
               ndays.times do

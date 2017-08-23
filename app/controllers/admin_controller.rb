@@ -7,7 +7,7 @@ class AdminController < ApplicationController
   layout "standard"
 
   def stats
-    @users = User.order('lastconnection DESC').limit(20)
+    @users = User.order('lastconnection DESC').limit(50)
   end
 
   def signin

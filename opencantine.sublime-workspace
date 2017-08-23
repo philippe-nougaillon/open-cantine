@@ -205,7 +205,7 @@
 			],
 			[
 				"une",
-				"unless	unless … end"
+				"unless\tunless … end"
 			],
 			[
 				"dos",
@@ -421,7 +421,7 @@
 			],
 			[
 				"un",
-				"unless	unless … end"
+				"unless\tunless … end"
 			],
 			[
 				"mar",
@@ -528,12 +528,13 @@
 			}
 		},
 		{
-			"file": "/home/phil/Documents/OpenCantine_TODO",
+			"file": "/home/philnoug/Documents/OPENCANTINE 2017",
 			"settings":
 			{
-				"buffer_size": 2144,
+				"buffer_size": 98,
+				"encoding": "UTF-8",
 				"line_ending": "Unix",
-				"name": "OpenCantine: TODO"
+				"name": "20170809"
 			}
 		},
 		{
@@ -541,6 +542,7 @@
 			"settings":
 			{
 				"buffer_size": 1969,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -573,6 +575,7 @@
 			"settings":
 			{
 				"buffer_size": 11800,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -613,6 +616,7 @@
 			"settings":
 			{
 				"buffer_size": 1164,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -621,6 +625,7 @@
 			"settings":
 			{
 				"buffer_size": 12863,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -629,6 +634,7 @@
 			"settings":
 			{
 				"buffer_size": 3037,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -645,6 +651,16 @@
 			"settings":
 			{
 				"buffer_size": 1911,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/moncompte_controller.rb",
+			"settings":
+			{
+				"buffer_size": 4743,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -653,6 +669,7 @@
 			"settings":
 			{
 				"buffer_size": 2585,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -661,6 +678,7 @@
 			"settings":
 			{
 				"buffer_size": 3590,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -669,6 +687,7 @@
 			"settings":
 			{
 				"buffer_size": 19759,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -685,6 +704,7 @@
 			"settings":
 			{
 				"buffer_size": 1660,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -693,6 +713,7 @@
 			"settings":
 			{
 				"buffer_size": 8145,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -701,6 +722,7 @@
 			"settings":
 			{
 				"buffer_size": 27966,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -709,6 +731,7 @@
 			"settings":
 			{
 				"buffer_size": 3166,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -717,6 +740,7 @@
 			"settings":
 			{
 				"buffer_size": 4760,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -725,6 +749,7 @@
 			"settings":
 			{
 				"buffer_size": 2745,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -749,6 +774,7 @@
 			"settings":
 			{
 				"buffer_size": 7038,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -757,6 +783,7 @@
 			"settings":
 			{
 				"buffer_size": 9786,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -764,7 +791,8 @@
 			"file": "app/views/familles/_famille.erb",
 			"settings":
 			{
-				"buffer_size": 1280,
+				"buffer_size": 1294,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -773,6 +801,7 @@
 			"settings":
 			{
 				"buffer_size": 2353,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -781,6 +810,7 @@
 			"settings":
 			{
 				"buffer_size": 1079,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -789,6 +819,7 @@
 			"settings":
 			{
 				"buffer_size": 565,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -805,6 +836,7 @@
 			"settings":
 			{
 				"buffer_size": 7464,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -813,14 +845,20 @@
 			"settings":
 			{
 				"buffer_size": 1803,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 33.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -832,7 +870,10 @@
 	},
 	"console":
 	{
-		"height": 139.0
+		"height": 139.0,
+		"history":
+		[
+		]
 	},
 	"distraction_free":
 	{
@@ -845,6 +886,7 @@
 	},
 	"file_history":
 	[
+		"/home/phil/Documents/OpenCantine_TODO",
 		"/home/phil/RailsProjects/opencantine_4.2/app/views/layouts/application.html.erb",
 		"/home/phil/RailsProjects/opencantine_4.2/db/migrate/20160831193354_modify_log_msg_to_text.rb",
 		"/home/phil/RailsProjects/opencantine_4.2/app/controllers/factures_controller.rb",
@@ -971,8 +1013,7 @@
 		"/home/phil/RailsProjects/opencantine_4.2/app/controllers/tarifs_controller.rb",
 		"/home/phil/RailsProjects/opencantine_4.2/app/controllers/villes_controller.rb",
 		"/home/phil/RailsProjects/opencantine_4.2/app/controllers/todos_controller.rb",
-		"/home/phil/RailsProjects/opencantine_4.2/app/controllers/logs_controller.rb",
-		"/home/phil/RailsProjects/opencantine_4.2/app/models/vacance.rb"
+		"/home/phil/RailsProjects/opencantine_4.2/app/controllers/logs_controller.rb"
 	],
 	"find":
 	{
@@ -1103,7 +1144,7 @@
 			"20104",
 			"map",
 			"map(",
-			"\n	",
+			"\n\t",
 			"@index",
 			"check",
 			"jalon_id",
@@ -1114,7 +1155,7 @@
 			"<%",
 			"Prestataire BE",
 			"@messages",
-			"\n		",
+			"\n\t\t",
 			"end",
 			"copro",
 			"@copro"
@@ -1198,12 +1239,13 @@
 	"groups":
 	[
 		{
-			"selected": 22,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
 					"file": "Gemfile",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 985,
@@ -1225,40 +1267,42 @@
 						"translation.y": 60.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/phil/Documents/OpenCantine_TODO",
+					"file": "/home/philnoug/Documents/OPENCANTINE 2017",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2144,
+						"buffer_size": 98,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2140,
-								2140
+								82,
+								82
 							]
 						],
 						"settings":
 						{
-							"auto_name": "OpenCantine: TODO",
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"auto_name": "20170809",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
 					"file": "app/assets/javascripts/application.js",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1969,
@@ -1282,11 +1326,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
 					"file": "app/assets/javascripts/factures.js.coffee",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 339,
@@ -1308,11 +1354,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
 					"file": "app/assets/stylesheets/application.css",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 669,
@@ -1334,11 +1382,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
 					"file": "config/routes.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 5314,
@@ -1362,11 +1412,13 @@
 						"translation.y": 912.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
 					"buffer": 6,
 					"file": "db/schema.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 11800,
@@ -1390,11 +1442,13 @@
 						"translation.y": 4005.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 7,
 					"file": "config/environments/production.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 2709,
@@ -1418,11 +1472,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
 					"buffer": 8,
 					"file": "config/database.yml",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 804,
@@ -1446,11 +1502,13 @@
 						"translation.y": 102.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
 					"buffer": 9,
 					"file": "app/models/blog.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 126,
@@ -1472,11 +1530,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
 					"buffer": 10,
 					"file": "app/models/user.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 743,
@@ -1500,11 +1560,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
 					"buffer": 11,
 					"file": "app/models/ville.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1164,
@@ -1527,11 +1589,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
 					"buffer": 12,
 					"file": "app/models/facture.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 12863,
@@ -1555,11 +1619,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
 					"buffer": 13,
 					"file": "app/pdf/factures.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 3037,
@@ -1582,11 +1648,13 @@
 						"translation.y": 45.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 14,
 					"type": "text"
 				},
 				{
 					"buffer": 14,
 					"file": "app/models/log.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 221,
@@ -1608,11 +1676,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 15,
 					"type": "text"
 				},
 				{
 					"buffer": 15,
 					"file": "app/models/famille.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1911,
@@ -1636,11 +1706,43 @@
 						"translation.y": 360.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 16,
 					"type": "text"
 				},
 				{
 					"buffer": 16,
+					"file": "app/controllers/moncompte_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4743,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3502,
+								3502
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1035.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
 					"file": "app/models/prestation.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 2585,
@@ -1664,11 +1766,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 17,
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 18,
 					"file": "app/views/layouts/standard.html.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 3590,
@@ -1690,11 +1794,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 18,
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 19,
 					"file": "app/controllers/prestations_controller.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 19759,
@@ -1718,11 +1824,13 @@
 						"translation.y": 6434.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 19,
 					"type": "text"
 				},
 				{
-					"buffer": 19,
+					"buffer": 20,
 					"file": "app/controllers/logs_controller.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 709,
@@ -1746,11 +1854,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 20,
 					"type": "text"
 				},
 				{
-					"buffer": 20,
+					"buffer": 21,
 					"file": "app/controllers/application_controller.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1660,
@@ -1774,11 +1884,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 21,
 					"type": "text"
 				},
 				{
-					"buffer": 21,
+					"buffer": 22,
 					"file": "app/controllers/admin_controller.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 8145,
@@ -1788,8 +1900,8 @@
 						"selection":
 						[
 							[
-								1327,
-								1327
+								420,
+								420
 							]
 						],
 						"settings":
@@ -1799,14 +1911,16 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 663.0,
+						"translation.y": 123.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 22,
 					"type": "text"
 				},
 				{
-					"buffer": 22,
+					"buffer": 23,
 					"file": "app/controllers/factures_controller.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 27966,
@@ -1830,11 +1944,13 @@
 						"translation.y": 810.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 23,
 					"type": "text"
 				},
 				{
-					"buffer": 23,
+					"buffer": 24,
 					"file": "app/views/factures/index.html.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 3166,
@@ -1858,11 +1974,13 @@
 						"translation.y": 345.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 24,
 					"type": "text"
 				},
 				{
-					"buffer": 24,
+					"buffer": 25,
 					"file": "app/views/prestations/new_manual.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 4760,
@@ -1885,11 +2003,13 @@
 						"translation.y": 918.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 25,
 					"type": "text"
 				},
 				{
-					"buffer": 25,
+					"buffer": 26,
 					"file": "app/views/prestations/new_manual_classroom.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 2745,
@@ -1912,11 +2032,13 @@
 						"translation.y": 459.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 26,
 					"type": "text"
 				},
 				{
-					"buffer": 26,
+					"buffer": 27,
 					"file": "app/views/prestations/_prestation_full.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1902,
@@ -1940,11 +2062,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 27,
 					"type": "text"
 				},
 				{
-					"buffer": 27,
+					"buffer": 28,
 					"file": "app/views/prestations/_prestation.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1694,
@@ -1968,11 +2092,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 28,
 					"type": "text"
 				},
 				{
-					"buffer": 28,
+					"buffer": 29,
 					"file": "app/views/prestations/_prestation_edit.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 7038,
@@ -1996,11 +2122,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 29,
 					"type": "text"
 				},
 				{
-					"buffer": 29,
+					"buffer": 30,
 					"file": "app/views/prestations/_list.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 9786,
@@ -2021,25 +2149,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 562.0,
+						"translation.y": 127.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 30,
 					"type": "text"
 				},
 				{
-					"buffer": 30,
+					"buffer": 31,
 					"file": "app/views/familles/_famille.erb",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1280,
+						"buffer_size": 1294,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1212,
+								1212
 							]
 						],
 						"settings":
@@ -2051,11 +2181,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 31,
 					"type": "text"
 				},
 				{
-					"buffer": 31,
+					"buffer": 32,
 					"file": "app/views/admin/bienvenue.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 2353,
@@ -2079,11 +2211,13 @@
 						"translation.y": 179.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 32,
 					"type": "text"
 				},
 				{
-					"buffer": 32,
+					"buffer": 33,
 					"file": "app/views/factures/facturation_speciale.html.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1079,
@@ -2106,11 +2240,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 33,
 					"type": "text"
 				},
 				{
-					"buffer": 33,
+					"buffer": 34,
 					"file": "app/views/factures/stats_mensuelle_params.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 565,
@@ -2132,11 +2268,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 34,
 					"type": "text"
 				},
 				{
-					"buffer": 34,
+					"buffer": 35,
 					"file": "app/views/factures/stats_mensuelle.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 745,
@@ -2159,11 +2297,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 35,
 					"type": "text"
 				},
 				{
-					"buffer": 35,
+					"buffer": 36,
 					"file": "app/controllers/familles_controller.rb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 7464,
@@ -2187,11 +2327,13 @@
 						"translation.y": 2071.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 36,
 					"type": "text"
 				},
 				{
-					"buffer": 36,
+					"buffer": 37,
 					"file": "app/views/familles/index.html.erb",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1803,
@@ -2215,6 +2357,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 37,
 					"type": "text"
 				}
 			]
@@ -2259,6 +2402,8 @@
 	{
 		"height": 0.0
 	},
+	"pinned_build_system": "",
+	"project": "opencantine.sublime-project",
 	"replace":
 	{
 		"height": 64.0
@@ -2267,6 +2412,7 @@
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -2275,6 +2421,7 @@
 	"select_project":
 	{
 		"height": 500.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -2284,10 +2431,26 @@
 		],
 		"width": 380.0
 	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 232.0,
-	"status_bar_visible": true
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
 }
