@@ -34,13 +34,22 @@ class PrestationsController < ApplicationController
   def index
     @images = get_etat_images
 
-    params[:sort] ||= 'date,enfants.classe,familles.nom,enfants.prenom'
+    params[:sort] ||= 'date, enfants.classe, familles.nom, enfants.prenom'
 	  refresh 	 
   end
 
   def refresh
-    params[:prestation_date] ||= Date.today.to_s(:fr)
-    params[:periode] ||= 'jour'
+    if session[:prestation_date]
+      params[:prestation_date] ||= session[:prestation_date]
+    else
+      params[:prestation_date] ||= Date.today.to_s(:fr)
+    end
+
+    if session[:periode]
+      params[:periode] ||= session[:periode]
+    else  
+      params[:periode] ||= 'jour'
+    end
  
     unless params[:sort].blank?
       sort = params[:sort]
@@ -51,6 +60,9 @@ class PrestationsController < ApplicationController
     end
     @prestations = Prestation.search(params[:prestation_date], params[:classe], session[:mairie], sort, params[:periode])
     @classrooms  = Ville.find(session[:mairie]).classrooms
+
+    session[:prestation_date] = params[:prestation_date]
+    session[:periode] = params[:periode]   
   end
 
   def print
@@ -573,6 +585,16 @@ class PrestationsController < ApplicationController
   		redirect_to "/prestations/stats_mensuelle_params/0"
   	end
   end	
+
+  def action
+    if params[:action_name] == "Supprimer" and params[:prestation_ids]
+      params[:prestation_ids].keys.each do | id |
+        Prestation.find(id).destroy
+      end
+      flash[:notice] = "Prestation(s) supprimée(s)"
+    end
+    redirect_to prestations_path
+  end
 
   private
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,4 +1,10 @@
-  <% if @prestations.size > 0 %>
+<% if @prestations.size > 0 %>
+  <%= form_tag prestations_action_path, name:'action' do %>
+    <span style="float:right;">
+        <small>Action:</small>
+        <%= select_tag "action_name", options_for_select(["Supprimer"]), include_blank:true %>
+        <%= submit_tag 'Go' %>
+    </span>
 
     <% total_repas = 0 %>
     <% total_repasA = 0 %>
@@ -38,6 +44,8 @@
 
     <table>
       <tr>
+        <th><%= check_box_tag "check_all", false %></th>
+
         <th><%= link_to "Date", :sort => "date", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
         <th><%= link_to "Classe", :sort => "enfants.classe", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
         <th><%= link_to "Nom", :sort => "enfants.nomfamille", :id => 0, :toutlemois => params[:toutlemois], :search => params[:search], :action => 'index' %></th>
@@ -56,7 +64,7 @@
 
       <% for prestation in @prestations %>
 
-        <% enfant = Enfant.find(prestation.enfant_id) %>
+        <% enfant = prestation.enfant %>
 
 		<%  if prestation.date != @date %>
     		
@@ -65,6 +73,7 @@
 			<% end %>
 			<% @date = prestation.date %>
 			<tr id="sum">
+                <td />
 				<td><small><i>Sous-total jour</i></small></td>
 				<td />
 				<td />
@@ -135,6 +144,7 @@
 			<tr><td><%= @date.to_s(:fr) %></td></tr> 
   	  <% end %>
 	  <tr id="sum">
+        <td />
 		<td><small><i>Sous-total jour</i></small></td>
 		<td />
 		<td />
@@ -149,6 +159,7 @@
 	  </tr>		
 
       <tr>
+        <td />
         <td><b>Total Repas Enfants</b>
             <% if total_repasEnfantSP > 0 %>
                <br>Dont <%= sprintf("%2d", (total_repasEnfantSP)) %> ss porc
@@ -171,6 +182,7 @@
         <td /><td />
       </tr>
       <tr>
+        <td />
         <td>Repas Adulte</td>
         <td />
         <td />
@@ -187,6 +199,7 @@
         <td /><td /><td /><td /><td /><td /><td />
       </tr>
       <tr id="sum">
+        <td />
         <td>Annulations</td>
         <td />
         <td />
@@ -200,6 +213,7 @@
         <td /><td />
       </tr>
       <tr id="sum">
+        <td />
         <td><b>Total</b></td>
         <td />
         <td />
@@ -208,11 +222,12 @@
         <td class="center"><b><%= sprintf("%03d", total_garderieAMP + total_garderieAMM) %></b></td>
         <td class="center"><b><%= sprintf("%03d", total_garderiePMP + total_garderiePMM) %></b></td>
         <td class="center"><b><%= sprintf("%03d", total_centreAMP +total_centreAMM) %></b></td>
-        <td class="center"><b><%= sprintf("%03d", total_centrePMP + total_centrePMM ) %></b></td>
+        <td class="center"><b><%= sprintf("%03d", total_centrePMP + total_centrePMM) %></b></td>
         <td class="center"><b><%= sprintf("%03d", total_etude) %></b></td>
         <td /><td />
       </tr>
     </table>
-  <% else %>
+  <% end %>
+<% else %>
     <b>Aucune prestation enregistrée pour ce jour</b><br>
-  <% end  %>
+<% end  %>

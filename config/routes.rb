@@ -90,6 +90,7 @@ OpenCantine3::Application.routes.draw do
   get 'prestations/print', to: 'prestations#print' 
   get 'prestations/stats_mensuelle_params', to: 'prestations#stats_mensuelle_params' 
   post 'prestations/stats_mensuelle', to: 'prestations#stats_mensuelle' 
+  post 'prestations/action'
 
   get 'admin/user_edit', to: 'admin#user_edit'
   get 'admin/users_admin', to: 'admin#users_admin'

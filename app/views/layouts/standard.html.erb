@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />  
 
-  <title>openCantine 4.2d</title>
+  <title>openCantine 4.2e</title>
 
   <%= stylesheet_link_tag 'application', media:"all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -26,8 +26,7 @@
     <div class="container">
 		<div style="float:right">
 		    <% if current_user %>
-			    <%= link_to link_to image_tag('school.png', size:'15x15'), familles_path %> 
-			    | <%= image_tag('icon_user.png', size:'15x15') %>
+			      <%= image_tag('icon_user.png', size:'15x15') %>
 			      <%= link_to current_user.username, admin_user_edit_path %>
 		        | <%= link_to "Journal", logs_path %>
 				| <%= link_to "Paramètres", admin_setup_path %>
@@ -35,23 +34,18 @@
 		        | <%= link_to "Déconnexion", admin_signout_path %>
 		    <% end %>
 		</div>
-		<br><br>
-
 		<div>
-           <%= link_to image_tag('playground.png', width:30), familles_path %>
-           <%= link_to image_tag('diner.png', width:30), familles_path %>
-           <%= link_to image_tag('picnic.png', width:30),familles_path %>
-           <br>
            <h3>
+		       	<%= link_to image_tag('diner.png', width:15), familles_path %>
            		<%= link_to 'openCantine', familles_path %>
            		<% if current_user %>
 	           		/ <%= link_to Ville.find(session[:mairie]).nom, familles_path %>
 	           	<% end %>	
        		</h3>
 		</div>
-
+		<br />
 		<div>
-		    <div id="error_message">  <%= flash[:notice]  %></div>
+		    <div id="error_message">  <%= flash[:notice] %></div>
 		    <div id="warning_message"><%= flash[:warning] %></div>
 		</div>
 

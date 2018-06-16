@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery.turbolinks
-//= require jquery-ui/datepicker
-//= require jquery-ui/autocomplete
+//= require jquery-ui/widgets/datepicker
+//= require jquery-ui/widgets/autocomplete
 //= require jquery_ujs
 //= require turbolinks
 //= require nprogress
