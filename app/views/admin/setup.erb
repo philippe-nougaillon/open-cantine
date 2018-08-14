@@ -74,7 +74,7 @@ Le <%= link_to "portail", "/moncompte" %> permet aux parents de consulter leur c
 	      <tr  class="<%= cycle('list-line-even','list-line-odd')%>">
 	      <td><b><%= c.nom %></b></td>
 	      <td><%= c.referant %></td>
-	      <td><%= Enfant.count(:conditions => ["classe = ?", c.id]) %> </td>
+	      <td><%= Enfant.where(classe: c.id).count %> </td>
 	      </tr>
 	 <% end %>
 </table>
