@@ -1,6 +1,6 @@
 # openCantine
 
-## Application web de facturation de cantine
+## Application web de facturation de cantine & activités périscolaires
 
 ### Installation sur une instance Gandi Simple Hosting 
 
@@ -61,6 +61,10 @@ Ouvrez le lien pointant sur le domaine que vous venez de créer et entrez l'iden
 Allez dans "Paramètres" pour compléter les informations sur votre mairie et saisir quelques tarifs.
 
 Félicitations, l'installation est terminé !
+
+N'oubliez pas de sécuriser vos données en activant le backup des bases Mysql, comme expliqué dans ce tutoriel : 
+https://wiki.gandi.net/fr/simple/anacron
+
 
 ### Installation sur un serveur Linux 
 _(Merci à David.G pour ce tuto)
