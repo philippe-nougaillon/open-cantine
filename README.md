@@ -2,6 +2,66 @@
 
 ## Application web de facturation de cantine
 
+### Installation sur une instance Gandi Simple Hosting 
+
+#### Cloner les sources
+git clone https://github.com/philippe-nougaillon/opencantine.git
+cd opencantine
+
+#### Créer une instance Gandi Simple Hosting (GSH)
+
+Allez sur https://www.gandi.net/fr/simple-hosting afin de créer une instance Ruby/Mysql de taille Small+SSL au minimum. 
+
+Une fois l'instance créée, ouvrez son interface d'administration.
+Allez sur "Vue générale/Voir le code deployé" et faite un copier/coller de chaque ligne dans votre répertoire openCantine.  
+
+1/Pour faire pointer votre répertoire source vers l'instance GSH (ici 0000000) :
+$ git remote add gandi git+ssh://0000000@git.sd5.gpaas.net/default.git
+
+2/Pour envoyer les sources sur l'instance :
+$ git push gandi master
+
+3/Pour déployer les sources et construire l'application :
+$ ssh 0000000@git.sd5.gpaas.net deploy default.git
+Cette étape peut prendre plusieurs minutes... 
+
+#### Créer la base de données
+
+Allez sur "Vue générale/Base de données", cliquez sur "Aller à PhpMyAdmin"
+Entrez votre numéro d'instance GSH et votre mot de passe
+
+Une fois dans PhpMyAdmin, connectez-vous avec l'utilisateur 'root' (il n'y a pas de mot de passe)
+Cliquez sur 'New' dans le volet de gauche et entrez "OPENCANTINE4.2" dans database name et cliquez sur 'Create'
+
+Retournez sur "Vue générale/Console d'urgence", activez la console et executez la commande de connexion à l'instance :
+
+$ ssh 0000000@console.sd5.gpaas.net
+
+Une fois connecté, executez les commandes suivantes:
+$ cd web/vhosts/default/
+$ bundle exec rake db:setup
+
+
+#### Créer l'utilisateur admin
+
+Toujours dans la console d'urgence, entrez les commandes suivantes :
+
+$ bundle exec rails c production
+irb> Ville.create(nom:"MAIRIE DE PAINPOL", email:"votre email")
+irb> User.create(username:"votre adresse email", password:"votre mot de passe", password_salt:"mot secret", readwrite: true, mairie_id: Ville.last.id)
+
+#### Associer l'instance à un nom de domaine
+
+Allez dans "Vue générale/Domaine"
+Un nom de domaine par défaut a déjà été créé à des fins de test mais vous devez entrez ici le nom de domaine souhaité pour votre instance openCantine. 
+
+#### Tester la nouvelle instannce
+Ouvrez le lien pointant sur le domaine que vous venez de créer et entrez l'identifiant(votre adresse email)/mot de passe de l'utilisateur que nous venons de créer.
+
+Allez dans "Paramètres" pour compléter les informations sur votre mairie et saisir quelques tarifs.
+
+Félicitations, l'installation est terminé !
+
 ### Installation sur un serveur Linux 
 _(Merci à David.G pour ce tuto)
 
