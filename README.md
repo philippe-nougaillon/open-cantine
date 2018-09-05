@@ -1,14 +1,13 @@
 # openCantine
+# Application web de facturation de cantine & activités périscolaires
 
-## Application web de facturation de cantine & activités périscolaires
+## Installation sur une instance Gandi Simple Hosting 
 
-### Installation sur une instance Gandi Simple Hosting 
-
-#### Cloner les sources
+### Cloner les sources
 git clone https://github.com/philippe-nougaillon/opencantine.git
 cd opencantine
 
-#### Créer une instance Gandi Simple Hosting (GSH)
+### Créer une instance Gandi Simple Hosting (GSH)
 
 Allez sur https://www.gandi.net/fr/simple-hosting afin de créer une instance Ruby/Mysql de taille Small+SSL au minimum. 
 
@@ -25,7 +24,7 @@ $ git push gandi master
 $ ssh 0000000@git.sd5.gpaas.net deploy default.git
 Cette étape peut prendre plusieurs minutes... 
 
-#### Créer la base de données
+### Créer la base de données
 
 Allez sur "Vue générale/Base de données", cliquez sur "Aller à PhpMyAdmin"
 Entrez votre numéro d'instance GSH et votre mot de passe
@@ -42,7 +41,7 @@ $ cd web/vhosts/default/
 $ bundle exec rake db:setup
 
 
-#### Créer l'utilisateur admin
+### Créer l'utilisateur admin
 
 Toujours dans la console d'urgence, entrez les commandes suivantes :
 
@@ -50,12 +49,12 @@ $ bundle exec rails c production
 irb> Ville.create(nom:"MAIRIE DE PAINPOL", email:"votre email")
 irb> User.create(username:"votre adresse email", password:"votre mot de passe", password_salt:"mot secret", readwrite: true, mairie_id: Ville.last.id)
 
-#### Associer l'instance à un nom de domaine
+### Associer l'instance à un nom de domaine
 
 Allez dans "Vue générale/Domaine"
 Un nom de domaine par défaut a déjà été créé à des fins de test mais vous devez entrez ici le nom de domaine souhaité pour votre instance openCantine. 
 
-#### Tester la nouvelle instannce
+### Tester la nouvelle instance
 Ouvrez le lien pointant sur le domaine que vous venez de créer et entrez l'identifiant(votre adresse email)/mot de passe de l'utilisateur que nous venons de créer.
 
 Allez dans "Paramètres" pour compléter les informations sur votre mairie et saisir quelques tarifs.
@@ -66,14 +65,14 @@ N'oubliez pas de sécuriser vos données en activant le backup des bases Mysql, 
 https://wiki.gandi.net/fr/simple/anacron
 
 
-### Installation sur un serveur Linux 
+## Installation sur un serveur Linux 
 _(Merci à David.G pour ce tuto)
 
-####Pack de base
+###Pack de base
 sudo apt-get update
 sudo apt-get install build-essential libssl-dev libyaml-dev libreadline-dev openssl curl git-core zlib1g-dev bison libxml2-dev libxslt1-dev libcurl4-openssl-dev libsqlite3-dev sqlite3
 
-####Installation ruby
+###Installation ruby
 mkdir ~/ruby
 cd ~/ruby
 wget https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.4.tar.gz
@@ -86,10 +85,10 @@ sudo make install
 verifier la version installée
 ruby -v
 
-####Installation Apache
+###Installation Apache
 sudo apt-get install apache2
 
-####Installation Passenger
+###Installation Passenger
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
 sudo nano /etc/apt/sources.list.d/passenger.list
 
@@ -106,20 +105,20 @@ sudo service apache2 restart
 sudo rm /usr/bin/ruby
 sudo ln -s /usr/local/bin/ruby /usr/bin/ruby
 
-####Installation Mysql
+###Installation Mysql
 sudo apt-get install mysql-server
 sudo apt-get install libmysqlclient-dev
 (vous devrez specifier le mot de passe root de mysql)
 
-####Installation Rails
+###Installation Rails
 sudo gem install --no-rdoc --no-ri rails
 sudo bundle install
 
-####Récupération sources
+###Récupération sources
 cd ~
 git clone https://adullact.net/anonscm/git/opencantine/opencantine.git
 
-####Configurer de l'accès à Mysql
+###Configurer de l'accès à Mysql
 cd opencantine
 cd config
 sudo nano database.yml
@@ -130,7 +129,7 @@ A ce stage de l'installation vous pouvez vérifier que Rails est correctement co
 rails c
 _Si un message d'erreur apparaît, vous avez un problème... passez en revue toutes les étapes précédentes pour identifier le problème avant d'aller plus loin._
 
-####Configurer Virtual host (où myapp est votre app)
+###Configurer Virtual host (où myapp est votre app)
 sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/myapp.conf
 sudo nano /etc/apache2/sites-available/myapp.conf
 
@@ -157,7 +156,7 @@ sudo a2dissite 000-default
 sudo a2ensite testapp
 sudo service apache2 restart
 
-#### Lancement
+### Lancement
 Lancez votre navigateur à l'adresse localhost
 
 Cliquer sur s'inscrire pour configurer votre openCantine.
