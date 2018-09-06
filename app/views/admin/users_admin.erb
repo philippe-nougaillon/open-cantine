@@ -17,9 +17,13 @@
 		<td><b><%= u.username[0..30] %></b></td>
 		<td>Lecture <% if u.readwrite %> + Ecriture <% end %></td>
 		<td><%= u.lastconnection.to_s(:fr) %> </td>
-		<td><%= u.lastchange.to_s(:fr) %></td>
+		<td><%= u.lastchange.to_s(:fr) if u.lastchange %></td>
 		<td><%= link_to image_tag('modif.png', size:"15x15"), admin_user_edit_path(u) %></td>
-		<td><%= link_to '[X]', admin_users_admin_path(id:u.id), method: :delete, data: { confirm: 'Etes-vous certain(e) de vouloir détruire cet utilisateur ainsi que son journal des modifications ?' } %></td>
+		<td><%= link_to('[X]', 
+						admin_users_admin_path(u), 
+						method: :delete, 
+						data: { confirm: "Etes-vous certain(e) de vouloir détruire cet utilisateur ainsi que son journal des modifications ?" }) %>			
+		</td>
 	  </tr>
    <% end %>
 </table>
