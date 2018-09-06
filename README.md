@@ -47,7 +47,7 @@ Toujours dans la console d'urgence, entrez les commandes suivantes :
 
 $ bundle exec rails c production
 irb> Ville.create(nom:"MAIRIE DE PAINPOL", email:"votre email")
-irb> User.create(username:"votre adresse email", password:"votre mot de passe", password_salt:"mot secret", readwrite: true, mairie_id: Ville.last.id)
+irb> User.create(username:"votre adresse email", password:"votre mot de passe", password_salt:"mot secret", readwrite: true, mairie_id: Ville.last.id, lastchange: DateTime.now)
 
 ### Associer l'instance à un nom de domaine
 
@@ -61,8 +61,9 @@ Allez dans "Paramètres" pour compléter les informations sur votre mairie et sa
 
 Félicitations, l'installation est terminé !
 
-N'oubliez pas de sécuriser vos données en activant le backup des bases Mysql, comme expliqué dans ce tutoriel : 
-https://wiki.gandi.net/fr/simple/anacron
+N'oubliez pas de sécuriser vos données en activant le backup des bases Mysql, comme expliqué dans ce tutoriel : https://wiki.gandi.net/fr/simple/anacron
+
+Pour la suite de la configuration, veuillez consulter le guide d'utilisation : https://demonstration.opencantine.net/admin/guide
 
 
 ## Installation sur un serveur Linux 
