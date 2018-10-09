@@ -71,12 +71,12 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    mini_mime (1.0.0)
+    mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
     mysql2 (0.3.21)
-    nokogiri (1.8.2)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     nprogress-rails (0.2.0.2)
     open_uri_redirections (0.2.1)
@@ -124,7 +124,7 @@ GEM
     simple_form (4.0.0)
       actionpack (> 4)
       activemodel (> 4)
-    sprockets (2.12.4)
+    sprockets (2.12.5)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -144,12 +144,12 @@ GEM
     thread_safe (0.3.6)
     tilt (1.4.1)
     ttfunk (1.4.0)
-    turbolinks (5.1.1)
-      turbolinks-source (~> 5.1)
-    turbolinks-source (5.1.0)
+    turbolinks (5.2.0)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.11)
+    uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
     will_paginate (3.1.6)
 
@@ -179,4 +179,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.16.2
+   1.16.3
