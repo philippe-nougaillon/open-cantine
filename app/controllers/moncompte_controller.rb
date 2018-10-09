@@ -142,9 +142,14 @@ class MoncompteController < ApplicationController
     facture = Facture.find_by_ref(params[:ref])
     return if facture.famille_id != session[:famille_id]
 
-    pdf = FacturePdf.new(facture, facture.ville, view_context)
-    send_data pdf.render, :type => "application/pdf", 
-          :filename => "Facture_#{facture.ref}_#{facture.created_at.strftime("%d/%m/%Y")}.pdf"
+    respond_to do |format|
+      format.pdf do
+        pdf = FacturePdf.new([facture.id])
+        send_data pdf.render, 
+              :type => "application/pdf", 
+              :filename => "Facture_#{facture.ref}_#{facture.created_at.strftime("%d/%m/%Y")}.pdf"
+      end
+    end        
   end
 
  private
