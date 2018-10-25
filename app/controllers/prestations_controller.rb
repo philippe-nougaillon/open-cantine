@@ -382,32 +382,34 @@ class PrestationsController < ApplicationController
 
     @enfants.count.times { |i|
         @enfant = @enfants[i]
+        
         #retourne le tarif
         @tarif = Facture.best_tarif(@enfant)
-	      date = Date.new(@year.to_i, @mois.to_i, 1)
+	      
+        date = Date.new(@year.to_i, @mois.to_i, 1)
         #logger.debug "Date:#{date} "
 
-        # supprime les décochés
-        if supprimees.any? 
-           keys = supprimees.first.split(".")  
-           d = Date.new(@year.to_i, @mois.to_i, keys.first.to_i)
+        supprimees.each do |p|
+            day = Date.new(@year.to_i, @mois.to_i, p.split(".").first.to_i)
+            key = p.split(".").last  
+            #logger.debug "[DEBUG] day:#{day} | key:#{key}" 
 
-           @p = Prestation.where(enfant_id:@enfant.id, date:d).first
-           @p[keys.last] = '0'
-           @p.log_changes(1, session[:user])
-           @p.save
-
-           supprimees = []            
+            prestation = Prestation.find_by(enfant_id:@enfant.id, date:day)
+            #logger.debug "[DEBUG] #{prestation.inspect}" 
+            prestation[key] = '0'
+            prestation.log_changes(1, session[:user])
+            prestation.save
+            #logger.debug "[DEBUG] #{prestation.inspect}" 
         end
            
         days_in_month(date).times {
           day = date.day
-          #logger.debug "Day loop #{day}"
+          #logger.debug "[DEBUG] Day loop #{day}"
 
           if params[:"#{day}.repas"] or params[:"#{day}.garderieAM"] or params[:"#{day}.garderiePM"] or
             params[:"#{day}.centreAM"] or params[:"#{day}.centrePM"] or params[:etude]
 
-            #logger.debug "Day loop :#{@year}-#{@mois}-#{day}"
+            #logger.debug "[DEBUG] Day loop :#{@year}-#{@mois}-#{day}"
 
             # test si date est dans une période de vacance
             # @vacances = Vacance.find(:all, :conditions => ["debut <= ? AND fin >= ? AND mairie_id = ?", date.to_s(:en), date.to_s(:en), session[:mairie]])
