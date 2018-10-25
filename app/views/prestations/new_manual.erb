@@ -54,66 +54,72 @@
         <% else %>	
         	<% @locked = (d <= Date.today + 1.day) %>
         <% end %>	
-		<tr>
-		  <td><% if @current_week != @week %><%= @week %><% @current_week = @week %><% end %></td>
-		  <td><b><%= format_date(d) %></b></td>
-		  <td>
-		  	<%= check_box_tag(:"#{d.day}.repas", params[:"#{d.day}.repas"], 
-				@presta ? (@presta.repas !="0")  : false , { :disabled => @locked }) %>
-		  	<% if @presta %> 
-			   <% session[:lastparams] << "#{d.day}.repas" if @presta.repas !="0" %>
-			<% end %>
-		  </td>
 
-		  <td>
-		  	<%= check_box_tag(:"#{d.day}.garderieAM", params[:"#{d.day}.garderieAM"],
-			 	@presta ? (@presta.garderieAM != "0") : false, { :disabled => @locked  }) %>
-		  	<%= select_tag "[select]#{d.day}.garderieAM", 
-		  			options_for_select(@duree + @duree_matin, @presta ? @presta.garderieAM: nil), include_blank: true %>
-			<% if @presta %> 
-			   <% session[:lastparams] << "#{d.day}.garderieAM" if @presta.garderieAM !="0" %>
-			<% end %>
-		  </td>
-		  <td>
-		  	<%= check_box_tag(:"#{d.day}.garderiePM", params[:"#{d.day}.garderiePM"], 
-				@presta ? (@presta.garderiePM != "0") : false, { :disabled => @locked  }) %>
-		  	<%= select_tag "[select]#{d.day}.garderiePM", 
-		  			options_for_select(@duree + @duree_soir, @presta ? @presta.garderiePM : nil), include_blank: true %>
-
-			<% if @presta %> 
-			   <% session[:lastparams] << "#{d.day}.garderiePM" if @presta.garderiePM !="0" %>
-			<% end %>	
-		  </td>
-		  <td>
-		  	<%= check_box_tag(:"#{d.day}.centreAM", params[:"#{d.day}.centreAM"], 
-				@presta ? (@presta.centreAM != "0") : false, {  :disabled => @locked  }) %>
-			<% if @presta %> 
-			   <% session[:lastparams] << "#{d.day}.centreAM" if @presta.centreAM !="0" %>
-			<% end %>	
-		  </td>
-		  <td>
-		  	<%= check_box_tag(:"#{d.day}.centrePM", params[:"#{d.day}.centrePM"], 
-				@presta ? (@presta.centrePM != "0") : false, {  :disabled => @locked  }) %>
-			<% if @presta %> 
-			   <% session[:lastparams] << "#{d.day}.centrePM" if @presta.centrePM !="0" %>
-			<% end %>	
-		  </td>
-		</tr>
-
-		<% if d.wday == 5 && (d.end_of_month().day - d.day >2 ) %>
-		   <% @week = @week + 1 %>
-		   </table>
-		   <table>
+        <% unless @locked %>
 			<tr>
-		      <th>Semaine</th>
-		      <th>Date</th>
-		      <th>Repas</th>
-		      <th>Garderie Matin</th>
-		      <th>Garderie Soir</th>
-		      <th>Centre Matin</th>
-		      <th>Centre Soir</th>
+			  <td><% if @current_week != @week %><%= @week %><% @current_week = @week %><% end %></td>
+			  <td><b><%= format_date(d) %></b></td>
+			  <td>
+			  	<%= check_box_tag(:"#{d.day}.repas", 
+			  						params[:"#{d.day}.repas"], 
+									@presta ? (@presta.repas !="0")  : false,
+									{ :disabled => @locked }) 
+				%>
+			  	<% if @presta %> 
+				   <% session[:lastparams] << "#{d.day}.repas" if @presta.repas !="0" %>
+				<% end %>
+			  </td>
+
+			  <td>
+			  	<%= check_box_tag(:"#{d.day}.garderieAM", params[:"#{d.day}.garderieAM"],
+				 	@presta ? (@presta.garderieAM != "0") : false, { :disabled => @locked  }) %>
+			  	<%= select_tag "[select]#{d.day}.garderieAM", 
+			  			options_for_select(@duree + @duree_matin, @presta ? @presta.garderieAM: nil), include_blank: true %>
+				<% if @presta %> 
+				   <% session[:lastparams] << "#{d.day}.garderieAM" if @presta.garderieAM !="0" %>
+				<% end %>
+			  </td>
+			  <td>
+			  	<%= check_box_tag(:"#{d.day}.garderiePM", params[:"#{d.day}.garderiePM"], 
+					@presta ? (@presta.garderiePM != "0") : false, { :disabled => @locked  }) %>
+			  	<%= select_tag "[select]#{d.day}.garderiePM", 
+			  			options_for_select(@duree + @duree_soir, @presta ? @presta.garderiePM : nil), include_blank: true %>
+
+				<% if @presta %> 
+				   <% session[:lastparams] << "#{d.day}.garderiePM" if @presta.garderiePM !="0" %>
+				<% end %>	
+			  </td>
+			  <td>
+			  	<%= check_box_tag(:"#{d.day}.centreAM", params[:"#{d.day}.centreAM"], 
+					@presta ? (@presta.centreAM != "0") : false, {  :disabled => @locked  }) %>
+				<% if @presta %> 
+				   <% session[:lastparams] << "#{d.day}.centreAM" if @presta.centreAM !="0" %>
+				<% end %>	
+			  </td>
+			  <td>
+			  	<%= check_box_tag(:"#{d.day}.centrePM", params[:"#{d.day}.centrePM"], 
+					@presta ? (@presta.centrePM != "0") : false, {  :disabled => @locked  }) %>
+				<% if @presta %> 
+				   <% session[:lastparams] << "#{d.day}.centrePM" if @presta.centrePM !="0" %>
+				<% end %>	
+			  </td>
 			</tr>
-        <% end %>
+
+			<% if d.wday == 5 && (d.end_of_month().day - d.day >2 ) %>
+			   <% @week = @week + 1 %>
+			   </table>
+			   <table>
+				<tr>
+			      <th>Semaine</th>
+			      <th>Date</th>
+			      <th>Repas</th>
+			      <th>Garderie Matin</th>
+			      <th>Garderie Soir</th>
+			      <th>Centre Matin</th>
+			      <th>Centre Soir</th>
+				</tr>
+	        <% end %>
+		<% end %>
 	<% end %>
 	</table>
 	<% if 1 == 0 %>
