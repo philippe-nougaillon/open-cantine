@@ -5,12 +5,13 @@
 #   gem 'sqlite3'
 development:
   adapter: mysql2
+  database: OPENCANTINE4.2
+  username: chef
+  password: KeepOnMoving!
   encoding: utf8
-  database: OPENCANTINERAILS
-  pool: 5
-  username: root
-  password: AltecLansing2009
+  reconnect: false
   socket: /var/run/mysqld/mysqld.sock
+  pool: 5
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,11 +26,13 @@ test:
   socket: /var/run/mysqld/mysqld.sock
 
 production:
-  adapter: pg
+  adapter: mysql2
   encoding: utf8
-  database: OPENCANTINERAILS
+  database: OPENCANTINE4.2
   pool: 5
   username: root
-  password: AltecLansing2009
+  password: 
   socket: /var/run/mysqld/mysqld.sock
+  reconnect: false
+
 

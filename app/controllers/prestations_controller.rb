@@ -444,14 +444,14 @@ class PrestationsController < ApplicationController
 
             # calcul prestations type 1 ' Normale
             nbr_prestation = {'Repas' => 0,'GarderieAM' => 0,'GarderiePM' => 0, 'CentreAM' => 0, 'CentrePM' => 0, 'CentreAMPM' => 0, 'Etude' => 0, 'MntRepas' => 0,'MntGarderieAM' => 0,'MntGarderiePM' => 0, 'MntCentreAM' => 0, 'MntCentrePM' => 0, 'MntCentreAMPM' => 0, 'MntEtude' => 0 ,'JoursRepas' => "",'JoursGarderieAM' => "",'JoursGarderiePM' => "", 'JoursCentreAM' =>"", 'JoursCentrePM' => "", 'JoursCentreAMPM' => "", 'JoursEtude' => "",'PrixCentreAMPM' => 0, 'PrixCentreAM' => 0, 'PrixCentrePM' => 0}
+            
             nbr_prestation = Facture.calc_prestation(nbr_prestation, @prestation, @tarif, date)
-
-            #nbr_prestation = @prestation.calc_prestation(nbr_prestation)
+            
             total_prestations = nbr_prestation['MntRepas'] + nbr_prestation['MntGarderieAM'] + nbr_prestation['MntGarderiePM'] + nbr_prestation['MntCentreAM'] + nbr_prestation['MntCentrePM'] + nbr_prestation['MntCentreAMPM'] + nbr_prestation['Etude']
+            
             @total = @total + total_prestations
             @prestation.totalP = total_prestations
-            #@tarif = @prestation.tarif
-
+            
       		  @prestation.save
   	      end
           date = date + 1.day

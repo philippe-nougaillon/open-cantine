@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.10'
+ruby '2.4.0'
+
+gem 'rails', '4.2.11'
 
 gem 'mysql2', '~> 0.3.18'
 gem 'will_paginate'
@@ -12,7 +14,7 @@ gem 'prawn', '1.3'
 gem 'prawn-table', '~> 0.2.0'
 gem 'capture_stdout'
 
-gem 'jquery-rails', "~> 2.3.0"
+gem "jquery-rails", ">= 3.1.3"
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 
