@@ -2,10 +2,8 @@ body {
   font-size:   14px;
 }
 
-
 a { color: #000;text-decoration: underline; }
 a:visited { color: #000;text-decoration:none  }
-
 
 pre {
   padding: 10px;
@@ -21,21 +19,20 @@ pre {
 }
 
 #ajaxzone {
-    font-size: 13px;
-    height: 70px;
-    width: 97%;
-		
+  font-size: 13px;
+  height: 70px;
+  width: 97%;
 }
 
 fieldset {
-    background-color: #eee;
-    padding-top:15px;
-    padding-bottom:5px;
-    padding-left: 10px;
-    width: 99%;
+  background-color: #eee;
+  padding-top:15px;
+  padding-bottom:5px;
+  padding-left: 10px;
+  width: 99%;
+  border-radius: 6px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
-	-border-radius: 6px;
 }
 
 #form_actions {
@@ -57,25 +54,18 @@ fieldset {
 	color:black;
 }
 
-#form_body {
-  #background-color: #eef;
-  padding-top:10px;
-  padding-bottom:5px;
-  padding-bottom: 15px;
-  #width: 99%;
-}
 
 #msgzone {
 	height: 40px;
 }
 
 #title {
-    color:  black;
-    font-size: 20px;
-    font-family: Helvetica,sans-serif;
-    text-align: left;
-    padding-top: 10px;
-    padding-bottom: 0px;
+  color:  black;
+  font-size: 20px;
+  font-family: Helvetica,sans-serif;
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 0px;
 }
 #title img {
 	width: 30px;
@@ -85,7 +75,6 @@ fieldset {
 	text-decoration: none;
 	color:#df2599;
 }
-
 
 #menu {
   font-size: 14px;
@@ -122,28 +111,28 @@ fieldset {
 }
 
 #menuCurrent a {
-    color: green;
-    text-decoration: none;
+  color: green;
+  text-decoration: none;
 }
 
 #menuCurrent img {
-    width: 25px;
+  width: 25px;
 }
 
 h3 {
-    border-bottom-color: #000000;
-    border-bottom-width: 1px;
-    border-bottom-style: groove;
-    width: 100%;
-    color: #8b0000;
+  border-bottom-color: #000000;
+  border-bottom-width: 1px;
+  border-bottom-style: groove;
+  width: 100%;
+  color: #8b0000;
 }
 
 h4 {
-    border-bottom-color: #000000;
-    border-bottom-width: 1px;
-    border-bottom-style: groove;
-    width: 100%;
-    color: green;
+  border-bottom-color: #000000;
+  border-bottom-width: 1px;
+  border-bottom-style: groove;
+  width: 100%;
+  color: green;
 }
 
 table.sample {
@@ -216,7 +205,7 @@ table.sample a:hover {
 
 #error_message {
   position:absolute;
-  top: 20px;
+  top: 40px;
   font-weight: bold;
   margin-right: auto;
   margin-left: auto;
@@ -240,21 +229,22 @@ table.sample a:hover {
 }
 
 table.form {
-    border-width: 1px 1px 1px 1px;
-    border-color: gray gray gray gray;
-    border-spacing: 5px;
-    -moz-border-radius: 5px 5px 5px 5px;
-    border-style: groove groove groove groove;
-    padding: 10px 10px 10px 10px;
+  border-width: 1px 1px 1px 1px;
+  border-color: gray gray gray gray;
+  border-spacing: 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  border-style: groove groove groove groove;
+  padding: 10px 10px 10px 10px;
 }
 
 table.form th {
-    color:green;
+  color:green;
 }
 
 table.form #label {
-    color:navy;
-    text-align:right;
+  color:navy;
+  text-align:right;
 }
 
 table.form input[type="submit"] {
@@ -266,62 +256,62 @@ table.form input[type="submit"] {
   padding: 0px 1.5rem;
 }
 
-
 table.show #label {
-    color:navy;
-    text-align:right;
-    padding-right:5px;
+  color:navy;
+  text-align:right;
+  padding-right:5px;
 }
 
 table.bienvenue {
-    text-decoration: none;
-    font-family: Helvetica,sans-serif;
-    text-align: left;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color: #FBFBFB;
-    border-width: 1px 1px 1px 1px;
-    border-style: groove groove groove groove;
-    border-color: gray gray gray gray;
-    -moz-border-radius: 5px 5px 5px 5px;
-    margin-left: 20px;
-    margin-top: 20px;
-    width: 60%
+  text-decoration: none;
+  font-family: Helvetica,sans-serif;
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #FBFBFB;
+  border-width: 1px 1px 1px 1px;
+  border-style: groove groove groove groove;
+  border-color: gray gray gray gray;
+  border-radius: 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 60%
 }
 
 table.bienvenue hr {
-    line-height:1
+  line-height:1
 }
 
 table.bienvenue ul li {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-decoration:none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-decoration: none;
 }
+
 table.bienvenue a {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-decoration:none;
-    font-size:120%;
-    color: green;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-decoration: none;
+  font-size: 120%;
+  color: green;
 }
 
 table.bienvenue b {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-decoration:none;
-    font-size:120%;
-    color: green;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-decoration: none;
+  font-size: 120%;
+  color: green;
 }
 
 table.bienvenue #help {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size:110%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 110%;
 }
-
 
 .simple_form div.input {
   margin-bottom: 10px;
@@ -366,7 +356,6 @@ div.boolean {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 
 div.boolean label, label.collection_radio_buttons {
   float: none;

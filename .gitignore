@@ -24,3 +24,5 @@
 /config/initializers/app_env_vars.rb
 
 /config/database.yml
+# Ignore master key for decrypting credentials and more.
+/config/master.key
