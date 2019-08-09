@@ -4,9 +4,9 @@ class EnfantsController < ApplicationController
 
   layout :determine_layout
 
-  before_filter :check, :except => ['index', 'new', 'create', 'liste']
+  before_action :check, :except => ['index', 'new', 'create', 'liste']
 
-  skip_before_filter :check_authentification, only: :autocomplete
+  skip_before_action :check_authentification, only: :autocomplete
 
   def autocomplete
     familles = Famille.order(:nom).where("nom LIKE ? and  mairie_id = ?", "%#{params[:term]}%", session[:mairie])

@@ -4,7 +4,7 @@ class VacancesController < ApplicationController
 
   layout "standard"
 
-  before_filter :check, :except => ['index', 'new', 'create']
+  before_action :check, :except => ['index', 'new', 'create']
 
   def check
     unless Vacance.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?

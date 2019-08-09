@@ -1,4 +1,4 @@
-class FactureChrono < ActiveRecord::Base
+class FactureChrono < ApplicationRecord
   
   belongs_to :mairie
 

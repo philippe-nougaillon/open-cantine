@@ -20,7 +20,7 @@
 <div id="form_body">
   <table>
     <tr>
-      <th><%= link_to "Nom", url_for(params.merge(sort:'nom')) %></th>
+      <th><%= link_to "Nom", url_for(params.permit!.merge(sort:'nom')) %></th>
       <th>Enfant(s)</th>
       <th>Adresse</th>
       <th><%= link_to "Cp", url_for(params.merge(sort:"cp")) %></th>

@@ -2,7 +2,7 @@
 
 class AdminController < ApplicationController
 
-  skip_before_filter :check_authentification
+  skip_before_action :check_authentification
 
   layout "standard"
 

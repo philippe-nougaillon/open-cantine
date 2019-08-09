@@ -1,4 +1,4 @@
-class DataFile < ActiveRecord::Base
+class DataFile < ApplicationRecord
   
   def self.save(upload, mairie_id)
     name =  upload['datafile'].original_filename

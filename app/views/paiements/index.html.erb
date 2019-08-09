@@ -18,7 +18,7 @@
   <% if @paiements.any? %>
     <table>
       <tr>
-        <th><%= link_to "Date", url_for(params.merge(sort:'date')) %></th>
+        <th><%= link_to "Date", url_for(params.permit!.merge(sort:'date')) %></th>
         <th><%= link_to "Famille", url_for(params.merge(sort:'familles.nom')) %></th>
         <th><%= link_to "Réf", url_for(params.merge(sort:'ref')) %></th>
         <th><%= link_to "Type", url_for(params.merge(sort:'typepaiement')) %></th>

@@ -3,7 +3,7 @@ require 'csv'
 
 class PaiementsController < ApplicationController
 
-  before_filter :check, :except => ['index', 'new', 'create','listing','majdateremise']
+  before_action :check, :except => ['index', 'new', 'create','listing','majdateremise']
   layout :determine_layout
 
   def check

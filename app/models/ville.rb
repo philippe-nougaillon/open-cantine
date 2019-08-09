@@ -2,7 +2,7 @@
 
 require 'concerns/logmodule.rb'
 
-class Ville < ActiveRecord::Base
+class Ville < ApplicationRecord
  	include LogModule
 
 	validates_presence_of :nom, :email, :message => "est requis..."

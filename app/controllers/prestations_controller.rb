@@ -2,8 +2,8 @@
 
 class PrestationsController < ApplicationController
 
-  before_filter :check, :only => ['edit', 'edit_from_enfants']
-  skip_before_filter :check_authentification, :only => [:new_manual, :new_manual_calc]
+  before_action :check, :only => ['edit', 'edit_from_enfants']
+  skip_before_action :check_authentification, :only => [:new_manual, :new_manual_calc]
 
   layout :determine_layout, :except => ['create', 'refresh', 'ajaxupdate', 'new_manual_calc']
 
@@ -39,6 +39,13 @@ class PrestationsController < ApplicationController
   end
 
   def refresh
+    @classrooms  = Ville.find(session[:mairie]).classrooms
+
+    if params[:prestation_date].blank?
+      @prestations = []
+      return
+    end  
+
     if session[:prestation_date]
       params[:prestation_date] ||= session[:prestation_date]
     else
@@ -59,7 +66,6 @@ class PrestationsController < ApplicationController
       session[:order_by] = sort
     end
     @prestations = Prestation.search(params[:prestation_date], params[:classe], session[:mairie], sort, params[:periode])
-    @classrooms  = Ville.find(session[:mairie]).classrooms
 
     session[:prestation_date] = params[:prestation_date]
     session[:periode] = params[:periode]   
@@ -175,7 +181,7 @@ class PrestationsController < ApplicationController
               ndays = days_in_month(start_date) - (start_date.day - 1) if params[:toutlemois]
 
               # TODO: prendre le dernier de cours dans une table (vacances ???)
-              ndays = (Date.parse("2019-07-07") - start_date).to_i if params[:toutelannee]
+              ndays = (Date.parse("2020-07-04") - start_date).to_i if params[:toutelannee]
 		
               date = start_date
               ndays.times do
@@ -459,7 +465,7 @@ class PrestationsController < ApplicationController
     }
 
     flash[:notice] = "Prestations enregistrées. Total: #{@total.round(2)} €"
-    redirect_to :back
+    redirect_back(fallback_location: root_path)
   end
 
 

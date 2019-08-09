@@ -1,9 +1,0 @@
-<br>
-<br>
-
-<%= simple_form_for(@famille) do |f| %>
-
-  <%= render :partial => 'famille', :locals => { :f => f } %>
-
-<% end %>
-

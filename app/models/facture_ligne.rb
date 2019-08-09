@@ -1,4 +1,4 @@
-class FactureLigne < ActiveRecord::Base
+class FactureLigne < ApplicationRecord
 
   belongs_to :facture
   

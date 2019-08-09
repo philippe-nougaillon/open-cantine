@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :check_authentification
+  before_action :check_authentification
 
   helper :all # include all helpers, all the time
 

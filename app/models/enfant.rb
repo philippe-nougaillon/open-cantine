@@ -1,6 +1,6 @@
 require 'concerns/logmodule.rb'
 
-class Enfant < ActiveRecord::Base
+class Enfant < ApplicationRecord
   include LogModule
 
   belongs_to :famille

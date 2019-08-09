@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'concerns/logmodule.rb'
 
-class Tarif < ActiveRecord::Base
+class Tarif < ApplicationRecord
 	include LogModule
 
 	belongs_to :ville

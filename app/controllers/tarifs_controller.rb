@@ -3,7 +3,7 @@
 class TarifsController < ApplicationController
 
   layout "standard"
-  before_filter :check, :except => ['index', 'new', 'create']
+  before_action :check, :except => ['index', 'new', 'create']
 
   def check
     unless Tarif.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?

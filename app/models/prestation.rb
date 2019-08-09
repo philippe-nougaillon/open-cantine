@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'concerns/logmodule.rb'
 
-class Prestation < ActiveRecord::Base
+class Prestation < ApplicationRecord
   include LogModule
 
   belongs_to :enfant

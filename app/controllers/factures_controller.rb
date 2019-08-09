@@ -5,7 +5,7 @@ require "open-uri"
 class FacturesController < ApplicationController
 
   layout :determine_layout
-  before_filter :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle_do', 'facturation_speciale', 'facturation_speciale_do', 'action']
+  before_action :check, :except => ['index', 'new', 'new_all', 'create', 'stats_mensuelle_params', 'stats_mensuelle_do', 'facturation_speciale', 'facturation_speciale_do', 'action']
 
   def check
     unless Facture.where("id = ? AND mairie_id = ?", params[:id], session[:mairie]).any?

@@ -1,6 +1,6 @@
 require 'concerns/logmodule.rb'
 
-class Famille < ActiveRecord::Base
+class Famille < ApplicationRecord
   include LogModule
 
   has_many :enfants, :dependent => :destroy

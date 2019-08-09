@@ -1,2 +1,2 @@
-class Formule < ActiveRecord::Base
+class Formule < ApplicationRecord
 end

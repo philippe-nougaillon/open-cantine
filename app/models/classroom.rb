@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'concerns/logmodule.rb'
 
-class Classroom < ActiveRecord::Base
+class Classroom < ApplicationRecord
 	include LogModule
 
 	belongs_to :ville

@@ -4,7 +4,7 @@ class FactureChronosController < ApplicationController
 
   layout "standard"
 
-  before_filter :check
+  before_action :check
 
   def check
     unless FactureChrono.find(:first, :conditions =>  [" id = ? AND mairie_id = ?",params[:id], session[:mairie]])

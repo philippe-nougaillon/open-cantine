@@ -1,7 +1,7 @@
 #require "digest/sha2"
 require 'concerns/logmodule.rb'
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include LogModule
   
   belongs_to :ville, :foreign_key => "mairie_id"

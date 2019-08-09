@@ -6,14 +6,14 @@
     <%= select_tag 'classe', options_for_select(@classes, params[:classe]), include_blank:true %>
     <%= submit_tag 'Rechercher' %>
     <span id="adroite">  
-      <%= link_to "Imprimer", enfants_liste_path(params), :target => "_blank" %>
+      <%= link_to "Imprimer", enfants_liste_path(params.permit!), :target => "_blank" %>
     </span>
   <% end %>
 </div>
 <div id="form_body">
   <table>
     <tr>
-      <th><%= link_to "Nom", url_for(params.merge(sort:"nomfamille")) %></th>
+      <th><%= link_to "Nom", url_for(params.permit!.merge(sort:"nomfamille")) %></th>
       <th><%= link_to "Prénom", url_for(params.merge(sort:"prenom")) %></th>
       <th><%= link_to "Classe", url_for(params.merge(sort:"classe")) %></th>
       <th>Enseignant</th>

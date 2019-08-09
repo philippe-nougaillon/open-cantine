@@ -1,6 +1,6 @@
 require 'concerns/logmodule.rb'
 
-class Facture < ActiveRecord::Base
+class Facture < ApplicationRecord
   include LogModule
 
   belongs_to :ville, foreign_key:"mairie_id"

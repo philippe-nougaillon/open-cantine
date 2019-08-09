@@ -1,4 +1,4 @@
-class Mairie < ActiveRecord::Base
+class Mairie < ApplicationRecord
   has_many :tarifs
   has_many :classrooms
   has_many :familles

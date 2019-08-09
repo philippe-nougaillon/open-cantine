@@ -6,7 +6,7 @@ class FamillesController < ApplicationController
 
   #before_filter :check, :except => ['index', 'new', 'create', 'balance', 'listing', 'autocomplete']
 
-  skip_before_filter :check_authentification, only: :autocomplete
+  skip_before_action :check_authentification, only: :autocomplete
 
   def autocomplete
     familles = Famille.where("nom LIKE ? and  mairie_id = ?", "%#{params[:term]}%", session[:mairie]).order(:nom)

@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
 
-ruby '2.4.5'
+ruby '2.6.0'
 
-gem 'rails', '4.2.11'
+gem 'rails', '5.2.3'
 
-gem 'mysql2', '~> 0.3.18'
+gem 'mysql2', '~> 0.4.4'
 gem 'will_paginate'
 gem 'thin'
 gem 'simple_form'
 gem "dynamic_sitemaps"
 
-gem 'prawn', '1.3'
-gem 'prawn-table', '~> 0.2.0'
+gem 'prawn'
+gem 'prawn-table'
 gem 'capture_stdout'
 
 gem "jquery-rails", ">= 3.1.3"
@@ -20,35 +20,20 @@ gem 'jquery-turbolinks'
 
 gem 'open_uri_redirections'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+# # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-gem 'execjs'
-gem 'therubyracer'
+#gem 'execjs'
+#gem 'therubyracer'
+gem 'mini_racer'
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+# # Use SCSS for stylesheets
+gem 'sass-rails'
 
-# Use Uglifier as compressor for JavaScript assets
+# # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+# # Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails'
 
 gem 'nprogress-rails'
- 
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
