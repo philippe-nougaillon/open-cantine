@@ -154,7 +154,8 @@ class MoncompteController < ApplicationController
 
  private
   def determine_layout
-    return iphone_format? ? "iphone" : "moncompte"
+    #return iphone_format? ? "iphone" : "moncompte"
+    "moncompte"
   end
 
   def random_password(size = 5)
