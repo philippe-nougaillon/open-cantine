@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.4.5'
 
-gem 'rails', '4.2.11'
+gem 'rails', '4.2.11.1'
 
 gem 'mysql2', '~> 0.3.18'
 gem 'will_paginate'
