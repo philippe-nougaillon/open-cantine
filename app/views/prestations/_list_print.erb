@@ -35,6 +35,7 @@
 				</td>
 				<td class="center">
 					<% if prestation.garderiePM != "0" %>
+						<%= image_tag @images[prestation.garderiePM.to_i], :size => '15x15' %>
 					<% end %>
 				</td>
 				<td class="center"><%= image_tag @images[prestation.centreAM.to_i], :size => '15x15'   if prestation.centreAM != "0" %> </td>
