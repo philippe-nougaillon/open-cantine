@@ -52,3 +52,6 @@ gem 'nprogress-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'sitemap_generator'
+
