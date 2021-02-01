@@ -5,7 +5,7 @@
   <legend>Choisir un mois à facturer</legend> 
 
 		<%= simple_form_for :facturer, :url => new_facture do |f| %>
-			<%= f.input :an, :collection => 2010..2020, :label => 'Année',  :selected => Date.today.year %>
+			<%= f.input :an, :collection => 2010..2022, :label => 'Année',  :selected => Date.today.year %>
 			<%= f.input :mois, :collection => 1..12,  :selected => Date.today.month %>
 			<%= f.submit ""  %>
 		<% end %>

@@ -8,7 +8,7 @@ Compte le nombre de repas et de prestations par enfant et par mois
 <h4>Choisir un mois et une classe</h4>
 <%= simple_form_for :stats, :url => '/prestations/stats_mensuelle' do |f| %>
 	<%= f.input :mois, :collection => 1..12,  :selected => Date.today.month %>
-	<%= f.input :an, :collection => 2010..2020, :label => 'Année',  :selected => Date.today.year %>
+	<%= f.input :an, :collection => 2010..2022, :label => 'Année',  :selected => Date.today.year %>
 	<%= f.input :classe do %>
 			<%= f.select "classe", options_from_collection_for_select(@classrooms, "id", "nom", params[:classe]) %>
 	<% end %>

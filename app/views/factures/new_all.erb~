@@ -9,7 +9,7 @@ Attention: Toutes les prestations du mois <b>de toutes les familles</b> vont êt
   <legend>Choisir un mois à facturer</legend> 
 
 		<%= simple_form_for :facturer, :url => "/factures/create" do |f| %>
-			<%= f.input :an, :collection => 2010..2020, :label => 'Année',  :selected => Date.today.year %>
+			<%= f.input :an, :collection => 2010..2022, :label => 'Année',  :selected => Date.today.year %>
 			<%= f.input :mois, :collection => 1..12,  :selected => Date.today.month %>
 			<%= f.input :commentaire, :as => :text, :hint => "Saisir un commentaire commun à toutes les factures", :required => false %>
 			<%= f.submit ""  %>

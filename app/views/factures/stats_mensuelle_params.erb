@@ -8,7 +8,7 @@ Compte le nombre de factures et totalise les montants des prestations de cantine
 <h4>Choisir un mois</h4>
 <%= simple_form_for(:stats, :url => {:action => "stats_mensuelle_do"}) do |f| %>
 	<%= f.input :mois, :collection => 1..12,  :selected => Date.today.month %>
-	<%= f.input :an, :collection => 2010..2020, :label => 'Année',  :selected => Date.today.year %>
+	<%= f.input :an, :collection => 2010..2022, :label => 'Année',  :selected => Date.today.year %>
 	<br>
 	<div style="margin-left:170px;">
 		<%= f.submit "Calculer" %>
