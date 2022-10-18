@@ -3,7 +3,7 @@
 <h3>Facturation mensuelle</h3>
 <%= simple_form_for :facturer, :url => "/factures/create" do |f| %>
 	<%= f.input :mois, :collection => 1..12,  :selected => Date.today.month %>
-	<%= f.input :an, :collection => 2010..2022, :label => 'Année',  :selected => Date.today.year %>
+	<%= f.input :an, :collection => 2010..2024, :label => 'Année',  :selected => Date.today.year %>
 	<%= f.input :commentaire, :as => :text, label: "Commentaire", :required => false %>
  	<div style="margin-left:170px;">
 		<b>Attention:</b> Toutes les prestations du mois <b>de toutes les familles</b> vont être facturées !<br><br>
